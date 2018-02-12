@@ -4,6 +4,7 @@
   "expo": {
     "name": "RNBoilerplate",
     "slug": "RNBoilerplate",
-    "sdkVersion": "25.0.0"
+    "sdkVersion": "24.0.0",
+    "appKey": "RNBoilerplate"
   }
 }
