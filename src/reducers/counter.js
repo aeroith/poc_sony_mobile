@@ -4,7 +4,6 @@ const initialState = {
 
 const actionsMap = {
   increment(state, action) {
-    console.log('action')
     return { ...state, value: state.value + 1 };
   },
   decrement(state, action) {

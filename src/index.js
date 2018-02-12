@@ -6,7 +6,7 @@ import AppWithNavigationState from './containers/AppWithNavigationState';
 import configureStore from './configureStore';
 
 // Redux-navigation configurations
-const reduxNavMiddleware = createReactNavigationReduxMiddleware('root', state => state.nav)
+const reduxNavMiddleware = createReactNavigationReduxMiddleware('root', state => state.nav);
 const addListener = createReduxBoundAddListener('root');
 
 // Initial state
