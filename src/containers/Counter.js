@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 
 @connect(
   state => ({
-    counter: state.counter,
+    counter: state.counter.value,
   }),
   dispatch => bindActionCreators(CounterActions, dispatch),
 )

@@ -14,7 +14,7 @@ export function incrementIfOdd() {
   return (dispatch, getState) => {
     const { counter } = getState();
 
-    if (counter.get('counter') % 2 === 0) {
+    if (counter.value % 2 === 0) {
       return;
     }
 

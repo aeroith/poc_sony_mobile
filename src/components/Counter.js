@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
-import Immutable from 'immutable';
 
 const styles = StyleSheet.create({
   text: {
@@ -17,7 +16,7 @@ export default class Counter extends Component {
     incrementIfOdd: PropTypes.func.isRequired,
     incrementAsync: PropTypes.func.isRequired,
     decrement: PropTypes.func.isRequired,
-    counter: PropTypes.instanceOf(Immutable.Map).isRequired,
+    counter: PropTypes.number.isRequired,
   };
 
   constructor(props) {
@@ -32,7 +31,7 @@ export default class Counter extends Component {
     } = this.props;
     return (
       <View>
-        <Text style={styles.text}>Clicked: {counter.get('counter')} times</Text>
+        <Text style={styles.text}>Clicked: {counter} times</Text>
         <TouchableHighlight onPress={increment}>
           <Text style={styles.text}>+</Text>
         </TouchableHighlight>

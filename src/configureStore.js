@@ -19,9 +19,8 @@ if (__DEV__) {
   /* eslint-enable no-underscore-dangle */
 }
 
-const enhancer = composeEnhancers(applyMiddleware(thunk));
-
-export default function configureStore(initialState) {
+export default function configureStore(initialState, navReduxMiddleWare) {
+  const enhancer = composeEnhancers(applyMiddleware(navReduxMiddleWare, thunk));
   const store = createStore(reducer, initialState, enhancer);
   if (module.hot) {
     module.hot.accept(() => {
