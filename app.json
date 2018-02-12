@@ -1,9 +1,9 @@
 {
-  "name": "poc_sony_mobile",
-  "displayName": "poc_sony_mobile",
+  "name": "RNBoilerplate",
+  "displayName": "RNBoilerplate",
   "expo": {
-    "name": "poc_sony_mobile",
-    "slug": "poc_sony_mobile",
-    "sdkVersion": "25.0.0",
+    "name": "RNBoilerplate",
+    "slug": "RNBoilerplate",
+    "sdkVersion": "25.0.0"
   }
 }
