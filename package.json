@@ -17,6 +17,7 @@
     "port": 5678
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "expo": "^24.0.0",
     "immutable": "^3.7.6",
     "lodash": "^4.3.0",
