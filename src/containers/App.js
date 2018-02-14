@@ -36,8 +36,10 @@ export default class App extends Component {
     return (
       <View style={styles.wrapper}>
         <StatusBar barStyle="light-content" />
-        <NavBar />
-        <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav, addListener })} />
+        <NavBar nav={nav} />
+        <View style={styles.app}>
+          <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav, addListener })} />
+        </View>
       </View>
     );
   }
