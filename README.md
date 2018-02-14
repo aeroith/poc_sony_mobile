@@ -1,6 +1,6 @@
-# React Native Boilerplate
+# Sony Mobile Channel Application
 
-> The React Native, Redux boilerplate for personal usage
+> Private repository for Sony Mobile Channel
 
 ## Included
 
