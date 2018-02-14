@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { BackHandler } from 'react-native';
+import {BackHandler, StatusBar, View} from 'react-native';
 import { NavigationActions, addNavigationHelpers } from 'react-navigation/src/react-navigation';
 import { connect } from 'react-redux';
 import AppNavigator from '../navigator';
 import { addListener } from '../index';
+import styles from './styles';
 
 @connect(
   state => ({
@@ -31,6 +32,11 @@ export default class AppWithNavigationState extends Component {
 
   render() {
     const { dispatch, nav } = this.props;
-    return <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav, addListener })} />;
+    return (
+      <View style={styles.wrapper}>
+        <StatusBar barStyle="light-content" />
+        <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav, addListener })} />
+      </View>
+    );
   }
 }

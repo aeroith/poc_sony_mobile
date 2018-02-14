@@ -1,5 +1,5 @@
 const config = {
-  lang: 'tr',
+  lang: 'en',
   UITheme: 'smcDark',
 };
 
