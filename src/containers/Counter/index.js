@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 import Counter from '../../components/Counter';
 import { actions as counterActions } from '../../reducers/counter';
 import styles from './styles';
+import withTranslation from '../../components/Translation';
 
+@withTranslation
 @connect(
   state => ({
     counter: state.counter.value,
@@ -15,6 +17,7 @@ import styles from './styles';
 export default class CounterContainer extends Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired,
+    translate: PropTypes.func.isRequired
   };
 
   handleBack = () => {
@@ -22,11 +25,12 @@ export default class CounterContainer extends Component {
   };
 
   render() {
+    const { translate } = this.props;
     return (
       <View style={styles.container}>
         <Counter {...this.props} />
         <TouchableOpacity onPress={this.handleBack}>
-          <Text style={styles.back}>Back</Text>
+          <Text style={styles.back}>{translate('back')}</Text>
         </TouchableOpacity>
       </View>
     );
