@@ -1,20 +1,22 @@
 import { StyleSheet } from 'react-native';
+import colorPalette from '../../config/colorPalette';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: colorPalette.grayBg4,
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
+    color: colorPalette.white,
   },
   instructions: {
     textAlign: 'center',
-    color: '#333333',
+    color: colorPalette.grayText1,
     marginBottom: 5,
   },
 });

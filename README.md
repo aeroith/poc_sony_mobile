@@ -1,6 +1,6 @@
-# React Native Boilerplate
+# Sony Mobile Channel Application
 
-> The React Native, Redux boilerplate for personal usage
+> Private repository for Sony Mobile Channel
 
 ## Included
 
@@ -74,9 +74,5 @@ $ npm test
 
 ## Credits
 
-* [react-native-counter-ios-android](https://github.com/chentsulin/react-native-counter-ios-android)'s
-  counter example.
+* [react-native-boilerplate](https://github.com/jhen0409/react-native-boilerplate)
 
-## LICENSE
-
-[MIT](LICENSE)
