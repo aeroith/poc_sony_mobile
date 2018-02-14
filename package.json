@@ -11,7 +11,7 @@
     "test": "jest",
     "remotedev": "remotedev-debugger --injectserver",
     "postinstall": "npm run remotedev && rndebugger-open",
-    "db": "node src/scripts/"
+    "db": "node scripts/generateTimestampedContent.js"
   },
   "remotedev": {
     "hostname": "localhost",

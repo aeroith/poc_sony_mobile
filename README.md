@@ -36,6 +36,12 @@ create project with this boilerplate.
 $ npm start
 ```
 
+#### Start mock database
+
+```bash
+$ npm run db
+```
+
 #### Start react-native-debugger
 ```bash
 $ open "rndebugger://set-debugger-loc?host=localhost&port=8081"
