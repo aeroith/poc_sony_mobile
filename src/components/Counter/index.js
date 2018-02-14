@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
-
-const styles = StyleSheet.create({
-  text: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-});
+import { Text, View, TouchableHighlight } from 'react-native';
+import styles from './styles';
 
 export default class Counter extends Component {
   static propTypes = {

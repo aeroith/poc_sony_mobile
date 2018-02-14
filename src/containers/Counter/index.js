@@ -1,22 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import Counter from '../components/Counter';
-import { actions as counterActions } from '../reducers/counter';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  back: {
-    margin: 10,
-    fontSize: 20,
-  },
-});
+import Counter from '../../components/Counter';
+import { actions as counterActions } from '../../reducers/counter';
+import styles from './styles';
 
 @connect(
   state => ({
