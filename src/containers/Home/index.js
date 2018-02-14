@@ -15,6 +15,10 @@ export default class Home extends Component {
     this.props.navigation.navigate('Counter');
   };
 
+  toCarousel = () => {
+    this.props.navigation.navigate('Carousel');
+  };
+
   render() {
     const { translate } = this.props;
     return (
@@ -22,6 +26,9 @@ export default class Home extends Component {
         <Text style={styles.welcome}>{translate('welcome_text')}</Text>
         <TouchableOpacity onPress={this.toCounter}>
           <Text style={styles.instructions}>{translate('navigate_to_counter')}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.toCarousel}>
+          <Text style={styles.instructions}>{translate('navigate_to_carousel')}</Text>
         </TouchableOpacity>
       </View>
     );
