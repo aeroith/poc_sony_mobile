@@ -1,9 +1,31 @@
 {
-  "posts": [
-    { "id": 1, "title": "json-server", "author": "typicode" }
-  ],
-  "comments": [
-    { "id": 1, "body": "some comment", "postId": 1 }
-  ],
-  "profile": { "name": "typicode" }
+  "content": [
+    {
+      "id": 1,
+      "Title": "Recep Ivedik",
+      "featured": true,
+      "tags": ["new"],
+      "nextAiring": 86400,
+      "imageURL": "https://images-na.ssl-images-amazon.com/images/M/MV5BYzRkZTNhMDctODU5Zi00MjA3LTgxMjYtMGQ3MDI1MzBkOTM5XkEyXkFqcGdeQXVyMjExNjgyMTc@._V1_SX300.jpg",
+      "imdbID": "tt1193516"
+    },
+    {
+      "id": 2,
+      "Title": "Cumali Ceber",
+      "featured": true,
+      "tags": ["new"],
+      "nextAiring": 93600,
+      "imageURL": "https://images-na.ssl-images-amazon.com/images/M/MV5BMmIyOTllN2EtM2Y5ZS00NzY4LTgwMzItOTI4MDJjMGI4Y2UwXkEyXkFqcGdeQXVyNjc1MDg1NDU@._V1_SX300.jpg",
+      "imdbID": "tt1193516"
+    },
+    {
+      "id": 3,
+      "Title":"Hababam Sinifi Dokuz Doguruyor",
+      "featured": true,
+      "tags": [],
+      "nextAiring": 98555,
+      "imageURL": "https://images-na.ssl-images-amazon.com/images/M/MV5BMjUwNDlmZDEtZmE0OS00OTk2LWIzYTAtYTVmYzI5MmM4ZjQ2XkEyXkFqcGdeQXVyNjUxNDU0MjM@._V1_SX300.jpg",
+      "imdbID":"tt0289968"
+    }
+  ]
 }

@@ -10,7 +10,8 @@
     "lint": "eslint src test *.js",
     "test": "jest",
     "remotedev": "remotedev-debugger --injectserver",
-    "postinstall": "npm run remotedev && rndebugger-open"
+    "postinstall": "npm run remotedev && rndebugger-open",
+    "db": "node src/scripts/"
   },
   "remotedev": {
     "hostname": "localhost",
