@@ -10,7 +10,6 @@ import AppNavigator from '../navigator';
   state => ({
     nav: state.nav,
   }),
-  // dispatch => ({ dispatch }),
 )
 export default class AppWithNavigationState extends Component {
   static propTypes = {

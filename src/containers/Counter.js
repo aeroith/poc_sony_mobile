@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Counter from '../components/Counter';
-import * as CounterActions from '../actions/counter';
+import { actions as counterActions } from '../reducers/counter';
 
 const styles = StyleSheet.create({
   container: {
@@ -23,7 +22,7 @@ const styles = StyleSheet.create({
   state => ({
     counter: state.counter.value,
   }),
-  dispatch => bindActionCreators(CounterActions, dispatch),
+  counterActions
 )
 export default class CounterContainer extends Component {
   static propTypes = {
