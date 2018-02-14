@@ -1,33 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import { bindActionCreators } from 'redux';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import Counter from '../components/Counter';
-import * as CounterActions from '../actions/counter';
+import Counter from '../../components/Counter';
+import { actions as counterActions } from '../../reducers/counter';
+import styles from './styles';
+import withTranslation from '../../components/Translation';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  back: {
-    margin: 10,
-    fontSize: 20,
-  },
-});
-
+@withTranslation
 @connect(
   state => ({
     counter: state.counter.value,
   }),
-  dispatch => bindActionCreators(CounterActions, dispatch),
+  counterActions
 )
 export default class CounterContainer extends Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired,
+    translate: PropTypes.func.isRequired
   };
 
   handleBack = () => {
@@ -35,11 +25,12 @@ export default class CounterContainer extends Component {
   };
 
   render() {
+    const { translate } = this.props;
     return (
       <View style={styles.container}>
         <Counter {...this.props} />
         <TouchableOpacity onPress={this.handleBack}>
-          <Text style={styles.back}>Back</Text>
+          <Text style={styles.back}>{translate('back')}</Text>
         </TouchableOpacity>
       </View>
     );

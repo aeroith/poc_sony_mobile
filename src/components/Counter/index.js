@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { Text, View, TouchableHighlight } from 'react-native';
+import styles from './styles';
+import withTranslation from '../Translation';
 
-const styles = StyleSheet.create({
-  text: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-});
-
+@withTranslation
 export default class Counter extends Component {
   static propTypes = {
     increment: PropTypes.func.isRequired,
@@ -17,6 +12,7 @@ export default class Counter extends Component {
     incrementAsync: PropTypes.func.isRequired,
     decrement: PropTypes.func.isRequired,
     counter: PropTypes.number.isRequired,
+    translate: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -27,11 +23,11 @@ export default class Counter extends Component {
 
   render() {
     const {
-      increment, incrementIfOdd, decrement, counter
+      increment, incrementIfOdd, decrement, counter, translate
     } = this.props;
     return (
       <View>
-        <Text style={styles.text}>Clicked: {counter} times</Text>
+        <Text style={styles.text}>{`${translate('clicked')}: ${counter} ${translate('times')}`}</Text>
         <TouchableHighlight onPress={increment}>
           <Text style={styles.text}>+</Text>
         </TouchableHighlight>
@@ -39,10 +35,10 @@ export default class Counter extends Component {
           <Text style={styles.text}>-</Text>
         </TouchableHighlight>
         <TouchableHighlight onPress={incrementIfOdd}>
-          <Text style={styles.text}>Increment if odd</Text>
+          <Text style={styles.text}>{translate('increment_odd')}</Text>
         </TouchableHighlight>
         <TouchableHighlight onPress={this.incrementAsync}>
-          <Text style={styles.text}>Increment async</Text>
+          <Text style={styles.text}>{translate('increment_async')}</Text>
         </TouchableHighlight>
       </View>
     );
