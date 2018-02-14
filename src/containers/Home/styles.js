@@ -6,13 +6,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colorPalette.grayBg4,
+    backgroundColor: colorPalette.white,
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-    color: colorPalette.white,
+    color: colorPalette.grayText1,
   },
   instructions: {
     textAlign: 'center',

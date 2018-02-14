@@ -11,9 +11,7 @@ const args = process.argv;
 
 if (args.length > 2) {
   const portArg = args.find(a => a.indexOf('--port') > -1);
-  if (!portArg) {
-    return console.error('Wrong arguments');
-  }
+  if (!portArg) return console.error('Wrong arguments');
   const [param, value] = portArg.split('=');
   if (value > 1024) {
     port = value;
@@ -29,12 +27,10 @@ const deleteFile = path => fs.unlinkSync(path);
 
 const runScript = (script) => {
   const jsonServer = exec(script, (err, stdout) => {
-    if (err) {
-      return;
-    }
+    if (err) return;
     console.log(stdout);
   });
-  jsonServer.on('exit', () => console.log('\nJson-server has stopped.'))
+  jsonServer.on('exit', () => console.log('\nJson-server has stopped.'));
 
   // capture the ctrl-c on main process
   process.on('SIGINT', () => {
@@ -48,9 +44,7 @@ const runScript = (script) => {
 };
 
 return fs.writeFile(modifiedDbPath, JSON.stringify(Object.assign({}, db, { content })), 'utf-8', (err) => {
-  if (err) {
-    return console.log(err);
-  }
+  if (err) return console.log(err);
   console.log(`Running json-server at port: ${port}. \nVisit http://localhost:${port}/content to see it!`);
   runScript(`json-server --port=${port} --watch ${modifiedDbPath}`);
 });

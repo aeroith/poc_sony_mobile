@@ -9,7 +9,7 @@ const AppNavigator = new StackNavigator(
     Counter: { screen: Counter },
   },
   {
-    headerMode: 'screen',
+    headerMode: 'float',
     navigationOptions: {
       header: null,
     },
