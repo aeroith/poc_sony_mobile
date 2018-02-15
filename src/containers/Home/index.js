@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 import styles from './styles';
 import withTranslation from '../../components/Translation';
 
@@ -19,6 +19,7 @@ export default class Home extends Component {
     const { translate } = this.props;
     return (
       <View style={styles.container}>
+        <Image source={require('../../assets/images/arrow_image.png')} style={styles.image} resizeMode="contain" />
         <Text style={styles.welcome}>{translate('welcome_text')}</Text>
         <TouchableOpacity onPress={this.toCounter}>
           <Text style={styles.instructions}>{translate('navigate_to_counter')}</Text>
