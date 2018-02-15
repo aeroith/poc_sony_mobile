@@ -7,6 +7,8 @@ const translations = {
     increment_odd: 'Increment if odd',
     increment_async: 'Increment async',
     back: 'Back',
+    home: 'Guide',
+    counter: 'Counter',
   },
   tr: {
     welcome_text: 'Sony Mobile Channel Projesine Hoşgeldiniz',
@@ -16,6 +18,8 @@ const translations = {
     increment_odd: 'Tekse artır',
     increment_async: 'Asenkron artır',
     back: 'Geri',
+    home: 'Yayın Akışı',
+    counter: 'Sayaç',
   }
 };
 

@@ -11,7 +11,7 @@ const AppNavigator = new StackNavigator(
     Carousel: { screen: Carousel }
   },
   {
-    headerMode: 'screen',
+    headerMode: 'float',
     navigationOptions: {
       header: null,
     },

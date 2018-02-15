@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { createReduxBoundAddListener, createReactNavigationReduxMiddleware } from 'react-navigation-redux-helpers';
 import { createAppInitialState } from './store/store';
-import AppWithNavigationState from './containers/AppWithNavigationState';
+import App from './containers/App';
 import configureStore from './configureStore';
 
 // Redux-navigation configurations
@@ -16,6 +16,6 @@ const store = configureStore(initialState, reduxNavMiddleware);
 export { addListener };
 export default () => (
   <Provider store={store}>
-    <AppWithNavigationState />
+    <App />
   </Provider>
 );
