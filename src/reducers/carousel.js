@@ -5,6 +5,7 @@ const actionTypes = {
   RECEIVE_FEATURED_PHOTOS: 'RECEIVE_FEATURED_PHOTOS',
   ERROR_FEATURED_PHOTOS: 'ERROR_FEATURED_PHOTOS',
   SET_CAROUSEL_PAGE: 'SET_CAROUSEL_PAGE',
+  RESET_CAROUSEL: 'RESET_CAROUSEL'
 };
 
 const initialState = {
@@ -18,7 +19,8 @@ const actionsMap = {
     ({ ...state, images: action.images, isLoading: false }),
   [actionTypes.REQUEST_FEATURED_PHOTOS]: state => ({ ...state, isLoading: true }),
   [actionTypes.ERROR_FEATURED_PHOTOS]: (state, action) => ({ ...state, error: action.error, isLoading: false }),
-  [actionTypes.SET_CAROUSEL_PAGE]: (state, action) => ({ ...state, page: action.page })
+  [actionTypes.SET_CAROUSEL_PAGE]: (state, action) => ({ ...state, page: action.page }),
+  [actionTypes.RESET_CAROUSEL]: (state) => ({ ...state, ...initialState }),
 };
 
 const actions = {
@@ -28,7 +30,8 @@ const actions = {
       .then(response => dispatch({ type: actionTypes.RECEIVE_FEATURED_PHOTOS, images: response.data }))
       .catch(error => dispatch({ type: actionTypes.ERROR_FEATURED_PHOTOS, error: error.request._response }));
   },
-  setCarouselPage: page => ({ type: actionTypes.SET_CAROUSEL_PAGE, page })
+  setCarouselPage: page => ({ type: actionTypes.SET_CAROUSEL_PAGE, page }),
+  resetCarousel: () => ({ type: actionTypes.RESET_CAROUSEL }),
 };
 
 export { initialState, actions };

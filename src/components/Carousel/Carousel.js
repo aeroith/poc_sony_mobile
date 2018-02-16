@@ -13,6 +13,7 @@ export default class Carousel extends Component {
     images: PropTypes.array,
     page: PropTypes.number,
     setCarouselPage: PropTypes.func.isRequired,
+    resetCarousel: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -32,6 +33,10 @@ export default class Carousel extends Component {
     if (nextProps.images && nextProps.images.length !== this.state.numItems) {
       this.setState({ numItems: nextProps.images.length });
     }
+  }
+
+  componentWillUnmount() {
+    this.props.resetCarousel();
   }
 
 
