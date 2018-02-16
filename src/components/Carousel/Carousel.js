@@ -91,4 +91,14 @@ const Indicator = ({ activeIndex, count }) => (
         style={[styles.indicator, num === activeIndex && styles.indicatorActive]}
       />))}
   </View>
-)
+);
+
+Indicator.propTypes = {
+  activeIndex: PropTypes.number,
+  count: PropTypes.number,
+};
+
+Indicator.defaultProps = {
+  activeIndex: 0,
+  count: 0,
+};

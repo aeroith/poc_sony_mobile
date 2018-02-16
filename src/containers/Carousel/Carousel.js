@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { View, TouchableOpacity, Text } from 'react-native';
 import Carousel from '../../components/Carousel';
 import styles from './styles';
 import { actions as carouselActions } from '../../reducers/carousel';
 import withTranslation from '../../components/Translation';
-import { connect } from 'react-redux';
 
 @withTranslation
 @connect(

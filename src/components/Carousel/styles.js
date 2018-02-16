@@ -4,7 +4,7 @@ import colorPalette from '../../config/colorPalette';
 const { width } = Dimensions.get('window');
 const height = width * 0.9;
 
-const INDICATOR_SIZE = 10;
+const INDICATOR_SIZE = 8;
 // const scrollBarVal = this.animVal.interpolate({
 //   inputRange: [30, 60],
 //   outputRange: [-this.itemWidth, this.itemWidth],
@@ -68,12 +68,13 @@ export default StyleSheet.create({
   indicatorContainer: {
     flexDirection: 'row',
     right: 50,
+    alignItems: 'center',
   },
   indicatorActive: {
     backgroundColor: colorPalette.carouselActive,
   },
   indicator: {
-    marginLeft: 3,
+    marginLeft: 7,
     backgroundColor: colorPalette.carousel,
     borderColor: colorPalette.grayText1,
     width: INDICATOR_SIZE,
