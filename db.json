@@ -7,7 +7,8 @@
       "tags": ["new"],
       "nextAiring": 0,
       "imageURL": "https://i.ytimg.com/vi/3TpBMUQfSOU/maxresdefault.jpg",
-      "imdbID": "tt1193516"
+      "imdbID": "tt1193516",
+      "Note": "🔥 🔥"
     },
     {
       "id": 2,
@@ -25,7 +26,8 @@
       "tags": [],
       "nextAiring": 0,
       "imageURL": "https://i.imgur.com/Ks7X1sw.jpg",
-      "imdbID":"tt0289968"
+      "imdbID":"tt0289968",
+      "Note": "Season 2 - Episode 3"
     },
     {
       "id": 4,
@@ -34,7 +36,8 @@
       "tags": [],
       "nextAiring": 0,
       "imageURL": "https://i.imgur.com/OP0ZrRS.jpg",
-      "imdbID": "tt3749900"
+      "imdbID": "tt3749900",
+      "Note": "Season 1 - Episode 1"
     },
     {
       "id": 5,
@@ -43,7 +46,8 @@
       "tags": [],
       "nextAiring": 0,
       "imageURL": "https://nerdist.com/wp-content/uploads/2016/03/Daredevil-Season-2-Punisher-Featurette.jpg",
-      "imdbID": "tt5675620"
+      "imdbID": "tt5675620",
+      "Note": "Grand Finale"
     }
   ]
 }

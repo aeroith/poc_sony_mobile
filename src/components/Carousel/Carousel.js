@@ -51,6 +51,7 @@ export default class Carousel extends Component {
     if (!this.props.images || _.isEmpty(this.props.images)) {
       return null;
     }
+    const currentSelection = this.props.images[this.props.page];
 
     return (
       <View style={styles.mainContainer}>
@@ -72,9 +73,9 @@ export default class Carousel extends Component {
           }
         </ScrollView>
         <View>
-          <Text style={styles.mainHeader}>{this.props.images[this.props.page].Title}</Text>
+          <Text style={styles.mainHeader}>{currentSelection.Title}</Text>
           <View style={styles.subContainer}>
-            <Text style={styles.subHeader}>Season 2 - Episode 3</Text>
+            <Text style={styles.subHeader}>{currentSelection.Note && currentSelection.Note}</Text>
             <Indicator activeIndex={this.props.page} count={this.state.numItems} />
           </View>
         </View>
