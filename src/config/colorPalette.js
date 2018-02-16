@@ -5,6 +5,7 @@ const colorPalette = {
     smcDark: {
       som: '#111416',
       white: '#ffffff',
+      black: '#000000',
       grayBg1: '#3d4149', // Tabs background
       grayBg2: '#2b2d31', // Tabs subtitle background
       grayBg3: 'rgba(29,34,36,1)', // Header background

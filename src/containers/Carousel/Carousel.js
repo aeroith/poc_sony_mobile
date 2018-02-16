@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 @connect(
   state => ({
     images: state.carousel.images,
+    page: state.carousel.page,
   }),
   carouselActions
 )

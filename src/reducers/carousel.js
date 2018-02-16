@@ -1,34 +1,34 @@
-import config from '../config/config';
+import ApiClient from '../utils/api-client';
 
 const actionTypes = {
   REQUEST_FEATURED_PHOTOS: 'REQUEST_FEATURED_PHOTOS',
   RECEIVE_FEATURED_PHOTOS: 'RECEIVE_FEATURED_PHOTOS',
   ERROR_FEATURED_PHOTOS: 'ERROR_FEATURED_PHOTOS',
+  SET_CAROUSEL_PAGE: 'SET_CAROUSEL_PAGE',
 };
 
 const initialState = {
   images: [],
   isLoading: false,
+  page: 0,
 };
 
 const actionsMap = {
   [actionTypes.RECEIVE_FEATURED_PHOTOS]: (state, action) =>
     ({ ...state, images: action.images, isLoading: false }),
   [actionTypes.REQUEST_FEATURED_PHOTOS]: state => ({ ...state, isLoading: true }),
-  [actionTypes.ERROR_FEATURED_PHOTOS]: (state, action) => ({ ...state, error: action.error })
+  [actionTypes.ERROR_FEATURED_PHOTOS]: (state, action) => ({ ...state, error: action.error, isLoading: false }),
+  [actionTypes.SET_CAROUSEL_PAGE]: (state, action) => ({ ...state, page: action.page })
 };
 
 const actions = {
   getFeaturedPhotos: () => (dispatch) => {
     dispatch({ type: actionTypes.REQUEST_FEATURED_PHOTOS });
-    return fetch(`${config.apiUrl}/content?featured=true`)
-      .then(response => response.json())
-      .then(images => dispatch({ type: actionTypes.RECEIVE_FEATURED_PHOTOS, images }))
-      .catch((error) => {
-        console.log(error);
-        return dispatch({ type: actionTypes.ERROR_FEATURED_PHOTOS, error });
-      });
-  }
+    return ApiClient.get('/content?featured=true&_sort=id&_order=desc&_limit=5')
+      .then(response => dispatch({ type: actionTypes.RECEIVE_FEATURED_PHOTOS, images: response.data }))
+      .catch(error => dispatch({ type: actionTypes.ERROR_FEATURED_PHOTOS, error: error.request._response }));
+  },
+  setCarouselPage: page => ({ type: actionTypes.SET_CAROUSEL_PAGE, page })
 };
 
 export { initialState, actions };
