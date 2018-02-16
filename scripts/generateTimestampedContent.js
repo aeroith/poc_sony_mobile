@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const { exec } = require('child_process');
 const chokidar = require('chokidar');
 
@@ -53,12 +54,25 @@ const runScript = (script) => {
   });
 };
 
-return fs.writeFile(modifiedDbPath, JSON.stringify(getDbContent()), 'utf-8', (err) => {
+let baseContent;
+try {
+  baseContent = getDbContent();
+} catch (err1) {
+  return console.log(`Error at file ${path.normalize(`${__dirname}/../db.json`)}: ${err1.message}`);
+}
+
+return fs.writeFile(modifiedDbPath, JSON.stringify(baseContent), 'utf-8', (err) => {
   if (err) return console.log(err);
   this.watcher = chokidar.watch(`${__dirname}/../db.json`);
   this.watcher
     .on('change', () => {
-      fs.writeFileSync(modifiedDbPath, JSON.stringify(getDbContent()), 'utf-8');
+      let content;
+      try {
+        content = getDbContent();
+      } catch (err_) {
+        console.log(`Error at file ${path.normalize(`${__dirname}/../db.json`)}: ${err_.message}`);
+      }
+      fs.writeFileSync(modifiedDbPath, JSON.stringify(content), 'utf-8');
     })
     .on('error', (error) => {
       log(`Watcher error: ${error}`);
