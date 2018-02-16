@@ -2,7 +2,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 import colorPalette from '../../config/colorPalette';
 
 const { width } = Dimensions.get('window');
-const height = width * 0.9;
+const height = 250;
 
 const INDICATOR_SIZE = 8;
 // const scrollBarVal = this.animVal.interpolate({
@@ -26,7 +26,7 @@ export default StyleSheet.create({
   scrollContainer: {
     flex: 1,
     flexGrow: 0,
-    flexBasis: 300,
+    flexBasis: 250,
     overflow: 'hidden',
   },
   subContainer: {

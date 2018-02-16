@@ -4,7 +4,8 @@ import colorPalette from '../../config/colorPalette';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: colorPalette.white,
   },
