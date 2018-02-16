@@ -34,6 +34,8 @@ export default StyleSheet.create({
     bottom: 15,
     left: 20,
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    width,
   },
   mainHeader: {
     fontSize: 25,
@@ -63,15 +65,19 @@ export default StyleSheet.create({
     height,
     resizeMode: 'cover',
   },
+  indicatorContainer: {
+    flexDirection: 'row',
+    right: 50,
+  },
   indicatorActive: {
-    backgroundColor: colorPalette.grayText1,
+    backgroundColor: colorPalette.carouselActive,
   },
   indicator: {
-    backgroundColor: colorPalette.transparent,
-    borderWidth: 1.5,
+    marginLeft: 3,
+    backgroundColor: colorPalette.carousel,
     borderColor: colorPalette.grayText1,
     width: INDICATOR_SIZE,
     height: INDICATOR_SIZE,
     borderRadius: INDICATOR_SIZE / 2
-  }
+  },
 });

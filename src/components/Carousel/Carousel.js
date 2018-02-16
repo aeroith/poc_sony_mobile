@@ -72,7 +72,7 @@ export default class Carousel extends Component {
           }
         </ScrollView>
         <View>
-          <Text style={styles.mainHeader}>Arrow</Text>
+          <Text style={styles.mainHeader}>{this.props.images[this.props.page].Title}</Text>
           <View style={styles.subContainer}>
             <Text style={styles.subHeader}>Season 2 - Episode 3</Text>
             <Indicator activeIndex={this.props.page} count={this.state.numItems} />
@@ -83,5 +83,12 @@ export default class Carousel extends Component {
   }
 }
 
-const Indicator = ({ activeIndex, count }) => _.times(count, num =>
-  (<View key={num.toString()} style={[styles.indicator, num === activeIndex && styles.indicatorActive]} />));
+const Indicator = ({ activeIndex, count }) => (
+  <View style={styles.indicatorContainer}>
+    {_.times(count, num =>
+      (<View
+        key={num.toString()}
+        style={[styles.indicator, num === activeIndex && styles.indicatorActive]}
+      />))}
+  </View>
+)
