@@ -19,6 +19,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  linearGradientWrapper__searchBarOpen: {
+    paddingTop: 0,
+  },
   navBarHeaderText: {
     color: colorPalette.white,
     fontWeight: 'bold',
