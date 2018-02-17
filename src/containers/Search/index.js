@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, TextInput } from 'react-native';
-import withTranslation from '../Translation';
+import withTranslation from '../../components/Translation/index';
 import styles from './styles';
 import colorPalette from '../../config/colorPalette';
 

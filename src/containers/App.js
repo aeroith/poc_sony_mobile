@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import AppNavigator from '../navigator';
 import { addListener } from '../index';
 import styles from './styles';
-import NavBar from '../components/NavBar';
+import NavBar from './NavBar';
 
 @connect(
   state => ({
