@@ -17,6 +17,10 @@ const styles = StyleSheet.create({
     height: 30,
     paddingHorizontal: 10,
     borderRadius: 4,
-  }
+  },
+  searchBar__invisible: {
+    height: 0,
+    borderWidth: 0,
+  },
 });
 export default styles;

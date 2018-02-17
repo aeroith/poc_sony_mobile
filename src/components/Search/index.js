@@ -18,6 +18,7 @@ export default class Search extends Component {
 
     constructor(props) {
       super(props);
+
       this.state = {
         query: '',
       };
@@ -30,18 +31,17 @@ export default class Search extends Component {
 
     render() {
       const { shouldRender } = this.props;
-      if (!shouldRender) return null;
+      if(!shouldRender) return null;
       return (
-        <View style={styles.searchBarWrapper}>
+        <View style={[styles.searchBarWrapper]}>
           <TextInput
-            style={styles.searchBarTextInput}
+            style={[styles.searchBarTextInput]}
             onChangeText={this.handleOnChangeText}
             value={this.state.query}
             placeholder="Search..."
             placeholderTextColor={colorPalette.grayText1}
           />
         </View>
-
       );
     }
 }
