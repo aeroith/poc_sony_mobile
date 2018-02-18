@@ -1,8 +1,6 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import colorPalette from '../../config/colorPalette';
-
-const { width } = Dimensions.get('window');
-const height = 250;
+import { CAROUSEL_HEIGHT as height } from '../../containers/Carousel/styles';
 
 const INDICATOR_SIZE = 8;
 
@@ -16,6 +14,7 @@ const headerShadowProps = {
 
 export default StyleSheet.create({
   mainContainer: {
+    flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
     position: 'relative',
@@ -27,8 +26,6 @@ export default StyleSheet.create({
   },
   scrollContainer: {
     flex: 1,
-    flexGrow: 0,
-    flexBasis: height,
     overflow: 'hidden',
   },
   subContainer: {
@@ -59,7 +56,6 @@ export default StyleSheet.create({
     ...headerShadowProps,
   },
   image: {
-    width,
     height,
   },
   indicatorContainer: {

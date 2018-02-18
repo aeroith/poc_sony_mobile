@@ -77,6 +77,7 @@ export default class Carousel extends Component {
           horizontal
           pagingEnabled
           scrollEventThrottle={10}
+          showsHorizontalScrollIndicator={false}
           onMomentumScrollEnd={this.handlePageChange}
           onScroll={this.onScroll}
         >
