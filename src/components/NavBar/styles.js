@@ -19,17 +19,26 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  navBarText: {
+  linearGradientWrapper__searchBarOpen: {
+    paddingTop: 0,
+  },
+  navBarHeaderText: {
     color: colorPalette.white,
     fontWeight: 'bold',
     fontSize: 16,
-    maxWidth: 100,
+    maxWidth: 120,
     backgroundColor: 'transparent'
   },
-  text: {
+  navBarText: {
     backgroundColor: 'transparent',
-    color: colorPalette.white
+    color: colorPalette.white,
+    width: 60,
+  },
+  navBarButton: {
+    width: 20,
+    height: 20,
+    backgroundColor: 'transparent',
+    justifyContent: 'center',
   }
 });
-
 export default styles;
