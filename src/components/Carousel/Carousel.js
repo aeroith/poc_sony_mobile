@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { View, ScrollView, Image, Animated, Text, Dimensions } from 'react-native';
-const { width } = Dimensions.get('window');
 import styles from './styles';
 
-const FIXED_BAR_WIDTH = 280;
-const BAR_SPACE = 10;
+const { width: initialWidth, height: initialHeight } = Dimensions.get('window');
 
 export default class Carousel extends Component {
   static propTypes = {
@@ -25,7 +23,11 @@ export default class Carousel extends Component {
     super(props);
     this.animVal = new Animated.Value(0);
     this.state = {
-      numItems: this.props.images.length
+      numItems: this.props.images.length,
+      layout: {
+        width: initialWidth,
+        height: initialHeight,
+      },
     };
   }
 
@@ -42,10 +44,20 @@ export default class Carousel extends Component {
 
   onScroll = () => Animated.event([{ nativeEvent: { contentOffset: { x: this.animVal } } }]);
 
+  onLayout = (event) => {
+    const { width, height } = event.nativeEvent.layout;
+    this.setState({
+      layout: {
+        width,
+        height,
+      }
+    });
+  };
+
   handlePageChange = (e) => {
     const offset = e.nativeEvent.contentOffset;
     if (offset) {
-      const page = Math.round(offset.x / width);
+      const page = Math.round(offset.x / this.state.layout.width);
       if (this.props.page !== page) {
         this.props.setCarouselPage(page);
       }
@@ -59,7 +71,7 @@ export default class Carousel extends Component {
     const currentSelection = this.props.images[this.props.page];
 
     return (
-      <View style={styles.mainContainer}>
+      <View style={styles.mainContainer} onLayout={this.onLayout}>
         <ScrollView
           style={styles.scrollContainer}
           horizontal
@@ -71,15 +83,19 @@ export default class Carousel extends Component {
           {
             this.props.images.map(({ imageURL, id }) => (
               <View key={id + 2}>
-                <Image style={styles.image} source={{ uri: imageURL }} key={id} />
-                <View key={id + 1} style={styles.innerFrame} />
+                <Image
+                  style={[styles.image, { width: this.state.layout.width }]}
+                  source={{ uri: imageURL }}
+                  key={id}
+                />
+                <View key={id + 1} style={[styles.innerFrame, { width: this.state.layout.width }]} />
               </View>
             ))
           }
         </ScrollView>
         <View>
           <Text style={styles.mainHeader}>{currentSelection.Title}</Text>
-          <View style={styles.subContainer}>
+          <View style={[styles.subContainer, { width: this.state.layout.width }]}>
             <Text style={styles.subHeader}>{currentSelection.Note && currentSelection.Note}</Text>
             <Indicator activeIndex={this.props.page} count={this.state.numItems} />
           </View>
@@ -89,8 +105,8 @@ export default class Carousel extends Component {
   }
 }
 
-const Indicator = ({ activeIndex, count }) => (
-  <View style={styles.indicatorContainer}>
+const Indicator = ({ activeIndex, count, ...props }) => (
+  <View {...props} style={styles.indicatorContainer}>
     {_.times(count, num =>
       (<View
         key={num.toString()}

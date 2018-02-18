@@ -5,11 +5,14 @@ const { width } = Dimensions.get('window');
 const height = 250;
 
 const INDICATOR_SIZE = 8;
-// const scrollBarVal = this.animVal.interpolate({
-//   inputRange: [30, 60],
-//   outputRange: [-this.itemWidth, this.itemWidth],
-//   extrapolate: 'clamp',
-// })
+
+const headerShadowProps = {
+  backgroundColor: colorPalette.transparent,
+  shadowColor: colorPalette.black,
+  shadowOpacity: 0.4,
+  shadowOffset: { width: 2, height: 2 },
+  shadowRadius: 2,
+};
 
 export default StyleSheet.create({
   mainContainer: {
@@ -20,13 +23,12 @@ export default StyleSheet.create({
   innerFrame: {
     position: 'absolute',
     height,
-    width,
     backgroundColor: 'rgba(0, 0, 0, .4)'
   },
   scrollContainer: {
     flex: 1,
     flexGrow: 0,
-    flexBasis: 250,
+    flexBasis: height,
     overflow: 'hidden',
   },
   subContainer: {
@@ -35,7 +37,6 @@ export default StyleSheet.create({
     left: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width,
   },
   mainHeader: {
     fontSize: 25,
@@ -43,12 +44,8 @@ export default StyleSheet.create({
     bottom: 35,
     left: 20,
     color: colorPalette.white,
-    backgroundColor: colorPalette.transparent,
-    shadowColor: colorPalette.black,
-    shadowOpacity: 0.4,
-    shadowOffset: { width: 2, height: 2 },
-    shadowRadius: 2,
     fontWeight: '600',
+    ...headerShadowProps,
   },
   subHeader: {
     fontSize: 13,
@@ -59,11 +56,11 @@ export default StyleSheet.create({
     shadowOffset: { width: 2, height: 2 },
     shadowRadius: 2,
     fontWeight: '400',
+    ...headerShadowProps,
   },
   image: {
     width,
     height,
-    resizeMode: 'cover',
   },
   indicatorContainer: {
     flexDirection: 'row',

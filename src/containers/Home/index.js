@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import Carousel from '../../containers/Carousel';
 import styles from './styles';
 import withTranslation from '../../components/Translation';
@@ -16,23 +16,17 @@ export default class Home extends Component {
     this.props.navigation.navigate('Counter');
   };
 
-  toCarousel = () => {
-    this.props.navigation.navigate('Carousel');
-  };
-
   render() {
     const { translate } = this.props;
     return (
       <View style={styles.container}>
         <Carousel />
-        <Image source={require('../../assets/images/arrow_image.png')} style={styles.image} resizeMode="contain" />
-        <Text style={styles.welcome}>{translate('welcome_text')}</Text>
-        <TouchableOpacity onPress={this.toCounter}>
-          <Text style={styles.instructions}>{translate('navigate_to_counter')}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.toCarousel}>
-          <Text style={styles.instructions}>{translate('navigate_to_carousel')}</Text>
-        </TouchableOpacity>
+        <View style={{ flex: 3 }}>
+          <Text style={styles.welcome}>{translate('welcome_text')}</Text>
+          <TouchableOpacity onPress={this.toCounter}>
+            <Text style={styles.instructions}>{translate('navigate_to_counter')}</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
