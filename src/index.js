@@ -4,6 +4,10 @@ import { createReduxBoundAddListener, createReactNavigationReduxMiddleware } fro
 import { createAppInitialState } from './store/store';
 import App from './containers/App';
 import configureStore from './configureStore';
+import TMBDClient from './utils/tmdb-client';
+
+// Initiate TMDB configuration fetching
+TMBDClient.getConfiguration();
 
 // Redux-navigation configurations
 const reduxNavMiddleware = createReactNavigationReduxMiddleware('root', state => state.nav);

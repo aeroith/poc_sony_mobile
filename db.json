@@ -46,8 +46,20 @@
       "tags": [],
       "nextAiring": 0,
       "imageURL": "https://nerdist.com/wp-content/uploads/2016/03/Daredevil-Season-2-Punisher-Featurette.jpg",
-      "imdbID": "tt5675620",
+      "tmdbID": "67178",
+      "tmdbTypes": ["tv"],
       "Note": "Grand Finale"
+    },
+    {
+      "id": 6,
+      "Title": "Punisher: War Zone",
+      "featured": false,
+      "tags": [],
+      "nextAiring": 0,
+      "imageURL": "https://images.fandango.com/r1.0.323/ImageRenderer/1040/650/redesign/areas/movie/moviesubpages/img/noimage_900x900.jpg/112810/images/masterrepository/fandango/112810/punisherwarzone-mv-raystevenson.jpg",
+      "tmdbID": "13056",
+      "tmdbTypes": ["movie"],
+      "Note": "Ray Stevenson as Frank Castle"
     }
   ]
 }

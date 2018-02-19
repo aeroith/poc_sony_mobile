@@ -9,6 +9,8 @@ const translations = {
     back: 'Back',
     home: 'Guide',
     counter: 'Counter',
+    search: 'Search...',
+    nextAiring_na: 'Next airing N/A',
     today: 'Today',
     tomorrow: 'Tomorrow'
   },
@@ -22,6 +24,8 @@ const translations = {
     back: 'Geri',
     home: 'Yayın Akışı',
     counter: 'Sayaç',
+    search: 'Arama...',
+    nextAiring_na: 'Bir sonraki yayın zamanı belirsiz',
     today: 'Bugün',
     tomorrow: 'Yarın'
   }
