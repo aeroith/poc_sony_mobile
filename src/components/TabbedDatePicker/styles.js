@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
   triangle: {
     position: 'absolute',
-    bottom: -(TRIANGLE_SIZE - 2), // also including border width
+    bottom: -(TRIANGLE_SIZE + 2), // also including border width
     alignSelf: 'center',
     width: 0,
     height: 0,
