@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     color: colorPalette.grayText1
   },
   tabItemTextActive: {
+    top: -1,
     color: colorPalette.white,
     alignItems: 'center',
     justifyContent: 'center',
