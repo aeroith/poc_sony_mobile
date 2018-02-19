@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Text, View, TouchableOpacity } from 'react-native';
-import Carousel from '../../containers/Carousel';
+import Carousel from '../Carousel';
 import styles from './styles';
+import TabbedDatePicker from '../TabbedDatePicker';
 import withTranslation from '../../components/Translation';
 
 @withTranslation
@@ -21,6 +22,7 @@ export default class Home extends Component {
     return (
       <View style={styles.container}>
         <Carousel />
+        <TabbedDatePicker />
         <View style={{ flex: 3 }}>
           <Text style={styles.welcome}>{translate('welcome_text')}</Text>
           <TouchableOpacity onPress={this.toCounter}>
