@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { View, TextInput, TouchableOpacity, Text, Image } from 'react-native';
 import _debounce from 'lodash/debounce';
 import Autocomplete from 'react-native-autocomplete-input';
-import Icon from 'react-native-vector-icons/Feather';
 import moment from 'moment';
 import config from '../../config/config';
 import withTranslation from '../../components/Translation/index';
 import styles from './styles';
 import colorPalette from '../../config/colorPalette';
 import SearchService from '../../services/searchService';
+import Spinner from '../../components/Spinner';
 
 @withTranslation
 export default class Search extends Component {
@@ -64,6 +64,7 @@ export default class Search extends Component {
           style={styles.searchBarAutocompleteItemWrapper}
           onPress={this.handleAutocompleteItemSelect(item)}
         >
+          {/* TODO: onLoad attribute should be put onto images with a spinner */}
           <Image
             style={styles.searchBarAutocompleteItemImage}
             source={{ uri: item.tmdbImagePath || config.dummyImageUrl }}
@@ -81,7 +82,6 @@ export default class Search extends Component {
     };
 
     renderTextInput = () => {
-      console.log('rendered');
       return (
         <View style={styles.searchBarTextInputWrapper}>
           <TextInput
@@ -93,11 +93,8 @@ export default class Search extends Component {
             onBlur={this.handleOnBlur}
           />
           {this.state.loading && (
-          <Icon
-            style={styles.searchBarSpinner}
-            name="loader"
-            size={15}
-            color={colorPalette.grayText1}
+          <Spinner
+            wrapperStyle={styles.searchBarSpinnerWrapper}
           />
           )}
         </View>
@@ -108,6 +105,7 @@ export default class Search extends Component {
       const { shouldRender } = this.props;
       const { data, query } = this.state;
       if (!shouldRender) return null;
+      // TODO: Autocomplete should be rendered differently on android devices. Check documentation
       return (
         <Autocomplete
           containerStyle={styles.searchBarWrapper}

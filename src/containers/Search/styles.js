@@ -18,14 +18,10 @@ const styles = StyleSheet.create({
     height: 30,
     paddingHorizontal: 10,
   },
-  searchBarSpinner: {
+  searchBarSpinnerWrapper: {
     position: 'absolute',
-    right: 0,
-    top: 0,
-    height: 35,
-    width: 25,
-    paddingHorizontal: 5,
-    paddingVertical: 6,
+    right: 5,
+    top: 5,
     backgroundColor: colorPalette.transparent,
   },
   searchBarTextInputAutocomplete: {
