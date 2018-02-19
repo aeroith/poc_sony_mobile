@@ -11,6 +11,8 @@ const translations = {
     counter: 'Counter',
     search: 'Search...',
     nextAiring_na: 'Next airing N/A',
+    today: 'Today',
+    tomorrow: 'Tomorrow'
   },
   tr: {
     welcome_text: 'Sony Mobile Channel Projesine Hoşgeldiniz',
@@ -24,6 +26,8 @@ const translations = {
     counter: 'Sayaç',
     search: 'Arama...',
     nextAiring_na: 'Bir sonraki yayın zamanı belirsiz'
+    today: 'Bugün',
+    tomorrow: 'Yarın'
   }
 };
 
