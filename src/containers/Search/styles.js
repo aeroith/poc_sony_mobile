@@ -9,13 +9,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   searchBarTextInput: {
-    borderColor: colorPalette.grayText2,
     color: colorPalette.white,
     fontWeight: '300',
     fontSize: 13,
-    borderWidth: 1,
     height: 30,
     paddingHorizontal: 10,
+  },
+  searchBarTextInputAutocomplete: {
+    borderColor: colorPalette.grayText2,
+    borderWidth: 1,
     borderRadius: 4,
   },
   searchBar__invisible: {

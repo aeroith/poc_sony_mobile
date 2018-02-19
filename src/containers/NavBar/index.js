@@ -4,11 +4,12 @@ import { View, Text, TouchableOpacity } from 'react-native';
 // TODO For android react-native-linear-gradient should be put into build phase
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import * as Animatable from 'react-native-animatable';
+import { connect } from 'react-redux';
 import colorPalette from '../../config/colorPalette';
 import withTranslation from '../../components/Translation/index';
 import styles from './styles';
 import Search from '../Search/index';
-import { connect } from 'react-redux';
 import { actions as searchBarActions } from '../../reducers/search';
 
 @withTranslation
@@ -46,7 +47,7 @@ export default class NavBar extends Component {
     render() {
       const { isSearchBarVisible } = this.props;
       return (
-        <View style={styles.navBarWrapper}>
+        <Animatable.View style={styles.navBarWrapper} animation="fadeInDown">
           <LinearGradient
             colors={[colorPalette.grayBg3, colorPalette.transparent]}
             locations={[isSearchBarVisible ? 0.4 : 0.25, 1]}
@@ -70,7 +71,7 @@ export default class NavBar extends Component {
               </TouchableOpacity>
             </View>
           </LinearGradient>
-        </View>
+        </Animatable.View>
 
       );
     }

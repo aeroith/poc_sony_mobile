@@ -2,7 +2,7 @@
   "content": [
     {
       "id": 1,
-      "Title": "Recep Ivedik",
+      "title": "Recep Ivedik",
       "featured": true,
       "tags": ["new"],
       "nextAiring": 0,
@@ -11,7 +11,7 @@
     },
     {
       "id": 2,
-      "Title": "Cumali Ceber",
+      "title": "Cumali Ceber",
       "featured": true,
       "tags": ["new"],
       "nextAiring": 0,
@@ -20,7 +20,7 @@
     },
     {
       "id": 3,
-      "Title":"Hababam Sinifi Dokuz Doguruyor",
+      "title":"Hababam Sinifi Dokuz Doguruyor",
       "featured": true,
       "tags": [],
       "nextAiring": 0,
