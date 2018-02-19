@@ -9,6 +9,7 @@ const translations = {
     back: 'Back',
     home: 'Guide',
     counter: 'Counter',
+    search: 'Search...',
   },
   tr: {
     welcome_text: 'Sony Mobile Channel Projesine Hoşgeldiniz',
@@ -20,6 +21,7 @@ const translations = {
     back: 'Geri',
     home: 'Yayın Akışı',
     counter: 'Sayaç',
+    search: 'Arama...',
   }
 };
 

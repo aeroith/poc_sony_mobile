@@ -24,5 +24,35 @@ const styles = StyleSheet.create({
     height: 0,
     borderWidth: 0,
   },
+  searchBarAutocompleteItemContainer: {
+    borderColor: colorPalette.grayText2,
+  },
+  searchBarAutocompleteItemWrapper: {
+    flex: 1,
+    flexDirection: 'row',
+    borderTopWidth: 1,
+    borderTopColor: colorPalette.grayBorderAutocomplete,
+    borderStyle: 'solid',
+  },
+  searchBarAutocompleteItemImage: {
+    height: 40,
+    width: 30,
+  },
+  searchBarAutocompleteItemTextView: {
+    flex: 1,
+    height: 40,
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingTop: 5,
+  },
+  searchBarAutocompleteItemText: {
+    fontSize: 13,
+  },
+  searchBarAutocompleteItemNextAiring: {
+    fontSize: 10,
+    color: colorPalette.grayText2,
+  },
+
+
 });
 export default styles;

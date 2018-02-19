@@ -15,6 +15,7 @@ const colorPalette = {
       grayText1: '#8b8d91', // Tabs text color
       grayText2: '#3d4146', // Tabs sub-text color
       grayText3: '#2b2d31', // Tabs sub-text color
+      grayBorderAutocomplete: '#ededed',
       carousel: '#4e555b',
       carouselActive: '#99a4ad',
       purpleBg1: '#7337e2', // Tag color
