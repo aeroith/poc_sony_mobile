@@ -25,7 +25,7 @@ const translations = {
     home: 'Yayın Akışı',
     counter: 'Sayaç',
     search: 'Arama...',
-    nextAiring_na: 'Bir sonraki yayın zamanı belirsiz'
+    nextAiring_na: 'Bir sonraki yayın zamanı belirsiz',
     today: 'Bugün',
     tomorrow: 'Yarın'
   }
