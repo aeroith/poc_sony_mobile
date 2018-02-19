@@ -74,4 +74,7 @@ export default StyleSheet.create({
     height: INDICATOR_SIZE,
     borderRadius: INDICATOR_SIZE / 2
   },
+  indicatorFirstChild: {
+    marginLeft: 0,
+  },
 });

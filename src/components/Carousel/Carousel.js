@@ -128,7 +128,9 @@ const Indicator = ({ activeIndex, count, ...props }) => (
     {_.times(count, num =>
       (<View
         key={num.toString()}
-        style={[styles.indicator, num === activeIndex && styles.indicatorActive]}
+        style={[styles.indicator,
+          num === activeIndex && styles.indicatorActive,
+          num === 0 && styles.indicatorFirstChild]}
       />))}
   </View>
 );
