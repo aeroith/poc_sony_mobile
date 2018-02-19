@@ -35,11 +35,15 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  mainHeader: {
-    fontSize: 25,
+  mainHeaderContainer: {
     position: 'absolute',
     bottom: 35,
     left: 20,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  mainHeader: {
+    fontSize: 25,
     color: colorPalette.white,
     fontWeight: '600',
     ...headerShadowProps,
@@ -76,5 +80,8 @@ export default StyleSheet.create({
   },
   indicatorFirstChild: {
     marginLeft: 0,
+  },
+  tag: {
+    marginLeft: 14,
   },
 });

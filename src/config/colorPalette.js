@@ -18,7 +18,10 @@ const colorPalette = {
       grayBorderAutocomplete: '#ededed',
       carousel: '#4e555b',
       carouselActive: '#99a4ad',
-      purpleBg1: '#7337e2', // Tag color
+      tag: {
+        new: '#7337e2',
+        popular: '#4b7bec'
+      },
       cyan1: '#39e0d5',
       redBg: '#f02f27',
       pinkBg: '#da287a',

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { View, ScrollView, Image, Animated, Text, Dimensions } from 'react-native';
+import Tag from '../Tag';
 import styles from './styles';
 
 const { width: initialWidth, height: initialHeight } = Dimensions.get('window');
@@ -112,7 +113,21 @@ export default class Carousel extends Component {
           }
         </ScrollView>
         <View>
-          <Text style={styles.mainHeader}>{currentSelection.Title}</Text>
+          <View style={styles.mainHeaderContainer}>
+            <Text style={styles.mainHeader}>{currentSelection.Title}</Text>
+            {
+              currentSelection.tags
+                .slice(0, 2)
+                .map((tag, i) => (
+                  <Tag
+                    key={`${tag}-${i}`}
+                    type={tag}
+                    text={this.props.translate(tag)}
+                    style={styles.tag}
+                  />
+              ))
+            }
+          </View>
           <View style={[styles.subContainer, { width: this.state.layout.width }]}>
             <Text style={styles.subHeader}>{currentSelection.Note && currentSelection.Note}</Text>
             <Indicator activeIndex={this.props.page} count={this.state.numItems} />
