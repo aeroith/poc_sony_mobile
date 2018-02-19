@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
-import { View, SectionList, Text, TouchableOpacity} from 'react-native';
+import { View, ScrollView, Text, TouchableOpacity} from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './styles';
 
 const moment = require('moment');
 
 export default class TabbedDatePicker extends Component {
+  static propTypes = {
+    dates: PropTypes.array.isRequired,
+  }
   constructor(props) {
     super(props);
     this.onTabItemClick = this.onTabItemClick.bind(this);
+    console.log(this.props.dates)
     this.state = {
       selected: 0,
     };
@@ -16,7 +20,6 @@ export default class TabbedDatePicker extends Component {
   onTabItemClick(index) {
     const self = this;
     return () => {
-      console.log(self.props)
       const momentNow = moment().add(index, 'days');
       const timeStart = momentNow.unix(Number);
       const timeEnd = momentNow.endOf('day').unix(Number);
@@ -25,27 +28,42 @@ export default class TabbedDatePicker extends Component {
     };
   }
 
-  componentDidUpdate() {
-    console.log(this.state)
-  }
-
   render() {
     return (
       <View style={styles.mainContainer}>
-        <TabItem onClick={this.onTabItemClick(0)} active text={'Today'}/>
-        <TabItem onClick={this.onTabItemClick(1)} text={'Tomorrow'}/>
-        <TabItem onClick={this.onTabItemClick(2)} text={'Wed 09'}/>
-        <TabItem onClick={this.onTabItemClick(3)} text={'Thu 10'}/>
+        <ScrollView
+          horizontal
+          pagingEnabled
+        >
+          {
+            this.props.dates.map((date, index) => (
+              <TabItem
+                key={date.key}
+                active={this.state.selected === index}
+                text={date.data.dayOfWeek}
+                dayNumber={date.data.dayNumber}
+                onPress={this.onTabItemClick(index)}
+              />
+            ))
+          }
+        </ScrollView>
       </View>
     );
   }
 };
 
-const TabItem = ({ text, active, onClick, ...props }) => (
-  <TouchableOpacity onPress={onClick} style={[styles.tabItem, active && styles.tabItemActive]} {...props}>
-    <View >
-      <Text style={[styles.tabItemText, active && styles.tabItemTextActive]}>{text}</Text>
-      <View style={active && [styles.triangle]} />
+const TabItem = ({ text, dayNumber, active, onPress, ...props }) => (
+  <TouchableOpacity
+    onPress={onPress}
+    style={[styles.tabItem, active && styles.tabItemActive]}
+    {...props}
+  >
+    <View>
+      <View style={styles.textContainer}>
+        <Text style={[styles.tabItemText, active && styles.tabItemTextActive]}>{text}</Text>
+        {dayNumber && <Text style={styles.textDayNumber}>{dayNumber}</Text>}
+      </View>
+      {active && <View style={[styles.triangle]} />}
     </View>
   </TouchableOpacity>
 );
@@ -53,10 +71,17 @@ const TabItem = ({ text, active, onClick, ...props }) => (
 TabItem.propTypes = {
   text: PropTypes.string.isRequired,
   active: PropTypes.bool,
-  onClick: PropTypes.func,
+  onPress: PropTypes.func,
+  dayNumber: PropTypes.string
 };
 
 TabItem.defaultProps = {
   active: false,
-  onClick: () => {},
+  onPress: () => {},
+  dayNumber: undefined
 };
+
+{/*<TabItem onPress={this.onTabItemClick(0)} active text={'Today'}/>*/}
+{/*<TabItem onPress={this.onTabItemClick(1)} text={'Tomorrow'} />*/}
+{/*<TabItem onPress={this.onTabItemClick(2)} text={'Wed'} dayNumber={'09'} />*/}
+{/*<TabItem onPress={this.onTabItemClick(3)} text={'Thu'} dayNumber={'10'} />*/}

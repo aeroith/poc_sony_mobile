@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
   triangle: {
     position: 'absolute',
-    bottom: -TRIANGLE_SIZE / 2,
+    bottom: -(TRIANGLE_SIZE - 2), // also including border width
     alignSelf: 'center',
     width: 0,
     height: 0,
@@ -42,11 +42,19 @@ const styles = StyleSheet.create({
     borderRightWidth: TRIANGLE_SIZE / 2,
     borderBottomWidth: 0,
     borderLeftWidth: TRIANGLE_SIZE / 2,
-    borderTopColor: colorPalette.grayBg1,
+    borderTopColor: 'red',
     borderRightColor: 'transparent',
     borderBottomColor: 'transparent',
     borderLeftColor: 'transparent',
-  }
+  },
+  textContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  textDayNumber: {
+    color: colorPalette.white,
+    marginLeft: 4,
+  },
 });
 
 export default styles;
