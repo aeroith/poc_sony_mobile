@@ -54,6 +54,18 @@ export default class Carousel extends Component {
     });
   };
 
+  setScrollViewRef = (ref) => {
+    this.scrollViewRef = ref;
+    return null;
+  };
+
+  // fixes the weird half screen issue when the device is rotated
+  handleLayoutScrolling = () => this.scrollViewRef.scrollTo({
+    x: this.state.layout.width * this.props.page,
+    y: 0,
+    animated: true
+  });
+
   handlePageChange = (e) => {
     const offset = e.nativeEvent.contentOffset;
     if (offset) {
@@ -73,9 +85,11 @@ export default class Carousel extends Component {
     return (
       <View style={styles.mainContainer} onLayout={this.onLayout}>
         <ScrollView
+          ref={this.setScrollViewRef}
           style={styles.scrollContainer}
           horizontal
           pagingEnabled
+          onContentSizeChange={this.handleLayoutScrolling}
           scrollEventThrottle={10}
           showsHorizontalScrollIndicator={false}
           onMomentumScrollEnd={this.handlePageChange}
@@ -89,7 +103,10 @@ export default class Carousel extends Component {
                   source={{ uri: imageURL }}
                   key={id}
                 />
-                <View key={id + 1} style={[styles.innerFrame, { width: this.state.layout.width }]} />
+                <View
+                  key={id + 1}
+                  style={[styles.innerFrame, { width: this.state.layout.width }]}
+                />
               </View>
             ))
           }
