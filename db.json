@@ -7,7 +7,8 @@
       "tags": ["new"],
       "nextAiring": 0,
       "imageURL": "https://i.ytimg.com/vi/3TpBMUQfSOU/maxresdefault.jpg",
-      "imdbID": "tt1193516"
+      "imdbID": "tt1193516",
+      "Note": "🔥 🔥"
     },
     {
       "id": 2,
@@ -20,12 +21,33 @@
     },
     {
       "id": 3,
-      "title":"Hababam Sinifi Dokuz Doguruyor",
+      "title":"Arrow",
       "featured": true,
       "tags": [],
       "nextAiring": 0,
-      "imageURL": "https://images-na.ssl-images-amazon.com/images/M/MV5BMjUwNDlmZDEtZmE0OS00OTk2LWIzYTAtYTVmYzI5MmM4ZjQ2XkEyXkFqcGdeQXVyNjUxNDU0MjM@._V1_SX300.jpg",
-      "imdbID":"tt0289968"
+      "imageURL": "https://i.imgur.com/Ks7X1sw.jpg",
+      "imdbID":"tt0289968",
+      "Note": "Season 2 - Episode 3"
+    },
+    {
+      "id": 4,
+      "title": "Gotham",
+      "featured": true,
+      "tags": [],
+      "nextAiring": 0,
+      "imageURL": "https://i.imgur.com/OP0ZrRS.jpg",
+      "imdbID": "tt3749900",
+      "Note": "Season 1 - Episode 1"
+    },
+    {
+      "id": 5,
+      "title": "The Punisher",
+      "featured": true,
+      "tags": [],
+      "nextAiring": 0,
+      "imageURL": "https://nerdist.com/wp-content/uploads/2016/03/Daredevil-Season-2-Punisher-Featurette.jpg",
+      "imdbID": "tt5675620",
+      "Note": "Grand Finale"
     }
   ]
 }

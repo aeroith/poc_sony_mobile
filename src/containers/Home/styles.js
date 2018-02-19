@@ -1,10 +1,11 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import colorPalette from '../../config/colorPalette';
-const { width } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-start',
+    flexDirection: 'column',
     alignItems: 'center',
     backgroundColor: colorPalette.white,
   },
@@ -19,9 +20,6 @@ const styles = StyleSheet.create({
     color: colorPalette.grayText1,
     marginBottom: 5,
   },
-  image: {
-    width,
-  }
 });
 
 export default styles;

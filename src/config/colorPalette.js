@@ -5,6 +5,7 @@ const colorPalette = {
     smcDark: {
       som: '#111416',
       white: '#ffffff',
+      black: '#000000',
       grayBg1: '#3d4149', // Tabs background
       grayBg2: '#2b2d31', // Tabs subtitle background
       grayBg3: 'rgba(29,34,36,1)', // Header background
@@ -14,6 +15,8 @@ const colorPalette = {
       grayText1: '#8b8d91', // Tabs text color
       grayText2: '#3d4146', // Tabs sub-text color
       grayText3: '#2b2d31', // Tabs sub-text color
+      carousel: '#4e555b',
+      carouselActive: '#99a4ad',
       purpleBg1: '#7337e2', // Tag color
       cyan1: '#39e0d5',
       redBg: '#f02f27',

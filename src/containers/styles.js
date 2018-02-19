@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
   app: {
     flex: 1,
     zIndex: 1,
-    marginTop: -60
   },
 });
 
