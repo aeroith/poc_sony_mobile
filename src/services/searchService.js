@@ -5,6 +5,7 @@ export default class SearchService {
   static getAutocompleteResults(query) {
     const lowerCaseQuery = query.toLowerCase();
     return ApiClient.get(`content?q=${lowerCaseQuery}`)
+      // TODO: w92 should be taken from tmdb configuration
       .then(response => SearchService.getTMDBImages(response.data, 'w92'))
       .catch(err => console.log(err));
   }
