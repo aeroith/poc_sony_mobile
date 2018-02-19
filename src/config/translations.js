@@ -10,6 +10,7 @@ const translations = {
     home: 'Guide',
     counter: 'Counter',
     search: 'Search...',
+    nextAiring_na: 'Next airing N/A',
   },
   tr: {
     welcome_text: 'Sony Mobile Channel Projesine Hoşgeldiniz',
@@ -22,6 +23,7 @@ const translations = {
     home: 'Yayın Akışı',
     counter: 'Sayaç',
     search: 'Arama...',
+    nextAiring_na: 'Bir sonraki yayın zamanı belirsiz'
   }
 };
 

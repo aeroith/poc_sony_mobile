@@ -7,10 +7,11 @@ class TDMBClient {
     this.configuration = {};
     this.baseUrl = config.tmdb.baseUrl;
     this.apiKey = config.tmdb.apiKey;
+    this.logErrors = config.tmdb.logErrors;
   }
 
   getConfiguration() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       if (Object.keys(this.configuration).length > 0) return resolve(this.configuration);
       axios.get(`${this.baseUrl}configuration?api_key=${this.apiKey}`)
         .then((response) => {
@@ -18,7 +19,7 @@ class TDMBClient {
           resolve(response.data);
         })
         .catch((err) => {
-          console.log('Tmdb configuration fetch error:', err);
+          if (this.logErrors) console.log('Tmdb configuration fetch error:', err);
           this.configuration = defaultTmdbConfig;
           resolve(defaultTmdbConfig);
         });
@@ -26,15 +27,22 @@ class TDMBClient {
   }
 
   get(methodName, tmdbType, tmdbId) {
-    return this.getConfiguration().then(() => this[`get${methodName}`](tmdbType, tmdbId));
+    return new Promise((resolve) => {
+      if (!(tmdbType && tmdbId)) resolve({});
+      this.getConfiguration().then(() => this[`get${methodName}`](tmdbType, tmdbId).then(resp => resolve(resp)));
+    });
   }
 
   getDetails(tmdbType, tmdbId) {
-    const url = `${this.baseUrl}${tmdbType}/${tmdbId}?api_key=${this.apiKey}`;
-    console.log('url: ', url);
-    return axios.get(url)
-      .then(response => response.data)
-      .catch(err => err);
+    return new Promise((resolve) => {
+      const url = `${this.baseUrl}${tmdbType}/${tmdbId}?api_key=${this.apiKey}`;
+      return axios.get(url)
+        .then(response => resolve(response.data))
+        .catch((err) => {
+          if (this.logErrors) console.log('Tmbd data fetch error: ', err);
+          resolve({});
+        });
+    });
   }
 }
 
