@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { View, TextInput, TouchableOpacity, Text, Image } from 'react-native';
 import _debounce from 'lodash/debounce';
 import Autocomplete from 'react-native-autocomplete-input';
-import config from '../../config/config';
+import Icon from 'react-native-vector-icons/Feather';
 import moment from 'moment';
+import config from '../../config/config';
 import withTranslation from '../../components/Translation/index';
 import styles from './styles';
 import colorPalette from '../../config/colorPalette';
@@ -27,6 +28,7 @@ export default class Search extends Component {
       this.state = {
         query: '',
         data: [],
+        loading: false,
       };
 
       this.getAutocompleteResults = _debounce(this.getAutocompleteResults, 350);
@@ -34,8 +36,9 @@ export default class Search extends Component {
 
     getAutocompleteResults = (query) => {
       if (query.length >= 3) {
+        this.setState({ loading: true });
         SearchService.getAutocompleteResults(query)
-          .then(results => this.setState({ data: results }));
+          .then(results => this.setState({ data: results, loading: false }));
       }
     };
 
@@ -56,7 +59,7 @@ export default class Search extends Component {
 
     handleRenderItem = (item) => {
       const nextAiring = this.getNextAiring(item.nextAiring);
-      const returnEl = (
+      return (
         <TouchableOpacity
           style={styles.searchBarAutocompleteItemWrapper}
           onPress={this.handleAutocompleteItemSelect(item)}
@@ -71,21 +74,35 @@ export default class Search extends Component {
           </View>
         </TouchableOpacity>
       );
-      return returnEl;
     };
 
     handleOnBlur = () => {
       this.setState({ data: [] });
     };
 
-    renderTextInput = () => (<TextInput
-      onChangeText={this.handleOnChangeText}
-      style={styles.searchBarTextInput}
-      placeholder={this.props.translate('search')}
-      placeholderTextColor={colorPalette.grayText1}
-      value={this.state.query}
-      onBlur={this.handleOnBlur}
-    />);
+    renderTextInput = () => {
+      console.log('rendered');
+      return (
+        <View style={styles.searchBarTextInputWrapper}>
+          <TextInput
+            onChangeText={this.handleOnChangeText}
+            style={styles.searchBarTextInput}
+            placeholder={this.props.translate('search')}
+            placeholderTextColor={colorPalette.grayText1}
+            value={this.state.query}
+            onBlur={this.handleOnBlur}
+          />
+          {this.state.loading && (
+          <Icon
+            style={styles.searchBarSpinner}
+            name="loader"
+            size={15}
+            color={colorPalette.grayText1}
+          />
+          )}
+        </View>
+      );
+    };
 
     render() {
       const { shouldRender } = this.props;

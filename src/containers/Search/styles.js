@@ -8,12 +8,25 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     paddingHorizontal: 15,
   },
+  searchBarTextInputWrapper: {
+    position: 'relative',
+  },
   searchBarTextInput: {
     color: colorPalette.white,
     fontWeight: '300',
     fontSize: 13,
     height: 30,
     paddingHorizontal: 10,
+  },
+  searchBarSpinner: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    height: 35,
+    width: 25,
+    paddingHorizontal: 5,
+    paddingVertical: 6,
+    backgroundColor: colorPalette.transparent,
   },
   searchBarTextInputAutocomplete: {
     borderColor: colorPalette.grayText2,
