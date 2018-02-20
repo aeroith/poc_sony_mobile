@@ -4,6 +4,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import Carousel from '../Carousel';
 import styles from './styles';
 import TabbedDatePicker from '../TabbedDatePicker';
+import Guide from '../Guide';
 import withTranslation from '../../components/Translation';
 
 @withTranslation
@@ -23,12 +24,7 @@ export default class Home extends Component {
       <View style={styles.container}>
         <Carousel />
         <TabbedDatePicker />
-        <View style={{ flex: 3 }}>
-          <Text style={styles.welcome}>{translate('welcome_text')}</Text>
-          <TouchableOpacity onPress={this.toCounter}>
-            <Text style={styles.instructions}>{translate('navigate_to_counter')}</Text>
-          </TouchableOpacity>
-        </View>
+        <Guide />
       </View>
     );
   }
