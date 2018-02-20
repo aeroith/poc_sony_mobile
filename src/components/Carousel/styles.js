@@ -28,24 +28,31 @@ export default StyleSheet.create({
     flex: 1,
     overflow: 'hidden',
   },
-  subContainer: {
+  contentContainer: {
     position: 'absolute',
-    bottom: 15,
-    left: 20,
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    bottom: 0,
+    marginHorizontal: 20,
+    marginVertical: 15,
+  },
+  subContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   mainHeaderContainer: {
-    position: 'absolute',
-    bottom: 35,
-    left: 20,
+    flexShrink: 0,
+    flexBasis: 80,
+    paddingVertical: 7,
+    flexWrap: 'wrap',
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   mainHeader: {
     fontSize: 25,
     color: colorPalette.white,
     fontWeight: '600',
+    marginRight: 14,
     ...headerShadowProps,
   },
   subHeader: {
@@ -84,4 +91,7 @@ export default StyleSheet.create({
   tag: {
     marginLeft: 14,
   },
+  tagFirstChild: {
+    marginLeft: 0,
+  }
 });

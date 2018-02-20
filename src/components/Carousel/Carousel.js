@@ -112,7 +112,7 @@ export default class Carousel extends Component {
             ))
           }
         </ScrollView>
-        <View>
+        <View style={styles.contentContainer}>
           <View style={styles.mainHeaderContainer}>
             <Text style={styles.mainHeader}>{currentSelection.Title}</Text>
             {
@@ -123,7 +123,7 @@ export default class Carousel extends Component {
                     key={`${tag}-${i}`}
                     type={tag}
                     text={this.props.translate(tag)}
-                    style={styles.tag}
+                    style={[styles.tag, i === 0 && styles.tagFirstChild]}
                   />
               ))
             }
