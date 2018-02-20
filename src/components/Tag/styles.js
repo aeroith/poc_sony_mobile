@@ -5,7 +5,8 @@ const style = StyleSheet.create({
   tagContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 20,
+    top: 2,
+    height: 18,
     paddingHorizontal: 5,
     borderRadius: 2,
     backgroundColor: colorPalette.new,
