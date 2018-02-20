@@ -5,6 +5,13 @@ const styles = StyleSheet.create({
   },
   guideItemMainContainer: {
     flexDirection: 'row',
+  },
+  guideItemImageContainer: {
+    flex: 1,
+  },
+  guideItemImage: {
+    width: 50,
+    height: 50
   }
 });
 

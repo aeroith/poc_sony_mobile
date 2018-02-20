@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { View, ScrollView, Image, Animated, Text, Dimensions } from 'react-native';
+import { View, ScrollView, Image, Animated, Text, Dimensions, TouchableOpacity } from 'react-native';
 import Tag from '../Tag';
 import styles from './styles';
 
@@ -98,17 +98,19 @@ export default class Carousel extends Component {
         >
           {
             this.props.images.map(({ imageURL, id }) => (
-              <View key={id + 2}>
-                <Image
-                  style={[styles.image, { width: this.state.layout.width }]}
-                  source={{ uri: imageURL }}
-                  key={id}
-                />
-                <View
-                  key={id + 1}
-                  style={[styles.innerFrame, { width: this.state.layout.width }]}
-                />
-              </View>
+              <TouchableOpacity key={id + 2}>
+                <View>
+                  <Image
+                    style={[styles.image, { width: this.state.layout.width }]}
+                    source={{ uri: imageURL }}
+                    key={id}
+                  />
+                  <View
+                    key={id + 1}
+                    style={[styles.innerFrame, { width: this.state.layout.width }]}
+                  />
+                </View>
+              </TouchableOpacity>
             ))
           }
         </ScrollView>
