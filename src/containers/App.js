@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { BackHandler, StatusBar, View } from 'react-native';
+import { BackHandler, StatusBar, View, Easing } from 'react-native';
 import { NavigationActions, addNavigationHelpers } from 'react-navigation/src/react-navigation';
 import { connect } from 'react-redux';
+import Drawer from '../components/Drawer';
 import AppNavigator from '../navigator';
 import { addListener } from '../index';
-import styles from './styles';
+import styles, { drawerCustomStyles } from './styles';
 import NavBar from './NavBar';
+import SideMenu from '../components/SideMenu';
+
 
 @connect(
   state => ({
@@ -31,15 +34,45 @@ export default class App extends Component {
     this.backHandler.remove();
   }
 
+  setDrawerRef = (el) => {
+    this.el = el;
+  };
+
+  handleOpenDrawer = () => {
+    if (this.el) this.el.openDrawer();
+  };
+
+  handleCloseDrawer = () => {
+    if (this.el) this.el.closeDrawer();
+  };
+
+  renderDrawerContent = navigation => <SideMenu navigation={navigation} drawerActions={this.el} />;
+
   render() {
     const { dispatch, nav } = this.props;
+    const navigation = addNavigationHelpers({ dispatch, state: nav, addListener });
+
     return (
       <View style={styles.wrapper}>
-        <StatusBar barStyle="light-content" />
-        <NavBar nav={nav} />
-        <View style={styles.app}>
-          <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav, addListener })} />
-        </View>
+        <Drawer
+          ref={this.setDrawerRef}
+          style={styles.drawerContainer}
+          drawerWidth={250}
+          drawerContent={this.renderDrawerContent(navigation)}
+          type={Drawer.types.Default}
+          customStyles={drawerCustomStyles}
+          maskAlpha={0.8}
+          drawerPosition={Drawer.positions.Left}
+          onDrawerOpen={() => { console.log('Drawer is opened'); }}
+          onDrawerClose={() => { console.log('Drawer is closed'); }}
+          easingFunc={Easing.ease}
+        >
+          <StatusBar barStyle="light-content" style={styles.statusBar} />
+          <NavBar nav={nav} openDrawer={this.handleOpenDrawer} closeDrawer={this.handleCloseDrawer} />
+          <View style={styles.app}>
+            <AppNavigator navigation={navigation} />
+          </View>
+        </Drawer>
       </View>
     );
   }

@@ -24,10 +24,6 @@ export default class NavBar extends Component {
       translate: PropTypes.func.isRequired,
     };
 
-    constructor(props) {
-      super(props);
-    }
-
     getNavHeader = () => {
       const navStackLength = this.props.nav ? this.props.nav.routes.length : 0;
       if (navStackLength === 0) return '';
