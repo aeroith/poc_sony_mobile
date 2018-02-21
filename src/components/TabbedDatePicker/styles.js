@@ -56,6 +56,9 @@ const styles = StyleSheet.create({
     color: colorPalette.white,
     marginLeft: 4,
   },
+  textDayNumberActive: {
+    top: -1,
+  },
 });
 
 export default styles;

@@ -61,7 +61,7 @@ const TabItem = ({ text, dayNumber, active, onPress, ...props }) => (
     <View>
       <View style={styles.textContainer}>
         <Text style={[styles.tabItemText, active && styles.tabItemTextActive]}>{text}</Text>
-        {dayNumber && <Text style={styles.textDayNumber}>{dayNumber}</Text>}
+        {dayNumber && <Text style={[styles.textDayNumber, active && styles.textDayNumberActive]}>{dayNumber}</Text>}
       </View>
       {active && <View style={[styles.triangle]} />}
     </View>
