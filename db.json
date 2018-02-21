@@ -61,5 +61,106 @@
       "tmdbTypes": ["movie"],
       "Note": "Ray Stevenson as Frank Castle"
     }
+  ],
+  "guide": [
+    {
+      "id": 1,
+      "title": "Arrow",
+      "note": {
+        "en": "S03 E06: Bad Things Happen"
+      },
+      "timeStart": 0,
+      "timeEnd": 3600
+    },
+    {
+      "id": 2,
+      "title": "Unforgettable",
+      "note": {
+        "en": "S01 E18: Bad Things Happen"
+      },
+      "timeStart": 0,
+      "timeEnd": 3600
+    },
+    {
+      "id": 3,
+      "title": "The Iceman",
+      "note": {
+        "en": "A cold man kills"
+      },
+      "timeStart": 0,
+      "timeEnd": 3600
+    },
+    {
+      "id": 4,
+      "title": "Gossip Girl",
+      "note": {
+        "en": "S06 E01: Gossip like you've never before"
+      },
+      "timeStart": 0,
+      "timeEnd": 3600
+    },
+    {
+      "id": 5,
+      "title": "Fringe",
+      "note": {
+        "en": "S05 E13: Cringe"
+      },
+      "timeStart": 0,
+      "timeEnd": 3600
+    },
+    {
+      "id": 6,
+      "title": "Brazil Avenue",
+      "note": {
+        "en": "Romance meets Samba!"
+      },
+      "timeStart": 0,
+      "timeEnd": 3600
+    },
+    {
+      "id": 7,
+      "title": "The Dr.Oz Show",
+      "note": {
+        "en": "Excuse me, I am a doctor"
+      },
+      "timeStart": 0,
+      "timeEnd": 3600
+    },
+    {
+      "id": 8,
+      "title": "Italian Job",
+      "note": {
+        "en": "Pizza was an inside job"
+      },
+      "timeStart": 0,
+      "timeEnd": 3600
+    },
+    {
+      "id": 9,
+      "title": "Pretty Little Liars",
+      "note": {
+        "en": "Don't believe their lies"
+      },
+      "timeStart": 0,
+      "timeEnd": 3600
+    },
+    {
+      "id": 10,
+      "title": "Lale Devri",
+      "note": {
+        "en": "A story about flowers"
+      },
+      "timeStart": 0,
+      "timeEnd": 3600
+    },
+    {
+      "id": 11,
+      "title": "Brazil Avenue (Again)",
+      "note": {
+        "en": "Romance meets Samba!"
+      },
+      "timeStart": 0,
+      "timeEnd": 3600
+    }
   ]
 }

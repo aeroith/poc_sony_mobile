@@ -7,7 +7,10 @@ const log = console.log.bind(console);
 const modifiedDbPath = `${__dirname}/modifieddb.json`;
 let port = 3005;
 
-const toModify = ['nextAiring'];
+const toModify = {
+  content: ['nextAiring'],
+  guide: ['timeStart', 'timeEnd']
+};
 
 // parse --port argument
 const args = process.argv;
@@ -26,10 +29,14 @@ const currentTime = Math.round(new Date().getTime() / 1000.0);
 const getDb = () => JSON.parse(fs.readFileSync(`${__dirname}/../db.json`));
 const getDbContent = () => {
   const db = getDb();
-  const content = db.content
-    .map(c => toModify
-      .reduce((acc, val) => Object.assign({}, acc, { [val]: (currentTime + c[val] + (3600 * c.id)) }), c));
-  return Object.assign({}, db, { content })
+  return Object.keys(toModify)
+    .reduce((acc, key) => {
+      const modified = acc[key]
+        .map(c => toModify[key]
+          .reduce((acc0, val) =>
+            Object.assign({}, acc0, { [val]: (currentTime + acc0[val] + (3600 * acc0.id)) }), c));
+      return Object.assign({}, acc, { [key]: modified });
+    }, db);
 };
 
 
