@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
 
@@ -11,9 +11,32 @@ export default class GuideItem extends PureComponent {
     };
   }
 
-  onNotificationIconPress = () => this.setState({
-    notificationEnabled: !this.state.notificationEnabled
-  });
+  onNotificationIconPress = () => (
+    this.state.notificationEnabled ?
+      this.setState({
+        notificationEnabled: false
+      }) :
+      this.notificationAlert()
+  );
+
+  notificationAlert = () => Alert.alert(
+    'Set Notification',
+    'Remind me 10 minutes from the start?',
+    [
+      {
+        text: 'Cancel',
+        onPress: () => this.setState({
+          notificationEnabled: false
+        }),
+      },
+      {
+        text: 'OK',
+        onPress: () => this.setState({
+          notificationEnabled: true
+        }),
+      },
+    ],
+  );
 
   render() {
     return (
