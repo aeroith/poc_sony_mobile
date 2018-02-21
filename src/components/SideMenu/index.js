@@ -21,7 +21,6 @@ export default class SideMenu extends Component {
   }
 
   render() {
-    console.log(this.props.drawerActions);
     return (
       <View>
         <Text>Item 1</Text>

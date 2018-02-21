@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
   },
   drawer: {
     shadowColor: '#000',
-    shadowOpacity: 0.4,
-    shadowRadius: 10,
+    // shadowOpacity: 0.4,
+    // shadowRadius: 10,
     zIndex: zIndexDrawer,
   },
   mask: {

@@ -9,18 +9,24 @@ import { addListener } from '../index';
 import styles, { drawerCustomStyles } from './styles';
 import NavBar from './NavBar';
 import SideMenu from '../components/SideMenu';
-
+import { actions as drawerActions } from '../reducers/drawer';
 
 @connect(
   state => ({
     nav: state.nav,
+    isDrawerVisible: state.drawer.isDrawerVisible,
   }),
-  dispatch => ({ dispatch }),
+  dispatch => ({
+    dispatch,
+    setDrawerState: drawerState => dispatch(drawerActions.setDrawerState(drawerState))
+  }),
 )
 export default class App extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     nav: PropTypes.object.isRequired,
+    isDrawerVisible: PropTypes.bool.isRequired,
+    setDrawerState: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
@@ -28,6 +34,13 @@ export default class App extends Component {
       this.props.dispatch(NavigationActions.back());
       return true;
     });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.isDrawerVisible !== nextProps.isDrawerVisible) {
+      const drawerRefMethod = nextProps.isDrawerVisible ? 'openDrawer' : 'closeDrawer';
+      if (this.el) this.el[drawerRefMethod]();
+    }
   }
 
   componentWillUnmount() {
@@ -38,15 +51,15 @@ export default class App extends Component {
     this.el = el;
   };
 
-  handleOpenDrawer = () => {
-    if (this.el) this.el.openDrawer();
-  };
+  handleDrawerToggle(drawerState) {
+    return () => {
+      if (this.props.isDrawerVisible !== drawerState) {
+        this.props.setDrawerState(drawerState);
+      }
+    };
+  }
 
-  handleCloseDrawer = () => {
-    if (this.el) this.el.closeDrawer();
-  };
-
-  renderDrawerContent = navigation => <SideMenu navigation={navigation} drawerActions={this.el} />;
+  renderDrawerContent = navigation => <SideMenu navigation={navigation} setDrawerState={this.props.setDrawerState} />;
 
   render() {
     const { dispatch, nav } = this.props;
@@ -62,13 +75,15 @@ export default class App extends Component {
           type={Drawer.types.Default}
           customStyles={drawerCustomStyles}
           maskAlpha={0.8}
+          showMask
           drawerPosition={Drawer.positions.Left}
-          onDrawerOpen={() => { console.log('Drawer is opened'); }}
-          onDrawerClose={() => { console.log('Drawer is closed'); }}
-          easingFunc={Easing.ease}
+          onDrawerOpen={this.handleDrawerToggle(true)}
+          onDrawerClose={this.handleDrawerToggle(false)}
+          easingFunc={Easing.linear}
+          duration={100}
         >
           <StatusBar barStyle="light-content" style={styles.statusBar} />
-          <NavBar nav={nav} openDrawer={this.handleOpenDrawer} closeDrawer={this.handleCloseDrawer} />
+          <NavBar nav={nav} />
           <View style={styles.app}>
             <AppNavigator navigation={navigation} />
           </View>

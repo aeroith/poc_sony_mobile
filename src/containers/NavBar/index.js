@@ -11,17 +11,26 @@ import withTranslation from '../../components/Translation/index';
 import styles from './styles';
 import Search from '../Search/index';
 import { actions as searchBarActions } from '../../reducers/search';
+import { actions as drawerActions } from '../../reducers/drawer';
 
 @withTranslation
 @connect(
   state => ({
     isSearchBarVisible: state.search.isSearchBarVisible,
+    isDrawerVisible: state.drawer.isDrawerVisible,
   }),
-  { setSearchBarState: searchBarActions.setSearchBarState }
+  {
+    setSearchBarState: searchBarActions.setSearchBarState,
+    setDrawerState: drawerActions.setDrawerState
+  }
 )
 export default class NavBar extends Component {
     static propTypes = {
       translate: PropTypes.func.isRequired,
+      setDrawerState: PropTypes.func.isRequired,
+      setSearchBarState: PropTypes.func.isRequired,
+      isDrawerVisible: PropTypes.bool.isRequired,
+
     };
 
     getNavHeader = () => {
@@ -32,7 +41,8 @@ export default class NavBar extends Component {
     };
 
     handleMenuButtonClick = () => {
-      console.log('Menu button clicked');
+      const { isDrawerVisible } = this.props;
+      this.props.setDrawerState(!isDrawerVisible);
     };
 
     handleSearchButtonClick = () => {
