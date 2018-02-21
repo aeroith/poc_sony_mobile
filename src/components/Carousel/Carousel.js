@@ -98,7 +98,7 @@ export default class Carousel extends Component {
         >
           {
             this.props.images.map(({ imageURL, id }) => (
-              <TouchableWithoutFeedback onPress={() => console.log('pressed')} key={id + 2}>
+              <TouchableWithoutFeedback onPress={() => console.log('carousel pressed')} key={id + 2}>
                 <View>
                   <Image
                     style={[styles.image, { width: this.state.layout.width }]}

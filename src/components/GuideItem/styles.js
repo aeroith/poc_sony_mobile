@@ -3,10 +3,10 @@ import colorPalette from '../../config/colorPalette';
 
 const styles = StyleSheet.create({
   guideItemContentContainer: {
+    flex: 4,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'flex-start',
-    flex: 4,
   },
   guideItemTextTitle: {
     color: colorPalette.white,
