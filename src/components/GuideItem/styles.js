@@ -49,14 +49,14 @@ const styles = StyleSheet.create({
     borderRightWidth: 1,
     borderRightColor: colorPalette.grayText3,
     flex: 2,
-    flexBasis: 95,
+    flexBasis: 125,
     flexGrow: 0,
     justifyContent: 'center',
     alignItems: 'center',
   },
   guideItemImage: {
     margin: 12.5,
-    width: 70,
+    width: 100,
     height: 60
   },
   guideItemNotificationContainer: {

@@ -69,6 +69,7 @@
       "note": {
         "en": "S03 E06: Bad Things Happen"
       },
+      "imageURL": "https://www.sonychannelturkiye.com/sites/tr.turk/files/styles/image_700x394/public/ct_series_f_primary_image/1600x900sony.png?itok=DLzScopR",
       "timeStart": 0,
       "timeEnd": 3600
     },
@@ -78,6 +79,7 @@
       "note": {
         "en": "S01 E18: Bad Things Happen"
       },
+      "imageURL": "https://www.sonychannelturkiye.com/sites/tr.turk/files/styles/image_700x394/public/unforgetable_default_0.jpg?itok=2z9KJtqc",
       "timeStart": 0,
       "timeEnd": 3600
     },
@@ -87,6 +89,7 @@
       "note": {
         "en": "A cold man kills"
       },
+      "imageURL": "https://www.sonychannelturkiye.com/sites/tr.turk/files/styles/image_700x394/public/ct_movie_f_primary_image/iceman.jpg?itok=gb8d9QOj",
       "timeStart": 0,
       "timeEnd": 3600
     },
@@ -96,6 +99,7 @@
       "note": {
         "en": "S06 E01: Gossip like you've never before"
       },
+      "imageURL": "https://www.sonychannelturkiye.com/sites/tr.turk/files/styles/image_700x394/public/ct_series_f_schedule_image/01_1.jpg?itok=clPCmnxQ",
       "timeStart": 0,
       "timeEnd": 3600
     },
@@ -105,6 +109,7 @@
       "note": {
         "en": "S05 E13: Cringe"
       },
+      "imageURL": "https://www.sonychannelturkiye.com/sites/tr.turk/files/styles/image_700x394/public/ct_series_f_schedule_image/poster.jpg?itok=nfuk05xM",
       "timeStart": 0,
       "timeEnd": 3600
     },
@@ -114,6 +119,7 @@
       "note": {
         "en": "Romance meets Samba!"
       },
+      "imageURL": "https://www.sonychannelturkiye.com/sites/tr.turk/files/styles/image_700x394/public/ct_series_f_schedule_image/brazil_avenue_1600x900.jpg?itok=jcoUa25a",
       "timeStart": 0,
       "timeEnd": 3600
     },
@@ -123,6 +129,7 @@
       "note": {
         "en": "Excuse me, I am a doctor"
       },
+      "imageURL": "https://www.sonychannelturkiye.com/sites/tr.turk/files/styles/image_700x394/public/ct_series_f_schedule_image/oz_1600x900.jpg?itok=i_nRxVtU",
       "timeStart": 0,
       "timeEnd": 3600
     },
@@ -132,6 +139,7 @@
       "note": {
         "en": "Pizza was an inside job"
       },
+      "imageURL": "https://www.sonychannelturkiye.com/sites/tr.turk/files/styles/image_700x394/public/ct_series_f_primary_image/italyan_isi_1600x900.jpg?itok=W-2io-Ue",
       "timeStart": 0,
       "timeEnd": 3600
     },
@@ -141,6 +149,7 @@
       "note": {
         "en": "Don't believe their lies"
       },
+      "imageURL": "https://www.sonychannelturkiye.com/sites/tr.turk/files/styles/image_700x394/public/flash_default.jpg?itok=OC23U2Y_",
       "timeStart": 0,
       "timeEnd": 3600
     },
@@ -150,15 +159,17 @@
       "note": {
         "en": "A story about flowers"
       },
+      "imageURL": "https://www.sonychannelturkiye.com/sites/tr.turk/files/styles/image_700x394/public/ct_series_f_primary_image/lale_devri_slider_cover.jpg?itok=ju37LegC",
       "timeStart": 0,
       "timeEnd": 3600
     },
     {
       "id": 11,
-      "title": "Brazil Avenue (Again)",
+      "title": "Flash",
       "note": {
-        "en": "Romance meets Samba!"
+        "en": "S01 E01: This guy runs"
       },
+      "imageURL": "https://www.sonychannelturkiye.com/sites/tr.turk/files/styles/image_700x394/public/flash_default.jpg?itok=OC23U2Y_",
       "timeStart": 0,
       "timeEnd": 3600
     }
