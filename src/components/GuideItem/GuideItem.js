@@ -28,6 +28,7 @@ export default class GuideItem extends PureComponent {
         onPress: () => this.setState({
           notificationEnabled: false
         }),
+        style: 'cancel'
       },
       {
         text: 'OK',
@@ -36,6 +37,7 @@ export default class GuideItem extends PureComponent {
         }),
       },
     ],
+    { cancellable: false }
   );
 
   render() {
@@ -49,9 +51,12 @@ export default class GuideItem extends PureComponent {
             />
           </View>
           <View style={styles.guideItemContentContainer}>
-            <Text style={{color: 'white'}}>Seinfield</Text>
-            <Text style={{color: 'white'}}>S2 E09: Changing Lives</Text>
-            <Text style={{color: 'white'}}>4:00pm - 5:00pm</Text>
+            <Text style={styles.guideItemTextTitle}>Seinfield</Text>
+            <Text style={styles.guideItemTextSubtitle}>S2 E09: Changing Lives</Text>
+            <View style={styles.guideItemAiringContainer}>
+              <Icon name="ios-time-outline" size={12} style={styles.guideItemIconAiring}/>
+              <Text style={styles.guideItemTextAiring}>4:00pm - 5:00pm</Text>
+            </View>
           </View>
           <View style={styles.guideItemNotificationContainer}>
             <TouchableOpacity onPress={this.onNotificationIconPress}>

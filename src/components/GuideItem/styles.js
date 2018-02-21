@@ -5,24 +5,59 @@ const styles = StyleSheet.create({
   guideItemContentContainer: {
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
-    flex: 6,
+    alignItems: 'flex-start',
+    flex: 4,
+  },
+  guideItemTextTitle: {
+    color: colorPalette.white,
+    fontSize: 14,
+    fontWeight: '600',
+    marginLeft: 10,
+    marginVertical: 2,
+  },
+  guideItemTextSubtitle: {
+    fontSize: 12,
+    color: colorPalette.white,
+    marginLeft: 10,
+    marginVertical: 2,
+  },
+  guideItemAiringContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    marginLeft: 10,
+    marginVertical: 2,
+  },
+  guideItemTextAiring: {
+    fontSize: 12,
+    color: colorPalette.white,
+  },
+  guideItemIconAiring: {
+    color: colorPalette.white,
+    marginRight: 5,
+    bottom: -1.25,
   },
   guideItemMainContainer: {
     backgroundColor: colorPalette.som,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    borderBottomWidth: 0.5,
+    borderTopWidth: 0.5,
+    borderBottomColor: colorPalette.grayText3,
+    borderTopColor: colorPalette.grayText3
   },
   guideItemImageContainer: {
+    borderRightWidth: 1,
+    borderRightColor: colorPalette.grayText3,
     flex: 2,
-    flexBasis: 50,
+    flexBasis: 100,
     flexGrow: 0,
     justifyContent: 'center',
     alignItems: 'center',
   },
   guideItemImage: {
-    width: 50,
-    height: 50
+    margin: 12.5,
+    width: 75,
+    height: 60
   },
   guideItemNotificationContainer: {
     justifyContent: 'center',
@@ -30,7 +65,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   guideItemNotificationIcon: {
-    color: colorPalette.white
+    color: colorPalette.white,
   }
 });
 

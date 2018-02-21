@@ -11,7 +11,18 @@ export default class Guide extends Component {
   render() {
     return (
       <View style={styles.mainContainer}>
-        <GuideItem />
+        <ScrollView>
+          <GuideItem />
+          <GuideItem />
+          <GuideItem />
+          <GuideItem />
+          <GuideItem />
+          <GuideItem />
+          <GuideItem />
+          <GuideItem />
+          <GuideItem />
+          <GuideItem />
+        </ScrollView>
       </View>
     );
   }
