@@ -4,6 +4,7 @@ import nav from './nav';
 import search from './search';
 import carousel from './carousel';
 import tabbedDatePicker from './tabbedDatePicker';
+import guide from './guide';
 
 export default combineReducers({
   counter,
@@ -11,4 +12,5 @@ export default combineReducers({
   search,
   carousel,
   tabbedDatePicker,
+  guide,
 });

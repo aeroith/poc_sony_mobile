@@ -1,9 +1,10 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
+const moment = require('moment');
 
-export default class GuideItem extends PureComponent {
+export default class GuideItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,6 +44,11 @@ export default class GuideItem extends PureComponent {
   onContentPress = () => console.log('Guide Item Content Pressed')
 
   render() {
+    const { image, title, note, timeStart, timeEnd } = this.props;
+    const startTime = moment.unix(timeStart).format('h:mma');
+    const endTime = moment.unix(timeEnd).format('h:mma');
+    console.log(timeStart)
+    console.log(startTime)
     return (
       <View {...this.props}>
         <View style={styles.guideItemMainContainer}>
@@ -52,7 +58,7 @@ export default class GuideItem extends PureComponent {
           >
             <Image
               style={styles.guideItemImage}
-              source={{uri: 'https://yt3.ggpht.com/a-/AJLlDp3MkZbnThs83KWXV7OIA4trD8TpggRsZLGUCA=s900-mo-c-c0xffffffff-rj-k-no' }}
+              source={{uri: image }}
             />
           </TouchableOpacity>
           <TouchableOpacity
@@ -60,11 +66,11 @@ export default class GuideItem extends PureComponent {
             style={styles.guideItemContentContainer}
           >
             <View>
-              <Text style={styles.guideItemTextTitle}>Seinfield</Text>
-              <Text style={styles.guideItemTextSubtitle}>S2 E09: Changing Lives</Text>
+              <Text style={styles.guideItemTextTitle}>{title}</Text>
+              <Text style={styles.guideItemTextSubtitle}>{note}</Text>
               <View style={styles.guideItemAiringContainer}>
                 <Icon name="ios-time-outline" size={12} style={styles.guideItemIconAiring} />
-                <Text style={styles.guideItemTextAiring}>4:00pm - 5:00pm</Text>
+                <Text style={styles.guideItemTextAiring}>{`${startTime} - ${endTime}`}</Text>
               </View>
             </View>
           </TouchableOpacity>
