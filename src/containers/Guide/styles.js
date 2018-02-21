@@ -2,7 +2,8 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   mainContainer: {
-    flex: 3
+    flex: 1,
+    width: '100%',
   }
 });
 

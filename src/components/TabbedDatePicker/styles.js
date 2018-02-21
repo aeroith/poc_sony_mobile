@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     borderRightWidth: TRIANGLE_SIZE / 2,
     borderBottomWidth: 0,
     borderLeftWidth: TRIANGLE_SIZE / 2,
-    borderTopColor: 'red',
+    borderTopColor: colorPalette.grayBg1,
     borderRightColor: 'transparent',
     borderBottomColor: 'transparent',
     borderLeftColor: 'transparent',

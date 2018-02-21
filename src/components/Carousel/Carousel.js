@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { View, ScrollView, Image, Animated, Text, Dimensions, TouchableOpacity } from 'react-native';
+import { View, ScrollView, Image, Animated, Text, Dimensions, TouchableWithoutFeedback } from 'react-native';
 import Tag from '../Tag';
 import styles from './styles';
 
@@ -98,7 +98,7 @@ export default class Carousel extends Component {
         >
           {
             this.props.images.map(({ imageURL, id }) => (
-              <TouchableOpacity key={id + 2}>
+              <TouchableWithoutFeedback onPress={() => console.log('pressed')} key={id + 2}>
                 <View>
                   <Image
                     style={[styles.image, { width: this.state.layout.width }]}
@@ -110,7 +110,7 @@ export default class Carousel extends Component {
                     style={[styles.innerFrame, { width: this.state.layout.width }]}
                   />
                 </View>
-              </TouchableOpacity>
+              </TouchableWithoutFeedback>
             ))
           }
         </ScrollView>
