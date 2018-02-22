@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import isEqual from 'lodash/isEqual';
 import Guide from '../../components/Guide';
 import styles from './styles';
 import { actions as guideActions } from '../../reducers/guide';
@@ -17,15 +16,15 @@ import { actions as guideActions } from '../../reducers/guide';
 )
 export default class GuideContainer extends Component {
   static propTypes = {
-    getTvGuide: PropTypes.func.isRequired,
+    setTvGuideResults: PropTypes.func.isRequired,
+    timeStart: PropTypes.number.isRequired,
+    timeEnd: PropTypes.number.isRequired,
   };
 
   componentDidMount() {
     const { timeStart, timeEnd } = this.props;
-    this.props.getTvGuide(timeStart, timeEnd);
+    this.props.setTvGuideResults(timeStart, timeEnd);
   }
-
-
 
   render() {
     return (

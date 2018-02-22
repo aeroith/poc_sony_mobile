@@ -16,7 +16,10 @@ const toModify = {
 const args = process.argv;
 if (args.length > 2) {
   const portArg = args.find(a => a.indexOf('--port') > -1);
-  if (!portArg) return console.error('Wrong arguments');
+  if (!portArg) {
+    console.error('Wrong arguments');
+    process.exit();
+  }
   const [param, value] = portArg.split('=');
   if (value > 1024) {
     port = value;
@@ -40,7 +43,7 @@ const getDbContent = () => {
 };
 
 
-const deleteFile = path => fs.unlinkSync(path);
+const deleteFile = path_ => fs.unlinkSync(path_);
 
 const runScript = (script) => {
   this.jsonServer = exec(script, (err, stdout) => {
@@ -65,10 +68,11 @@ let baseContent;
 try {
   baseContent = getDbContent();
 } catch (err1) {
-  return console.log(`Error at file ${path.normalize(`${__dirname}/../db.json`)}: ${err1.message}`);
+  console.log(`Error at file ${path.normalize(`${__dirname}/../db.json`)}: ${err1.message}`);
+  process.exit();
 }
 
-return fs.writeFile(modifiedDbPath, JSON.stringify(baseContent), 'utf-8', (err) => {
+fs.writeFile(modifiedDbPath, JSON.stringify(baseContent), 'utf-8', (err) => {
   if (err) return console.log(err);
   this.watcher = chokidar.watch(`${__dirname}/../db.json`);
   this.watcher
