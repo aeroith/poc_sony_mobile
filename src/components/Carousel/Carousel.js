@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { View, ScrollView, Image, Animated, Text, Dimensions, TouchableWithoutFeedback } from 'react-native';
 import Tag from '../Tag';
+import Spinner from '../Spinner';
 import styles from './styles';
 
 const { width: initialWidth, height: initialHeight } = Dimensions.get('window');
@@ -39,7 +40,9 @@ export default class Carousel extends Component {
   }
 
   componentWillUnmount() {
-    this.props.resetCarousel();
+    if (this.props.page !== 0) {
+      this.props.resetCarousel();
+    }
   }
 
 

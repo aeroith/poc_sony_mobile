@@ -5,12 +5,14 @@ import PropTypes from 'prop-types';
 import Guide from '../../components/Guide';
 import styles from './styles';
 import { actions as guideActions } from '../../reducers/guide';
+import Spinner from '../../components/Spinner';
 
 @connect(
   state => ({
     guide: state.guide.guide,
     timeStart: state.tabbedDatePicker.timeStart,
     timeEnd: state.tabbedDatePicker.timeEnd,
+    isLoading: state.guide.isLoading,
   }),
   guideActions
 )
@@ -19,6 +21,7 @@ export default class GuideContainer extends Component {
     setTvGuideResults: PropTypes.func.isRequired,
     timeStart: PropTypes.number.isRequired,
     timeEnd: PropTypes.number.isRequired,
+    isLoading: PropTypes.bool,
   };
 
   componentDidMount() {
@@ -27,6 +30,14 @@ export default class GuideContainer extends Component {
   }
 
   render() {
+    // TODO: Move this logic to higher-order-component
+    if (this.props.isLoading) {
+      return (
+        <View style={styles.searchBarContainer}>
+          <Spinner iconStyle={styles.searchBarIconStyle} iconSize={40} />
+        </View>
+      );
+    }
     return (
       <View style={styles.mainContainer}>
         <Guide {...this.props} />
@@ -34,3 +45,7 @@ export default class GuideContainer extends Component {
     );
   }
 }
+
+GuideContainer.defaultProps = {
+  isLoading: false,
+};

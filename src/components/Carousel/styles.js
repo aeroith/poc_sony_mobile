@@ -18,6 +18,7 @@ export default StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     position: 'relative',
+    backgroundColor: colorPalette.som
   },
   innerFrame: {
     position: 'absolute',

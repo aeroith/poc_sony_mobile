@@ -6,14 +6,15 @@ import colorPalette from '../../config/colorPalette';
 
 export default class Spinner extends Component {
     static propTypes = {
-      // wrapperStyle: PropTypes.StyleSheet.isRequired,
+      wrapperStyle: View.propTypes.style,
       iconSize: PropTypes.number,
-      iconStyle: PropTypes.objectOf(PropTypes.any),
+      iconStyle: Icon.propTypes.style,
     };
 
     static defaultProps = {
       iconSize: 20,
-      iconStyle: {},
+      iconStyle: undefined,
+      wrapperStyle: undefined,
     };
 
     constructor(props) {

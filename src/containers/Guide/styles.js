@@ -7,7 +7,18 @@ const styles = StyleSheet.create({
     flex: 7,
     width: '100%',
     backgroundColor: colorPalette.som
-  }
+  },
+  searchBarIconStyle: {
+    color: colorPalette.greenBg1,
+  },
+  searchBarContainer: {
+    backgroundColor: colorPalette.som,
+    width: '100%',
+    flex: 7,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 export default styles;
