@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   tabItem: {
-    position: 'relative',
     paddingHorizontal: deviceWidth / 16,
     flexDirection: 'column',
     justifyContent: 'center',
@@ -40,11 +39,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   triangle: {
-    bottom: -4, // also including border width
+    position: 'absolute',
+    bottom: -(TRIANGLE_SIZE / 2),
     alignSelf: 'center',
-    width: 10,
-    height: 10,
     zIndex: 999,
+    width: 0,
+    height: 0,
     backgroundColor: 'transparent',
     borderStyle: 'solid',
     borderTopWidth: TRIANGLE_SIZE / 2,
