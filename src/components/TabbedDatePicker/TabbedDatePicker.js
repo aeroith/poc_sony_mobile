@@ -34,6 +34,7 @@ export default class TabbedDatePicker extends Component {
         <ScrollView
           horizontal
           pagingEnabled
+          showsHorizontalScrollIndicator={false}
         >
           {
             this.props.dates.map((date, index) => (
