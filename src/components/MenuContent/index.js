@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
 
 const noop = () => {};
-export default class SideMenu extends Component {
+export default class MenuContent extends Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired,
     drawerActions: PropTypes.object,
