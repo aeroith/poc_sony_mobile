@@ -54,11 +54,11 @@ export default class GuideItem extends PureComponent {
   );
 
   render() {
-    const { image, title, note, timeStart, timeEnd } = this.props;
+    const { image, title, note, timeStart, timeEnd, ...props } = this.props;
     const startTime = moment.unix(timeStart).format('h:mma');
     const endTime = moment.unix(timeEnd).format('h:mma');
     return (
-      <View {...this.props}>
+      <View {...props}>
         <View style={styles.guideItemMainContainer}>
           <TouchableOpacity
             onPress={this.onContentPress}

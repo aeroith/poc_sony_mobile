@@ -7,10 +7,18 @@ const TRIANGLE_SIZE = 16;
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'center',
   },
+  scrollViewContainer: {
+    flex: 4,
+  },
+  bottomBar: {
+    backgroundColor: colorPalette.grayBg2,
+    flex: 1,
+  },
   tabItem: {
+    position: 'relative',
     paddingHorizontal: deviceWidth / 16,
     flexDirection: 'column',
     justifyContent: 'center',
@@ -32,18 +40,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   triangle: {
-    position: 'absolute',
-    bottom: -(TRIANGLE_SIZE + 2), // also including border width
+    bottom: -4, // also including border width
     alignSelf: 'center',
-    width: 0,
-    height: 0,
+    width: 10,
+    height: 10,
+    zIndex: 999,
     backgroundColor: 'transparent',
     borderStyle: 'solid',
     borderTopWidth: TRIANGLE_SIZE / 2,
     borderRightWidth: TRIANGLE_SIZE / 2,
     borderBottomWidth: 0,
     borderLeftWidth: TRIANGLE_SIZE / 2,
-    borderTopColor: colorPalette.grayBg1,
+    borderTopColor: colorPalette.white,
     borderRightColor: 'transparent',
     borderBottomColor: 'transparent',
     borderLeftColor: 'transparent',

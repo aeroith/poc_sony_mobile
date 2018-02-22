@@ -33,45 +33,47 @@ export default class TabbedDatePicker extends Component {
   render() {
     return (
       <View style={styles.mainContainer}>
-        <ScrollView
-          horizontal
-          pagingEnabled
-          showsHorizontalScrollIndicator={false}
-        >
-          {
-            this.props.dates.map((date, index) => (
-              <TabItem
-                key={date.key}
-                active={this.state.selected === index}
-                text={date.data.dayOfWeek}
-                dayNumber={date.data.dayNumber}
-                onPress={this.onTabItemClick(index)}
-              />
-            ))
-          }
-        </ScrollView>
+        <View style={styles.scrollViewContainer}>
+          <ScrollView
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+          >
+            {
+              this.props.dates.map((date, index) => (
+                <TabItem
+                  key={date.key}
+                  active={this.state.selected === index}
+                  text={date.data.dayOfWeek}
+                  dayNumber={date.data.dayNumber}
+                  onPress={this.onTabItemClick(index)}
+                />
+              ))
+            }
+          </ScrollView>
+        </View>
+        <View style={styles.bottomBar} />
       </View>
     );
   }
 };
 
 const TabItem = ({ text, dayNumber, active, onPress, ...props }) => (
-  <TouchableOpacity
-    onPress={onPress}
-    style={[styles.tabItem, active && styles.tabItemActive]}
-    {...props}
-  >
-    <View>
-      <View style={styles.textContainer}>
-        <Text style={[styles.tabItemText, active && styles.tabItemTextActive]}>{text}</Text>
-        {dayNumber &&
+  <View style={[styles.tabItem, active && styles.tabItemActive]} {...props}>
+    <TouchableOpacity
+      onPress={onPress}
+    >
+      <View>
+        <View style={styles.textContainer}>
+          <Text style={[styles.tabItemText, active && styles.tabItemTextActive]}>{text}</Text>
+          {dayNumber &&
           <Text style={[styles.textDayNumber, active && styles.textDayNumberActive]}>
             {dayNumber}
           </Text>}
+        </View>
       </View>
-      {active && <View style={[styles.triangle]} />}
-    </View>
-  </TouchableOpacity>
+    </TouchableOpacity>
+  </View>
 );
 
 TabItem.propTypes = {

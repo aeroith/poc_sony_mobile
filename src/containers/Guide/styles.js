@@ -4,7 +4,7 @@ import colorPalette from '../../config/colorPalette';
 
 const styles = StyleSheet.create({
   mainContainer: {
-    flex: 1,
+    flex: 7,
     width: '100%',
     backgroundColor: colorPalette.som
   }
