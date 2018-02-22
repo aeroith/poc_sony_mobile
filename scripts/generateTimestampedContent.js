@@ -88,6 +88,6 @@ fs.writeFile(modifiedDbPath, JSON.stringify(baseContent), 'utf-8', (err) => {
     .on('error', (error) => {
       log(`Watcher error: ${error}`);
     });
-  console.log(`Running json-server at port: ${port}. \nVisit http://localhost:${port}/content to see it!`);
-  runScript(`json-server --port=${port} --watch ${modifiedDbPath}`);
+  console.log(`Running json-server at port: ${port}. \nVisit http://localhost:${port} to see it!`);
+  runScript(`json-server --port=${port} --watch ${modifiedDbPath} --delay 250`);
 });
