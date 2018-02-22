@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import colorPalette from '../config/colorPalette';
 
 const zIndexDrawer = 999999;
 const styles = StyleSheet.create({
@@ -23,10 +24,9 @@ const styles = StyleSheet.create({
     zIndex: zIndexDrawer,
   },
   drawer: {
-    shadowColor: '#000',
-    // shadowOpacity: 0.4,
-    // shadowRadius: 10,
     zIndex: zIndexDrawer,
+    backgroundColor: colorPalette.grayBg4,
+    paddingTop: 30,
   },
   mask: {
     backgroundColor: 'black',

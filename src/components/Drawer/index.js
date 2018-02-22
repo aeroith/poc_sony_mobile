@@ -4,6 +4,7 @@
 
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import * as Animatable from 'react-native-animatable';
 import {
   StyleSheet,
   View,
@@ -400,7 +401,10 @@ export default class Drawer extends Component {
             {...this._pan.panHandlers}
           >
             {this.props.children}
-            {this.state.showMask && <View
+            {this.state.showMask && <Animatable.View
+              animation="fadeIn"
+              easing="ease-in-quad"
+              duration={200}
               ref={this._maskRefBind}
               style={[customStyles.mask, styles.mask, styles.absolute]}
             />}
