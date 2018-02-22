@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     bottom: -1.25,
   },
   guideItemMainContainer: {
-    backgroundColor: colorPalette.som,
+    backgroundColor: colorPalette.grayBg5,
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderBottomWidth: 0.5,
@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     borderTopColor: colorPalette.grayText3
   },
   guideItemImageContainer: {
+    backgroundColor: colorPalette.grayBg4,
     borderRightWidth: 1,
     borderRightColor: colorPalette.grayText3,
     flex: 2,

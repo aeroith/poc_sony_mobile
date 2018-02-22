@@ -47,8 +47,6 @@ export default class GuideItem extends Component {
     const { image, title, note, timeStart, timeEnd } = this.props;
     const startTime = moment.unix(timeStart).format('h:mma');
     const endTime = moment.unix(timeEnd).format('h:mma');
-    console.log(timeStart)
-    console.log(startTime)
     return (
       <View {...this.props}>
         <View style={styles.guideItemMainContainer}>
