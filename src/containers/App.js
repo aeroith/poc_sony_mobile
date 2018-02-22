@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { BackHandler, StatusBar, View, Easing } from 'react-native';
+import { BackHandler, StatusBar, View } from 'react-native';
 import { NavigationActions, addNavigationHelpers } from 'react-navigation/src/react-navigation';
 import { connect } from 'react-redux';
 import Drawer from '../components/Drawer';
 import AppNavigator from '../navigator';
 import { addListener } from '../index';
 import styles, { drawerCustomStyles } from './styles';
+import drawerConfig from '../components/Drawer/config';
 import NavBar from './NavBar';
 import SideMenu from '../components/SideMenu';
 import { actions as drawerActions } from '../reducers/drawer';
@@ -68,19 +69,13 @@ export default class App extends Component {
     return (
       <View style={styles.wrapper}>
         <Drawer
+          {...drawerConfig}
           ref={this.setDrawerRef}
           style={styles.drawerContainer}
-          drawerWidth={250}
           drawerContent={this.renderDrawerContent(navigation)}
-          type={Drawer.types.Default}
           customStyles={drawerCustomStyles}
-          maskAlpha={0.8}
-          showMask
-          drawerPosition={Drawer.positions.Left}
           onDrawerOpen={this.handleDrawerToggle(true)}
           onDrawerClose={this.handleDrawerToggle(false)}
-          easingFunc={Easing.linear}
-          duration={100}
         >
           <StatusBar barStyle="light-content" style={styles.statusBar} />
           <NavBar nav={nav} />
