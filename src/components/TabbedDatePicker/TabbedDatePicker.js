@@ -20,11 +20,12 @@ export default class TabbedDatePicker extends Component {
   }
   onTabItemClick(index) {
     return () => {
-      const momentNow = moment().add(index, 'days');
+      const momentNow = index === 0 ? moment() : moment().add(index, 'days').startOf('day');
       const timeStart = momentNow.unix(Number);
       const timeEnd = momentNow.endOf('day').unix(Number);
       this.setState({ selected: index });
       this.props.setTime(timeStart, timeEnd);
+      this.props.getTvGuide(timeStart, timeEnd);
     };
   }
 

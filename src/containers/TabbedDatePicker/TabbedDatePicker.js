@@ -7,6 +7,7 @@ import TabbedDatePicker from '../../components/TabbedDatePicker';
 import style from './styles';
 import withTranslation from '../../components/Translation';
 import { actions as tabbedDatePickerActions } from '../../reducers/tabbedDatePicker';
+import { actions as guideActions } from '../../reducers/guide'
 
 const moment = require('moment');
 
@@ -16,7 +17,10 @@ const moment = require('moment');
     timeStart: state.tabbedDatePicker.timeStart,
     timeEnd: state.tabbedDatePicker.timeEnd,
   }),
-  tabbedDatePickerActions
+  {
+    ...tabbedDatePickerActions,
+    ...guideActions,
+  }
 )
 export default class TabbedDatePickerContainer extends Component {
   static propTypes = {

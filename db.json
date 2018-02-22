@@ -172,6 +172,26 @@
       "imageURL": "https://www.sonychannelturkiye.com/sites/tr.turk/files/styles/image_700x394/public/flash_default.jpg?itok=OC23U2Y_",
       "timeStart": 0,
       "timeEnd": 3600
+    },
+    {
+      "id": 12,
+      "title": "Person of Interest",
+      "note": {
+        "en": "S01 E01: The world's most interesting man"
+      },
+      "imageURL": "https://www.sonychannelturkiye.com/sites/tr.turk/files/styles/image_700x394/public/personofinterest_visuals.jpg?itok=iz_ENm2h",
+      "timeStart": 0,
+      "timeEnd": 3600
+    },
+    {
+      "id": 13,
+      "title": "Rizzoli & Isles",
+      "note": {
+        "en": "S05 E14: Rizzoli must die"
+      },
+      "imageURL": "https://www.sonychannelturkiye.com/sites/tr.turk/files/styles/image_700x394/public/ct_series_f_primary_image/01_1.jpg?itok=b36uJp6Q",
+      "timeStart": 0,
+      "timeEnd": 3600
     }
   ]
 }

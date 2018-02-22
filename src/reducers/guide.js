@@ -21,9 +21,9 @@ const actionsMap = {
 };
 
 const actions = {
-  getTvGuide: () => (dispatch) => {
+  getTvGuide: (timeStart, timeEnd) => (dispatch) => {
     dispatch({ type: actionTypes.REQUEST_TV_GUIDE });
-    return ApiClient.get('/guide')
+    return ApiClient.get(`/guide?timeStart_gte=${timeStart}&timeStart_lte=${timeEnd}`)
       .then(response => dispatch({ type: actionTypes.RECEIVE_TV_GUIDE, guide: response.data }))
       .catch(error => dispatch({ type: actionTypes.ERROR_TV_GUIDE, error: error.request._response }));
   }
