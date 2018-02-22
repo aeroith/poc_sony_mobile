@@ -61,7 +61,7 @@ Open Android emulator (recommended [Genymotion](https://www.genymotion.com)) and
 run command: (Or connect real device via USB)
 
 ```bash
-$ npm run android
+$ adb reverse tcp:3005 tcp:3005 && npm run android
 ```
 
 ## DevTools
