@@ -15,6 +15,7 @@ class Carousel extends PureComponent {
     page: PropTypes.number,
     setCarouselPage: PropTypes.func.isRequired,
     resetCarousel: PropTypes.func.isRequired,
+    translate: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -95,7 +96,6 @@ class Carousel extends PureComponent {
           horizontal
           pagingEnabled
           onContentSizeChange={this.handleLayoutScrolling}
-          scrollEventThrottle={10}
           showsHorizontalScrollIndicator={false}
           onMomentumScrollEnd={this.handlePageChange}
           onScroll={this.onScroll}
@@ -135,7 +135,7 @@ class Carousel extends PureComponent {
             }
           </View>
           <View style={[styles.subContainer, { width: this.state.layout.width }]}>
-            <Text style={styles.subHeader}>{currentSelection.Note && currentSelection.Note}</Text>
+            <Text style={styles.subHeader}>{currentSelection.Note || ' '}</Text>
             <Indicator activeIndex={this.props.page} count={this.state.numItems} />
           </View>
         </View>

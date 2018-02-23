@@ -6,7 +6,7 @@
     "start": "react-native start",
     "ios-open": "open ios/*.xcodeproj",
     "ios": "react-native run-ios",
-    "android": "react-native run-android",
+    "android": "adb reverse tcp:3005 tcp:3005 && react-native run-android",
     "lint": "eslint src test *.js",
     "test": "jest",
     "remotedev": "remotedev-debugger --injectserver",

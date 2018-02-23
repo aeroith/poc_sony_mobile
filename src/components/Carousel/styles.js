@@ -27,7 +27,6 @@ export default StyleSheet.create({
   },
   scrollContainer: {
     flex: 1,
-    overflow: 'hidden',
   },
   contentContainer: {
     position: 'absolute',
