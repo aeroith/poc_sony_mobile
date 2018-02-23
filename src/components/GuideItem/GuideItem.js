@@ -13,6 +13,7 @@ export default class GuideItem extends PureComponent {
     note: PropTypes.string,
     timeStart: PropTypes.number.isRequired,
     timeEnd: PropTypes.number.isRequired,
+    translate: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -32,26 +33,29 @@ export default class GuideItem extends PureComponent {
 
   onContentPress = () => console.log('Guide Item Content Pressed');
 
-  notificationAlert = () => Alert.alert(
-    'Set Notification',
-    'Remind me 10 minutes from the start?',
-    [
-      {
-        text: 'Cancel',
-        onPress: () => this.setState({
-          notificationEnabled: false
-        }),
-        style: 'cancel'
-      },
-      {
-        text: 'OK',
-        onPress: () => this.setState({
-          notificationEnabled: true
-        }),
-      },
-    ],
-    { cancellable: false }
-  );
+  notificationAlert = () => {
+    const { translate } = this.props;
+    return Alert.alert(
+      translate('set_notification'),
+      translate('set_notification_extended'),
+      [
+        {
+          text: translate('cancel'),
+          onPress: () => this.setState({
+            notificationEnabled: false
+          }),
+          style: 'cancel'
+        },
+        {
+          text: translate('ok'),
+          onPress: () => this.setState({
+            notificationEnabled: true
+          }),
+        },
+      ],
+      { cancellable: false }
+    );
+  };
 
   render() {
     const { image, title, note, timeStart, timeEnd, ...props } = this.props;

@@ -95,6 +95,7 @@ class Carousel extends PureComponent {
           style={styles.scrollContainer}
           horizontal
           pagingEnabled
+          scrollEventThrottle={10}
           onContentSizeChange={this.handleLayoutScrolling}
           showsHorizontalScrollIndicator={false}
           onMomentumScrollEnd={this.handlePageChange}

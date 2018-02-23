@@ -14,7 +14,11 @@ const translations = {
     today: 'Today',
     tomorrow: 'Tomorrow',
     new: 'New',
-    popular: 'Popular'
+    popular: 'Popular',
+    set_notification: 'Set Notification',
+    set_notification_extended: 'Remind me 10 minutes before the show starts',
+    ok: 'OK',
+    cancel: 'Cancel'
   },
   tr: {
     welcome_text: 'Sony Mobile Channel Projesine Hoşgeldiniz',
@@ -31,7 +35,11 @@ const translations = {
     today: 'Bugün',
     tomorrow: 'Yarın',
     new: 'Yeni',
-    popular: 'Popüler'
+    popular: 'Popüler',
+    set_notification: 'Hatırlatıcı ayarla',
+    set_notification_extended: 'Program başlamadan 10 dakika önce beni uyar',
+    ok: 'OK',
+    cancel: 'İptal',
   }
 };
 

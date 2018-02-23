@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
 import Guide from '../../components/Guide';
 import styles from './styles';
 import { actions as guideActions } from '../../reducers/guide';
+import withTranslation from '../../hocs/Translation';
 
+@withTranslation
 @connect(
   state => ({
     guide: state.guide.guide,
@@ -21,6 +23,7 @@ export default class GuideContainer extends Component {
     timeStart: PropTypes.number.isRequired,
     timeEnd: PropTypes.number.isRequired,
     isLoading: PropTypes.bool,
+    translate: PropTypes.func.isRequired,
   };
 
   componentDidMount() {

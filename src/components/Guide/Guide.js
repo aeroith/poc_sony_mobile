@@ -6,7 +6,7 @@ import GuideItem from '../GuideItem';
 import config from '../../config/config';
 import withLoadingBar from '../../hocs/WithLoadingBar';
 
-const Guide = ({ guide, ...props }) => (
+const Guide = ({ guide, translate, ...props }) => (
   <View {...props}>
     <View style={styles.mainContainer}>
       <ScrollView>
@@ -19,6 +19,7 @@ const Guide = ({ guide, ...props }) => (
               note={item.note[config.lang]}
               timeStart={item.timeStart}
               timeEnd={item.timeEnd}
+              translate={translate}
             />
           ))
         }
@@ -28,7 +29,8 @@ const Guide = ({ guide, ...props }) => (
 );
 
 Guide.propTypes = {
-  guide: PropTypes.array
+  guide: PropTypes.array,
+  translate: PropTypes.func.isRequired,
 };
 
 Guide.defaultProps = {
