@@ -5,7 +5,7 @@ import Carousel from '../Carousel';
 import styles from './styles';
 import TabbedDatePicker from '../TabbedDatePicker';
 import Guide from '../Guide';
-import withTranslation from '../../components/Translation';
+import withTranslation from '../../hocs/Translation';
 
 @withTranslation
 export default class Home extends Component {

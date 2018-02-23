@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Text, View, TouchableHighlight } from 'react-native';
 import styles from './styles';
-import withTranslation from '../Translation';
+import withTranslation from '../../hocs/Translation';
 
 @withTranslation
 export default class Counter extends Component {

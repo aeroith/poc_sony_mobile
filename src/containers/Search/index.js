@@ -5,7 +5,7 @@ import _debounce from 'lodash/debounce';
 import Autocomplete from 'react-native-autocomplete-input';
 import moment from 'moment';
 import config from '../../config/config';
-import withTranslation from '../../components/Translation/index';
+import withTranslation from '../../hocs/Translation/index';
 import styles from './styles';
 import colorPalette from '../../config/colorPalette';
 import SearchService from '../../services/searchService';

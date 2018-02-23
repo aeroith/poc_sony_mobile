@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import styles from './styles';
 import GuideItem from '../GuideItem';
 import config from '../../config/config';
+import withLoadingBar from '../../hocs/WithLoadingBar';
 
 const Guide = ({ guide, ...props }) => (
   <View {...props}>
@@ -34,4 +35,6 @@ Guide.defaultProps = {
   guide: [],
 };
 
-export default Guide;
+export { Guide };
+
+export default withLoadingBar(Guide);

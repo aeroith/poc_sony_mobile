@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { View, ScrollView, Image, Animated, Text, Dimensions, TouchableWithoutFeedback } from 'react-native';
 import Tag from '../Tag';
-import Spinner from '../Spinner';
+import withLoadingBar from '../../hocs/WithLoadingBar';
 import styles from './styles';
 
 const { width: initialWidth, height: initialHeight } = Dimensions.get('window');
 
-export default class Carousel extends Component {
+@withLoadingBar
+class Carousel extends PureComponent {
   static propTypes = {
     images: PropTypes.array,
     page: PropTypes.number,
@@ -164,3 +165,5 @@ Indicator.defaultProps = {
   activeIndex: 0,
   count: 0,
 };
+
+export default Carousel;

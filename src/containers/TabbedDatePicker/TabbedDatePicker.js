@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import _times from 'lodash/times';
 import TabbedDatePicker from '../../components/TabbedDatePicker';
 import style from './styles';
-import withTranslation from '../../components/Translation';
+import withTranslation from '../../hocs/Translation';
 import { actions as tabbedDatePickerActions } from '../../reducers/tabbedDatePicker';
 import { setTvGuideResults } from '../../reducers/guide';
 

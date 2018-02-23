@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import Guide from '../../components/Guide';
 import styles from './styles';
 import { actions as guideActions } from '../../reducers/guide';
-import Spinner from '../../components/Spinner';
 
 @connect(
   state => ({
@@ -30,16 +29,8 @@ export default class GuideContainer extends Component {
   }
 
   render() {
-    // TODO: Move this logic to higher-order-component
-    if (this.props.isLoading) {
-      return (
-        <View style={styles.searchBarContainer}>
-          <Spinner iconStyle={styles.searchBarIconStyle} iconSize={40} />
-        </View>
-      );
-    }
     return (
-      <View style={styles.mainContainer}>
+      <View style={[styles.mainContainer, this.props.isLoading && styles.centerContainer]}>
         <Guide {...this.props} />
       </View>
     );

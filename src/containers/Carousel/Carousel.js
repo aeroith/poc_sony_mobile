@@ -5,8 +5,7 @@ import { View } from 'react-native';
 import Carousel from '../../components/Carousel';
 import styles from './styles';
 import { actions as carouselActions } from '../../reducers/carousel';
-import withTranslation from '../../components/Translation';
-import Spinner from '../../components/Spinner';
+import withTranslation from '../../hocs/Translation';
 
 @withTranslation
 @connect(
@@ -29,13 +28,6 @@ export default class CarouselContainer extends Component {
   }
 
   render() {
-    if (this.props.isLoading) {
-      return (
-        <View style={styles.searchBarContainer}>
-          <Spinner iconStyle={styles.searchBarIconStyle} iconSize={40}/>
-        </View>
-      );
-    }
     return (
       <View style={styles.container}>
         <Carousel {...this.props} />

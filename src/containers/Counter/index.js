@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Counter from '../../components/Counter';
 import { actions as counterActions } from '../../reducers/counter';
 import styles from './styles';
-import withTranslation from '../../components/Translation';
+import withTranslation from '../../hocs/Translation';
 
 @withTranslation
 @connect(

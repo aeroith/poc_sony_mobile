@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import * as Animatable from 'react-native-animatable';
 import { connect } from 'react-redux';
 import colorPalette from '../../config/colorPalette';
-import withTranslation from '../../components/Translation/index';
+import withTranslation from '../../hocs/Translation/index';
 import styles from './styles';
 import Search from '../Search/index';
 import { actions as searchBarActions } from '../../reducers/search';
