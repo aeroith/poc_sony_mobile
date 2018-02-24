@@ -5,8 +5,9 @@ import PropTypes from 'prop-types';
 import _times from 'lodash/times';
 import TabbedDatePicker from '../../components/TabbedDatePicker';
 import style from './styles';
-import withTranslation from '../../components/Translation';
+import withTranslation from '../../hocs/Translation';
 import { actions as tabbedDatePickerActions } from '../../reducers/tabbedDatePicker';
+import { setTvGuideResults } from '../../reducers/guide';
 
 const moment = require('moment');
 
@@ -16,7 +17,10 @@ const moment = require('moment');
     timeStart: state.tabbedDatePicker.timeStart,
     timeEnd: state.tabbedDatePicker.timeEnd,
   }),
-  tabbedDatePickerActions
+  {
+    ...tabbedDatePickerActions,
+    setTvGuideResults,
+  }
 )
 export default class TabbedDatePickerContainer extends Component {
   static propTypes = {

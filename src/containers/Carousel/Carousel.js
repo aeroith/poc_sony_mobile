@@ -5,13 +5,14 @@ import { View } from 'react-native';
 import Carousel from '../../components/Carousel';
 import styles from './styles';
 import { actions as carouselActions } from '../../reducers/carousel';
-import withTranslation from '../../components/Translation';
+import withTranslation from '../../hocs/Translation';
 
 @withTranslation
 @connect(
   state => ({
     images: state.carousel.images,
     page: state.carousel.page,
+    isLoading: state.carousel.isLoading
   }),
   carouselActions
 )
@@ -19,6 +20,7 @@ export default class CarouselContainer extends Component {
   static propTypes = {
     translate: PropTypes.func.isRequired,
     getFeaturedPhotos: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool,
   };
 
   componentDidMount() {
@@ -33,3 +35,7 @@ export default class CarouselContainer extends Component {
     );
   }
 }
+
+CarouselContainer.defaultProps = {
+  isLoading: false,
+};

@@ -18,6 +18,7 @@ export default StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     position: 'relative',
+    backgroundColor: colorPalette.som
   },
   innerFrame: {
     position: 'absolute',
@@ -26,7 +27,6 @@ export default StyleSheet.create({
   },
   scrollContainer: {
     flex: 1,
-    overflow: 'hidden',
   },
   contentContainer: {
     position: 'absolute',

@@ -1,18 +1,21 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { View, ScrollView, Image, Animated, Text, Dimensions } from 'react-native';
+import { View, ScrollView, Image, Animated, Text, Dimensions, TouchableWithoutFeedback } from 'react-native';
 import Tag from '../Tag';
+import withLoadingBar from '../../hocs/WithLoadingBar';
 import styles from './styles';
 
 const { width: initialWidth, height: initialHeight } = Dimensions.get('window');
 
-export default class Carousel extends Component {
+@withLoadingBar
+class Carousel extends PureComponent {
   static propTypes = {
     images: PropTypes.array,
     page: PropTypes.number,
     setCarouselPage: PropTypes.func.isRequired,
     resetCarousel: PropTypes.func.isRequired,
+    translate: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -39,7 +42,9 @@ export default class Carousel extends Component {
   }
 
   componentWillUnmount() {
-    this.props.resetCarousel();
+    if (this.props.page !== 0) {
+      this.props.resetCarousel();
+    }
   }
 
 
@@ -90,25 +95,27 @@ export default class Carousel extends Component {
           style={styles.scrollContainer}
           horizontal
           pagingEnabled
-          onContentSizeChange={this.handleLayoutScrolling}
           scrollEventThrottle={10}
+          onContentSizeChange={this.handleLayoutScrolling}
           showsHorizontalScrollIndicator={false}
           onMomentumScrollEnd={this.handlePageChange}
           onScroll={this.onScroll}
         >
           {
             this.props.images.map(({ imageURL, id }) => (
-              <View key={id + 2}>
-                <Image
-                  style={[styles.image, { width: this.state.layout.width }]}
-                  source={{ uri: imageURL }}
-                  key={id}
-                />
-                <View
-                  key={id + 1}
-                  style={[styles.innerFrame, { width: this.state.layout.width }]}
-                />
-              </View>
+              <TouchableWithoutFeedback onPress={() => console.log('carousel pressed')} key={id + 2}>
+                <View>
+                  <Image
+                    style={[styles.image, { width: this.state.layout.width }]}
+                    source={{ uri: imageURL }}
+                    key={id}
+                  />
+                  <View
+                    key={id + 1}
+                    style={[styles.innerFrame, { width: this.state.layout.width }]}
+                  />
+                </View>
+              </TouchableWithoutFeedback>
             ))
           }
         </ScrollView>
@@ -129,7 +136,7 @@ export default class Carousel extends Component {
             }
           </View>
           <View style={[styles.subContainer, { width: this.state.layout.width }]}>
-            <Text style={styles.subHeader}>{currentSelection.Note && currentSelection.Note}</Text>
+            <Text style={styles.subHeader}>{currentSelection.Note || ' '}</Text>
             <Indicator activeIndex={this.props.page} count={this.state.numItems} />
           </View>
         </View>
@@ -159,3 +166,5 @@ Indicator.defaultProps = {
   activeIndex: 0,
   count: 0,
 };
+
+export default Carousel;

@@ -8,7 +8,8 @@ const moment = require('moment');
 export default class TabbedDatePicker extends Component {
   static propTypes = {
     dates: PropTypes.array.isRequired,
-    setTime: PropTypes.func.isRequired
+    setTime: PropTypes.func.isRequired,
+    setTvGuideResults: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -20,59 +21,66 @@ export default class TabbedDatePicker extends Component {
   }
   onTabItemClick(index) {
     return () => {
-      const momentNow = moment().add(index, 'days');
+      const momentNow = index === 0 ? moment() : moment().add(index, 'days').startOf('day');
       const timeStart = momentNow.unix(Number);
       const timeEnd = momentNow.endOf('day').unix(Number);
       this.setState({ selected: index });
       this.props.setTime(timeStart, timeEnd);
+      this.props.setTvGuideResults(timeStart, timeEnd);
     };
   }
 
   render() {
     return (
       <View style={styles.mainContainer}>
-        <ScrollView
-          horizontal
-          pagingEnabled
-        >
-          {
-            this.props.dates.map((date, index) => (
-              <TabItem
-                key={date.key}
-                active={this.state.selected === index}
-                text={date.data.dayOfWeek}
-                dayNumber={date.data.dayNumber}
-                onPress={this.onTabItemClick(index)}
-              />
-            ))
-          }
-        </ScrollView>
+        <View style={styles.scrollViewContainer}>
+          <ScrollView
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+          >
+            {
+              this.props.dates.map((date, index) => (
+                <TabItem
+                  key={date.key}
+                  active={this.state.selected === index}
+                  text={date.data.dayOfWeek}
+                  dayNumber={date.data.dayNumber}
+                  onPress={this.onTabItemClick(index)}
+                />
+              ))
+            }
+          </ScrollView>
+        </View>
+        <View style={styles.bottomBar} />
       </View>
     );
   }
 };
 
 const TabItem = ({ text, dayNumber, active, onPress, ...props }) => (
-  <TouchableOpacity
-    onPress={onPress}
-    style={[styles.tabItem, active && styles.tabItemActive]}
-    {...props}
-  >
-    <View>
-      <View style={styles.textContainer}>
-        <Text style={[styles.tabItemText, active && styles.tabItemTextActive]}>{text}</Text>
-        {dayNumber && <Text style={styles.textDayNumber}>{dayNumber}</Text>}
+  <View style={[styles.tabItem, active && styles.tabItemActive]} {...props}>
+    <TouchableOpacity
+      onPress={onPress}
+    >
+      <View>
+        <View style={styles.textContainer}>
+          <Text style={[styles.tabItemText, active && styles.tabItemTextActive]}>{text}</Text>
+          {dayNumber &&
+          <Text style={[styles.textDayNumber, active && styles.textDayNumberActive]}>
+            {dayNumber}
+          </Text>}
+        </View>
       </View>
-      {active && <View style={[styles.triangle]} />}
-    </View>
-  </TouchableOpacity>
+    </TouchableOpacity>
+  </View>
 );
 
 TabItem.propTypes = {
   text: PropTypes.string.isRequired,
   active: PropTypes.bool,
   onPress: PropTypes.func,
-  dayNumber: PropTypes.string
+  dayNumber: PropTypes.string,
 };
 
 TabItem.defaultProps = {

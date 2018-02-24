@@ -6,7 +6,7 @@
     "start": "react-native start",
     "ios-open": "open ios/*.xcodeproj",
     "ios": "react-native run-ios",
-    "android": "react-native run-android",
+    "android": "adb reverse tcp:3005 tcp:3005 && react-native run-android",
     "lint": "eslint src test *.js",
     "test": "jest",
     "remotedev": "remotedev-debugger --injectserver",
@@ -35,6 +35,7 @@
     "react-navigation-redux-helpers": "^1.0.1",
     "react-redux": "^5.0.3",
     "redux": "^3.3.1",
+    "redux-persist": "^5.9.1",
     "redux-thunk": "^2.0.1"
   },
   "devDependencies": {

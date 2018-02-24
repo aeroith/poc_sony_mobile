@@ -7,12 +7,11 @@ export const CAROUSEL_HEIGHT = 300;
 
 export default StyleSheet.create({
   container: {
-    flexGrow: 0,
-    flexBasis: CAROUSEL_HEIGHT,
-    flex: 2,
+    backgroundColor: colorPalette.som,
+    width: '100%',
+    flex: 6,
     flexDirection: 'column',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colorPalette.grayBg4,
-  }
+  },
 });
