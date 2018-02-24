@@ -103,5 +103,5 @@ export default class GuideItem extends PureComponent {
 
 GuideItem.defaultProps = {
   image: 'https://dummyimage.com/100x60/2d5d61/fff.png&text=Placeholder',
-  note: '',
+  note: undefined,
 };
