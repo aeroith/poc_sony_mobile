@@ -1,5 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import { createReduxBoundAddListener, createReactNavigationReduxMiddleware } from 'react-navigation-redux-helpers';
 import { createAppInitialState } from './store/store';
 import App from './containers/App';
@@ -15,11 +16,13 @@ const addListener = createReduxBoundAddListener('root');
 
 // Initial state
 const initialState = createAppInitialState();
-const store = configureStore(initialState, reduxNavMiddleware);
+const { store, persistor } = configureStore(initialState, reduxNavMiddleware);
 
 export { addListener };
 export default () => (
   <Provider store={store}>
-    <App />
+    <PersistGate loading={null} persistor={persistor}>
+      <App />
+    </PersistGate>
   </Provider>
 );
