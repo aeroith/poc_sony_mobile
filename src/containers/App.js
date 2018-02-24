@@ -12,6 +12,7 @@ import Menu from './Menu';
 @connect(
   state => ({
     nav: state.nav,
+    channelName: state.app.channelName,
   }),
   dispatch => ({
     dispatch
@@ -22,6 +23,10 @@ export default class App extends Component {
     dispatch: PropTypes.func.isRequired,
     nav: PropTypes.object.isRequired,
   };
+
+  componentWillMount() {
+    // this.props.
+  }
 
   componentDidMount() {
     this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {

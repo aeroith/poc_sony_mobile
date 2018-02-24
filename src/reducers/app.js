@@ -1,10 +1,14 @@
-const actionsTypes = {
-  SET_APP_TYPE_LOADING: 'SET_APP_TYPE_LOADING',
-  SET_APP_TYPE: 'SET_APP_TYPE',
+import ApiClient from '../utils/api-client';
+
+const actionTypes = {
+  CONFIG_REQUEST: 'CONFIG_REQUEST',
+  CONFIG_RESPONSE: 'CONFIG_RESPONSE',
+  CONFIG_ERROR: 'CONFIG_ERROR'
 };
 
 const initialState = {
-  appTypeLoading: false,
+  configLoading: false,
+  configError: null,
   channelName: '',
   connectedChannels: [],
   language: '',
@@ -13,19 +17,28 @@ const initialState = {
 
 // Reducer - SearchBar
 const actionsMap = {
-  [actionsTypes.SET_APP_TYPE_LOADING]: state => ({ ...state, appTypeLoading: true }),
-  [actionsTypes.SET_APP_TYPE]: (state, action) => ({
+  [actionTypes.CONFIG_REQUEST]: state => ({ ...state, configLoading: true, configError: null }),
+  [actionTypes.CONFIG_RESPONSE]: (state, action) => ({
     ...state,
-    channelName: action.channelName,
+    channelName: action.default_channel,
     language: action.language,
     country: action.country,
+    configLoading: false,
+    configError: null,
+  }),
+  [actionTypes.CONFIG_ERROR]: (state, action) => ({
+    ...state,
+    error: action.error,
   }),
 };
 
 // Actions - SearchBar
 const actions = {
-  setAppType: country => (dispatch, getState) => {
-    dispatch({ type: actionsTypes.SET_APP_TYPE_LOADING });
+  getConfig: country => (dispatch, getState) => {
+    dispatch({ type: actionTypes.CONFIG_REQUEST });
+    ApiClient.get(`config/?country=${country.toUpperCase()}`)
+      .then(response => dispatch({ type: actionTypes.CONFIG_RESPONSE, ...response }))
+      .catch(error => dispatch({ type: actionTypes.CONFIG_ERROR, error: error.request._response }));
   },
 };
 

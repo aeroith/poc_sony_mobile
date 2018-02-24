@@ -7,6 +7,7 @@ import App from './containers/App';
 import siteConfig from './config/siteConfig';
 import configureStore from './configureStore';
 import TMBDClient from './utils/tmdb-client';
+import Utils from './utils/utils';
 
 // Initiate TMDB configuration fetching
 TMBDClient.getConfiguration();
@@ -15,19 +16,18 @@ TMBDClient.getConfiguration();
 const reduxNavMiddleware = createReactNavigationReduxMiddleware('root', state => state.nav);
 const addListener = createReduxBoundAddListener('root');
 
+// Device Info
+const deviceInfo = Utils.getDeviceInfo();
+
 // Initial state
-const initialState = createAppInitialState(siteConfig);
-console.log('initialState: ', initialState);
+const initialState = createAppInitialState(siteConfig, deviceInfo);
 const { store, persistor } = configureStore(initialState, reduxNavMiddleware);
 
 export { addListener };
-export default () => {
-  console.log('Sony Mobile Channel Initiated');
-  return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <App />
-      </PersistGate>
-    </Provider>
-  );
-};
+export default () => (
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <App />
+    </PersistGate>
+  </Provider>
+);

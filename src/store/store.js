@@ -22,8 +22,6 @@ const createAppInitialState = (siteConfig) => {
 
   if (siteConfig.defaultCountry) state.app.country = siteConfig.defaultCountry;
   if (siteConfig.defaultLanguage) state.app.language = siteConfig.defaultLanguage;
-  if (siteConfig.defaultChannelName) state.app.channelName = siteConfig.defaultChannelName;
-  if (siteConfig.defaultConnectedChannels) state.app.connectedChannels = siteConfig.defaultConnectedChannels;
 
   return state;
 };
