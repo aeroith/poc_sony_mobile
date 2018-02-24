@@ -1,4 +1,4 @@
-import config from './config';
+import siteConfig from './siteConfig';
 
 const colorPalette = {
   themes: {
@@ -33,5 +33,5 @@ const colorPalette = {
     return this.themes[themeName] || 'smcDark';
   }
 };
-const exportedTheme = colorPalette.getColors(config.UITheme);
+const exportedTheme = colorPalette.getColors(siteConfig.UITheme);
 export default exportedTheme;

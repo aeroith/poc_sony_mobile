@@ -4,6 +4,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { createReduxBoundAddListener, createReactNavigationReduxMiddleware } from 'react-navigation-redux-helpers';
 import { createAppInitialState } from './store/store';
 import App from './containers/App';
+import siteConfig from './config/siteConfig';
 import configureStore from './configureStore';
 import TMBDClient from './utils/tmdb-client';
 
@@ -15,14 +16,18 @@ const reduxNavMiddleware = createReactNavigationReduxMiddleware('root', state =>
 const addListener = createReduxBoundAddListener('root');
 
 // Initial state
-const initialState = createAppInitialState();
+const initialState = createAppInitialState(siteConfig);
+console.log('initialState: ', initialState);
 const { store, persistor } = configureStore(initialState, reduxNavMiddleware);
 
 export { addListener };
-export default () => (
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <App />
-    </PersistGate>
-  </Provider>
-);
+export default () => {
+  console.log('Sony Mobile Channel Initiated');
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
+    </Provider>
+  );
+};

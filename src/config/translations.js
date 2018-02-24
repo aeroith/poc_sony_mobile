@@ -7,7 +7,7 @@ const translations = {
     increment_odd: 'Increment if odd',
     increment_async: 'Increment async',
     back: 'Back',
-    home: 'Guide',
+    home: 'TV Guide',
     counter: 'Counter',
     search: 'Search...',
     nextAiring_na: 'Next airing N/A',
