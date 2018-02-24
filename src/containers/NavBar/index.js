@@ -30,7 +30,6 @@ export default class NavBar extends Component {
       setDrawerState: PropTypes.func.isRequired,
       setSearchBarState: PropTypes.func.isRequired,
       isDrawerVisible: PropTypes.bool.isRequired,
-
     };
 
     getNavHeader = () => {

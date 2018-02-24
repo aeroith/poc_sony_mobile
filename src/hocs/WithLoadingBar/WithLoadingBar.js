@@ -13,7 +13,7 @@ const withLoadingBar = Component => class extends PureComponent {
 
   static defaultProps = {
     iconStyle: styles.iconStyleDefault,
-    iconSize: 40,
+    iconSize: 20,
   };
 
   render() {
