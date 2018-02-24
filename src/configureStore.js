@@ -9,6 +9,7 @@ import reducer from './reducers';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
+  whitelist: ['carousel']
 };
 
 
