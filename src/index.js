@@ -9,6 +9,9 @@ import configureStore from './configureStore';
 import TMBDClient from './utils/tmdb-client';
 import Utils from './utils/utils';
 
+// Environment
+const env = Utils.getEnv();
+
 // Initiate TMDB configuration fetching
 TMBDClient.getConfiguration();
 
@@ -17,7 +20,7 @@ const reduxNavMiddleware = createReactNavigationReduxMiddleware('root', state =>
 const addListener = createReduxBoundAddListener('root');
 
 // Device Info
-const deviceInfo = Utils.getDeviceInfo();
+const deviceInfo = Utils.getDeviceInfo(env);
 
 // Initial state
 const initialState = createAppInitialState(siteConfig, deviceInfo);

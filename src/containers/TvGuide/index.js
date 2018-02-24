@@ -7,7 +7,7 @@ import Guide from '../Guide';
 import withTranslation from '../../hocs/Translation';
 
 @withTranslation
-export default class Home extends Component {
+export default class TVGuide extends Component {
   render() {
     return (
       <View style={styles.container}>

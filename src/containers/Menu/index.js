@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Drawer from '../../components/Drawer';
 import styles from './styles';
 import drawerConfig from '../../components/Drawer/config';
-import MenuContent from '../../components/MenuContent';
+import MenuContent from '../MenuContent';
 import { actions as drawerActions } from '../../reducers/drawer';
 import { actions as searchBarActions } from '../../reducers/search';
 

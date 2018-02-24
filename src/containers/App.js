@@ -5,6 +5,7 @@ import { NavigationActions, addNavigationHelpers } from 'react-navigation/src/re
 import { connect } from 'react-redux';
 import AppNavigator from '../navigator';
 import { addListener } from '../index';
+import { actions as appActions } from '../reducers/app';
 import styles from './styles';
 import NavBar from './NavBar';
 import Menu from './Menu';
@@ -12,10 +13,13 @@ import Menu from './Menu';
 @connect(
   state => ({
     nav: state.nav,
-    channelName: state.app.channelName,
+    country: state.app.country,
+    language: state.app.language,
+    configLoading: state.app.configLoading,
   }),
   dispatch => ({
-    dispatch
+    dispatch,
+    getConfig: country => dispatch(appActions.getConfig(country)),
   }),
 )
 export default class App extends Component {
@@ -25,7 +29,8 @@ export default class App extends Component {
   };
 
   componentWillMount() {
-    // this.props.
+    const { country } = this.props;
+    if (country) this.props.getConfig(country);
   }
 
   componentDidMount() {
@@ -33,6 +38,12 @@ export default class App extends Component {
       this.props.dispatch(NavigationActions.back());
       return true;
     });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.country && (nextProps.country !== this.props.country)) {
+      this.props.getConfig(nextProps.country);
+    }
   }
 
   componentWillUnmount() {

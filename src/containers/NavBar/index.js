@@ -54,8 +54,8 @@ export default class NavBar extends Component {
       return (
         <Animatable.View style={styles.navBarWrapper} animation="fadeInDown">
           <LinearGradient
-            colors={[colorPalette.grayBg3, colorPalette.transparent]}
-            locations={[isSearchBarVisible ? 0.4 : 0.25, 1]}
+            colors={[colorPalette.grayBg4, colorPalette.transparent]}
+            locations={[isSearchBarVisible ? 0.4 : 0.15, 1]}
           >
             <Search shouldRender={isSearchBarVisible} />
             <View style={[styles.linearGradientWrapper, isSearchBarVisible && styles.linearGradientWrapper__searchBarOpen]}>

@@ -1,11 +1,11 @@
 import { StackNavigator } from 'react-navigation';
 
-import Home from './containers/Home';
+import TVGuide from './containers/TvGuide';
 import Counter from './containers/Counter';
 
 const AppNavigator = new StackNavigator(
   {
-    Home: { screen: Home },
+    TVGuide: { screen: TVGuide },
     Counter: { screen: Counter },
   },
   {

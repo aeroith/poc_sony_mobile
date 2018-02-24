@@ -4,15 +4,19 @@ import translations from '../../config/translations';
 
 const withTranslation = (ComponentRaw) => {
   class WrappedComponent extends Component {
-    constructor(props) {
-      super(props);
-      this.translate = (key) => {
-        if (!key || key.length === 0 || typeof key !== 'string') return '';
-        return translations[this.props.language][key] || key;
-      };
-    }
     render() {
-      return <ComponentRaw {...this.props} translate={this.translate} />;
+      const translateFn = (key) => {
+        const language = this.props.language && this.props.language.length > 0
+          ? this.props.language
+          : 'en';
+        if (!key || key.length === 0 || typeof key !== 'string') return '';
+        let rootObj = translations[language || 'en'];
+        key.split('.').forEach((pathPart) => {
+          rootObj = rootObj[pathPart];
+        });
+        return rootObj || key;
+      };
+      return <ComponentRaw {...this.props} translate={translateFn} />;
     }
   }
   return connect(state => ({

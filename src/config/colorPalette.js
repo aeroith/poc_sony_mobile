@@ -23,7 +23,7 @@ const colorPalette = {
         popular: '#4b7bec'
       },
       cyan1: '#39e0d5',
-      redBg: '#f02f27',
+      red: '#e50914',
       pinkBg: '#da287a',
       greenBg1: '#005d70',
       transparent: 'transparent',

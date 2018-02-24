@@ -7,7 +7,7 @@ const translations = {
     increment_odd: 'Increment if odd',
     increment_async: 'Increment async',
     back: 'Back',
-    home: 'TV Guide',
+    tvguide: 'TV Guide',
     counter: 'Counter',
     search: 'Search...',
     nextAiring_na: 'Next airing N/A',
@@ -18,7 +18,17 @@ const translations = {
     set_notification: 'Set Notification',
     set_notification_extended: 'Remind me 10 minutes before the show starts',
     ok: 'OK',
-    cancel: 'Cancel'
+    cancel: 'Cancel',
+    days: {
+      mon: 'Monday',
+      tue: 'Tuesday',
+      wed: 'Wednesday',
+      thu: 'Thursday',
+      fri: 'Friday',
+      sat: 'Saturday',
+      sun: 'Sunday',
+    },
+    sonycrimechannel: 'Sony Crime Channel'
   },
   tr: {
     welcome_text: 'Sony Mobile Channel Projesine Hoşgeldiniz',
@@ -28,7 +38,7 @@ const translations = {
     increment_odd: 'Tekse artır',
     increment_async: 'Asenkron artır',
     back: 'Geri',
-    home: 'Yayın Akışı',
+    tvguide: 'Yayın Akışı',
     counter: 'Sayaç',
     search: 'Arama...',
     nextAiring_na: 'Bir sonraki yayın zamanı belirsiz',
@@ -40,6 +50,15 @@ const translations = {
     set_notification_extended: 'Program başlamadan 10 dakika önce beni uyar',
     ok: 'OK',
     cancel: 'İptal',
+    days: {
+      mon: 'Pazartesi',
+      tue: 'Salı',
+      wed: 'Çarşamba',
+      thu: 'Perşembe',
+      fri: 'Cuma',
+      sat: 'Cumartesi',
+      sun: 'Pazar',
+    },
   }
 };
 

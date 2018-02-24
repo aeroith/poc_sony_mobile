@@ -25,8 +25,8 @@ const styles = StyleSheet.create({
     borderLeftWidth: 1,
   },
   tabItemActive: {
-    borderTopWidth: 2,
-    borderTopColor: colorPalette.cyan1,
+    borderTopWidth: 3,
+    borderTopColor: colorPalette.red,
     borderStyle: 'solid',
   },
   tabItemText: {

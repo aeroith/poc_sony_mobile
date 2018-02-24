@@ -8,7 +8,7 @@ import { initialState as carouselInitialState } from '../reducers/carousel';
 import { initialState as tabbedDatePickerInitialState } from '../reducers/tabbedDatePicker';
 import { initialState as guideInitialState } from '../reducers/guide';
 
-const createAppInitialState = (siteConfig) => {
+const createAppInitialState = (siteConfig, deviceInfo) => {
   const state = {
     app: _cloneDeep(appInitialState),
     counter: _cloneDeep(counterInitialState),
@@ -20,8 +20,8 @@ const createAppInitialState = (siteConfig) => {
     guide: _cloneDeep(guideInitialState),
   };
 
-  if (siteConfig.defaultCountry) state.app.country = siteConfig.defaultCountry;
-  if (siteConfig.defaultLanguage) state.app.language = siteConfig.defaultLanguage;
+  if (deviceInfo.country) state.app.country = deviceInfo.country;
+  if (deviceInfo.language) state.app.language = deviceInfo.language;
 
   return state;
 };
