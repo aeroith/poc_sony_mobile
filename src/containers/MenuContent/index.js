@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
+import _find from 'lodash/find';
 import Image from '../../components/Image';
 import styles from './styles';
 import withTranslation from '../../hocs/Translation';
 import Utils from '../../utils/utils';
+import routeMappings from '../../config/routeMappings';
+import { resetAction } from '../../reducers/nav';
 
 @withTranslation
 @connect(state => ({
@@ -34,15 +37,18 @@ export default class MenuContent extends Component {
     menu: [],
   };
 
-  handleMenuItemClick = (item) => {
-    console.log('Menu item clicked: ', item);
+  handleMenuItemClick = (item, currentRouteName) => {
+    const { routeName } = _find(routeMappings, { enum: item });
+    if (currentRouteName !== routeName) {
+      this.props.navigation.dispatch(resetAction(routeName, currentRouteName));
+    }
   };
 
   render() {
     const {
       channelLogo, channelName, menu, translate
     } = this.props;
-    const routeName = Utils.getCurrentRouteName(this.props.navigation.state);
+    const route = Utils.getCurrentRoute(this.props.navigation.state);
     return (
       <View style={styles.menuContentWrapper}>
         <MenuItem
@@ -56,10 +62,10 @@ export default class MenuContent extends Component {
             <MenuItem
               bordered
               touchable
-              style={[routeName === item && styles.selectedMenuItem]}
+              style={[route.enum === item && styles.selectedMenuItem]}
               text={{ content: translate(`menu.${channelName}.${item}`) }}
               key={item + menu.indexOf(item)}
-              onPress={() => this.handleMenuItemClick(item)}
+              onPress={() => this.handleMenuItemClick(item, route.routeName)}
             />
             ))}
         </ScrollView>

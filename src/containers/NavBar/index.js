@@ -12,7 +12,7 @@ import styles from './styles';
 import Search from '../Search/index';
 import { actions as searchBarActions } from '../../reducers/search';
 import { actions as drawerActions } from '../../reducers/drawer';
-import Utils from "../../utils/utils";
+import Utils from '../../utils/utils';
 
 @withTranslation
 @connect(
@@ -36,9 +36,9 @@ export default class NavBar extends Component {
     };
 
     getNavHeader = () => {
-      const routeName = Utils.getCurrentRouteName(this.props.nav);
+      const route = Utils.getCurrentRoute(this.props.nav);
       return this.props.translate(this.props.channelName
-        ? `menu.${this.props.channelName}.${routeName}`
+        ? `menu.${this.props.channelName}.${route.enum}`
         : '');
     };
 
