@@ -40,6 +40,11 @@ export default class Menu extends Component {
         const drawerRefMethod = nextProps.isDrawerVisible ? 'openDrawer' : 'closeDrawer';
         if (this.el) this.el[drawerRefMethod]();
       }
+      const { routeName: prevRouteName } = this.props.nav.routes[this.props.nav.routes.length - 1];
+      const { routeName: nextRouteName } = nextProps.nav.routes[nextProps.nav.routes.length - 1];
+      if (prevRouteName !== nextRouteName) {
+        this.props.setDrawerState(false);
+      }
     }
 
     setDrawerRef = (el) => {
