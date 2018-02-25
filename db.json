@@ -2,22 +2,23 @@
   "content": [
     {
       "id": 1,
-      "Title": "Recep Ivedik",
+      "Title": "Person of Interest",
       "featured": true,
       "tags": ["popular"],
       "nextAiring": 0,
-      "imageURL": "https://i.ytimg.com/vi/3TpBMUQfSOU/maxresdefault.jpg",
+      "imageURL": "https://www.sonychannelturkiye.com/sites/tr.turk/files/styles/image_1170x658/public/ct_series_f_primary_image/08.jpg",
       "imdbID": "tt1193516",
-      "Note": "🔥 🔥"
+      "Note": "Season 5 Recap"
     },
     {
       "id": 2,
-      "Title": "Cumali Ceber",
+      "Title": "The Flash",
       "featured": true,
       "tags": [],
       "nextAiring": 0,
-      "imageURL": "https://images-na.ssl-images-amazon.com/images/M/MV5BMmIyOTllN2EtM2Y5ZS00NzY4LTgwMzItOTI4MDJjMGI4Y2UwXkEyXkFqcGdeQXVyNjc1MDg1NDU@._V1_SX300.jpg",
-      "imdbID": "tt1193516"
+      "imageURL": "https://www.sonychannelturkiye.com/sites/tr.turk/files/styles/image_1170x658/public/ct_series_f_primary_image/theflash_1600x900.jpg",
+      "imdbID": "tt1193516",
+      "Note": "Season 1 - Episode 21"
     },
     {
       "id": 3,
@@ -25,7 +26,7 @@
       "featured": true,
       "tags": ["popular"],
       "nextAiring": 0,
-      "imageURL": "https://i.imgur.com/Ks7X1sw.jpg",
+      "imageURL": "https://i.hizliresim.com/jygOmj.jpg",
       "imdbID":"tt0289968",
       "Note": "Season 2 - Episode 3"
     },
@@ -35,7 +36,7 @@
       "featured": true,
       "tags": ["new"],
       "nextAiring": 0,
-      "imageURL": "https://i.imgur.com/OP0ZrRS.jpg",
+      "imageURL": "https://i.hizliresim.com/dOvdmr.jpg",
       "imdbID": "tt3749900",
       "Note": "Season 1 - Episode 1"
     },

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Guide from '../../components/Guide';
 import styles from './styles';
+import siteConfig from '../../config/siteConfig'
 import { actions as guideActions } from '../../reducers/guide';
 import withTranslation from '../../hocs/Translation';
 
@@ -14,6 +15,7 @@ import withTranslation from '../../hocs/Translation';
     timeStart: state.tabbedDatePicker.timeStart,
     timeEnd: state.tabbedDatePicker.timeEnd,
     isLoading: state.guide.isLoading,
+    lang: state.app.lang,
   }),
   guideActions
 )
@@ -24,6 +26,12 @@ export default class GuideContainer extends Component {
     timeEnd: PropTypes.number.isRequired,
     isLoading: PropTypes.bool,
     translate: PropTypes.func.isRequired,
+    lang: PropTypes.string,
+  };
+
+  static defaultProps = {
+    isLoading: false,
+    lang: siteConfig.defaultLanguage,
   };
 
   componentDidMount() {

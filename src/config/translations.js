@@ -37,6 +37,14 @@ const translations = {
         galleries: 'Galleries',
         news: 'News',
         games_and_more: 'Games & More',
+        gamesandmore: 'Games & More',
+      },
+      sonychannelturkiye: {
+        programs: 'Shows',
+        tvguide: 'TV Guide',
+        galleries: 'Galleries',
+        livefeed: 'Live Feed',
+        videos: 'Videos',
       }
     }
   },
@@ -74,7 +82,14 @@ const translations = {
         tv_guide: 'Yayın Akışı',
         galleries: 'Galeriler',
         news: 'Haberler',
-        games_and_more: 'Oyunlar ve Daha Fazlası',
+        gamesandmore: 'Oyunlar ve Daha Fazlası',
+      },
+      sonychannelturkiye: {
+        programs: 'Şovlar',
+        tv_guide: 'Yayın Akışı',
+        galleries: 'Galeriler',
+        livefeed: 'Canlı Yayın',
+        videos: 'Videolar',
       }
     }
   }
