@@ -13,7 +13,7 @@ const withLoadingBar = Component => class extends PureComponent {
 
   static defaultProps = {
     iconStyle: styles.iconStyleDefault,
-    iconSize: 40,
+    iconSize: 20,
   };
 
   render() {
@@ -27,7 +27,7 @@ const withLoadingBar = Component => class extends PureComponent {
     if (isLoading) {
       return (
         <View style={styles.loadingWrapper}>
-          <Spinner iconStyle={iconStyle || styles.iconStyleDefault} iconSize={iconSize || 40} />
+          <Spinner iconStyle={iconStyle || styles.iconStyleDefault} iconSize={iconSize || 20} />
         </View>
       );
     }

@@ -3,6 +3,7 @@ package com.rnboilerplate;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
@@ -29,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new ReactNativePushNotificationPackage(),
             new ReactNativeOneSignalPackage(),
+            new RNDeviceInfo(),
             new VectorIconsPackage(),
             new LinearGradientPackage()
       );

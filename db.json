@@ -194,5 +194,51 @@
       "timeStart": 0,
       "timeEnd": 3600
     }
+  ],
+  "config": [
+    {
+      "id": 1,
+      "language": "en",
+      "country": "GB",
+      "default_channel": "sonycrimechannel"
+    },
+    {
+      "id": 2,
+      "language": "tr",
+      "country": "TR",
+      "default_channel": "sonychannelturkiye"
+    }
+  ],
+  "channels": [
+    {
+      "id": 1,
+      "title": "sonycrimechannel",
+      "menu": ["programs", "tvguide", "galleries", "news", "gamesandmore"],
+      "connected_channels": ["sonymoviechannel", "movies4men"],
+      "logo": "https://vignette.wikia.nocookie.net/logopedia/images/8/87/SonyCrimeChannelUK.png/revision/latest/scale-to-width-down/140?cb=20180126010145",
+      "configId": 1
+    },
+    {
+      "id": 2,
+      "title": "sonymoviechannel",
+      "menu": ["programs", "tvguide", "galleries", "quizzes", "videos", "news"],
+      "connected_channels": ["sonycrimechannel", "movies4men"],
+      "logo": "https://www.sonymoviechannel.co.uk/sites/all/themes/responsive/responsive_smc_uk_2/logo.png"
+    },
+    {
+      "id": 3,
+      "title": "movies4men",
+      "menu": ["programs", "tvguide", "galleries", "quizzes", "videos", "news"],
+      "connected_channels": ["sonycrimechannel", "sonymoviechannel"],
+      "logo": "https://www.sonymoviechannel.co.uk/sites/all/themes/responsive/responsive_smc_uk_2/logo.png"
+    },
+    {
+      "id": 4,
+      "title": "sonychannelturkiye",
+      "menu": ["programs", "tvguide", "videos", "livefeed", "galleries"],
+      "connected_channels": [],
+      "logo": "https://www.sonychannelturkiye.com/sites/all/themes/responsive/responsive_sony_russia/logo.png",
+      "configId": 2
+    }
   ]
 }

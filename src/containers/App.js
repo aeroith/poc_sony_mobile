@@ -6,14 +6,22 @@ import OneSignal from 'react-native-onesignal'; // Import package from node modu
 import { connect } from 'react-redux';
 import AppNavigator from '../navigator';
 import { addListener } from '../index';
+import { actions as appActions } from '../reducers/app';
 import styles from './styles';
 import NavBar from './NavBar';
+import Menu from './Menu';
 
 @connect(
   state => ({
     nav: state.nav,
+    country: state.app.country,
+    language: state.app.language,
+    configLoading: state.app.configLoading,
   }),
-  dispatch => ({ dispatch }),
+  dispatch => ({
+    dispatch,
+    getConfig: country => dispatch(appActions.getConfig(country)),
+  }),
 )
 export default class App extends Component {
   static propTypes = {
@@ -22,6 +30,8 @@ export default class App extends Component {
   };
 
   componentWillMount() {
+    const { country } = this.props;
+    if (country) this.props.getConfig(country);
     OneSignal.addEventListener('received', this.onReceived);
     OneSignal.addEventListener('opened', this.onOpened);
     OneSignal.addEventListener('registered', this.onRegistered);
@@ -33,6 +43,12 @@ export default class App extends Component {
       this.props.dispatch(NavigationActions.back());
       return true;
     });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.country && (nextProps.country !== this.props.country)) {
+      this.props.getConfig(nextProps.country);
+    }
   }
 
   componentWillUnmount() {
@@ -64,13 +80,17 @@ export default class App extends Component {
 
   render() {
     const { dispatch, nav } = this.props;
+    const navigation = addNavigationHelpers({ dispatch, state: nav, addListener });
+
     return (
       <View style={styles.wrapper}>
-        <StatusBar barStyle="light-content" />
-        <NavBar nav={nav} />
-        <View style={styles.app}>
-          <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav, addListener })} />
-        </View>
+        <Menu navigation={navigation}>
+          <StatusBar barStyle="light-content" style={styles.statusBar} />
+          <NavBar nav={nav} />
+          <View style={styles.app}>
+            <AppNavigator navigation={navigation} />
+          </View>
+        </Menu>
       </View>
     );
   }

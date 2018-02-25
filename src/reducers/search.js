@@ -6,12 +6,12 @@ const initialState = {
   isSearchBarVisible: false,
 };
 
-// Reducer - Counter
+// Reducer - SearchBar
 const actionsMap = {
   [actionsTypes.SET_SEARCH_BAR_STATE]: (state, action) => ({ ...state, isSearchBarVisible: action.isSearchBarVisible }),
 };
 
-// Actions - Counter
+// Actions - SearchBar
 const actions = {
   setSearchBarState: isSearchBarVisible => ({ type: actionsTypes.SET_SEARCH_BAR_STATE, isSearchBarVisible }),
 };

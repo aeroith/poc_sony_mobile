@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     height: 80,
-    zIndex: 999999,
+    zIndex: 11,
   },
   linearGradientWrapper: {
     paddingTop: 30,

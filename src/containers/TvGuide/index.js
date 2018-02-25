@@ -18,7 +18,7 @@ const onNotification = (notification) => {
 
 @withPushNotification(onNotification)
 @withTranslation
-export default class Home extends Component {
+export default class TVGuide extends Component {
   static propTypes = {
     pushNotification: PropTypes.object.isRequired,
   };

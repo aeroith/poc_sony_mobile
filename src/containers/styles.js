@@ -10,6 +10,8 @@ const styles = StyleSheet.create({
     flex: 1,
     zIndex: 1,
   },
+  statusBar: {
+    zIndex: 11,
+  },
 });
-
 export default styles;
