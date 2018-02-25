@@ -29,6 +29,7 @@
     "react-native": "^0.51.0",
     "react-native-animatable": "^1.2.4",
     "react-native-autocomplete-input": "^3.5.0",
+    "react-native-device-info": "^0.16.0",
     "react-native-linear-gradient": "^2.4.0",
     "react-native-vector-icons": "^4.5.0",
     "react-navigation": "^1.0.3",

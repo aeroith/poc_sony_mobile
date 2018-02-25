@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   iconStyleDefault: {
-    color: colorPalette.greenBg1,
+    color: colorPalette.grayBg1,
   }
 });
 

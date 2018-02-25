@@ -4,14 +4,19 @@ import { View, TextInput, TouchableOpacity, Text, Image } from 'react-native';
 import _debounce from 'lodash/debounce';
 import Autocomplete from 'react-native-autocomplete-input';
 import moment from 'moment';
+import { connect } from 'react-redux';
 import config from '../../config/config';
 import withTranslation from '../../hocs/Translation/index';
 import styles from './styles';
 import colorPalette from '../../config/colorPalette';
 import SearchService from '../../services/searchService';
 import Spinner from '../../components/Spinner';
+import { actions as searchBarActions } from '../../reducers/search';
 
 @withTranslation
+@connect(null, dispatch => ({
+  setSearchBarState: searchBarState => dispatch(searchBarActions.setSearchBarState(searchBarState))
+}))
 export default class Search extends Component {
     static propTypes = {
       translate: PropTypes.func.isRequired,
@@ -77,29 +82,32 @@ export default class Search extends Component {
       );
     };
 
-    handleOnBlur = () => {
-      this.setState({ data: [] });
+    clearSearchBar = () => {
+      this.setState({ data: [], query: '', loading: false });
     };
 
-    renderTextInput = () => {
-      return (
-        <View style={styles.searchBarTextInputWrapper}>
-          <TextInput
-            onChangeText={this.handleOnChangeText}
-            style={styles.searchBarTextInput}
-            placeholder={this.props.translate('search')}
-            placeholderTextColor={colorPalette.grayText1}
-            value={this.state.query}
-            onBlur={this.handleOnBlur}
-          />
-          {this.state.loading && (
+    handleOnBlur = () => {
+      this.clearSearchBar();
+      this.props.setSearchBarState(false);
+    };
+
+    renderTextInput = () => (
+      <View style={styles.searchBarTextInputWrapper}>
+        <TextInput
+          onChangeText={this.handleOnChangeText}
+          style={styles.searchBarTextInput}
+          placeholder={this.props.translate('search')}
+          placeholderTextColor={colorPalette.grayText1}
+          value={this.state.query}
+          onBlur={this.handleOnBlur}
+        />
+        {this.state.loading && (
           <Spinner
             wrapperStyle={styles.searchBarSpinnerWrapper}
           />
           )}
-        </View>
-      );
-    };
+      </View>
+    );
 
     render() {
       const { shouldRender } = this.props;

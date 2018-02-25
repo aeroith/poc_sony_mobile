@@ -1,4 +1,4 @@
-import config from './config';
+import siteConfig from './siteConfig';
 
 const colorPalette = {
   themes: {
@@ -23,7 +23,7 @@ const colorPalette = {
         popular: '#4b7bec'
       },
       cyan1: '#39e0d5',
-      redBg: '#f02f27',
+      red: '#e50914',
       pinkBg: '#da287a',
       greenBg1: '#005d70',
       transparent: 'transparent',
@@ -33,5 +33,5 @@ const colorPalette = {
     return this.themes[themeName] || 'smcDark';
   }
 };
-const exportedTheme = colorPalette.getColors(config.UITheme);
+const exportedTheme = colorPalette.getColors(siteConfig.UITheme);
 export default exportedTheme;

@@ -26,25 +26,23 @@ export default class TabbedDatePickerContainer extends Component {
   static propTypes = {
     translate: PropTypes.func.isRequired
   };
-  constructor(props) {
-    super(props);
-    this.data = _times(30, (num) => {
-      if (num === 0) return { data: { dayOfWeek: this.props.translate('today') }, key: num.toString() };
-      if (num === 1) return { data: { dayOfWeek: this.props.translate('tomorrow') }, key: num.toString() };
-      const [dayOfWeek, dayNumber] = moment().add(num, 'days').format('ddd D').split(' ');
-      return {
-        data: {
-          dayOfWeek,
-          dayNumber,
-        },
-        key: num.toString(),
-      };
-    });
-  }
+  getDayOfWeek = (translateFn, momentDayOfWeek) => translateFn(`days.${momentDayOfWeek.toLowerCase()}`).substring(0, 3);
+  generateData = () => _times(30, (num) => {
+    if (num === 0) return { data: { dayOfWeek: this.props.translate('today') }, key: num.toString() };
+    if (num === 1) return { data: { dayOfWeek: this.props.translate('tomorrow') }, key: num.toString() };
+    const [dayOfWeek, dayNumber] = moment().add(num, 'days').format('ddd D').split(' ');
+    return {
+      data: {
+        dayOfWeek: this.getDayOfWeek(this.props.translate, dayOfWeek),
+        dayNumber,
+      },
+      key: num.toString(),
+    };
+  });
   render() {
     return (
       <View style={style.mainContainer}>
-        <TabbedDatePicker dates={this.data} {...this.props} />
+        <TabbedDatePicker dates={this.generateData()} {...this.props} />
       </View>
     );
   }
