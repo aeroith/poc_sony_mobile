@@ -1,8 +1,8 @@
 {
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 46128,
-  "expoServerNgrokUrl": "https://db-t5a.bugrauluyurt.poc-sony-mobile.exp.direct",
-  "packagerNgrokUrl": "https://packager.db-t5a.bugrauluyurt.poc-sony-mobile.exp.direct",
-  "ngrokPid": 46151
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }

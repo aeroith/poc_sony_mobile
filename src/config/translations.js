@@ -33,10 +33,10 @@ const translations = {
     menu: {
       sonycrimechannel: {
         programs: 'Shows',
-        tvguide: 'TV Guide',
+        tv_guide: 'TV Guide',
         galleries: 'Galleries',
         news: 'News',
-        gamesandmore: 'Games & More',
+        games_and_more: 'Games & More',
       }
     }
   },
@@ -71,10 +71,10 @@ const translations = {
     menu: {
       sonycrimechannel: {
         programs: 'Şovlar',
-        tvguide: 'Yayın Akışı',
+        tv_guide: 'Yayın Akışı',
         galleries: 'Galeriler',
         news: 'Haberler',
-        gamesandmore: 'Oyunlar ve Daha Fazlası',
+        games_and_more: 'Oyunlar ve Daha Fazlası',
       }
     }
   }

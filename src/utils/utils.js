@@ -1,5 +1,7 @@
 import { getDeviceCountry, getDeviceLocale } from 'react-native-device-info';
+import _find from 'lodash/find';
 import siteConfig from '../config/siteConfig';
+import routeMappings from '../config/routeMappings';
 
 export default class Utils {
   static getEnv() {
@@ -20,9 +22,10 @@ export default class Utils {
     const language = getDeviceLocale().split('-')[0];
     return { country, language };
   }
-  static getCurrentRouteName(navState) {
+  static getCurrentRoute(navState) {
     const navStackLength = navState ? navState.routes.length : 0;
     if (navStackLength === 0) return '';
-    return navState.routes[navStackLength - 1].routeName.toLowerCase();
+    const { routeName } = navState.routes[navStackLength - 1];
+    return _find(routeMappings, { routeName });
   }
 }
