@@ -37,6 +37,13 @@ const translations = {
         galleries: 'Galleries',
         news: 'News',
         gamesandmore: 'Games & More',
+      },
+      sonychannelturkiye: {
+        programs: 'Shows',
+        tvguide: 'TV Guide',
+        galleries: 'Galleries',
+        livefeed: 'Live Feed',
+        videos: 'Videos',
       }
     }
   },
@@ -75,6 +82,13 @@ const translations = {
         galleries: 'Galeriler',
         news: 'Haberler',
         gamesandmore: 'Oyunlar ve Daha Fazlası',
+      },
+      sonychannelturkiye: {
+        programs: 'Şovlar',
+        tvguide: 'Yayın Akışı',
+        galleries: 'Galeriler',
+        livefeed: 'Canlı Yayın',
+        videos: 'Videolar',
       }
     }
   }
