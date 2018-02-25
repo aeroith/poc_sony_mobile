@@ -103,15 +103,13 @@ class Carousel extends PureComponent {
         >
           {
             this.props.images.map(({ imageURL, id }) => (
-              <TouchableWithoutFeedback onPress={() => console.log('carousel pressed')} key={id + 2}>
+              <TouchableWithoutFeedback onPress={() => console.log('carousel pressed')} key={id}>
                 <View>
                   <Image
                     style={[styles.image, { width: this.state.layout.width }]}
                     source={{ uri: imageURL }}
-                    key={id}
                   />
                   <View
-                    key={id + 1}
                     style={[styles.innerFrame, { width: this.state.layout.width }]}
                   />
                 </View>

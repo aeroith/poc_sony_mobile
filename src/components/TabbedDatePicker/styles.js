@@ -67,6 +67,12 @@ const styles = StyleSheet.create({
   textDayNumberActive: {
     top: -1,
   },
+  touchable: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%'
+  }
 });
 
 export default styles;

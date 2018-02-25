@@ -59,21 +59,20 @@ export default class TabbedDatePicker extends Component {
 };
 
 const TabItem = ({ text, dayNumber, active, onPress, ...props }) => (
-  <View style={[styles.tabItem, active && styles.tabItemActive]} {...props}>
-    <TouchableOpacity
-      onPress={onPress}
-    >
-      <View>
-        <View style={styles.textContainer}>
-          <Text style={[styles.tabItemText, active && styles.tabItemTextActive]}>{text}</Text>
-          {dayNumber &&
-          <Text style={[styles.textDayNumber, active && styles.textDayNumberActive]}>
-            {dayNumber}
-          </Text>}
-        </View>
-      </View>
-    </TouchableOpacity>
-  </View>
+  <TouchableOpacity
+    key={`${dayNumber}${text}`}
+    style={[styles.tabItem, active && styles.tabItemActive]}
+    onPress={onPress}
+    {...props}
+  >
+    <View style={styles.textContainer}>
+      <Text style={[styles.tabItemText, active && styles.tabItemTextActive]}>{text}</Text>
+      {dayNumber &&
+      <Text style={[styles.textDayNumber, active && styles.textDayNumberActive]}>
+        {dayNumber}
+      </Text>}
+    </View>
+  </TouchableOpacity>
 );
 
 TabItem.propTypes = {

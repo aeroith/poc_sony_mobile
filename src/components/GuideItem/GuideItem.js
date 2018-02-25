@@ -86,15 +86,16 @@ export default class GuideItem extends PureComponent {
               </View>
             </View>
           </TouchableOpacity>
-          <View style={styles.guideItemNotificationContainer}>
-            <TouchableOpacity onPress={this.onNotificationIconPress}>
-              {
-                this.state.notificationEnabled ?
-                  <Icon name="ios-notifications-outline" size={30} style={styles.guideItemNotificationIcon} /> :
-                  <Icon name="ios-notifications-off-outline" size={30} style={styles.guideItemNotificationIcon} />
-              }
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            style={styles.guideItemNotificationContainer}
+            onPress={this.onNotificationIconPress}
+          >
+            {
+              this.state.notificationEnabled ?
+                <Icon name="ios-notifications-outline" size={30} style={styles.guideItemNotificationIcon} /> :
+                <Icon name="ios-notifications-off-outline" size={30} style={styles.guideItemNotificationIcon} />
+            }
+          </TouchableOpacity>
         </View>
       </View>
     );
