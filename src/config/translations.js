@@ -1,4 +1,7 @@
 const translations = {
+  default: {
+    sonycrimechannel: 'Sony Crime Channel',
+  },
   en: {
     welcome_text: 'Welcome to Sony Mobile Channel Project',
     navigate_to_counter: 'Navigate to Counter',
@@ -7,7 +10,6 @@ const translations = {
     increment_odd: 'Increment if odd',
     increment_async: 'Increment async',
     back: 'Back',
-    tvguide: 'TV Guide',
     counter: 'Counter',
     search: 'Search...',
     nextAiring_na: 'Next airing N/A',
@@ -28,7 +30,15 @@ const translations = {
       sat: 'Saturday',
       sun: 'Sunday',
     },
-    sonycrimechannel: 'Sony Crime Channel'
+    menu: {
+      sonycrimechannel: {
+        programs: 'Shows',
+        tvguide: 'TV Guide',
+        galleries: 'Galleries',
+        news: 'News',
+        gamesandmore: 'Games & More',
+      }
+    }
   },
   tr: {
     welcome_text: 'Sony Mobile Channel Projesine Hoşgeldiniz',
@@ -38,7 +48,6 @@ const translations = {
     increment_odd: 'Tekse artır',
     increment_async: 'Asenkron artır',
     back: 'Geri',
-    tvguide: 'Yayın Akışı',
     counter: 'Sayaç',
     search: 'Arama...',
     nextAiring_na: 'Bir sonraki yayın zamanı belirsiz',
@@ -59,6 +68,15 @@ const translations = {
       sat: 'Cumartesi',
       sun: 'Pazar',
     },
+    menu: {
+      sonycrimechannel: {
+        programs: 'Şovlar',
+        tvguide: 'Yayın Akışı',
+        galleries: 'Galeriler',
+        news: 'Haberler',
+        gamesandmore: 'Oyunlar ve Daha Fazlası',
+      }
+    }
   }
 };
 

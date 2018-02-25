@@ -4,17 +4,20 @@ import translations from '../../config/translations';
 
 const withTranslation = (ComponentRaw) => {
   class WrappedComponent extends Component {
+    getValue(key, language) {
+      let rootObj = translations[language || 'default'];
+      key.split('.').forEach((pathPart) => {
+        rootObj = rootObj[pathPart];
+      });
+      return rootObj || (language && this.getValue(key)) || key;
+    }
     render() {
       const translateFn = (key) => {
         const language = this.props.language && this.props.language.length > 0
           ? this.props.language
           : 'en';
         if (!key || key.length === 0 || typeof key !== 'string') return '';
-        let rootObj = translations[language || 'en'];
-        key.split('.').forEach((pathPart) => {
-          rootObj = rootObj[pathPart];
-        });
-        return rootObj || key;
+        return this.getValue(key, language);
       };
       return <ComponentRaw {...this.props} translate={translateFn} />;
     }

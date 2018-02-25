@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Image from '../../components/Image';
 import styles from './styles';
 import withTranslation from '../../hocs/Translation';
+import Utils from '../../utils/utils';
 
 @withTranslation
 @connect(state => ({
@@ -24,6 +25,7 @@ export default class MenuContent extends Component {
     channelLogo: PropTypes.string.isRequired,
     country: PropTypes.string.isRequired,
     menu: PropTypes.arrayOf(PropTypes.string),
+    translate: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -32,15 +34,15 @@ export default class MenuContent extends Component {
     menu: [],
   };
 
-  constructor(props) {
-    super(props);
-  }
+  handleMenuItemClick = (item) => {
+    console.log('Menu item clicked: ', item);
+  };
 
   render() {
     const {
-      channelLogo, translate, channelName, menu
+      channelLogo, channelName, menu, translate
     } = this.props;
-    console.log(channelLogo);
+    const routeName = Utils.getCurrentRouteName(this.props.navigation.state);
     return (
       <View style={styles.menuContentWrapper}>
         <MenuItem
@@ -54,9 +56,10 @@ export default class MenuContent extends Component {
             <MenuItem
               bordered
               touchable
-              text={{ content: translate(item) }}
+              style={[routeName === item && styles.selectedMenuItem]}
+              text={{ content: translate(`menu.${channelName}.${item}`) }}
               key={item + menu.indexOf(item)}
-              onPress={() => console.log('menu item clicked')}
+              onPress={() => this.handleMenuItemClick(item)}
             />
             ))}
         </ScrollView>
@@ -68,10 +71,12 @@ export default class MenuContent extends Component {
 const MenuItem = (props) => {
   const { image, text } = props;
   const activeOpacity = props.onPress ? 0.8 : 1;
+  const noop = () => {};
   return (
     <TouchableOpacity
       style={[styles.menuItemWrapper, props.style && props.style, props.bordered && styles.menuItemBordered]}
       activeOpacity={activeOpacity}
+      onPress={props.onPress || noop}
     >
       {props.image
       && Object.keys(props.image).length > 0
@@ -84,7 +89,7 @@ const MenuItem = (props) => {
 };
 
 MenuItem.propTypes = {
-  style: PropTypes.objectOf(PropTypes.any),
+  style: PropTypes.any,
   image: PropTypes.objectOf(PropTypes.any),
   text: PropTypes.objectOf(PropTypes.any).isRequired,
 };

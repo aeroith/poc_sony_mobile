@@ -12,12 +12,14 @@ import styles from './styles';
 import Search from '../Search/index';
 import { actions as searchBarActions } from '../../reducers/search';
 import { actions as drawerActions } from '../../reducers/drawer';
+import Utils from "../../utils/utils";
 
 @withTranslation
 @connect(
   state => ({
     isSearchBarVisible: state.search.isSearchBarVisible,
     isDrawerVisible: state.drawer.isDrawerVisible,
+    channelName: state.app.channelName,
   }),
   {
     setSearchBarState: searchBarActions.setSearchBarState,
@@ -30,13 +32,14 @@ export default class NavBar extends Component {
       setDrawerState: PropTypes.func.isRequired,
       setSearchBarState: PropTypes.func.isRequired,
       isDrawerVisible: PropTypes.bool.isRequired,
+      channelName: PropTypes.string.isRequired,
     };
 
     getNavHeader = () => {
-      const navStackLength = this.props.nav ? this.props.nav.routes.length : 0;
-      if (navStackLength === 0) return '';
-      const { routeName } = this.props.nav.routes[navStackLength - 1];
-      return this.props.translate(routeName.toLowerCase());
+      const routeName = Utils.getCurrentRouteName(this.props.nav);
+      return this.props.translate(this.props.channelName
+        ? `menu.${this.props.channelName}.${routeName}`
+        : '');
     };
 
     handleMenuButtonClick = () => {

@@ -32,5 +32,9 @@ const styles = StyleSheet.create({
   channelInfoText: {
     height: 40
   },
+  selectedMenuItem: {
+    borderRightColor: colorPalette.red,
+    borderRightWidth: 3,
+  },
 });
 export default styles;
