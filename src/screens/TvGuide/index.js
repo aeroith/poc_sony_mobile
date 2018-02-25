@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { View, PushNotificationIOS, TouchableOpacity, Text } from 'react-native';
 import PropTypes from 'prop-types';
-import Carousel from '../Carousel';
+import Carousel from '../../containers/Carousel/index';
 import styles from './styles';
-import TabbedDatePicker from '../TabbedDatePicker';
-import Guide from '../Guide';
-import withTranslation from '../../hocs/Translation';
-import withPushNotification from '../../hocs/WithPushNotification';
+import TabbedDatePicker from '../../containers/TabbedDatePicker/index';
+import Guide from '../../containers/Guide/index';
+import withTranslation from '../../hocs/Translation/index';
+import withPushNotification from '../../hocs/WithPushNotification/index';
 
 // called when user presses on the notification
 const onNotification = (notification) => {

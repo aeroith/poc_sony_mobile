@@ -63,6 +63,7 @@ export default class NavBar extends Component {
             <Search shouldRender={isSearchBarVisible} />
             <View style={[styles.linearGradientWrapper, isSearchBarVisible && styles.linearGradientWrapper__searchBarOpen]}>
               <TouchableOpacity
+                hitSlop={{ top: 10, right: 20, bottom: 20, left: 15 }}
                 onPress={this.handleMenuButtonClick}
                 style={styles.navBarButton}
                 activeOpacity={0.8}
@@ -71,6 +72,7 @@ export default class NavBar extends Component {
               </TouchableOpacity>
               <Text style={styles.navBarHeaderText}>{this.getNavHeader()}</Text>
               <TouchableOpacity
+                hitSlop={{ top: 10, right: 15, bottom: 20, left: 20 }}
                 onPress={this.handleSearchButtonClick}
                 style={styles.navBarButton}
                 activeOpacity={0.8}

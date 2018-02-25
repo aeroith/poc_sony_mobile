@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import styles from './styles';
-import withTranslation from '../../hocs/Translation';
+import withTranslation from '../../hocs/Translation/index';
 
 @withTranslation
 export default class News extends Component {

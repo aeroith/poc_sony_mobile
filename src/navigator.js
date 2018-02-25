@@ -1,10 +1,10 @@
 import { StackNavigator } from 'react-navigation';
 
-import TVGuide from './containers/TvGuide';
-import Programs from './containers/Programs';
-import Galleries from './containers/Galleries';
-import News from './containers/News';
-import GamesAndMore from './containers/GamesAndMore';
+import TVGuide from './screens/TvGuide';
+import Programs from './screens/Programs';
+import Galleries from './screens/Galleries';
+import News from './screens/News';
+import GamesAndMore from './screens/GamesAndMore';
 import Counter from './containers/Counter';
 
 const AppNavigator = new StackNavigator(
