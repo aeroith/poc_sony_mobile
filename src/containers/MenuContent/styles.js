@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   menuItemWrapper: {
     flexDirection: 'row',
     paddingBottom: 15,
-    paddingHorizontal: 15,
+    paddingHorizontal: 10,
   },
   menuItemBordered: {
     borderBottomColor: colorPalette.grayBg5,
@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
   },
   channelInfoImage: {
     width: 30,
-    height: 40
+    height: 40,
+    marginLeft: 15,
   },
   channelInfoText: {
     height: 40
