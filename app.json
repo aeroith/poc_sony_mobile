@@ -1,10 +1,10 @@
 {
-  "name": "RNBoilerplate",
-  "displayName": "RNBoilerplate",
+  "name": "SonyChannelMobile",
+  "displayName": "Sony Channel Mobile",
   "expo": {
-    "name": "RNBoilerplate",
-    "slug": "RNBoilerplate",
+    "name": "SonyChannelMobile",
+    "slug": "SonyChannelMobile",
     "sdkVersion": "24.0.0",
-    "appKey": "RNBoilerplate"
+    "appKey": "SonyChannelMobile"
   }
 }

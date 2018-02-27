@@ -1,4 +1,4 @@
-package com.rnboilerplate;
+package com.sony.channelmobile;
 
 import android.app.Application;
 
