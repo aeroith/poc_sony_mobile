@@ -3,4 +3,4 @@ import { AppRegistry } from 'react-native';
 // import Expo from 'expo';
 import App from './src';
 
-AppRegistry.registerComponent('RNBoilerplate', () => App);
+AppRegistry.registerComponent('SonyChannelMobile', () => App);
