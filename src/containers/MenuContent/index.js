@@ -55,8 +55,11 @@ export default class MenuContent extends Component {
           bordered
           style={styles.channelName}
           image={{
- uri: channelLogo, style: styles.channelInfoImage, height: 40, width: 30
-}}
+              uri: channelLogo,
+              style: styles.channelInfoImage,
+              height: 40,
+              width: 30
+          }}
           text={{ content: translate(channelName), style: styles.channelInfoText }}
         />
         <ScrollView>
@@ -88,6 +91,7 @@ const MenuItem = (props) => {
     >
       {props.image
       && Object.keys(props.image).length > 0
+      && props.image.uri.length > 0
       && <Image uri={image.uri} style={image.style} height={image.height} width={image.width} />}
       <Text style={[styles.menuItemText, props.text.style && props.text.style]}>
         {text.content}
