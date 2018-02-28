@@ -33,7 +33,7 @@ class ImageWrapper extends Component {
 
   calculateStyles = () => {
     const { height, width } = this.props;
-    // Converting to StyleSheet.create causes bugs
+    // Converting to StyleSheet.create causes bugs should be calculated while rendering
     return {
       imageStyles: { height, width },
       spinnerStyles: { top: height * 0.5, left: width * 0.5 }
