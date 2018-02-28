@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, TextInput, TouchableOpacity, Text, Image } from 'react-native';
+import { View, TextInput, TouchableOpacity, Text } from 'react-native';
+import Image from '../../components/Image';
 import _debounce from 'lodash/debounce';
 import Autocomplete from 'react-native-autocomplete-input';
 import moment from 'moment';
@@ -69,10 +70,11 @@ export default class Search extends Component {
           style={styles.searchBarAutocompleteItemWrapper}
           onPress={this.handleAutocompleteItemSelect(item)}
         >
-          {/* TODO: onLoad attribute should be put onto images with a spinner */}
           <Image
+            height={40}
+            width={30}
             style={styles.searchBarAutocompleteItemImage}
-            source={{ uri: item.tmdbImagePath || config.dummyImageUrl }}
+            uri={item.tmdbImagePath || config.dummyImageUrl}
           />
           <View style={styles.searchBarAutocompleteItemTextView}>
             <Text style={styles.searchBarAutocompleteItemText}>{item.Title}</Text>

@@ -50,7 +50,8 @@ class ImageWrapper extends Component {
         {isLoading && this.renderSpinner(spinnerStyles)}
         <AnimatableImage
           animation="fadeIn"
-          easing="ease-in-out-cubic"
+          easing="ease-in"
+          duration={300}
           source={{ uri: this.props.uri || config.dummyImageUrl }}
           style={[styles.image, isLoading && styles.imageLoading, imageStyles]}
           onLoad={this.handleOnLoad}

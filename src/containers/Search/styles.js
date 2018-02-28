@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
   searchBarAutocompleteItemImage: {
     height: 40,
     width: 30,
+    backgroundColor: colorPalette.dummyImageColor,
   },
   searchBarAutocompleteItemTextView: {
     flex: 1,
