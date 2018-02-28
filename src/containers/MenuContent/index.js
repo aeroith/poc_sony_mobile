@@ -54,7 +54,9 @@ export default class MenuContent extends Component {
         <MenuItem
           bordered
           style={styles.channelName}
-          image={{ uri: channelLogo, style: styles.channelInfoImage }}
+          image={{
+ uri: channelLogo, style: styles.channelInfoImage, height: 40, width: 30
+}}
           text={{ content: translate(channelName), style: styles.channelInfoText }}
         />
         <ScrollView>
@@ -86,7 +88,7 @@ const MenuItem = (props) => {
     >
       {props.image
       && Object.keys(props.image).length > 0
-      && <Image uri={image.uri} style={image.style} />}
+      && <Image uri={image.uri} style={image.style} height={image.height} width={image.width} />}
       <Text style={[styles.menuItemText, props.text.style && props.text.style]}>
         {text.content}
       </Text>
@@ -98,11 +100,13 @@ MenuItem.propTypes = {
   style: PropTypes.any,
   image: PropTypes.objectOf(PropTypes.any),
   text: PropTypes.objectOf(PropTypes.any).isRequired,
+  bordered: PropTypes.bool,
 };
 
 MenuItem.defaultProps = {
   image: {},
-  style: {}
+  style: {},
+  bordered: false,
 };
 
 export { MenuItem };

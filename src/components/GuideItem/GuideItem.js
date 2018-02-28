@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
-import { View, Text, Image, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
+import Image from '../Image';
 import styles from './styles';
 
 const moment = require('moment');
@@ -58,25 +59,27 @@ export default class GuideItem extends PureComponent {
   };
 
   render() {
-    const { image, title, note, timeStart, timeEnd, ...props } = this.props;
+    const {
+      image, title, note, timeStart, timeEnd, ...props
+    } = this.props;
     const startTime = moment.unix(timeStart).format('h:mma');
     const endTime = moment.unix(timeEnd).format('h:mma');
     return (
       <View {...props}>
-        <View style={styles.guideItemMainContainer}>
-          <TouchableOpacity
-            onPress={this.onContentPress}
-            style={styles.guideItemImageContainer}
-          >
+        <TouchableOpacity
+          onPress={this.onContentPress}
+          style={styles.guideItemMainContainer}
+          activeOpacity={0.8}
+        >
+          <View style={styles.guideItemImageContainer} >
             <Image
               style={styles.guideItemImage}
-              source={{ uri: image }}
+              uri={image}
+              width={100}
+              height={60}
             />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={this.onContentPress}
-            style={styles.guideItemContentContainer}
-          >
+          </View>
+          <View style={styles.guideItemContentContainer} >
             <View>
               <Text style={styles.guideItemTextTitle}>{title}</Text>
               {note && <Text style={styles.guideItemTextSubtitle}>{note}</Text>}
@@ -85,7 +88,7 @@ export default class GuideItem extends PureComponent {
                 <Text style={styles.guideItemTextAiring}>{`${startTime} - ${endTime}`}</Text>
               </View>
             </View>
-          </TouchableOpacity>
+          </View>
           <TouchableOpacity
             style={styles.guideItemNotificationContainer}
             onPress={this.onNotificationIconPress}
@@ -96,7 +99,7 @@ export default class GuideItem extends PureComponent {
                 <Icon name="ios-notifications-off-outline" size={30} style={styles.guideItemNotificationIcon} />
             }
           </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
       </View>
     );
   }

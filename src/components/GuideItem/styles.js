@@ -57,8 +57,6 @@ const styles = StyleSheet.create({
   },
   guideItemImage: {
     margin: 12.5,
-    width: 100,
-    height: 60
   },
   guideItemNotificationContainer: {
     justifyContent: 'center',
