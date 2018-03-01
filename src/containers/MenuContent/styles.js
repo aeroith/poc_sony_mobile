@@ -9,27 +9,28 @@ const styles = StyleSheet.create({
   },
   menuItemWrapper: {
     flexDirection: 'row',
-    paddingBottom: 15,
-    paddingHorizontal: 10,
+    alignContent: 'center',
+    paddingRight: 15,
+    paddingLeft: 20,
+    height: 50,
   },
   menuItemBordered: {
     borderBottomColor: colorPalette.grayBg5,
     borderBottomWidth: 2,
     borderStyle: 'solid',
   },
-  menuItemText: {
+  menuItemTextWrapper: {
     flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  menuItemText: {
     fontSize,
-    textAlignVertical: 'center',
-    paddingTop: fontSize / 1.2,
-    paddingHorizontal: 15,
     color: colorPalette.white,
   },
-  channelInfoImage: {
-    marginLeft: 15,
-  },
   channelInfoText: {
-    height: 40
+    paddingLeft: 15,
+    marginTop: -8,
   },
   selectedMenuItem: {
     borderRightColor: colorPalette.red,
