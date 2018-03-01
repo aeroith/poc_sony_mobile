@@ -26,6 +26,7 @@ const colorPalette = {
       red: '#e50914',
       pinkBg: '#da287a',
       greenBg1: '#005d70',
+      dummyImageColor: '#e0e0e0',
       transparent: 'transparent',
     },
   },

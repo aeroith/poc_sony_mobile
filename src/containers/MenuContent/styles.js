@@ -26,8 +26,6 @@ const styles = StyleSheet.create({
     color: colorPalette.white,
   },
   channelInfoImage: {
-    width: 30,
-    height: 40,
     marginLeft: 15,
   },
   channelInfoText: {
