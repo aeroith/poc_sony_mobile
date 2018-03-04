@@ -87,7 +87,7 @@ class Carousel extends PureComponent {
       return null;
     }
     const currentSelection = this.props.images[this.props.page];
-
+    const { translate } = this.props;
     return (
       <View style={styles.mainContainer} onLayout={this.onLayout}>
         <ScrollView
@@ -137,7 +137,7 @@ class Carousel extends PureComponent {
           <View style={[styles.subContainer, { width: this.state.layout.width }]}>
             <Text style={styles.subHeader}>{
               currentSelection.type === 'series' ?
-                `Season ${currentSelection.season} - Episode ${currentSelection.episode_number}` : ' '
+                `${translate('season')} ${currentSelection.season} - ${translate('episode')} ${currentSelection.episode_number}` : ' '
             }
             </Text>
             <Indicator activeIndex={this.props.page} count={this.state.numItems} />
