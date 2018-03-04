@@ -22,8 +22,7 @@ const actionsMap = {
 
 const setTvGuideResults = (channelId, timeStart, timeEnd) => (dispatch) => {
   dispatch({ type: actionTypes.REQUEST_TV_GUIDE });
-  console.log(`/channels/1/feeds?startTime=${timeStart}&endTime=${timeEnd}`);
-  return ApiClient.get(`/channels/1/feeds?startTime=${timeStart}&endTime=${timeEnd}`)
+  return ApiClient.get(`/channels/${channelId}/feeds?startTime=${timeStart}&endTime=${timeEnd}`)
     .then(response => dispatch({ type: actionTypes.RECEIVE_TV_GUIDE, guide: response.data.data }))
     .catch(error => dispatch({ type: actionTypes.ERROR_TV_GUIDE, error: error.request._response }));
 };
