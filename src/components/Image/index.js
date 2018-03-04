@@ -8,8 +8,12 @@ const ImageWrapper = props => (
 );
 
 ImageWrapper.propTypes = {
-  uri: PropTypes.string.isRequired,
+  uri: PropTypes.string,
   style: PropTypes.any.isRequired
+};
+
+ImageWrapper.defaultProps = {
+  uri: config.dummyImageUrl
 };
 
 export default ImageWrapper;

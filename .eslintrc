@@ -15,7 +15,8 @@
     "new-cap": [2, { "capIsNewExceptions": ["Map"] }],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/forbid-prop-types": 0,
-    "import/no-extraneous-dependencies": 0
+    "import/no-extraneous-dependencies": 0,
+    "camelcase": 0
   },
   "plugins": ["react"]
 }

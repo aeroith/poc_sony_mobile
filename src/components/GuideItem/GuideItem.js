@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
-import { View, Text, Image, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
+import Image from '../Image';
 import styles from './styles';
 
 const moment = require('moment');
@@ -70,7 +71,7 @@ export default class GuideItem extends PureComponent {
           >
             <Image
               style={styles.guideItemImage}
-              source={{ uri: image }}
+              uri={image}
             />
           </TouchableOpacity>
           <TouchableOpacity
