@@ -51,7 +51,6 @@ const actions = {
     ApiClientNew.get(`countries/${state.app.locale}`)
       .then((response) => {
         const data = response.data.data[0];
-        console.log('received data: ', data);
         dispatch({ type: actionTypes.CONFIG_RESPONSE, ...data });
       })
       .catch(error => dispatch({ type: actionTypes.CONFIG_ERROR, error }));
