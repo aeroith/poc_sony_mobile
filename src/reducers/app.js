@@ -1,4 +1,4 @@
-import ApiClient from '../utils/api-client';
+import { ApiClient } from '../utils/api-client';
 
 const actionTypes = {
   CONFIG_REQUEST: 'CONFIG_REQUEST',
@@ -46,6 +46,7 @@ const actions = {
     ApiClient.get(`config?country=${country.toUpperCase()}&_embed=channels`)
       .then((response) => {
         const data = response.data[0];
+        console.log('data: ', data);
         dispatch({ type: actionTypes.CONFIG_RESPONSE, ...data });
       })
       .catch(error => dispatch({ type: actionTypes.CONFIG_ERROR, error }));

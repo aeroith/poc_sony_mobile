@@ -1,4 +1,4 @@
-import ApiClient from '../utils/api-client';
+import { ApiClient } from '../utils/api-client';
 
 const actionTypes = {
   REQUEST_TV_GUIDE: 'REQUEST_TV_GUIDE',

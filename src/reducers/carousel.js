@@ -1,4 +1,4 @@
-import ApiClient from '../utils/api-client';
+import { ApiClient } from '../utils/api-client';
 
 const actionTypes = {
   REQUEST_FEATURED_PHOTOS: 'REQUEST_FEATURED_PHOTOS',
