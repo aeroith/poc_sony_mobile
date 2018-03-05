@@ -7,6 +7,7 @@ import drawer from './drawer';
 import carousel from './carousel';
 import tabbedDatePicker from './tabbedDatePicker';
 import guide from './guide';
+import notification from './notification';
 
 export default combineReducers({
   app,
@@ -17,4 +18,5 @@ export default combineReducers({
   carousel,
   tabbedDatePicker,
   guide,
+  notification,
 });

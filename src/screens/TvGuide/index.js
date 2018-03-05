@@ -6,27 +6,32 @@ import styles from './styles';
 import TabbedDatePicker from '../../containers/TabbedDatePicker/index';
 import Guide from '../../containers/Guide/index';
 import withTranslation from '../../hocs/Translation/index';
-import withPushNotification from '../../hocs/WithPushNotification/index';
+import PushNotification from '../../utils/push-notification';
 
 // called when user presses on the notification
 const onNotification = (notification) => {
   console.log('NOTIFICATION:', notification);
-
+  console.log(notification.data)
   // required on iOS only (see fetchCompletionHandler docs: https://facebook.github.io/react-native/docs/pushnotificationios.html)
   notification.finish(PushNotificationIOS.FetchResult.NoData);
 };
 
-@withPushNotification(onNotification)
 @withTranslation
 export default class TVGuide extends Component {
-  static propTypes = {
-    pushNotification: PropTypes.object.isRequired,
-  };
+  constructor(props) {
+    super(props);
+    this.pushNotification = new PushNotification(onNotification).init();
+  }
 
   sendNotification = () => {
-    this.props.pushNotification.localNotification({
-      message: 'You pushed the notification button!'
+    this.pushNotification.localNotificationSchedule({
+      message: 'You pushed the notification button!',
+      userInfo: {
+        id: 1,
+      },
+      date: new Date(Date.now() + (5 * 1000))
     });
+    this.pushNotification.cancelLocalNotifications({id: 2})
   };
 
   render() {

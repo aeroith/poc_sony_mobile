@@ -1,12 +1,14 @@
 import React from 'react';
-import { View, ScrollView, Animated } from 'react-native';
+import _some from 'lodash/some';
+import { View, ScrollView, Animated, PushNotificationIOS } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from './styles';
-import GuideItem from '../GuideItem';
+import GuideItem from '../../containers/GuideItem';
 import withLoadingBar from '../../hocs/WithLoadingBar';
 
-
-const Guide = ({ guide, translate, ...props }) => {
+const Guide = ({
+  guide, translate, notifications, ...props
+}) => {
   this.animVal = new Animated.Value(0);
   const onScroll = Animated.event([{ nativeEvent: { contentOffset: { x: this.animVal } } }]);
   return (
@@ -20,6 +22,7 @@ const Guide = ({ guide, translate, ...props }) => {
             guide.map(item => (
               <GuideItem
                 key={item.id}
+                id={item.id}
                 title={item.name}
                 type={item.type}
                 season={item.season}
@@ -28,6 +31,7 @@ const Guide = ({ guide, translate, ...props }) => {
                 name={item.episode_name}
                 timeStart={+item.start_time}
                 timeEnd={+item.end_time}
+                notificationActive={_some(notifications, x => x.id === item.id)}
                 translate={translate}
               />
             ))
@@ -41,6 +45,7 @@ const Guide = ({ guide, translate, ...props }) => {
 Guide.propTypes = {
   guide: PropTypes.array,
   translate: PropTypes.func.isRequired,
+  notifications: PropTypes.array.isRequired,
 };
 
 Guide.defaultProps = {

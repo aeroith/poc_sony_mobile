@@ -1,14 +1,16 @@
 import React, { PureComponent } from 'react';
-import { View, Text, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, Alert, PushNotificationIOS, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
 import Image from '../Image';
 import styles from './styles';
+import PushNotification from '../../utils/push-notification';
 
 const moment = require('moment');
 
 export default class GuideItem extends PureComponent {
   static propTypes = {
+    id: PropTypes.number.isRequired,
     image: PropTypes.string,
     title: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
@@ -18,6 +20,9 @@ export default class GuideItem extends PureComponent {
     timeStart: PropTypes.number.isRequired,
     timeEnd: PropTypes.number.isRequired,
     translate: PropTypes.func.isRequired,
+    setNotification: PropTypes.func.isRequired,
+    unsetNotification: PropTypes.func.isRequired,
+    notificationActive: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
@@ -28,19 +33,27 @@ export default class GuideItem extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.state = {
-      notificationEnabled: false,
-    };
     this.translate = this.props.translate;
+    this.pushNotification = new PushNotification(this.onNotification).init();
   }
 
-  onNotificationIconPress = () => (
-    this.state.notificationEnabled ?
-      this.setState({
-        notificationEnabled: false
-      }) :
-      this.notificationAlert()
-  );
+  onNotificationIconPress = () => {
+    if (this.props.notificationActive) {
+      this.props.unsetNotification(this.props.id);
+      this.pushNotification.cancelLocalNotifications({ id: this.props.id });
+    } else {
+      this.notificationAlert();
+    }
+  };
+
+  onNotification = (notification) => {
+    if (Platform.OS === 'ios') {
+      this.props.unsetNotification(notification.data.id);
+    } else {
+      this.props.unsetNotification(notification.id);
+    }
+    notification.finish(PushNotificationIOS.FetchResult.NoData);
+  };
 
   onContentPress = () => console.log('Guide Item Content Pressed');
 
@@ -52,16 +65,27 @@ export default class GuideItem extends PureComponent {
       [
         {
           text: translate('cancel'),
-          onPress: () => this.setState({
-            notificationEnabled: false
-          }),
+          onPress: () => {},
           style: 'cancel'
         },
         {
           text: translate('ok'),
-          onPress: () => this.setState({
-            notificationEnabled: true
-          }),
+          onPress: () => {
+            this.pushNotification.localNotificationSchedule({
+              id: this.props.id,
+              message: `${this.props.title} ${this.translate('notification_msg')}`,
+              date: new Date((this.props.timeStart - 600) * 1000),
+              userInfo: {
+                id: this.props.id
+              },
+            });
+            this.props.setNotification({
+              id: this.props.id,
+              title: this.props.title,
+              timeStart: this.props.timeStart,
+              timeEnd: this.props.timeEnd,
+            });
+          },
         },
       ],
       { cancellable: false }
@@ -115,7 +139,7 @@ export default class GuideItem extends PureComponent {
             onPress={this.onNotificationIconPress}
           >
             {
-              this.state.notificationEnabled ?
+              this.props.notificationActive ?
                 <Icon name="ios-notifications-outline" size={30} style={styles.guideItemNotificationIcon} /> :
                 <Icon name="ios-notifications-off-outline" size={30} style={styles.guideItemNotificationIcon} />
             }
