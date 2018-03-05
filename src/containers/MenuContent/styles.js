@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     borderRightWidth: 3,
   },
   menuSection: {
-    marginTop: 15,
+    margin: 0,
   },
   menuSectionHeader: {
     flex: 1,
@@ -55,7 +55,6 @@ const styles = StyleSheet.create({
     backgroundColor: colorPalette.grayBg5,
     paddingVertical: 12,
     paddingHorizontal: 20,
-    marginBottom: 10,
   },
   menuSectionHeaderText: {
     fontSize: 12,

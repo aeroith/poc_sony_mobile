@@ -40,7 +40,7 @@ export default class MenuContent extends Component {
     menu: [],
   };
 
-  static settings = ['language', 'country'];
+  static settings = ['settings'];
 
   handleMenuItemClick = (item, currentRouteName) => {
     const { routeName } = _find(routeMappings, { enum: item });
@@ -65,20 +65,27 @@ export default class MenuContent extends Component {
               height: 40,
               width: 30
           }}
-          text={{ contentLeft: channelName, style: styles.channelInfoText }}
+          text={{ content: channelName, style: styles.channelInfoText }}
         />
         <ScrollView>
           {/* Main menu*/}
           {menu.length > 0 && menu.map((item, index) => (
             <MenuItem
               bordered
-              isLastItem={index === menu.length - 1}
               style={[route.enum === item && styles.selectedMenuItem]}
-              text={{ contentLeft: translate(`menu.${channelEnum}.${item}`) }}
+              text={{ content: translate(`menu.${channelEnum}.${item}`) }}
               key={item + menu.indexOf(item)}
               onPress={() => this.handleMenuItemClick(item, route.routeName)}
             />
             ))}
+          {/* Navigations */}
+          {MenuContent.settings.map((settingEnum, index) => (<MenuItem
+            bordered
+            isLastItem={index === MenuContent.settings.length - 1}
+            key={`${settingEnum}_${index}`}
+            text={{ content: translate(settingEnum) }}
+            contentRight={<Icon name="settings" size={17} color={colorPalette.white} />}
+          />))}
           {/* Other channels section  */}
           <View style={styles.menuSection}>
             <View style={styles.menuSectionHeader}>
@@ -88,20 +95,9 @@ export default class MenuContent extends Component {
             {sisterChannels && sisterChannels.length > 0 && sisterChannels.map((channel, index) => (
               <MenuItem
                 key={`${channel.id}_${index}`}
-                text={{ contentLeft: channel.name }}
+                text={{ content: channel.name }}
               />
             ))}
-          </View>
-          {/* Settings section  */}
-          <View style={styles.menuSection}>
-            <View style={styles.menuSectionHeader}>
-              <Text style={styles.menuSectionHeaderText}>{translate('settings').toUpperCase()}</Text>
-              <Icon name="settings" size={17} color={colorPalette.white} />
-            </View>
-            {MenuContent.settings.map((settingEnum, index) => (<MenuItem
-              key={`${settingEnum}_${index}`}
-              text={{ contentLeft: translate(settingEnum), contentRight: this.props[settingEnum] }}
-            />))}
           </View>
 
         </ScrollView>
@@ -112,7 +108,7 @@ export default class MenuContent extends Component {
 }
 
 const MenuItem = (props) => {
-  const { image, text } = props;
+  const { image, text, contentRight } = props;
   const activeOpacity = props.onPress ? 0.8 : 1;
   const noop = () => {};
   return (
@@ -129,13 +125,11 @@ const MenuItem = (props) => {
       && Object.keys(props.image).length > 0
       && props.image.uri.length > 0
       && <Image uri={image.uri} style={image.style} height={image.height} width={image.width} />}
-      <View style={[styles.menuItemTextWrapper, text.contentRight && styles.menuItemTextWrapperMultipleText]}>
+      <View style={[styles.menuItemTextWrapper, contentRight && styles.menuItemTextWrapperMultipleText]}>
         <Text style={[styles.menuItemTextLeft, props.text.style && props.text.style]}>
-          {text.contentLeft}
+          {text.content}
         </Text>
-        {text.contentRight && (
-           <Text style={styles.menuItemTextRight}>{text.contentRight.toUpperCase()}</Text>
-        )}
+        {contentRight || null }
       </View>
 
     </TouchableOpacity>
