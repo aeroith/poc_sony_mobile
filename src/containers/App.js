@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { BackHandler, StatusBar, View } from 'react-native';
+import { BackHandler, StatusBar, View, AppState } from 'react-native';
 import { NavigationActions, addNavigationHelpers } from 'react-navigation/src/react-navigation';
 import OneSignal from 'react-native-onesignal';
 import { connect } from 'react-redux';
 import AppNavigator from '../navigator';
 import { addListener } from '../index';
 import { actions as appActions } from '../reducers/app';
+import { actions as notificationActions } from '../reducers/notification';
 import styles from './styles';
 import NavBar from './NavBar';
 import Menu from './Menu';
@@ -20,6 +21,7 @@ import Menu from './Menu';
   dispatch => ({
     dispatch,
     getConfig: country => dispatch(appActions.getConfig(country)),
+    clearNotification: () => dispatch(notificationActions.clearNotification()),
   }),
 )
 export default class App extends Component {
@@ -28,7 +30,15 @@ export default class App extends Component {
     nav: PropTypes.object.isRequired,
     locale: PropTypes.string.isRequired,
     getConfig: PropTypes.func.isRequired,
+    clearNotification: PropTypes.func.isRequired,
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      appState: AppState.currentState
+    };
+  }
 
   componentWillMount() {
     this.props.getConfig();
@@ -43,6 +53,7 @@ export default class App extends Component {
       this.props.dispatch(NavigationActions.back());
       return true;
     });
+    AppState.addEventListener('change', this.handleAppStateChange);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -53,11 +64,13 @@ export default class App extends Component {
 
   componentWillUnmount() {
     this.backHandler.remove();
+    AppState.removeEventListener('change', this.handleAppStateChange);
     OneSignal.removeEventListener('received', this.onReceived);
     OneSignal.removeEventListener('opened', this.onOpened);
     OneSignal.removeEventListener('registered', this.onRegistered);
     OneSignal.removeEventListener('ids', this.onIds);
   }
+
 
   onReceived = (notification) => {
     console.log('Notification received: ', notification);
@@ -76,6 +89,13 @@ export default class App extends Component {
 
   onIds = (device) => {
     console.log('Device info: ', device);
+  };
+
+  handleAppStateChange = (nextAppState) => {
+    if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+      this.props.clearNotification();
+    }
+    this.setState({ appState: nextAppState });
   };
 
   render() {

@@ -23,7 +23,6 @@ export default class GuideItem extends PureComponent {
     setNotification: PropTypes.func.isRequired,
     unsetNotification: PropTypes.func.isRequired,
     notificationActive: PropTypes.bool.isRequired,
-    clearNotification: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -36,17 +35,6 @@ export default class GuideItem extends PureComponent {
     super(props);
     this.translate = this.props.translate;
     this.pushNotification = new PushNotification(this.onNotification).init();
-    this.state = {
-      appState: AppState.currentState
-    };
-  }
-
-  componentDidMount() {
-    AppState.addEventListener('change', this.handleAppStateChange);
-  }
-
-  componentWillUnmount() {
-    AppState.removeEventListener('change', this.handleAppStateChange);
   }
 
   onContentPress = () => console.log('Guide Item Content Pressed');
@@ -63,17 +51,10 @@ export default class GuideItem extends PureComponent {
   onNotification = (notification) => {
     if (Platform.OS === 'ios') {
       this.props.unsetNotification(notification.data.id);
+      notification.finish(PushNotificationIOS.FetchResult.NoData);
     } else {
       this.props.unsetNotification(+notification.id);
     }
-    notification.finish(PushNotificationIOS.FetchResult.NoData);
-  };
-
-  handleAppStateChange = (nextAppState) => {
-    if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
-      this.props.clearNotification();
-    }
-    this.setState({ appState: nextAppState });
   };
 
   notificationAlert = () => {
