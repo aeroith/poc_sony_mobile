@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   menuItemWrapper: {
     flexDirection: 'row',
     alignContent: 'center',
-    paddingRight: 15,
+    paddingRight: 20,
     paddingLeft: 20,
     height: 50,
   },
@@ -21,10 +21,18 @@ const styles = StyleSheet.create({
   },
   menuItemTextWrapper: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
-  menuItemText: {
+  menuItemTextWrapperMultipleText: {
+    justifyContent: 'space-between',
+  },
+  menuItemTextLeft: {
+    fontSize,
+    color: colorPalette.white,
+  },
+  menuItemTextRight: {
     fontSize,
     color: colorPalette.white,
   },
@@ -37,16 +45,13 @@ const styles = StyleSheet.create({
     borderRightWidth: 3,
   },
   menuSection: {
-    borderColor: colorPalette.grayBg5,
-    borderBottomWidth: 2,
-    borderTopWidth: 2,
-    borderStyle: 'solid',
     marginTop: 15,
   },
   menuSectionHeader: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     backgroundColor: colorPalette.grayBg5,
     paddingVertical: 12,
     paddingHorizontal: 20,

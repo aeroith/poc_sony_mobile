@@ -17,6 +17,7 @@ import colorPalette from '../../config/colorPalette';
   channelName: state.app.channelName,
   connectedChannels: state.app.connectedChannels,
   channelLogo: state.app.channelLogo,
+  language: state.app.language,
   country: state.app.country,
   menu: state.app.menu,
 }))
@@ -38,6 +39,8 @@ export default class MenuContent extends Component {
     connectedChannels: [],
     menu: [],
   };
+
+  static settings = ['language', 'country'];
 
   handleMenuItemClick = (item, currentRouteName) => {
     const { routeName } = _find(routeMappings, { enum: item });
@@ -62,7 +65,7 @@ export default class MenuContent extends Component {
               height: 40,
               width: 30
           }}
-          text={{ content: channelName, style: styles.channelInfoText }}
+          text={{ contentLeft: channelName, style: styles.channelInfoText }}
         />
         <ScrollView>
           {/* Main menu*/}
@@ -71,7 +74,7 @@ export default class MenuContent extends Component {
               bordered
               isLastItem={index === menu.length - 1}
               style={[route.enum === item && styles.selectedMenuItem]}
-              text={{ content: translate(`menu.${channelEnum}.${item}`) }}
+              text={{ contentLeft: translate(`menu.${channelEnum}.${item}`) }}
               key={item + menu.indexOf(item)}
               onPress={() => this.handleMenuItemClick(item, route.routeName)}
             />
@@ -80,14 +83,25 @@ export default class MenuContent extends Component {
           <View style={styles.menuSection}>
             <View style={styles.menuSectionHeader}>
               <Text style={styles.menuSectionHeaderText}>{translate('other_channels').toUpperCase()}</Text>
-              <Icon name="globe" size={15} color={colorPalette.white} />
+              <Icon name="globe" size={17} color={colorPalette.white} />
             </View>
             {sisterChannels && sisterChannels.length > 0 && sisterChannels.map((channel, index) => (
               <MenuItem
                 key={`${channel.id}_${index}`}
-                text={{ content: channel.name }}
+                text={{ contentLeft: channel.name }}
               />
             ))}
+          </View>
+          {/* Settings section  */}
+          <View style={styles.menuSection}>
+            <View style={styles.menuSectionHeader}>
+              <Text style={styles.menuSectionHeaderText}>{translate('settings').toUpperCase()}</Text>
+              <Icon name="settings" size={17} color={colorPalette.white} />
+            </View>
+            {MenuContent.settings.map((settingEnum, index) => (<MenuItem
+              key={`${settingEnum}_${index}`}
+              text={{ contentLeft: translate(settingEnum), contentRight: this.props[settingEnum] }}
+            />))}
           </View>
 
         </ScrollView>
@@ -105,8 +119,8 @@ const MenuItem = (props) => {
     <TouchableOpacity
       style={[
           styles.menuItemWrapper,
+          props.bordered && !props.isLastItem && styles.menuItemBordered,
           props.style && props.style,
-          props.bordered && !props.isLastItem && styles.menuItemBordered
       ]}
       activeOpacity={activeOpacity}
       onPress={props.onPress || noop}
@@ -115,10 +129,13 @@ const MenuItem = (props) => {
       && Object.keys(props.image).length > 0
       && props.image.uri.length > 0
       && <Image uri={image.uri} style={image.style} height={image.height} width={image.width} />}
-      <View style={styles.menuItemTextWrapper}>
-        <Text style={[styles.menuItemText, props.text.style && props.text.style]}>
-          {text.content}
+      <View style={[styles.menuItemTextWrapper, text.contentRight && styles.menuItemTextWrapperMultipleText]}>
+        <Text style={[styles.menuItemTextLeft, props.text.style && props.text.style]}>
+          {text.contentLeft}
         </Text>
+        {text.contentRight && (
+           <Text style={styles.menuItemTextRight}>{text.contentRight.toUpperCase()}</Text>
+        )}
       </View>
 
     </TouchableOpacity>

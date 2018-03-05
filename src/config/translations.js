@@ -3,6 +3,8 @@ const translations = {
     sony_crime_channel: 'Sony Crime Channel',
   },
   en: {
+    language: 'Language',
+    country: 'Country',
     welcome_text: 'Welcome to Sony Mobile Channel Project',
     navigate_to_counter: 'Navigate to Counter',
     navigate_to_carousel: 'Navigate to Carousel',
@@ -27,6 +29,7 @@ const translations = {
     episode_short: 'E',
     tv: 'Series',
     movie: 'Movie',
+    settings: 'Settings',
     other_channels: 'Other Channels',
     days: {
       mon: 'Monday',
@@ -56,6 +59,8 @@ const translations = {
     }
   },
   tr: {
+    language: 'Dil',
+    country: 'Ülke',
     welcome_text: 'Sony Mobile Channel Projesine Hoşgeldiniz',
     navigate_to_counter: 'Sayaca git',
     navigate_to_carousel: 'Karusele git',
@@ -80,6 +85,7 @@ const translations = {
     episode_short: 'B',
     tv: 'Dizi',
     movie: 'Film',
+    settings: 'Ayarlar',
     other_channels: 'Diğer kanallar',
       days: {
       mon: 'Pazartesi',
