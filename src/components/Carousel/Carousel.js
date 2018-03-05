@@ -87,7 +87,7 @@ class Carousel extends PureComponent {
       return null;
     }
     const currentSelection = this.props.images[this.props.page];
-
+    const { translate } = this.props;
     return (
       <View style={styles.mainContainer} onLayout={this.onLayout}>
         <ScrollView
@@ -102,25 +102,26 @@ class Carousel extends PureComponent {
           onScroll={this.onScroll}
         >
           {
-            this.props.images.map(({ imageURL, id }) => (
-              <TouchableWithoutFeedback onPress={() => console.log('carousel pressed')} key={id}>
-                <View key={id + 1}>
-                  <Image
-                    style={[styles.image, { width: this.state.layout.width }]}
-                    source={{ uri: imageURL }}
-                  />
-                  <View
-                    style={[styles.innerFrame, { width: this.state.layout.width }]}
-                  />
-                </View>
-              </TouchableWithoutFeedback>
+            this.props.images
+              .map(({ global_image_url, id }) => (
+                <TouchableWithoutFeedback onPress={() => console.log('carousel pressed')} key={id}>
+                  <View key={id + 1}>
+                    <Image
+                      style={[styles.image, { width: this.state.layout.width }]}
+                      source={{ uri: global_image_url }}
+                    />
+                    <View
+                      style={[styles.innerFrame, { width: this.state.layout.width }]}
+                    />
+                  </View>
+                </TouchableWithoutFeedback>
             ))
           }
         </ScrollView>
         <View style={styles.contentContainer}>
           <View style={styles.mainHeaderContainer}>
-            <Text style={styles.mainHeader}>{currentSelection.Title}</Text>
-            {
+            <Text style={styles.mainHeader}>{currentSelection.name}</Text>
+            { currentSelection.tags &&
               currentSelection.tags
                 .slice(0, 2)
                 .map((tag, i) => (
@@ -134,7 +135,11 @@ class Carousel extends PureComponent {
             }
           </View>
           <View style={[styles.subContainer, { width: this.state.layout.width }]}>
-            <Text style={styles.subHeader}>{currentSelection.Note || ' '}</Text>
+            <Text style={styles.subHeader}>{
+              currentSelection.type === 'movie' ?
+                ' ' : `${translate('season')} ${currentSelection.season} - ${translate('episode')} ${currentSelection.episode_number}`
+            }
+            </Text>
             <Indicator activeIndex={this.props.page} count={this.state.numItems} />
           </View>
         </View>

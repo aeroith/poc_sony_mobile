@@ -26,7 +26,7 @@ export default class TabbedDatePicker extends Component {
       const timeEnd = momentNow.endOf('day').unix(Number);
       this.setState({ selected: index });
       this.props.setTime(timeStart, timeEnd);
-      this.props.setTvGuideResults(timeStart, timeEnd);
+      this.props.setTvGuideResults(1, timeStart, timeEnd);
     };
   }
 

@@ -6,7 +6,7 @@ import GuideItem from '../GuideItem';
 import withLoadingBar from '../../hocs/WithLoadingBar';
 
 
-const Guide = ({ guide, translate, lang, ...props }) => {
+const Guide = ({ guide, translate, ...props }) => {
   this.animVal = new Animated.Value(0);
   const onScroll = Animated.event([{ nativeEvent: { contentOffset: { x: this.animVal } } }]);
   return (
@@ -20,11 +20,14 @@ const Guide = ({ guide, translate, lang, ...props }) => {
             guide.map(item => (
               <GuideItem
                 key={item.id}
-                title={item.title}
-                image={item.imageURL}
-                note={item.note[lang]}
-                timeStart={item.timeStart}
-                timeEnd={item.timeEnd}
+                title={item.name}
+                type={item.type}
+                season={item.season}
+                episodeNumber={item.episode_number}
+                image={item.episode_image_url || item.image_url}
+                name={item.episode_name}
+                timeStart={+item.start_time}
+                timeEnd={+item.end_time}
                 translate={translate}
               />
             ))
@@ -38,7 +41,6 @@ const Guide = ({ guide, translate, lang, ...props }) => {
 Guide.propTypes = {
   guide: PropTypes.array,
   translate: PropTypes.func.isRequired,
-  lang: PropTypes.string.isRequired,
 };
 
 Guide.defaultProps = {

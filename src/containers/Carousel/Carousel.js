@@ -10,7 +10,7 @@ import withTranslation from '../../hocs/Translation';
 @withTranslation
 @connect(
   state => ({
-    images: state.carousel.images,
+    images: state.carousel.images.filter(x => x.global_image_url),
     page: state.carousel.page,
     isLoading: state.carousel.isLoading
   }),
@@ -24,7 +24,7 @@ export default class CarouselContainer extends Component {
   };
 
   componentDidMount() {
-    this.props.getFeaturedPhotos();
+    this.props.getFeaturedPhotos(1);
   }
 
   render() {
