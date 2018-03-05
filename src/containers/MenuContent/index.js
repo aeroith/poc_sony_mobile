@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import { connect } from 'react-redux';
 import _find from 'lodash/find';
 import Image from '../../components/Image';
@@ -9,6 +10,7 @@ import withTranslation from '../../hocs/Translation';
 import Utils from '../../utils/utils';
 import routeMappings from '../../config/routeMappings';
 import { resetAction } from '../../reducers/nav';
+import colorPalette from '../../config/colorPalette';
 
 @withTranslation
 @connect(state => ({
@@ -63,10 +65,10 @@ export default class MenuContent extends Component {
           text={{ content: channelName, style: styles.channelInfoText }}
         />
         <ScrollView>
+          {/* Main menu*/}
           {menu.length > 0 && menu.map((item, index) => (
             <MenuItem
               bordered
-              touchable
               isLastItem={index === menu.length - 1}
               style={[route.enum === item && styles.selectedMenuItem]}
               text={{ content: translate(`menu.${channelEnum}.${item}`) }}
@@ -74,8 +76,12 @@ export default class MenuContent extends Component {
               onPress={() => this.handleMenuItemClick(item, route.routeName)}
             />
             ))}
+          {/* Other channels section  */}
           <View style={styles.menuSection}>
-            <Text style={styles.menuSectionHeader}>{translate('other_channels').toUpperCase()}</Text>
+            <View style={styles.menuSectionHeader}>
+              <Text style={styles.menuSectionHeaderText}>{translate('other_channels').toUpperCase()}</Text>
+              <Icon name="globe" size={15} color={colorPalette.white} />
+            </View>
             {sisterChannels && sisterChannels.length > 0 && sisterChannels.map((channel, index) => (
               <MenuItem
                 key={`${channel.id}_${index}`}
@@ -97,7 +103,11 @@ const MenuItem = (props) => {
   const noop = () => {};
   return (
     <TouchableOpacity
-      style={[styles.menuItemWrapper, props.style && props.style, props.bordered && !props.isLastItem && styles.menuItemBordered]}
+      style={[
+          styles.menuItemWrapper,
+          props.style && props.style,
+          props.bordered && !props.isLastItem && styles.menuItemBordered
+      ]}
       activeOpacity={activeOpacity}
       onPress={props.onPress || noop}
     >

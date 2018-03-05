@@ -44,12 +44,20 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   menuSectionHeader: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     backgroundColor: colorPalette.grayBg5,
-    color: colorPalette.white,
     paddingVertical: 12,
-    paddingLeft: 20,
-    fontSize: 12,
+    paddingHorizontal: 20,
     marginBottom: 10,
   },
+  menuSectionHeaderText: {
+    fontSize: 12,
+    color: colorPalette.white,
+  },
+  menuSectionHeaderIcon: {
+
+  }
 });
 export default styles;
