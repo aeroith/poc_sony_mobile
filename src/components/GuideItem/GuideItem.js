@@ -93,7 +93,7 @@ export default class GuideItem extends PureComponent {
             if (Platform.OS === 'ios') {
               this.pushNotification.localNotificationSchedule({
                 message: `${this.props.title} ${this.translate('notification_msg')}`,
-                date: new Date(Date.now() + (10 * 1000)),
+                date: new Date((this.props.timeStart - 600) * 1000),
                 userInfo: {
                   id: this.props.id
                 },
