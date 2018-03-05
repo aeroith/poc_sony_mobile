@@ -14,6 +14,7 @@ const initialState = {
   channelLogo: '',
   language: '',
   country: '',
+  locale: '',
 };
 
 // Reducer - SearchBar
@@ -23,6 +24,7 @@ const actionsMap = {
     const { logo, menu, connected_channels: connectedChannels } = action.channels[0];
     return {
       ...state,
+      // channelName: action.channels.filter(channel => channel.id === action.default_channel).name,
       channelName: action.default_channel,
       connectedChannels,
       language: action.language,
@@ -41,13 +43,14 @@ const actionsMap = {
 
 // Actions - SearchBar
 const actions = {
-  getConfig: country => (dispatch) => {
+  getConfig: () => (dispatch, getState) => {
+    const state = getState();
     dispatch({ type: actionTypes.CONFIG_REQUEST });
-    // ApiClientNew.get()
-    ApiClient.get(`config?country=${country.toUpperCase()}&_embed=channels`)
+    ApiClientNew.get(`countries/${state.app.locale}`).then(response => console.log('new data: ', response.data.data[0]));
+    ApiClient.get(`config?country=${state.app.country.toUpperCase()}&_embed=channels`)
       .then((response) => {
         const data = response.data[0];
-        console.log('data: ', data);
+        console.log('old data: ', data);
         dispatch({ type: actionTypes.CONFIG_RESPONSE, ...data });
       })
       .catch(error => dispatch({ type: actionTypes.CONFIG_ERROR, error }));

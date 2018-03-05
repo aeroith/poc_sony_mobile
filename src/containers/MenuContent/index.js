@@ -53,13 +53,12 @@ export default class MenuContent extends Component {
       <View style={styles.menuContentWrapper}>
         <MenuItem
           bordered
-          style={styles.channelName}
           image={{
               uri: channelLogo,
               height: 40,
               width: 30
           }}
-          text={{ content: translate(channelName), style: styles.channelInfoText }}
+          text={{ content: channelName, style: styles.channelInfoText }}
         />
         <ScrollView>
           {menu.length > 0 && menu.map(item => (

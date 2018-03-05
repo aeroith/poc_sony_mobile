@@ -14,14 +14,17 @@ export default class Utils {
   }
   static getDeviceInfo(env) {
     if (env === 'development') {
+      const { defaultCountry: country, defaultLanguage: language } = siteConfig;
       return {
-        country: siteConfig.defaultCountry,
-        language: siteConfig.defaultLanguage
+        country,
+        language,
+        locale: `${language}_${country}`,
       };
     }
+    const deviceLocale = getDeviceLocale().replace('-', '_');
     const country = getDeviceCountry();
-    const language = getDeviceLocale().split('-')[0];
-    return { country, language };
+    const language = deviceLocale.split('_')[0];
+    return { country, language, locale: deviceLocale };
   }
   static getCurrentRoute(navState) {
     const navStackLength = navState ? navState.routes.length : 0;
