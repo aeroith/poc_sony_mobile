@@ -21,16 +21,18 @@ const initialState = {
 const actionsMap = {
   [actionTypes.CONFIG_REQUEST]: state => ({ ...state, configLoading: true, configError: null }),
   [actionTypes.CONFIG_RESPONSE]: (state, action) => {
-    const { logo, menu, connected_channels: connectedChannels } = action.channels[0];
+    const { logo, menu, name } = action.channels
+      .filter(channel => channel.id === action.default_channel)[0];
+    const [language, country] = action.locale.split('_');
     return {
       ...state,
-      // channelName: action.channels.filter(channel => channel.id === action.default_channel).name,
-      channelName: action.default_channel,
-      connectedChannels,
-      language: action.language,
+      channelName: name,
+      connectedChannels: action.channels,
       channelLogo: logo,
       menu,
-      country: action.country,
+      language,
+      country,
+      locale: action.locale,
       configLoading: true,
       configError: null,
     };
@@ -46,11 +48,10 @@ const actions = {
   getConfig: () => (dispatch, getState) => {
     const state = getState();
     dispatch({ type: actionTypes.CONFIG_REQUEST });
-    ApiClientNew.get(`countries/${state.app.locale}`).then(response => console.log('new data: ', response.data.data[0]));
-    ApiClient.get(`config?country=${state.app.country.toUpperCase()}&_embed=channels`)
+    ApiClientNew.get(`countries/${state.app.locale}`)
       .then((response) => {
-        const data = response.data[0];
-        console.log('old data: ', data);
+        const data = response.data.data[0];
+        console.log('received data: ', data);
         dispatch({ type: actionTypes.CONFIG_RESPONSE, ...data });
       })
       .catch(error => dispatch({ type: actionTypes.CONFIG_ERROR, error }));

@@ -44,4 +44,5 @@ export default class Utils {
     if (firstAirDate === lastAirDate) return `(${firstAirDate})`;
     return `(${firstAirDate} - ${lastAirDate})`;
   }
+  static getChannelEnum = channelName => channelName.toLowerCase().replace(/\s/g, '_')
 }

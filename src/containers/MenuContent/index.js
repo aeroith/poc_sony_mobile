@@ -24,7 +24,7 @@ export default class MenuContent extends Component {
     setDrawerState: PropTypes.func.isRequired,
     isLoading: PropTypes.bool,
     channelName: PropTypes.string.isRequired,
-    connectedChannels: PropTypes.arrayOf(PropTypes.string),
+    connectedChannels: PropTypes.arrayOf(PropTypes.object),
     channelLogo: PropTypes.string.isRequired,
     country: PropTypes.string.isRequired,
     menu: PropTypes.arrayOf(PropTypes.string),
@@ -49,6 +49,7 @@ export default class MenuContent extends Component {
       channelLogo, channelName, menu, translate
     } = this.props;
     const route = Utils.getCurrentRoute(this.props.navigation.state);
+    const channelEnum = Utils.getChannelEnum(channelName);
     return (
       <View style={styles.menuContentWrapper}>
         <MenuItem
@@ -66,7 +67,7 @@ export default class MenuContent extends Component {
               bordered
               touchable
               style={[route.enum === item && styles.selectedMenuItem]}
-              text={{ content: translate(`menu.${channelName}.${item}`) }}
+              text={{ content: translate(`menu.${channelEnum}.${item}`) }}
               key={item + menu.indexOf(item)}
               onPress={() => this.handleMenuItemClick(item, route.routeName)}
             />

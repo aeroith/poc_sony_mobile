@@ -6,8 +6,9 @@ const withTranslation = (ComponentRaw) => {
   class WrappedComponent extends Component {
     getValue(key, language) {
       let rootObj = translations[language || 'default'];
-      key.split('.').forEach((pathPart) => {
+      key.split('.').some((pathPart) => {
         rootObj = rootObj[pathPart];
+        return rootObj === undefined;
       });
       return rootObj || (language && this.getValue(key)) || key;
     }
@@ -16,7 +17,7 @@ const withTranslation = (ComponentRaw) => {
         const language = this.props.language && this.props.language.length > 0
           ? this.props.language
           : 'en';
-        if (!key || key.length === 0 || typeof key !== 'string') return '';
+        if (!key || key.length === 0 || typeof key !== 'string') return key;
         return this.getValue(key, language);
       };
       return <ComponentRaw {...this.props} translate={translateFn} />;
