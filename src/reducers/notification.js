@@ -21,7 +21,7 @@ const actionsMap = {
   }),
   [actionTypes.CLEAR_NOTIFICATION]: state => ({
     ...state,
-    notifications: state.notifications.filter(x => x.timeStart < moment().unix()),
+    notifications: state.notifications.filter(x => x.timeStart - 600 > moment().unix()),
   })
 };
 
