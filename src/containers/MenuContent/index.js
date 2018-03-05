@@ -46,10 +46,11 @@ export default class MenuContent extends Component {
 
   render() {
     const {
-      channelLogo, channelName, menu, translate
+      channelLogo, channelName, connectedChannels, menu, translate
     } = this.props;
     const route = Utils.getCurrentRoute(this.props.navigation.state);
     const channelEnum = Utils.getChannelEnum(channelName);
+    const sisterChannels = connectedChannels.filter(channel => channel.name !== channelName);
     return (
       <View style={styles.menuContentWrapper}>
         <MenuItem
@@ -62,17 +63,29 @@ export default class MenuContent extends Component {
           text={{ content: channelName, style: styles.channelInfoText }}
         />
         <ScrollView>
-          {menu.length > 0 && menu.map(item => (
+          {menu.length > 0 && menu.map((item, index) => (
             <MenuItem
               bordered
               touchable
+              isLastItem={index === menu.length - 1}
               style={[route.enum === item && styles.selectedMenuItem]}
               text={{ content: translate(`menu.${channelEnum}.${item}`) }}
               key={item + menu.indexOf(item)}
               onPress={() => this.handleMenuItemClick(item, route.routeName)}
             />
             ))}
+          <View style={styles.menuSection}>
+            <Text style={styles.menuSectionHeader}>{translate('other_channels').toUpperCase()}</Text>
+            {sisterChannels && sisterChannels.length > 0 && sisterChannels.map((channel, index) => (
+              <MenuItem
+                key={`${channel.id}_${index}`}
+                text={{ content: channel.name }}
+              />
+            ))}
+          </View>
+
         </ScrollView>
+
       </View>
     );
   }
@@ -84,7 +97,7 @@ const MenuItem = (props) => {
   const noop = () => {};
   return (
     <TouchableOpacity
-      style={[styles.menuItemWrapper, props.style && props.style, props.bordered && styles.menuItemBordered]}
+      style={[styles.menuItemWrapper, props.style && props.style, props.bordered && !props.isLastItem && styles.menuItemBordered]}
       activeOpacity={activeOpacity}
       onPress={props.onPress || noop}
     >
@@ -107,12 +120,14 @@ MenuItem.propTypes = {
   image: PropTypes.objectOf(PropTypes.any),
   text: PropTypes.objectOf(PropTypes.any).isRequired,
   bordered: PropTypes.bool,
+  isLastItem: PropTypes.bool,
 };
 
 MenuItem.defaultProps = {
   image: {},
   style: {},
   bordered: false,
+  isLastItem: false,
 };
 
 export { MenuItem };

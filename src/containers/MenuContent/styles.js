@@ -36,5 +36,20 @@ const styles = StyleSheet.create({
     borderRightColor: colorPalette.red,
     borderRightWidth: 3,
   },
+  menuSection: {
+    borderColor: colorPalette.grayBg5,
+    borderBottomWidth: 2,
+    borderTopWidth: 2,
+    borderStyle: 'solid',
+    marginTop: 15,
+  },
+  menuSectionHeader: {
+    backgroundColor: colorPalette.grayBg5,
+    color: colorPalette.white,
+    paddingVertical: 12,
+    paddingLeft: 20,
+    fontSize: 12,
+    marginBottom: 10,
+  },
 });
 export default styles;

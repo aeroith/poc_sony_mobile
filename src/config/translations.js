@@ -27,6 +27,7 @@ const translations = {
     episode_short: 'E',
     tv: 'Series',
     movie: 'Movie',
+    other_channels: 'Other Channels',
     days: {
       mon: 'Monday',
       tue: 'Tuesday',
@@ -79,6 +80,7 @@ const translations = {
     episode_short: 'B',
     tv: 'Dizi',
     movie: 'Film',
+    other_channels: 'Diğer kanallar',
       days: {
       mon: 'Pazartesi',
       tue: 'Salı',
