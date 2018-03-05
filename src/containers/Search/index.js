@@ -57,14 +57,13 @@ export default class Search extends Component {
       this.setState({ query: selectedItem.name, data: [] });
     };
 
-    getNextAiring = (nextAiring) => {
-      if (!nextAiring) return this.props.translate('nextAiring_na');
-      const momentTime = moment(nextAiring * 1000);
-      return momentTime.format(this.momentFormat);
+    getType = (typeEnum) => {
+      let translateKey = typeEnum || 'nextAiring_na';
+      return this.props.translate(translateKey);
     };
 
     handleRenderItem = (item) => {
-      const nextAiring = this.getNextAiring(item.nextAiring);
+      const itemType = this.getType(item.type);
       return (
         <TouchableOpacity
           style={styles.searchBarAutocompleteItemWrapper}
@@ -78,7 +77,7 @@ export default class Search extends Component {
           />
           <View style={styles.searchBarAutocompleteItemTextView}>
             <Text style={styles.searchBarAutocompleteItemText}>{item.name}</Text>
-            <Text style={styles.searchBarAutocompleteItemNextAiring}>{nextAiring}</Text>
+            <Text style={styles.searchBarAutocompleteItemNextAiring}>{`${itemType} ${item.dateRange}`}</Text>
           </View>
         </TouchableOpacity>
       );

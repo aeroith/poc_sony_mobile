@@ -1,5 +1,6 @@
 import { ApiClientNew } from '../utils/api-client';
 import TMDBClient from '../utils/tmdb-client';
+import utils from '../utils/utils';
 
 export default class SearchService {
   static getAutocompleteResults(query) {
@@ -23,6 +24,7 @@ export default class SearchService {
         return {
           ...data[index],
           tmdbImagePath,
+          dateRange: utils.getTMDBDateRange(item),
         };
       }))
       .catch(err => console.log(err));

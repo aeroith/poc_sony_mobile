@@ -21,6 +21,12 @@ const translations = {
     set_notification_extended: 'Remind me 10 minutes before the show starts',
     ok: 'OK',
     cancel: 'Cancel',
+    season: 'Season',
+    season_short: 'S',
+    episode: 'Episode',
+    episode_short: 'E',
+    tv: 'Series',
+    movie: 'Movie',
     days: {
       mon: 'Monday',
       tue: 'Tuesday',
@@ -67,7 +73,13 @@ const translations = {
     set_notification_extended: 'Program başlamadan 10 dakika önce beni uyar',
     ok: 'OK',
     cancel: 'İptal',
-    days: {
+    season: 'Sezon',
+    season_short: 'S',
+    episode: 'Bölüm',
+    episode_short: 'B',
+    tv: 'Dizi',
+    movie: 'Film',
+      days: {
       mon: 'Pazartesi',
       tue: 'Salı',
       wed: 'Çarşamba',

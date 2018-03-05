@@ -1,4 +1,4 @@
-import { ApiClient } from '../utils/api-client';
+import { ApiClientNew } from '../utils/api-client';
 
 const actionTypes = {
   REQUEST_FEATURED_PHOTOS: 'REQUEST_FEATURED_PHOTOS',
@@ -24,10 +24,10 @@ const actionsMap = {
 };
 
 const actions = {
-  getFeaturedPhotos: () => (dispatch) => {
+  getFeaturedPhotos: channelId => (dispatch) => {
     dispatch({ type: actionTypes.REQUEST_FEATURED_PHOTOS });
-    return ApiClient.get('/content?featured=true&_sort=id&_order=desc&_limit=5')
-      .then(response => dispatch({ type: actionTypes.RECEIVE_FEATURED_PHOTOS, images: response.data }))
+    return ApiClientNew.get(`/channels/${channelId}/programs/episodes?distinct=true&featured=true&sort=episode&limit=5`)
+      .then(response => dispatch({ type: actionTypes.RECEIVE_FEATURED_PHOTOS, images: response.data.data }))
       .catch(error => dispatch({ type: actionTypes.ERROR_FEATURED_PHOTOS, error: error.request._response }));
   },
   setCarouselPage: page => ({ type: actionTypes.SET_CAROUSEL_PAGE, page }),

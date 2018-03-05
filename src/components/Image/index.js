@@ -8,7 +8,7 @@ import styles from './styles';
 
 class ImageWrapper extends Component {
   static propTypes = {
-    uri: PropTypes.string.isRequired,
+    uri: PropTypes.string,
     height: PropTypes.number.isRequired,
     width: PropTypes.number.isRequired,
     style: PropTypes.any,
@@ -18,6 +18,7 @@ class ImageWrapper extends Component {
   static defaultProps = {
     wrapperStyle: {},
     style: {},
+    uri: config.dummyImageUrl,
   };
 
   constructor(props) {
