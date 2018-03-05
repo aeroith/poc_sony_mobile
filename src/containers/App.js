@@ -14,8 +14,7 @@ import Menu from './Menu';
 @connect(
   state => ({
     nav: state.nav,
-    country: state.app.country,
-    language: state.app.language,
+    locale: state.app.locale,
     configLoading: state.app.configLoading,
   }),
   dispatch => ({
@@ -27,13 +26,12 @@ export default class App extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     nav: PropTypes.object.isRequired,
-    country: PropTypes.string.isRequired,
+    locale: PropTypes.string.isRequired,
     getConfig: PropTypes.func.isRequired,
   };
 
   componentWillMount() {
-    const { country } = this.props;
-    if (country) this.props.getConfig(country);
+    this.props.getConfig();
     OneSignal.addEventListener('received', this.onReceived);
     OneSignal.addEventListener('opened', this.onOpened);
     OneSignal.addEventListener('registered', this.onRegistered);
@@ -48,8 +46,8 @@ export default class App extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.country && (nextProps.country !== this.props.country)) {
-      this.props.getConfig(nextProps.country);
+    if (nextProps.locale && (nextProps.locale !== this.props.locale)) {
+      this.props.getConfig();
     }
   }
 

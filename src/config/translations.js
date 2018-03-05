@@ -1,6 +1,6 @@
 const translations = {
   default: {
-    sonycrimechannel: 'Sony Crime Channel',
+    sony_crime_channel: 'Sony Crime Channel',
   },
   en: {
     welcome_text: 'Welcome to Sony Mobile Channel Project',
@@ -26,6 +26,8 @@ const translations = {
     season_short: 'S',
     episode: 'Episode',
     episode_short: 'E',
+    tv: 'Series',
+    movie: 'Movie',
     days: {
       mon: 'Monday',
       tue: 'Tuesday',
@@ -36,7 +38,7 @@ const translations = {
       sun: 'Sunday',
     },
     menu: {
-      sonycrimechannel: {
+      sony_crime_channel: {
         programs: 'Shows',
         tv_guide: 'TV Guide',
         galleries: 'Galleries',
@@ -44,7 +46,7 @@ const translations = {
         games_and_more: 'Games & More',
         gamesandmore: 'Games & More',
       },
-      sonychannelturkiye: {
+      sony_channel_turkiye: {
         programs: 'Shows',
         tvguide: 'TV Guide',
         galleries: 'Galleries',
@@ -77,7 +79,9 @@ const translations = {
     season_short: 'S',
     episode: 'Bölüm',
     episode_short: 'B',
-    days: {
+    tv: 'Dizi',
+    movie: 'Film',
+      days: {
       mon: 'Pazartesi',
       tue: 'Salı',
       wed: 'Çarşamba',
@@ -87,14 +91,14 @@ const translations = {
       sun: 'Pazar',
     },
     menu: {
-      sonycrimechannel: {
+      sony_crime_channel: {
         programs: 'Şovlar',
         tv_guide: 'Yayın Akışı',
         galleries: 'Galeriler',
         news: 'Haberler',
         gamesandmore: 'Oyunlar ve Daha Fazlası',
       },
-      sonychannelturkiye: {
+      sony_channel_turkiye: {
         programs: 'Şovlar',
         tv_guide: 'Yayın Akışı',
         galleries: 'Galeriler',
