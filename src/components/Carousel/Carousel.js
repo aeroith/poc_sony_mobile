@@ -136,8 +136,8 @@ class Carousel extends PureComponent {
           </View>
           <View style={[styles.subContainer, { width: this.state.layout.width }]}>
             <Text style={styles.subHeader}>{
-              currentSelection.type === 'series' ?
-                `${translate('season')} ${currentSelection.season} - ${translate('episode')} ${currentSelection.episode_number}` : ' '
+              currentSelection.type === 'movie' ?
+                ' ' : `${translate('season')} ${currentSelection.season} - ${translate('episode')} ${currentSelection.episode_number}`
             }
             </Text>
             <Indicator activeIndex={this.props.page} count={this.state.numItems} />

@@ -15,7 +15,6 @@ import withTranslation from '../../hocs/Translation';
     timeStart: state.tabbedDatePicker.timeStart,
     timeEnd: state.tabbedDatePicker.timeEnd,
     isLoading: state.guide.isLoading,
-    lang: state.app.lang,
   }),
   guideActions
 )
@@ -26,12 +25,10 @@ export default class GuideContainer extends Component {
     timeEnd: PropTypes.number.isRequired,
     isLoading: PropTypes.bool,
     translate: PropTypes.func.isRequired,
-    lang: PropTypes.string,
   };
 
   static defaultProps = {
     isLoading: false,
-    lang: siteConfig.defaultLanguage,
   };
 
   componentDidMount() {

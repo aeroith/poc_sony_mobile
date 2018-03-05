@@ -78,7 +78,9 @@ export default class GuideItem extends PureComponent {
   };
 
   render() {
-    const { image, title, name, timeStart, timeEnd, type, season, episodeNumber, ...props } = this.props;
+    const {
+      image, title, name, timeStart, timeEnd, type, season, episodeNumber, ...props
+    } = this.props;
     const startTime = moment.unix(timeStart).format('h:mma');
     const endTime = moment.unix(timeEnd).format('h:mma');
     return (

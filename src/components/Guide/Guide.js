@@ -41,7 +41,6 @@ const Guide = ({ guide, translate, ...props }) => {
 Guide.propTypes = {
   guide: PropTypes.array,
   translate: PropTypes.func.isRequired,
-  lang: PropTypes.string.isRequired,
 };
 
 Guide.defaultProps = {
