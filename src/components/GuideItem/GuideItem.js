@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, Text, TouchableOpacity, Alert, PushNotificationIOS, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, Alert, PushNotificationIOS, Platform, AppState } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
 import Image from '../Image';
@@ -23,6 +23,7 @@ export default class GuideItem extends PureComponent {
     setNotification: PropTypes.func.isRequired,
     unsetNotification: PropTypes.func.isRequired,
     notificationActive: PropTypes.bool.isRequired,
+    clearNotification: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -35,7 +36,20 @@ export default class GuideItem extends PureComponent {
     super(props);
     this.translate = this.props.translate;
     this.pushNotification = new PushNotification(this.onNotification).init();
+    this.state = {
+      appState: AppState.currentState
+    };
   }
+
+  componentDidMount() {
+    AppState.addEventListener('change', this.handleAppStateChange);
+  }
+
+  componentWillUnmount() {
+    AppState.removeEventListener('change', this.handleAppStateChange);
+  }
+
+  onContentPress = () => console.log('Guide Item Content Pressed');
 
   onNotificationIconPress = () => {
     if (this.props.notificationActive) {
@@ -50,12 +64,17 @@ export default class GuideItem extends PureComponent {
     if (Platform.OS === 'ios') {
       this.props.unsetNotification(notification.data.id);
     } else {
-      this.props.unsetNotification(notification.id);
+      this.props.unsetNotification(+notification.id);
     }
     notification.finish(PushNotificationIOS.FetchResult.NoData);
   };
 
-  onContentPress = () => console.log('Guide Item Content Pressed');
+  handleAppStateChange = (nextAppState) => {
+    if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
+      this.props.clearNotification();
+    }
+    this.setState({ appState: nextAppState });
+  };
 
   notificationAlert = () => {
     const { translate } = this.props;
@@ -71,14 +90,21 @@ export default class GuideItem extends PureComponent {
         {
           text: translate('ok'),
           onPress: () => {
-            this.pushNotification.localNotificationSchedule({
-              id: this.props.id,
-              message: `${this.props.title} ${this.translate('notification_msg')}`,
-              date: new Date((this.props.timeStart - 600) * 1000),
-              userInfo: {
-                id: this.props.id
-              },
-            });
+            if (Platform.OS === 'ios') {
+              this.pushNotification.localNotificationSchedule({
+                message: `${this.props.title} ${this.translate('notification_msg')}`,
+                date: new Date(Date.now() + (10 * 1000)),
+                userInfo: {
+                  id: this.props.id
+                },
+              });
+            } else {
+              this.pushNotification.localNotificationSchedule({
+                id: this.props.id.toString(),
+                message: `${this.props.title} ${this.translate('notification_msg')}`,
+                date: new Date((this.props.timeStart - 600) * 1000),
+              });
+            }
             this.props.setNotification({
               id: this.props.id,
               title: this.props.title,
