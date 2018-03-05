@@ -54,7 +54,7 @@ export default class Search extends Component {
     };
 
     handleAutocompleteItemSelect = selectedItem => () => {
-      this.setState({ query: selectedItem.Title, data: [] });
+      this.setState({ query: selectedItem.name, data: [] });
     };
 
     getNextAiring = (nextAiring) => {
@@ -77,7 +77,7 @@ export default class Search extends Component {
             uri={item.tmdbImagePath || config.dummyImageUrl}
           />
           <View style={styles.searchBarAutocompleteItemTextView}>
-            <Text style={styles.searchBarAutocompleteItemText}>{item.Title}</Text>
+            <Text style={styles.searchBarAutocompleteItemText}>{item.name}</Text>
             <Text style={styles.searchBarAutocompleteItemNextAiring}>{nextAiring}</Text>
           </View>
         </TouchableOpacity>
@@ -107,7 +107,7 @@ export default class Search extends Component {
           <Spinner
             wrapperStyle={styles.searchBarSpinnerWrapper}
           />
-          )}
+        )}
       </View>
     );
 
