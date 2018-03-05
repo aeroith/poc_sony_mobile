@@ -22,7 +22,9 @@ const translations = {
     ok: 'OK',
     cancel: 'Cancel',
     season: 'Season',
+    season_short: 'S',
     episode: 'Episode',
+    episode_short: 'E',
     days: {
       mon: 'Monday',
       tue: 'Tuesday',
@@ -70,7 +72,9 @@ const translations = {
     ok: 'OK',
     cancel: 'İptal',
     season: 'Sezon',
+    season_short: 'S',
     episode: 'Bölüm',
+    episode_short: 'B',
     days: {
       mon: 'Pazartesi',
       tue: 'Salı',

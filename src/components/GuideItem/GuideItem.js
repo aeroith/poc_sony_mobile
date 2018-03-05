@@ -11,7 +11,10 @@ export default class GuideItem extends PureComponent {
   static propTypes = {
     image: PropTypes.string,
     title: PropTypes.string.isRequired,
-    note: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    season: PropTypes.string.isRequired,
+    episodeNumber: PropTypes.string.isRequired,
     timeStart: PropTypes.number.isRequired,
     timeEnd: PropTypes.number.isRequired,
     translate: PropTypes.func.isRequired,
@@ -22,6 +25,7 @@ export default class GuideItem extends PureComponent {
     this.state = {
       notificationEnabled: false,
     };
+    this.translate = this.props.translate;
   }
 
   onNotificationIconPress = () => (
@@ -58,8 +62,17 @@ export default class GuideItem extends PureComponent {
     );
   };
 
+  renderNoteField = (type, name, season, episode_number) => {
+    if (!type || !name) return ' ';
+    if (type === 'movie' || !season || !episode_number) {
+      return name;
+    }
+    const normalize = field => (+field < 10 ? `0${field.toString()}` : field);
+    return `${this.translate('season_short')}${normalize(season)} ${this.translate('episode_short')}${normalize(episode_number)}: ${name}`;
+  };
+
   render() {
-    const { image, title, note, timeStart, timeEnd, ...props } = this.props;
+    const { image, title, name, timeStart, timeEnd, type, season, episodeNumber, ...props } = this.props;
     const startTime = moment.unix(timeStart).format('h:mma');
     const endTime = moment.unix(timeEnd).format('h:mma');
     return (
@@ -80,7 +93,9 @@ export default class GuideItem extends PureComponent {
           >
             <View>
               <Text style={styles.guideItemTextTitle}>{title}</Text>
-              {note && <Text style={styles.guideItemTextSubtitle}>{note}</Text>}
+              <Text style={styles.guideItemTextSubtitle}>
+                {this.renderNoteField(type, name, season, episodeNumber)}
+              </Text>
               <View style={styles.guideItemAiringContainer}>
                 <Icon name="ios-time-outline" size={12} style={styles.guideItemIconAiring} />
                 <Text style={styles.guideItemTextAiring}>{`${startTime} - ${endTime}`}</Text>

@@ -36,7 +36,7 @@ export default class GuideContainer extends Component {
 
   componentDidMount() {
     const { timeStart, timeEnd } = this.props;
-    this.props.setTvGuideResults(timeStart, timeEnd);
+    this.props.setTvGuideResults(1, timeStart, timeEnd);
   }
 
   render() {
