@@ -13,11 +13,17 @@ export default class GuideItem extends PureComponent {
     title: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    season: PropTypes.string.isRequired,
-    episodeNumber: PropTypes.string.isRequired,
+    season: PropTypes.number,
+    episodeNumber: PropTypes.number,
     timeStart: PropTypes.number.isRequired,
     timeEnd: PropTypes.number.isRequired,
     translate: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    season: null,
+    episodeNumber: null,
+    image: 'https://dummyimage.com/100x60/2d5d61/fff.png&text=Placeholder',
   };
 
   constructor(props) {
@@ -117,8 +123,3 @@ export default class GuideItem extends PureComponent {
     );
   }
 }
-
-GuideItem.defaultProps = {
-  image: 'https://dummyimage.com/100x60/2d5d61/fff.png&text=Placeholder',
-  note: undefined,
-};
