@@ -1,11 +1,11 @@
-import { ApiClientNew } from '../utils/api-client';
+import ApiClient from '../utils/api-client';
 import TMDBClient from '../utils/tmdb-client';
 import utils from '../utils/utils';
 
 export default class SearchService {
   static getAutocompleteResults(query) {
     const lowerCaseQuery = query.toLowerCase();
-    return ApiClientNew.get(`programs?q=${lowerCaseQuery}`)
+    return ApiClient.get(`programs?q=${lowerCaseQuery}`)
       // TODO: w92 should be taken from tmdb configuration
       .then(response => SearchService.getTMDBImages(response.data.data, 'w92'))
       .catch(err => console.log(err));

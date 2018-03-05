@@ -1,6 +1,5 @@
 const config = {
-  apiUrl: process.env.REACT_APP_API_URL || 'http://localhost:3005/',
-  apiUrlNew: process.env.REACT_APP_API_URL || 'http://localhost:1337/api/v1/',
+  apiUrl: process.env.REACT_APP_API_URL || 'http://localhost:1337/api/v1/',
   dummyImageUrl: 'https://dummyimage.com/50x50/e0e0e0/0011ff.png',
   tmdb: {
     baseUrl: 'https://api.themoviedb.org/3/',

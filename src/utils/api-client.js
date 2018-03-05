@@ -2,9 +2,9 @@ import axios from 'axios';
 import conf from '../config/config';
 
 class ApiClient {
-  constructor(isNew) {
+  constructor() {
     this.instance = axios.create({
-      baseURL: isNew ? conf.apiUrlNew : conf.apiUrl,
+      baseURL: conf.apiUrl,
       timeout: 10000,
     });
   }
@@ -22,9 +22,4 @@ class ApiClient {
   }
 }
 
-const apiClients = {
-  ApiClientNew: new ApiClient(true),
-  ApiClient: new ApiClient(),
-};
-
-module.exports = apiClients;
+module.exports = new ApiClient();

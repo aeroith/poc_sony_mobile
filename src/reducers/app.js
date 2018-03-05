@@ -1,4 +1,4 @@
-import { ApiClient, ApiClientNew } from '../utils/api-client';
+import ApiClient from '../utils/api-client';
 
 const actionTypes = {
   CONFIG_REQUEST: 'CONFIG_REQUEST',
@@ -48,7 +48,7 @@ const actions = {
   getConfig: () => (dispatch, getState) => {
     const state = getState();
     dispatch({ type: actionTypes.CONFIG_REQUEST });
-    ApiClientNew.get(`countries/${state.app.locale}`)
+    ApiClient.get(`countries/${state.app.locale}`)
       .then((response) => {
         const data = response.data.data[0];
         dispatch({ type: actionTypes.CONFIG_RESPONSE, ...data });
