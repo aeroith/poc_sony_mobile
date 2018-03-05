@@ -1,20 +1,21 @@
 import ApiClient from '../utils/api-client';
 import TMDBClient from '../utils/tmdb-client';
+import utils from '../utils/utils';
 
 export default class SearchService {
   static getAutocompleteResults(query) {
     const lowerCaseQuery = query.toLowerCase();
-    return ApiClient.get(`content?q=${lowerCaseQuery}`)
+    return ApiClient.get(`programs?q=${lowerCaseQuery}`)
       // TODO: w92 should be taken from tmdb configuration
-      .then(response => SearchService.getTMDBImages(response.data, 'w92'))
+      .then(response => SearchService.getTMDBImages(response.data.data, 'w92'))
       .catch(err => console.log(err));
   }
 
   static getTMDBImages(data, imageSize) {
     const promiseAllData = data.map(item => TMDBClient.get(
       'Details',
-      item.tmdbTypes ? item.tmdbTypes[0] : '',
-      item.tmdbID || ''
+      item.type || '',
+      item.tmdb_id || ''
     ));
     return Promise.all(promiseAllData)
       .then(items => items.map((item, index) => {
@@ -23,6 +24,7 @@ export default class SearchService {
         return {
           ...data[index],
           tmdbImagePath,
+          dateRange: utils.getTMDBDateRange(item),
         };
       }))
       .catch(err => console.log(err));

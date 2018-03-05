@@ -14,21 +14,25 @@ const initialState = {
   channelLogo: '',
   language: '',
   country: '',
+  locale: '',
 };
 
 // Reducer - SearchBar
 const actionsMap = {
   [actionTypes.CONFIG_REQUEST]: state => ({ ...state, configLoading: true, configError: null }),
   [actionTypes.CONFIG_RESPONSE]: (state, action) => {
-    const { logo, menu, connected_channels: connectedChannels } = action.channels[0];
+    const { logo, menu, name } = action.channels
+      .filter(channel => channel.id === action.default_channel)[0];
+    const [language, country] = action.locale.split('_');
     return {
       ...state,
-      channelName: action.default_channel,
-      connectedChannels,
-      language: action.language,
+      channelName: name,
+      connectedChannels: action.channels,
       channelLogo: logo,
       menu,
-      country: action.country,
+      language,
+      country,
+      locale: action.locale,
       configLoading: true,
       configError: null,
     };
@@ -41,11 +45,12 @@ const actionsMap = {
 
 // Actions - SearchBar
 const actions = {
-  getConfig: country => (dispatch) => {
+  getConfig: () => (dispatch, getState) => {
+    const state = getState();
     dispatch({ type: actionTypes.CONFIG_REQUEST });
-    ApiClient.get(`config?country=${country.toUpperCase()}&_embed=channels`)
+    ApiClient.get(`countries/${state.app.locale}`)
       .then((response) => {
-        const data = response.data[0];
+        const data = response.data.data[0];
         dispatch({ type: actionTypes.CONFIG_RESPONSE, ...data });
       })
       .catch(error => dispatch({ type: actionTypes.CONFIG_ERROR, error }));

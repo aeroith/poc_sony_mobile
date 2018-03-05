@@ -22,4 +22,4 @@ class ApiClient {
   }
 }
 
-export default new ApiClient();
+module.exports = new ApiClient();
