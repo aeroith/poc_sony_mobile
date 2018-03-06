@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
 import _find from 'lodash/find';
 import Image from '../../components/Image';
@@ -40,7 +40,11 @@ export default class MenuContent extends Component {
     menu: [],
   };
 
-  static settings = ['settings'];
+  static navigations = [
+    { text: 'settings', iconText: 'ios-settings-outline', },
+    { text: 'notifications', iconText: 'ios-notifications-outline', },
+    { text: 'other_channels', iconText: 'ios-globe-outline', },
+  ];
 
   handleMenuItemClick = (item, currentRouteName) => {
     const { routeName } = _find(routeMappings, { enum: item });
@@ -79,26 +83,25 @@ export default class MenuContent extends Component {
             />
             ))}
           {/* Navigations */}
-          {MenuContent.settings.map((settingEnum, index) => (<MenuItem
+          {MenuContent.navigations.map((navigationItem, index) => (<MenuItem
             bordered
-            isLastItem={index === MenuContent.settings.length - 1}
-            key={`${settingEnum}_${index}`}
-            text={{ content: translate(settingEnum) }}
-            contentRight={<Icon name="settings" size={17} color={colorPalette.white} />}
+            key={`${navigationItem.text}_${index}`}
+            text={{ content: translate(navigationItem.text) }}
+            contentRight={<Icon name={navigationItem.iconText} size={25} color={colorPalette.white} />}
           />))}
           {/* Other channels section  */}
-          <View style={styles.menuSection}>
-            <View style={styles.menuSectionHeader}>
-              <Text style={styles.menuSectionHeaderText}>{translate('other_channels').toUpperCase()}</Text>
-              <Icon name="globe" size={17} color={colorPalette.white} />
-            </View>
-            {sisterChannels && sisterChannels.length > 0 && sisterChannels.map((channel, index) => (
-              <MenuItem
-                key={`${channel.id}_${index}`}
-                text={{ content: channel.name }}
-              />
-            ))}
-          </View>
+          {/*<View style={styles.menuSection}>*/}
+            {/*<View style={styles.menuSectionHeader}>*/}
+              {/*<Text style={styles.menuSectionHeaderText}>{translate('other_channels').toUpperCase()}</Text>*/}
+              {/*<Icon name="globe" size={17} color={colorPalette.white} />*/}
+            {/*</View>*/}
+            {/*{sisterChannels && sisterChannels.length > 0 && sisterChannels.map((channel, index) => (*/}
+              {/*<MenuItem*/}
+                {/*key={`${channel.id}_${index}`}*/}
+                {/*text={{ content: channel.name }}*/}
+              {/*/>*/}
+            {/*))}*/}
+          {/*</View>*/}
 
         </ScrollView>
 

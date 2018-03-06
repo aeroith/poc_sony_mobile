@@ -30,6 +30,7 @@ const translations = {
     tv: 'Series',
     movie: 'Movie',
     settings: 'Settings',
+    notifications: 'Notifications',
     other_channels: 'Other Channels',
     days: {
       mon: 'Monday',
@@ -86,8 +87,9 @@ const translations = {
     tv: 'Dizi',
     movie: 'Film',
     settings: 'Ayarlar',
+    notifications: 'Bildirimler',
     other_channels: 'Diğer kanallar',
-      days: {
+    days: {
       mon: 'Pazartesi',
       tue: 'Salı',
       wed: 'Çarşamba',
