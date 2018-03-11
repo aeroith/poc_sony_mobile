@@ -41,9 +41,9 @@ export default class MenuContent extends Component {
   };
 
   static navigations = [
+    { text: 'other_channels', iconText: 'ios-globe-outline', },
     { text: 'settings', iconText: 'ios-settings-outline', },
     { text: 'notifications', iconText: 'ios-notifications-outline', },
-    { text: 'other_channels', iconText: 'ios-globe-outline', },
   ];
 
   handleMenuItemClick = (item, currentRouteName) => {
@@ -96,6 +96,16 @@ export default class MenuContent extends Component {
           text={{ content: channelName, style: styles.channelInfoText }}
         />
         <ScrollView>
+          {/* Main menu*/}
+          {menu.length > 0 && menu.map((item, index) => (
+            <MenuItem
+              bordered
+              style={[route.enum === item && styles.selectedMenuItem]}
+              text={{ content: translate(`menu.${channelEnum}.${item}`) }}
+              key={`${item}_${index}`}
+              onPress={() => this.handleMenuItemClick(item, route.routeName)}
+            />
+            ))}
           {/* Navigations */}
           {MenuContent.navigations.map((navigationItem, index) => (
             <MenuItem
@@ -106,16 +116,6 @@ export default class MenuContent extends Component {
             >
               {this.renderSubMenuItems(navigationItem.text)}
             </MenuItem>
-            ))}
-          {/* Main menu*/}
-          {menu.length > 0 && menu.map((item, index) => (
-            <MenuItem
-              bordered
-              style={[route.enum === item && styles.selectedMenuItem]}
-              text={{ content: translate(`menu.${channelEnum}.${item}`) }}
-              key={`${item}_${index}`}
-              onPress={() => this.handleMenuItemClick(item, route.routeName)}
-            />
             ))}
         </ScrollView>
 
@@ -131,6 +131,7 @@ class MenuItem extends Component {
     text: PropTypes.objectOf(PropTypes.any).isRequired,
     bordered: PropTypes.bool,
     isLastItem: PropTypes.bool,
+    childItem: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -138,6 +139,7 @@ class MenuItem extends Component {
     style: {},
     bordered: false,
     isLastItem: false,
+    childItem: false,
   };
 
   constructor(props) {
@@ -148,28 +150,13 @@ class MenuItem extends Component {
       menuItemChildrenOpacity: new Animated.Value(0),
     };
 
-    this.animation = {
-      open: Animated.parallel([
-        Animated.timing(this.state.menuItemChildrenHeight, {
-          toValue: 120,
-          duration: 200,
-          easing: Easing.linear
-        }),
-        Animated.timing(this.state.menuItemChildrenOpacity, {
-          toValue: 1,
-        }),
-      ]),
-      close: Animated.parallel([
-        Animated.timing(this.state.menuItemChildrenHeight, {
-          toValue: 0,
-          duration: 200,
-          easing: Easing.linear
-        }),
-        Animated.timing(this.state.menuItemChildrenOpacity, {
-          toValue: 0,
-        }),
-      ])
+    this.height = {
+      opened: { toValue: 100 }, // Default value set to 100
+      closed: { toValue: 0 },
     };
+
+    this.animationEasing = { duration: 200, easing: Easing.linear };
+    this.animation = {};
     this.noop = () => {};
   }
 
@@ -182,6 +169,27 @@ class MenuItem extends Component {
       this.animation.close.stop();
       this.animation.open.start();
     }
+  };
+
+  generateAnimationFunc = (childrenElements) => {
+    const childrenProps = childrenElements.props.children;
+    if (childrenProps.length > 0) {
+      let totalHeight = 0;
+      childrenProps.forEach((childrenProp) => {
+        totalHeight += (childrenProp.props.image ? 60 : 50);
+      });
+      this.height.opened.toValue = totalHeight;
+    }
+    this.animation = {
+      open: Animated.parallel([
+        Animated.timing(this.state.menuItemChildrenHeight, Object.assign({}, this.height.opened, this.animationEasing)),
+        Animated.timing(this.state.menuItemChildrenOpacity, { toValue: 1 }),
+      ]),
+      close: Animated.parallel([
+        Animated.timing(this.state.menuItemChildrenHeight, Object.assign({}, this.height.closed, this.animationEasing)),
+        Animated.timing(this.state.menuItemChildrenOpacity, { toValue: 0 }),
+      ])
+    };
   };
 
   generateOnPressFunc = () => {
@@ -198,6 +206,7 @@ class MenuItem extends Component {
     const onPressFn = this.generateOnPressFunc();
     const isBordered = bordered && !isLastItem;
     const activeOpacity = onPressFn ? 0.8 : 1;
+    if (children && Object.keys(this.animation).length === 0) this.generateAnimationFunc(children);
     return (
       <View>
         <TouchableOpacity
