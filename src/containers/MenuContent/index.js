@@ -4,6 +4,7 @@ import { View, Text, TouchableOpacity, ScrollView, Animated, Easing } from 'reac
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
 import _find from 'lodash/find';
+import _isBoolean from 'lodash/isBoolean';
 import Image from '../../components/Image';
 import styles from './styles';
 import withTranslation from '../../hocs/Translation';
@@ -46,6 +47,31 @@ export default class MenuContent extends Component {
     { text: 'notifications', iconText: 'ios-notifications-outline', },
   ];
 
+  constructor(props) {
+    super(props);
+    this.elReferences = [];
+  }
+
+  componentWillReceiveProps(nextProps, prevProps) {
+    const routeNames = {
+      prevRoute: '',
+      nextRoute: '',
+    };
+    Object.keys(routeNames).forEach((key) => {
+      const propsToSend = key === 'prevRoute' ? prevProps : nextProps;
+      routeNames[key] = this.getRouteName(propsToSend);
+    });
+    if (routeNames.prevRoute !== routeNames.nextRoute && this.elReferences.length > 0) {
+      this.elReferences.forEach(el => el.closeMenuItemChildren());
+    }
+  }
+
+  getRouteName = (props) => {
+    if (!props || !props.navigation) return '';
+    const { routes } = props.navigation.state;
+    return routes[routes.length - 1].routeName;
+  };
+
   handleMenuItemClick = (item, currentRouteName) => {
     const { routeName } = _find(routeMappings, { enum: item });
     if (currentRouteName !== routeName) {
@@ -76,6 +102,12 @@ export default class MenuContent extends Component {
         />))}
       </View>
     );
+  };
+
+  setMenuItemRef = (el) => {
+    if (el && el.props.children) {
+      this.elReferences.push(el);
+    }
   };
 
   render() {
@@ -109,6 +141,7 @@ export default class MenuContent extends Component {
           {/* Navigations */}
           {MenuContent.navigations.map((navigationItem, index) => (
             <MenuItem
+              ref={el => this.setMenuItemRef(el)}
               bordered
               key={`${navigationItem.text}_${index}`}
               text={{ content: translate(navigationItem.text) }}
@@ -160,15 +193,28 @@ class MenuItem extends Component {
     this.noop = () => {};
   }
 
-  toggleMenuItemChildren = () => {
-    this.setState({ isOpen: !this.state.isOpen });
-    if (this.state.isOpen) {
+  animateMenu = (type) => {
+    if (type === 'close') {
       this.animation.open.stop();
       this.animation.close.start();
-    } else {
+    } else if (type === 'open') {
       this.animation.close.stop();
       this.animation.open.start();
     }
+  };
+
+  toggleMenuItemChildren = () => {
+    this.setState({ isOpen: !this.state.isOpen });
+    if (this.state.isOpen) {
+      this.animateMenu('close');
+    } else {
+      this.animateMenu('open');
+    }
+  };
+
+  closeMenuItemChildren = () => {
+    this.setState({ isOpen: false });
+    this.animateMenu('close');
   };
 
   generateAnimationFunc = (childrenElements) => {
