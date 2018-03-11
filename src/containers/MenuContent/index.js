@@ -60,6 +60,7 @@ export default class MenuContent extends Component {
     const route = Utils.getCurrentRoute(this.props.navigation.state);
     const channelEnum = Utils.getChannelEnum(channelName);
     const sisterChannels = connectedChannels.filter(channel => channel.name !== channelName);
+    console.log('sisterChannels: ', sisterChannels);
     return (
       <View style={styles.menuContentWrapper}>
         <MenuItem
@@ -78,31 +79,34 @@ export default class MenuContent extends Component {
               bordered
               style={[route.enum === item && styles.selectedMenuItem]}
               text={{ content: translate(`menu.${channelEnum}.${item}`) }}
-              key={item + menu.indexOf(item)}
+              key={`${item}_${index}`}
               onPress={() => this.handleMenuItemClick(item, route.routeName)}
             />
             ))}
           {/* Navigations */}
-          {MenuContent.navigations.map((navigationItem, index) => (<MenuItem
-            bordered
-            key={`${navigationItem.text}_${index}`}
-            text={{ content: translate(navigationItem.text) }}
-            contentRight={<Icon name={navigationItem.iconText} size={25} color={colorPalette.white} />}
-          />))}
-          {/* Other channels section  */}
-          {/*<View style={styles.menuSection}>*/}
-            {/*<View style={styles.menuSectionHeader}>*/}
-              {/*<Text style={styles.menuSectionHeaderText}>{translate('other_channels').toUpperCase()}</Text>*/}
-              {/*<Icon name="globe" size={17} color={colorPalette.white} />*/}
-            {/*</View>*/}
-            {/*{sisterChannels && sisterChannels.length > 0 && sisterChannels.map((channel, index) => (*/}
-              {/*<MenuItem*/}
-                {/*key={`${channel.id}_${index}`}*/}
-                {/*text={{ content: channel.name }}*/}
-              {/*/>*/}
-            {/*))}*/}
-          {/*</View>*/}
-
+          {MenuContent.navigations.map((navigationItem, index) => (
+            <MenuItem
+              bordered
+              key={`${navigationItem.text}_${index}`}
+              text={{ content: translate(navigationItem.text) }}
+              contentRight={<Icon name={navigationItem.iconText} size={25} color={colorPalette.white} />}
+            >
+              {(navigationItem.text === 'other_channels' && sisterChannels.length > 0) ? (
+                <View>
+                  {sisterChannels.map((sisterChannel, indexSisterChannel) => (<MenuItem
+                    bordered
+                    key={`${sisterChannel.name}_${indexSisterChannel}`}
+                    image={{
+                        uri: sisterChannel.logo,
+                        height: 40,
+                        width: 30,
+                      }}
+                    text={{ content: sisterChannel.name, style: styles.channelInfoText }}
+                  />))}
+                </View>
+               ) : null }
+            </MenuItem>
+            ))}
         </ScrollView>
 
       </View>
@@ -112,30 +116,34 @@ export default class MenuContent extends Component {
 
 const MenuItem = (props) => {
   const { image, text, contentRight } = props;
+  const hasImage = props.image && Object.keys(props.image).length > 0 && props.image.uri.length > 0;
   const activeOpacity = props.onPress ? 0.8 : 1;
   const noop = () => {};
   return (
-    <TouchableOpacity
-      style={[
-          styles.menuItemWrapper,
-          props.bordered && !props.isLastItem && styles.menuItemBordered,
-          props.style && props.style,
-      ]}
-      activeOpacity={activeOpacity}
-      onPress={props.onPress || noop}
-    >
-      {props.image
-      && Object.keys(props.image).length > 0
-      && props.image.uri.length > 0
-      && <Image uri={image.uri} style={image.style} height={image.height} width={image.width} />}
-      <View style={[styles.menuItemTextWrapper, contentRight && styles.menuItemTextWrapperMultipleText]}>
-        <Text style={[styles.menuItemTextLeft, props.text.style && props.text.style]}>
-          {text.content}
-        </Text>
-        {contentRight || null }
-      </View>
+    <View>
+      <TouchableOpacity
+        style={[
+            styles.menuItemWrapper,
+            props.bordered && !props.isLastItem && styles.menuItemBordered,
+            props.style && props.style,
+            hasImage && styles.menuItemWrapperWithImage
+        ]}
+        activeOpacity={activeOpacity}
+        onPress={props.onPress || noop}
+      >
+        {hasImage && (
+          <Image uri={image.uri} style={image.style || {}} height={image.height} width={image.width} />
+        )}
+        <View style={[styles.menuItemTextWrapper, contentRight && styles.menuItemTextWrapperMultipleText]}>
+          <Text style={[styles.menuItemTextLeft, props.text.style && props.text.style]}>
+            {text.content}
+          </Text>
+          {contentRight || null }
+        </View>
 
-    </TouchableOpacity>
+      </TouchableOpacity>
+      { props.children || null }
+    </View>
   );
 };
 

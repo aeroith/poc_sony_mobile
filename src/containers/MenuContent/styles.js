@@ -9,10 +9,13 @@ const styles = StyleSheet.create({
   },
   menuItemWrapper: {
     flexDirection: 'row',
-    alignContent: 'center',
+    alignItems: 'center',
     paddingRight: 20,
     paddingLeft: 20,
     height: 50,
+  },
+  menuItemWrapperWithImage: {
+    height: 60,
   },
   menuItemBordered: {
     borderBottomColor: colorPalette.grayBg5,
@@ -38,7 +41,6 @@ const styles = StyleSheet.create({
   },
   channelInfoText: {
     paddingLeft: 15,
-    marginTop: -8,
   },
   selectedMenuItem: {
     borderRightColor: colorPalette.red,
