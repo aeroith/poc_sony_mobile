@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, Animated, Easing } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
 import _find from 'lodash/find';
@@ -63,12 +63,15 @@ export default class MenuContent extends Component {
       <View>
         {sisterChannels.map((sisterChannel, indexSisterChannel) => (<MenuItem
           bordered
+          childItem
+          isLastItem={indexSisterChannel === sisterChannels.length - 1}
           key={`${sisterChannel.name}_${indexSisterChannel}`}
           image={{
             uri: sisterChannel.logo,
             height: 40,
             width: 30,
           }}
+          style={styles.menuItemChildren}
           text={{ content: sisterChannel.name, style: styles.channelInfoText }}
         />))}
       </View>
@@ -93,16 +96,6 @@ export default class MenuContent extends Component {
           text={{ content: channelName, style: styles.channelInfoText }}
         />
         <ScrollView>
-          {/* Main menu*/}
-          {menu.length > 0 && menu.map((item, index) => (
-            <MenuItem
-              bordered
-              style={[route.enum === item && styles.selectedMenuItem]}
-              text={{ content: translate(`menu.${channelEnum}.${item}`) }}
-              key={`${item}_${index}`}
-              onPress={() => this.handleMenuItemClick(item, route.routeName)}
-            />
-            ))}
           {/* Navigations */}
           {MenuContent.navigations.map((navigationItem, index) => (
             <MenuItem
@@ -113,6 +106,16 @@ export default class MenuContent extends Component {
             >
               {this.renderSubMenuItems(navigationItem.text)}
             </MenuItem>
+            ))}
+          {/* Main menu*/}
+          {menu.length > 0 && menu.map((item, index) => (
+            <MenuItem
+              bordered
+              style={[route.enum === item && styles.selectedMenuItem]}
+              text={{ content: translate(`menu.${channelEnum}.${item}`) }}
+              key={`${item}_${index}`}
+              onPress={() => this.handleMenuItemClick(item, route.routeName)}
+            />
             ))}
         </ScrollView>
 
@@ -141,12 +144,44 @@ class MenuItem extends Component {
     super(props);
     this.state = {
       isOpen: false,
+      menuItemChildrenHeight: new Animated.Value(0),
+      menuItemChildrenOpacity: new Animated.Value(0),
+    };
+
+    this.animation = {
+      open: Animated.parallel([
+        Animated.timing(this.state.menuItemChildrenHeight, {
+          toValue: 120,
+          duration: 200,
+          easing: Easing.linear
+        }),
+        Animated.timing(this.state.menuItemChildrenOpacity, {
+          toValue: 1,
+        }),
+      ]),
+      close: Animated.parallel([
+        Animated.timing(this.state.menuItemChildrenHeight, {
+          toValue: 0,
+          duration: 200,
+          easing: Easing.linear
+        }),
+        Animated.timing(this.state.menuItemChildrenOpacity, {
+          toValue: 0,
+        }),
+      ])
     };
     this.noop = () => {};
   }
 
   toggleMenuItemChildren = () => {
     this.setState({ isOpen: !this.state.isOpen });
+    if (this.state.isOpen) {
+      this.animation.open.stop();
+      this.animation.close.start();
+    } else {
+      this.animation.close.stop();
+      this.animation.open.start();
+    }
   };
 
   generateOnPressFunc = () => {
@@ -157,26 +192,27 @@ class MenuItem extends Component {
 
   render() {
     const {
-      image, text, contentRight, bordered, isLastItem, style
+      image, text, contentRight, bordered, isLastItem, style, children, childItem
     } = this.props;
     const hasImage = image && Object.keys(image).length > 0 && image.uri.length > 0;
     const onPressFn = this.generateOnPressFunc();
+    const isBordered = bordered && !isLastItem;
     const activeOpacity = onPressFn ? 0.8 : 1;
     return (
       <View>
         <TouchableOpacity
           style={[
             styles.menuItemWrapper,
-            bordered && !isLastItem && styles.menuItemBordered,
+            isBordered && styles.menuItemBordered,
+            isBordered && childItem && styles.menuItemBorderedBlack,
             style && style,
+            this.state.isOpen && styles.menuItemChildrenOpen,
             hasImage && styles.menuItemWrapperWithImage
           ]}
           activeOpacity={activeOpacity}
           onPress={onPressFn}
         >
-          {hasImage && (
-          <Image uri={image.uri} style={image.style || {}} height={image.height} width={image.width} />
-                  )}
+          {hasImage && <Image uri={image.uri} style={image.style || {}} height={image.height} width={image.width} />}
           <View style={[styles.menuItemTextWrapper, contentRight && styles.menuItemTextWrapperMultipleText]}>
             <Text style={[styles.menuItemTextLeft, text.style && text.style]}>
               {text.content}
@@ -185,10 +221,10 @@ class MenuItem extends Component {
           </View>
 
         </TouchableOpacity>
-        {this.props.children && (
-          <View style={[styles.menuItemChildren, this.state.isOpen && styles.menuItemChildrenOpen]}>
-            {this.props.children}
-          </View>
+        {children && (
+          <Animated.View style={{ height: this.state.menuItemChildrenHeight, opacity: this.state.menuItemChildrenOpacity }}>
+            {children}
+          </Animated.View>
         )}
       </View>);
   }
