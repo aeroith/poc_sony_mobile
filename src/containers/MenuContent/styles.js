@@ -17,6 +17,15 @@ const styles = StyleSheet.create({
   menuItemWrapperWithImage: {
     height: 60,
   },
+  menuItemChildren: {
+    height: 0,
+    opacity: 0,
+    backgroundColor: colorPalette.grayBg4,
+  },
+  menuItemChildrenOpen: {
+    height: 120,
+    opacity: 1,
+  },
   menuItemBordered: {
     borderBottomColor: colorPalette.grayBg5,
     borderBottomWidth: 2,

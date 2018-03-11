@@ -53,14 +53,34 @@ export default class MenuContent extends Component {
     }
   };
 
+  renderSubMenuItems = (navigationItemText) => {
+    const { connectedChannels, channelName } = this.props;
+    const sisterChannels = connectedChannels
+      ? connectedChannels.filter(channel => channel.name !== channelName)
+      : [];
+    if (navigationItemText !== 'other_channels' || sisterChannels.length === 0) return null;
+    return (
+      <View>
+        {sisterChannels.map((sisterChannel, indexSisterChannel) => (<MenuItem
+          bordered
+          key={`${sisterChannel.name}_${indexSisterChannel}`}
+          image={{
+            uri: sisterChannel.logo,
+            height: 40,
+            width: 30,
+          }}
+          text={{ content: sisterChannel.name, style: styles.channelInfoText }}
+        />))}
+      </View>
+    );
+  };
+
   render() {
     const {
-      channelLogo, channelName, connectedChannels, menu, translate
+      channelLogo, channelName, menu, translate
     } = this.props;
     const route = Utils.getCurrentRoute(this.props.navigation.state);
     const channelEnum = Utils.getChannelEnum(channelName);
-    const sisterChannels = connectedChannels.filter(channel => channel.name !== channelName);
-    console.log('sisterChannels: ', sisterChannels);
     return (
       <View style={styles.menuContentWrapper}>
         <MenuItem
@@ -91,20 +111,7 @@ export default class MenuContent extends Component {
               text={{ content: translate(navigationItem.text) }}
               contentRight={<Icon name={navigationItem.iconText} size={25} color={colorPalette.white} />}
             >
-              {(navigationItem.text === 'other_channels' && sisterChannels.length > 0) ? (
-                <View>
-                  {sisterChannels.map((sisterChannel, indexSisterChannel) => (<MenuItem
-                    bordered
-                    key={`${sisterChannel.name}_${indexSisterChannel}`}
-                    image={{
-                        uri: sisterChannel.logo,
-                        height: 40,
-                        width: 30,
-                      }}
-                    text={{ content: sisterChannel.name, style: styles.channelInfoText }}
-                  />))}
-                </View>
-               ) : null }
+              {this.renderSubMenuItems(navigationItem.text)}
             </MenuItem>
             ))}
         </ScrollView>
@@ -114,52 +121,77 @@ export default class MenuContent extends Component {
   }
 }
 
-const MenuItem = (props) => {
-  const { image, text, contentRight } = props;
-  const hasImage = props.image && Object.keys(props.image).length > 0 && props.image.uri.length > 0;
-  const activeOpacity = props.onPress ? 0.8 : 1;
-  const noop = () => {};
-  return (
-    <View>
-      <TouchableOpacity
-        style={[
+class MenuItem extends Component {
+  static propTypes = {
+    style: PropTypes.any,
+    image: PropTypes.objectOf(PropTypes.any),
+    text: PropTypes.objectOf(PropTypes.any).isRequired,
+    bordered: PropTypes.bool,
+    isLastItem: PropTypes.bool,
+  };
+
+  static defaultProps = {
+    image: {},
+    style: {},
+    bordered: false,
+    isLastItem: false,
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen: false,
+    };
+    this.noop = () => {};
+  }
+
+  toggleMenuItemChildren = () => {
+    this.setState({ isOpen: !this.state.isOpen });
+  };
+
+  generateOnPressFunc = () => {
+    if (this.props.children) return this.toggleMenuItemChildren;
+    if (!this.props.onPress) return this.noop;
+    return this.props.onPress;
+  };
+
+  render() {
+    const {
+      image, text, contentRight, bordered, isLastItem, style
+    } = this.props;
+    const hasImage = image && Object.keys(image).length > 0 && image.uri.length > 0;
+    const onPressFn = this.generateOnPressFunc();
+    const activeOpacity = onPressFn ? 0.8 : 1;
+    return (
+      <View>
+        <TouchableOpacity
+          style={[
             styles.menuItemWrapper,
-            props.bordered && !props.isLastItem && styles.menuItemBordered,
-            props.style && props.style,
+            bordered && !isLastItem && styles.menuItemBordered,
+            style && style,
             hasImage && styles.menuItemWrapperWithImage
-        ]}
-        activeOpacity={activeOpacity}
-        onPress={props.onPress || noop}
-      >
-        {hasImage && (
+          ]}
+          activeOpacity={activeOpacity}
+          onPress={onPressFn}
+        >
+          {hasImage && (
           <Image uri={image.uri} style={image.style || {}} height={image.height} width={image.width} />
+                  )}
+          <View style={[styles.menuItemTextWrapper, contentRight && styles.menuItemTextWrapperMultipleText]}>
+            <Text style={[styles.menuItemTextLeft, text.style && text.style]}>
+              {text.content}
+            </Text>
+            {contentRight || null }
+          </View>
+
+        </TouchableOpacity>
+        {this.props.children && (
+          <View style={[styles.menuItemChildren, this.state.isOpen && styles.menuItemChildrenOpen]}>
+            {this.props.children}
+          </View>
         )}
-        <View style={[styles.menuItemTextWrapper, contentRight && styles.menuItemTextWrapperMultipleText]}>
-          <Text style={[styles.menuItemTextLeft, props.text.style && props.text.style]}>
-            {text.content}
-          </Text>
-          {contentRight || null }
-        </View>
-
-      </TouchableOpacity>
-      { props.children || null }
-    </View>
-  );
-};
-
-MenuItem.propTypes = {
-  style: PropTypes.any,
-  image: PropTypes.objectOf(PropTypes.any),
-  text: PropTypes.objectOf(PropTypes.any).isRequired,
-  bordered: PropTypes.bool,
-  isLastItem: PropTypes.bool,
-};
-
-MenuItem.defaultProps = {
-  image: {},
-  style: {},
-  bordered: false,
-  isLastItem: false,
-};
+      </View>);
+  }
+}
 
 export { MenuItem };
