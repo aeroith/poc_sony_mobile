@@ -9,15 +9,31 @@ const styles = StyleSheet.create({
   },
   menuItemWrapper: {
     flexDirection: 'row',
-    alignContent: 'center',
+    alignItems: 'center',
     paddingRight: 20,
     paddingLeft: 20,
     height: 50,
+    backgroundColor: colorPalette.grayBg4,
+  },
+  menuItemWrapperWithImage: {
+    height: 60,
+  },
+  menuItemChildren: {
+    backgroundColor: colorPalette.grayBg5,
+  },
+  menuItemChildrenOpen: {
+    shadowColor: 'black',
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 50 },
+    shadowOpacity: 1,
   },
   menuItemBordered: {
     borderBottomColor: colorPalette.grayBg5,
     borderBottomWidth: 2,
     borderStyle: 'solid',
+  },
+  menuItemBorderedBlack: {
+    borderBottomColor: colorPalette.grayBorder1,
   },
   menuItemTextWrapper: {
     flex: 1,
@@ -38,7 +54,6 @@ const styles = StyleSheet.create({
   },
   channelInfoText: {
     paddingLeft: 15,
-    marginTop: -8,
   },
   selectedMenuItem: {
     borderRightColor: colorPalette.red,

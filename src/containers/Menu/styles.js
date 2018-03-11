@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   drawer: {
     zIndex: zIndexDrawer,
     backgroundColor: colorPalette.grayBg4,
-    paddingTop: 30,
+    paddingTop: 20,
   },
   mask: {
     backgroundColor: 'black',

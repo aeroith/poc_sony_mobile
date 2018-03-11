@@ -12,6 +12,7 @@ const colorPalette = {
       grayBg3a: 'rgba(17,20,22,0.9)', // Header background - Gradient start
       grayBg4: '#1a1b1e', // Guide hours background
       grayBg5: '#141517', // Guide text background
+      grayBorder1: '#101112', // Child menu item border
       grayText1: '#8b8d91', // Tabs text color
       grayText2: '#3d4146', // Tabs sub-text color
       grayText3: '#2b2d31', // Tabs sub-text color
