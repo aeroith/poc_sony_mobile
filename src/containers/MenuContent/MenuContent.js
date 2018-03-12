@@ -4,6 +4,7 @@ import { View, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { connect } from 'react-redux';
 import _find from 'lodash/find';
+import _isObject from 'lodash/isObject';
 import styles from './styles';
 import MenuItem from './MenuItem';
 import withTranslation from '../../hocs/Translation';
@@ -25,6 +26,7 @@ export default class MenuContent extends Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired,
     setDrawerState: PropTypes.func.isRequired,
+    isDrawerVisible: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool,
     channelName: PropTypes.string.isRequired,
     connectedChannels: PropTypes.arrayOf(PropTypes.object),
@@ -51,17 +53,18 @@ export default class MenuContent extends Component {
     this.elReferences = [];
   }
 
-  componentWillReceiveProps(nextProps, prevProps) {
+  componentWillReceiveProps(nextProps) {
     const routeNames = {
       prevRoute: '',
       nextRoute: '',
     };
     Object.keys(routeNames).forEach((key) => {
-      const propsToSend = key === 'prevRoute' ? prevProps : nextProps;
+      const propsToSend = key === 'prevRoute' ? this.props : nextProps;
       routeNames[key] = this.getRouteName(propsToSend);
     });
-    if (routeNames.prevRoute !== routeNames.nextRoute && this.elReferences.length > 0) {
-      this.elReferences.forEach(el => el.closeMenuItemChildren());
+    if ((routeNames.prevRoute !== routeNames.nextRoute)
+        || (nextProps.isDrawerVisible !== this.props.isDrawerVisible)) {
+      this.closeMenuItemChildrenAll();
     }
   }
 
@@ -77,8 +80,14 @@ export default class MenuContent extends Component {
     return routes[routes.length - 1].routeName;
   };
 
+  closeMenuItemChildrenAll = () => {
+    if (this.elReferences && this.elReferences.length > 0) {
+      this.elReferences.forEach(el => el.closeMenuItemChildren());
+    }
+  };
+
   handleMenuItemClick = (item, currentRouteName) => {
-    const { routeName } = _find(routeMappings, { enum: item });
+    const { routeName } = _find(routeMappings, { enum: _isObject(item) ? item.text : item });
     if (currentRouteName !== routeName) {
       this.props.navigation.dispatch(resetAction(routeName, currentRouteName));
     }
@@ -141,7 +150,7 @@ export default class MenuContent extends Component {
           {menu.length > 0 && menu.map((item, index) => (
             <MenuItem
               bordered
-              style={[route.enum === item && styles.selectedMenuItem]}
+              isSelected={route.enum === item && styles.selectedMenuItem}
               text={{ content: translate(`menu.${channelEnum}.${item}`) }}
               key={`${item}_${index}`}
               onPress={() => this.handleMenuItemClick(item, route.routeName)}
@@ -152,10 +161,12 @@ export default class MenuContent extends Component {
             <MenuItem
               ref={el => this.setMenuItemRef(el)}
               bordered
+              isSelected={route.enum === navigationItem.text}
               key={`${navigationItem.text}_${index}`}
               text={{ content: translate(navigationItem.text) }}
               broadcastMenuItemOpened={this.handleBroadcastMenuItemOpened}
               contentRight={<Icon name={navigationItem.iconText} size={25} color={colorPalette.white} />}
+              onPress={() => this.handleMenuItemClick(navigationItem, route.routeName)}
             >
               {this.renderSubMenuItems(navigationItem.text)}
             </MenuItem>

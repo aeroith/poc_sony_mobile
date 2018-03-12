@@ -5,15 +5,19 @@ import Programs from './screens/Programs';
 import Galleries from './screens/Galleries';
 import News from './screens/News';
 import GamesAndMore from './screens/GamesAndMore';
+import Settings from './screens/Settings';
+import Notifications from './screens/Notifications';
 import Counter from './containers/Counter';
 
 const AppNavigator = new StackNavigator(
   {
-    TVGuide: { screen: TVGuide, enum: 'tv_guide' },
-    Programs: { screen: Programs, enum: 'programs' },
-    Galleries: { screen: Galleries, enum: 'galleries' },
-    News: { screen: News, enum: 'news' },
+    TVGuide: { screen: TVGuide },
+    Programs: { screen: Programs },
+    Galleries: { screen: Galleries },
+    News: { screen: News },
     GamesAndMore: { screen: GamesAndMore },
+    Settings: { screen: Settings },
+    Notifications: { screen: Notifications },
     Counter: { screen: Counter },
   },
   {

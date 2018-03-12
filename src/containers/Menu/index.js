@@ -62,6 +62,7 @@ export default class Menu extends Component {
     renderDrawerContent = navigation => (<MenuContent
       navigation={navigation}
       setDrawerState={this.props.setDrawerState}
+      isDrawerVisible={this.props.isDrawerVisible}
     />);
 
     render() {

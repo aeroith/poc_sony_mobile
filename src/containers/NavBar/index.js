@@ -38,6 +38,7 @@ export default class NavBar extends Component {
     getNavHeader = () => {
       const route = Utils.getCurrentRoute(this.props.nav);
       const channelEnum = Utils.getChannelEnum(this.props.channelName);
+      if (route.uniqueMenuItem) return this.props.translate(route.enum);
       return this.props.translate(this.props.channelName
         ? `menu.${channelEnum}.${route.enum}`
         : '');
