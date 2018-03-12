@@ -153,10 +153,18 @@ export default class GuideItem extends PureComponent {
             {
               this.props.notificationActive ?
                 <AnimatableView ref={this.setActiveIconRef}>
-                  <Icon name="ios-notifications" size={30} style={styles.guideItemNotificationIconActive} />
+                  {
+                    Platform.OS === 'ios' ?
+                      <Icon name="ios-notifications" size={30} style={styles.guideItemNotificationIconActive} /> :
+                      <Icon name="md-notifications" size={30} style={styles.guideItemNotificationIconActive} />
+                  }
                 </AnimatableView> :
                 <AnimatableView>
-                  <Icon name="ios-notifications-off-outline" size={30} style={styles.guideItemNotificationIcon} />
+                  {
+                    Platform.OS === 'ios' ?
+                      <Icon name="ios-notifications-off-outline" size={30} style={styles.guideItemNotificationIcon} /> :
+                      <Icon name="md-notifications-off" size={30} style={styles.guideItemNotificationIcon} />
+                  }
                 </AnimatableView>
             }
           </TouchableOpacity>
