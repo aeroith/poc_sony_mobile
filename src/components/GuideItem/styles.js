@@ -64,7 +64,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   guideItemNotificationIcon: {
-    color: colorPalette.white,
+    color: colorPalette.grayText1,
+  },
+  guideItemNotificationIconActive: {
+    color: '#FFC312',
   }
 });
 

@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
-import { View, Text, TouchableOpacity, Alert, PushNotificationIOS, Platform, AppState } from 'react-native';
+import { View, Text, TouchableOpacity, Alert, PushNotificationIOS, Platform } from 'react-native';
+import { View as AnimatableView } from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
 import Image from '../Image';
@@ -57,6 +58,9 @@ export default class GuideItem extends PureComponent {
     }
   };
 
+  setActiveIconRef = ref => this.activeIconRef = ref;
+
+
   notificationAlert = () => {
     const { translate } = this.props;
     return Alert.alert(
@@ -71,6 +75,13 @@ export default class GuideItem extends PureComponent {
         {
           text: translate('ok'),
           onPress: () => {
+            this.props.setNotification({
+              id: this.props.id,
+              title: this.props.title,
+              timeStart: this.props.timeStart,
+              timeEnd: this.props.timeEnd,
+            });
+            this.activeIconRef.shake(1000);
             if (Platform.OS === 'ios') {
               this.pushNotification.localNotificationSchedule({
                 message: `${this.props.title} ${this.translate('notification_msg')}`,
@@ -86,12 +97,6 @@ export default class GuideItem extends PureComponent {
                 date: new Date((this.props.timeStart - 600) * 1000),
               });
             }
-            this.props.setNotification({
-              id: this.props.id,
-              title: this.props.title,
-              timeStart: this.props.timeStart,
-              timeEnd: this.props.timeEnd,
-            });
           },
         },
       ],
@@ -147,8 +152,12 @@ export default class GuideItem extends PureComponent {
           >
             {
               this.props.notificationActive ?
-                <Icon name="ios-notifications-outline" size={30} style={styles.guideItemNotificationIcon} /> :
-                <Icon name="ios-notifications-off-outline" size={30} style={styles.guideItemNotificationIcon} />
+                <AnimatableView ref={this.setActiveIconRef}>
+                  <Icon name="ios-notifications" size={30} style={styles.guideItemNotificationIconActive} />
+                </AnimatableView> :
+                <AnimatableView>
+                  <Icon name="ios-notifications-off-outline" size={30} style={styles.guideItemNotificationIcon} />
+                </AnimatableView>
             }
           </TouchableOpacity>
         </TouchableOpacity>
