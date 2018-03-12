@@ -150,7 +150,7 @@ export default class MenuContent extends Component {
           {menu.length > 0 && menu.map((item, index) => (
             <MenuItem
               bordered
-              isSelected={route.enum === item && styles.selectedMenuItem}
+              isSelected={route.enum === item}
               text={{ content: translate(`menu.${channelEnum}.${item}`) }}
               key={`${item}_${index}`}
               onPress={() => this.handleMenuItemClick(item, route.routeName)}
