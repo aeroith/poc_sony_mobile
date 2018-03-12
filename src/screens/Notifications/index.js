@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
+import NotificationItem from '../../containers/NotificationItem';
 import styles from './styles';
 import withTranslation from '../../hocs/Translation/index';
 
@@ -13,7 +14,10 @@ export default class Notifications extends Component {
 
   render() {
     return (
-      <View style={styles.container} />
+      <View style={styles.container}>
+        <View style={styles.emptyContainer} />
+        <NotificationItem />
+      </View>
     );
   }
 }

@@ -80,6 +80,7 @@ export default class GuideItem extends PureComponent {
               title: this.props.title,
               timeStart: this.props.timeStart,
               timeEnd: this.props.timeEnd,
+              repeated: false,
             });
             this.activeIconRef.shake(1000);
             if (Platform.OS === 'ios') {

@@ -42,6 +42,7 @@ const translations = {
       sat: 'Saturday',
       sun: 'Sunday',
     },
+    every: 'Every',
     menu: {
       sony_crime_channel: {
         programs: 'Shows',
@@ -100,6 +101,7 @@ const translations = {
       sat: 'Cumartesi',
       sun: 'Pazar',
     },
+    every: 'Her',
     menu: {
       sony_crime_channel: {
         programs: 'Şovlar',
