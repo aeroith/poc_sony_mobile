@@ -1,9 +1,13 @@
 import React, { PureComponent } from 'react';
 import { View, Text, TouchableOpacity, Animated, PanResponder, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import PushNotification from '../../utils/push-notification';
 import styles from './styles';
 import ImageWrapper from '../Image';
+
 const moment = require('moment');
+
+const screenWidth = Dimensions.get('window').width;
 
 class NotificationItem extends PureComponent {
   constructor(props) {
@@ -11,17 +15,21 @@ class NotificationItem extends PureComponent {
     this.translateX = new Animated.Value(0);
     this.translate = this.props.translate;
     this.momentFormat = 'kk:mm';
+    this.pushNotification = new PushNotification(this.onNotification).init();
     this.panResponder = PanResponder.create({
       onMoveShouldSetResponderCapture: () => true,
       onMoveShouldSetPanResponderCapture: () => true,
       onPanResponderMove: Animated.event([null, { dx: this.translateX }]),
       onPanResponderRelease: (e, { vx, dx }) => {
-        const screenWidth = Dimensions.get('window').width;
         if (Math.abs(vx) >= 0.5 || Math.abs(dx) >= 0.5 * screenWidth) {
           Animated.timing(this.translateX, {
             toValue: dx > 0 ? screenWidth : -screenWidth,
             duration: 200
-          }).start(() => console.log('dismissed'));
+          }).start(() => {
+            this.props.unsetNotification(this.props.id);
+            this.pushNotification.cancelLocalNotifications({ id: this.props.id });
+            this.props.onDismiss();
+          });
         } else {
           Animated.spring(this.translateX, {
             toValue: 0,
@@ -62,7 +70,7 @@ class NotificationItem extends PureComponent {
                     this.props.timeStart,
                     this.props.timeEnd,
                     this.props.repeated,
-                    this.props.repeatInterval
+                    this.props.repeatInterval,
                   )}
                 </Text>
               </View>

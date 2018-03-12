@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { View, ScrollView, Animated } from 'react-native';
+import { View, ScrollView, Animated, UIManager, LayoutAnimation } from 'react-native';
 import NotificationItem from '../../containers/NotificationItem';
 import styles from './styles';
 import { actions as notificationActions } from '../../reducers/notification';
@@ -23,7 +23,12 @@ export default class Notifications extends Component {
   constructor(props) {
     super(props);
     this.animVal = new Animated.Value(0);
+    if (UIManager.setLayoutAnimationEnabledExperimental) {
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
   }
+
+  onDismiss = () => LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
 
   onScroll = Animated.event([{ nativeEvent: { contentOffset: { x: this.animVal } } }]);
 
@@ -55,6 +60,8 @@ export default class Notifications extends Component {
                   season={season}
                   repeated={repeated}
                   translate={this.props.translate}
+                  unsetNotification={this.props.unsetNotification}
+                  onDismiss={this.onDismiss}
                 />
               );
             })
