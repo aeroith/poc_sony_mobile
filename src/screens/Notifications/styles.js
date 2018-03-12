@@ -13,6 +13,14 @@ const styles = StyleSheet.create({
     flexShrink: 0,
     borderBottomColor: colorPalette.red,
     borderBottomWidth: 2,
+  },
+  notificationItem: {
+    height: 80,
+    backgroundColor: colorPalette.grayBg5,
+    borderBottomWidth: 0.5,
+    borderTopWidth: 0.5,
+    borderBottomColor: colorPalette.grayText3,
+    borderTopColor: colorPalette.grayText3
   }
 });
 export default styles;

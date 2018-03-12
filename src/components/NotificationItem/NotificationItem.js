@@ -28,8 +28,8 @@ class NotificationItem extends PureComponent {
           <TouchableOpacity activeOpacity={0.8} style={styles.iconContainer}>
             <Icon style={styles.moreIcon} name="md-more" size={30} />
           </TouchableOpacity>
-          <View style={styles.hiddenDeleteMenu} />
         </Animated.View>
+        <View style={styles.hiddenDeleteMenu} />
       </View>
     );
   }

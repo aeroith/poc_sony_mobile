@@ -7,7 +7,7 @@ class NotificationItemContainer extends Component {
   render() {
     return (
       <View {...this.props}>
-        <NotificationItem style={styles.container} {...this.props} />
+        <NotificationItem {...this.props} />
       </View>
     );
   }
