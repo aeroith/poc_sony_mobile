@@ -86,7 +86,7 @@ export default class GuideItem extends PureComponent {
               timeEnd: this.props.timeEnd,
               repeated: false,
             });
-            this.activeIconRef.shake(200);
+            this.activeIconRef.shake(300);
             if (Platform.OS === 'ios') {
               this.pushNotification.localNotificationSchedule({
                 message: `${this.props.title} ${this.translate('notification_msg')}`,

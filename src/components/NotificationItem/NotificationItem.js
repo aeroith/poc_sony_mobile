@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, Text, TouchableOpacity, Animated, PanResponder, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import PropTypes from 'prop-types';
 import PushNotification from '../../utils/push-notification';
 import styles from './styles';
 import ImageWrapper from '../Image';
@@ -10,6 +11,27 @@ const moment = require('moment');
 const screenWidth = Dimensions.get('window').width;
 
 class NotificationItem extends PureComponent {
+  static propTypes = {
+    translate: PropTypes.func.isRequired,
+    unsetNotification: PropTypes.func.isRequired,
+    onDismiss: PropTypes.func.isRequired,
+    image: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    season: PropTypes.number,
+    episodeNumber: PropTypes.number,
+    timeStart: PropTypes.number.isRequired,
+    timeEnd: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    repeated: PropTypes.bool,
+    repeatInterval: PropTypes.string,
+  };
+  static defaultProps = {
+    repeated: false,
+    repeatInterval: '',
+    season: null,
+    episodeNumber: null
+  };
+
   constructor(props) {
     super(props);
     this.translateX = new Animated.Value(0);
