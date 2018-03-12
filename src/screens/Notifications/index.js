@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { View, ScrollView, Animated } from 'react-native';
 import NotificationItem from '../../containers/NotificationItem';
 import styles from './styles';
+import { actions as notificationActions } from '../../reducers/notification';
 import withTranslation from '../../hocs/Translation/index';
 
+@connect(
+  state => ({
+    notifications: state.notification.notifications
+  }),
+  notificationActions,
+)
 @withTranslation
 export default class Notifications extends Component {
   static propTypes = {
@@ -15,8 +23,9 @@ export default class Notifications extends Component {
   constructor(props) {
     super(props);
     this.animVal = new Animated.Value(0);
-    const onScroll = Animated.event([{ nativeEvent: { contentOffset: { x: this.animVal } } }]);
   }
+
+  onScroll = Animated.event([{ nativeEvent: { contentOffset: { x: this.animVal } } }]);
 
   render() {
     return (
@@ -27,25 +36,29 @@ export default class Notifications extends Component {
           scrollEventThrottle={10}
           contentContainerStyle={styles.scrollViewContainer}
         >
-          <NotificationItem style={styles.notificationItem} />
-          <NotificationItem style={styles.notificationItem} />
-          <NotificationItem style={styles.notificationItem} />
-          <NotificationItem style={styles.notificationItem} />
-          <NotificationItem style={styles.notificationItem} />
-          <NotificationItem style={styles.notificationItem} />
-          <NotificationItem style={styles.notificationItem} />
-          <NotificationItem style={styles.notificationItem} />
-          <NotificationItem style={styles.notificationItem} />
-          <NotificationItem style={styles.notificationItem} />
-          <NotificationItem style={styles.notificationItem} />
-          <NotificationItem style={styles.notificationItem} />
-          <NotificationItem style={styles.notificationItem} />
-          <NotificationItem style={styles.notificationItem} />
-          <NotificationItem style={styles.notificationItem} />
-          <NotificationItem style={styles.notificationItem} />
-          <NotificationItem style={styles.notificationItem} />
-          <NotificationItem style={styles.notificationItem} />
-          <NotificationItem style={styles.notificationItem} />
+          {
+            this.props.notifications.map((item) => {
+              const {
+               title, image, episodeNumber, timeStart, timeEnd, type, season, id, repeated
+              } = item;
+              return (
+                <NotificationItem
+                  key={id}
+                  id={id}
+                  style={styles.notificationItem}
+                  title={title}
+                  image={image}
+                  episodeNumber={episodeNumber}
+                  timeStart={timeStart}
+                  timeEnd={timeEnd}
+                  type={type}
+                  season={season}
+                  repeated={repeated}
+                  translate={this.props.translate}
+                />
+              );
+            })
+          }
         </ScrollView>
       </View>
     );

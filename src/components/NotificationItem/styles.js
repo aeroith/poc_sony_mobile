@@ -45,13 +45,18 @@ const styles = StyleSheet.create({
   moreIcon: {
     color: colorPalette.carouselActive,
   },
-  hiddenDeleteMenu: {
+  hiddenMenu: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     position: 'absolute',
-    backgroundColor: 'yellow',
-    right: 0,
+    backgroundColor: colorPalette.grayBg1,
     width: '100%',
     height: 79,
     zIndex: -99
+  },
+  hiddenMenuIcon: {
+    marginHorizontal: 25,
   },
   title: {
     marginVertical: 1.5,
@@ -68,7 +73,6 @@ const styles = StyleSheet.create({
   date: {
     marginVertical: 1.5,
     fontSize: 12,
-    fontWeight: '400',
     color: colorPalette.grayText1,
   }
 });

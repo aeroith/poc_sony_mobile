@@ -6,9 +6,7 @@ import styles from './styles';
 class NotificationItemContainer extends Component {
   render() {
     return (
-      <View {...this.props}>
-        <NotificationItem {...this.props} />
-      </View>
+      <NotificationItem {...this.props} />
     );
   }
 }

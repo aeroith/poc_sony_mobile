@@ -78,6 +78,10 @@ export default class GuideItem extends PureComponent {
             this.props.setNotification({
               id: this.props.id,
               title: this.props.title,
+              season: this.props.season,
+              type: this.props.type,
+              episodeNumber: this.props.episodeNumber,
+              image: this.props.image,
               timeStart: this.props.timeStart,
               timeEnd: this.props.timeEnd,
               repeated: false,
