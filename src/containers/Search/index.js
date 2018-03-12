@@ -15,17 +15,24 @@ import Spinner from '../../components/Spinner';
 import { actions as searchBarActions } from '../../reducers/search';
 
 @withTranslation
-@connect(null, dispatch => ({
-  setSearchBarState: searchBarState => dispatch(searchBarActions.setSearchBarState(searchBarState))
-}))
+@connect(
+  state => ({
+    systemName: state.app.systemName,
+  }),
+  dispatch => ({
+    setSearchBarState: searchBarState => dispatch(searchBarActions.setSearchBarState(searchBarState))
+  })
+)
 export default class Search extends Component {
     static propTypes = {
       translate: PropTypes.func.isRequired,
       shouldRender: PropTypes.bool,
+      systemName: PropTypes.string,
     };
 
     static defaultProps = {
       shouldRender: false,
+      systemName: 'iOS'
     };
 
     constructor(props) {
@@ -58,7 +65,7 @@ export default class Search extends Component {
     };
 
     getType = (typeEnum) => {
-      let translateKey = typeEnum || 'nextAiring_na';
+      const translateKey = typeEnum || 'nextAiring_na';
       return this.props.translate(translateKey);
     };
 
@@ -110,11 +117,8 @@ export default class Search extends Component {
       </View>
     );
 
-    render() {
-      const { shouldRender } = this.props;
+    renderAutocomplete = () => {
       const { data, query } = this.state;
-      if (!shouldRender) return null;
-      // TODO: Autocomplete should be rendered differently on android devices. Check documentation
       return (
         <Autocomplete
           containerStyle={styles.searchBarWrapper}
@@ -127,5 +131,23 @@ export default class Search extends Component {
           renderTextInput={this.renderTextInput}
         />
       );
+    };
+
+    render() {
+      const { shouldRender, systemName } = this.props;
+      if (!shouldRender) return null;
+      // TODO: Autocomplete should be rendered differently on android devices. Check documentation
+      const autocompleteRendered = this.renderAutocomplete();
+      if (systemName === 'iOS') return autocompleteRendered;
+      if (systemName === 'Android') {
+        return (
+          <View>
+            <View style={styles.autocompleteContainer}>
+              { autocompleteRendered }
+            </View>
+          </View>
+        );
+      }
+      return autocompleteRendered;
     }
 }

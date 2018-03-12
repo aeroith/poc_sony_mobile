@@ -2,6 +2,14 @@ import { StyleSheet } from 'react-native';
 import colorPalette from '../../config/colorPalette';
 
 const styles = StyleSheet.create({
+  autocompleteContainer: {
+    flex: 1,
+    left: 0,
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    zIndex: 1
+  },
   searchBarWrapper: {
     height: 30,
     marginTop: 30,

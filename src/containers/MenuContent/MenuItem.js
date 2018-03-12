@@ -12,7 +12,8 @@ export default class MenuItem extends Component {
       bordered: PropTypes.bool,
       isLastItem: PropTypes.bool,
       childItem: PropTypes.bool,
-      broadcastMenuItemOpened: PropTypes.func
+      broadcastMenuItemOpened: PropTypes.func,
+      isSelected: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -21,6 +22,7 @@ export default class MenuItem extends Component {
       bordered: false,
       isLastItem: false,
       childItem: false,
+      isSelected: false,
       broadcastMenuItemOpened: this.noop
     };
 
@@ -96,7 +98,7 @@ export default class MenuItem extends Component {
 
     render() {
       const {
-        image, text, contentRight, bordered, isLastItem, style, children, childItem
+        image, text, contentRight, bordered, isLastItem, style, children, childItem, isSelected
       } = this.props;
       const hasImage = image && Object.keys(image).length > 0 && image.uri.length > 0;
       const onPressFn = this.generateOnPressFunc();
@@ -124,7 +126,7 @@ export default class MenuItem extends Component {
               </Text>
               {contentRight || null }
             </View>
-
+            { isSelected && <View style={styles.selectedMenuItem} /> }
           </TouchableOpacity>
           {children && (
             <Animated.View style={{ height: this.state.menuItemChildrenHeight, opacity: this.state.menuItemChildrenOpacity }}>

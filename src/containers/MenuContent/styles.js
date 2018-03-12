@@ -56,8 +56,15 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
   },
   selectedMenuItem: {
-    borderRightColor: colorPalette.red,
-    borderRightWidth: 3,
+    flex: 1,
+    width: 5,
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    bottom: 0,
+    backgroundColor: colorPalette.red,
+    // borderRightColor: colorPalette.red,
+    // borderRightWidth: 3,
   },
   menuSection: {
     margin: 0,

@@ -15,6 +15,8 @@ const initialState = {
   language: '',
   country: '',
   locale: '',
+  systemName: 'ios',
+  systemVersion: '',
 };
 
 // Reducer - SearchBar
