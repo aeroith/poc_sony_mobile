@@ -1,4 +1,4 @@
-import { getDeviceCountry, getDeviceLocale } from 'react-native-device-info';
+import { getDeviceCountry, getDeviceLocale, getSystemName, getSystemVersion } from 'react-native-device-info';
 import _find from 'lodash/find';
 import _isEmpty from 'lodash/isEmpty';
 import siteConfig from '../config/siteConfig';
@@ -13,18 +13,24 @@ export default class Utils {
     return env;
   }
   static getDeviceInfo(env) {
+    const systemName = getSystemName();
+    const systemVersion = getSystemVersion();
     if (env === 'development') {
       const { defaultCountry: country, defaultLanguage: language } = siteConfig;
       return {
         country,
         language,
         locale: `${language}_${country}`,
+        systemVersion,
+        systemName,
       };
     }
     const deviceLocale = getDeviceLocale().replace('-', '_');
     const country = getDeviceCountry();
     const language = deviceLocale.split('_')[0];
-    return { country, language, locale: deviceLocale };
+    return {
+      country, language, systemName, systemVersion, locale: deviceLocale
+    };
   }
   static getCurrentRoute(navState) {
     const navStackLength = navState ? navState.routes.length : 0;

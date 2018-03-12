@@ -23,6 +23,8 @@ const createAppInitialState = (siteConfig, deviceInfo) => {
   if (deviceInfo.country) state.app.country = deviceInfo.country;
   if (deviceInfo.language) state.app.language = deviceInfo.language;
   if (deviceInfo.locale) state.app.locale = deviceInfo.locale;
+  if (deviceInfo.systemName) state.app.systemName = deviceInfo.systemName;
+  if (deviceInfo.systemVersion) state.app.systemVersion = deviceInfo.systemVersion;
 
   return state;
 };
