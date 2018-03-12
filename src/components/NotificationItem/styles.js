@@ -56,6 +56,9 @@ const styles = StyleSheet.create({
     zIndex: -99
   },
   hiddenMenuIcon: {
+    color: colorPalette.white,
+  },
+  hiddenMenuIconContainer: {
     marginHorizontal: 25,
   },
   title: {

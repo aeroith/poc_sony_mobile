@@ -81,8 +81,38 @@ class NotificationItem extends PureComponent {
           </TouchableOpacity>
         </Animated.View>
         <View style={styles.hiddenMenu}>
-          <Icon style={styles.hiddenMenuIcon} name="ios-trash" size={32} />
-          <Icon style={styles.hiddenMenuIcon} name="ios-trash" size={32} />
+          <Animated.View style={[styles.hiddenMenuIconContainer,
+            {
+              opacity: this.translateX.interpolate({
+                inputRange: [0, 20, screenWidth / 2, screenWidth],
+                outputRange: [0, 1, 1.2, 1.5]
+              }),
+              transform: [{
+                scale: this.translateX.interpolate({
+                  inputRange: [0, 10, screenWidth / 2, screenWidth],
+                  outputRange: [0.1, 1, 1.2, 1.5]
+                }),
+              }]
+            }]}
+          >
+            <Icon style={styles.hiddenMenuIcon} name="ios-trash" size={30} />
+          </Animated.View>
+          <Animated.View style={[styles.hiddenMenuIconContainer,
+            {
+              opacity: this.translateX.interpolate({
+                inputRange: [-screenWidth, -screenWidth / 2, -20, 0],
+                outputRange: [1.5, 1.2, 1, 0]
+              }),
+              transform: [{
+                scale: this.translateX.interpolate({
+                  inputRange: [-screenWidth, -screenWidth / 2, 0],
+                  outputRange: [1.5, 1.2, 0.8]
+                }),
+              }]
+            }]}
+          >
+            <Icon style={styles.hiddenMenuIcon} name="ios-trash" size={30} />
+          </Animated.View>
         </View>
       </View>
     );
