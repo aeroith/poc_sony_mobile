@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { View, ScrollView, Animated, UIManager, LayoutAnimation, Platform, PushNotificationIOS } from 'react-native';
+import { View, ScrollView, Animated, UIManager, LayoutAnimation, Platform, PushNotificationIOS, Text, Dimensions, Easing, TouchableOpacity } from 'react-native';
 import NotificationItem from '../../containers/NotificationItem';
 import styles from './styles';
 import { actions as notificationActions } from '../../reducers/notification';
 import withTranslation from '../../hocs/Translation/index';
 import PushNotification from '../../utils/push-notification';
+import ImageWrapper from '../../components/Image';
+
+const { width: deviceWidth, height: deviceHeight } = Dimensions.get('window');
 
 @connect(
   state => ({
@@ -30,6 +33,10 @@ export default class Notifications extends Component {
       UIManager.setLayoutAnimationEnabledExperimental(true);
     }
     this.pushNotification = new PushNotification(this.onNotification).init();
+    this.translateY = new Animated.Value(deviceHeight - 200);
+    this.state = {
+      hiddenMenu: {}
+    };
   }
 
   onDismiss = () => LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
@@ -45,10 +52,39 @@ export default class Notifications extends Component {
     }
   };
 
+  handleHiddenMenuClick = (item) => {
+    this.setState({
+      hiddenMenu: item,
+    }, () => Animated.timing(this.translateY, {
+      toValue: 80,
+      duration: 500,
+      easing: Easing.ease,
+      useNativeDriver: true
+    }).start());
+  };
+
+  dismissHiddenMenu = () => {
+    Animated.timing(this.translateY, {
+      toValue: deviceHeight - 200,
+      duration: 500,
+      easing: Easing.ease,
+      useNativeDriver: true
+    }).start(() => this.setState({
+      hiddenMenu: {}
+    }));
+  };
+
+  cancelAnimationFromHiddenMenu = () => {
+    this.props.unsetNotification(this.state.hiddenMenu.id, this.pushNotification);
+    this.dismissHiddenMenu();
+  };
+
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.emptyContainer} />
+        <View
+          style={[styles.emptyContainer, this.state.hiddenMenu.id && { borderBottomWidth: 0 }]}
+        />
         <ScrollView
           onScroll={this.onScroll}
           scrollEventThrottle={10}
@@ -57,7 +93,16 @@ export default class Notifications extends Component {
           {
             this.props.notifications.map((item) => {
               const {
-               title, image, episodeNumber, timeStart, timeEnd, type, season, id, repeated
+                title,
+                image,
+                episodeNumber,
+                timeStart,
+                timeEnd,
+                type,
+                season,
+                id,
+                repeated,
+                repeatInterval
               } = item;
               return (
                 <NotificationItem
@@ -72,15 +117,61 @@ export default class Notifications extends Component {
                   type={type}
                   season={season}
                   repeated={repeated}
+                  repeatInterval={repeatInterval}
                   translate={this.props.translate}
                   unsetNotification={this.props.unsetNotification}
                   onDismiss={this.onDismiss}
                   pushNotification={this.pushNotification}
+                  hiddenMenuClick={this.handleHiddenMenuClick}
                 />
               );
             })
           }
         </ScrollView>
+        <Animated.View style={[
+          styles.moreMenu,
+          {
+            transform: [{ translateY: this.translateY }],
+            opacity: this.translateY.interpolate({
+              inputRange: [80, deviceHeight - 200],
+              outputRange: [1, 0]
+            })
+          }
+        ]}
+        >
+          <Animated.View style={[
+            styles.moreMenuBg,
+            {
+              opacity: this.translateY.interpolate({
+                inputRange: [80, deviceHeight - 200],
+                outputRange: [0.8, 0]
+              })
+            }
+          ]}
+          />
+          <ImageWrapper
+            style={styles.moreMenuImg}
+            uri={this.state.hiddenMenu.image}
+            height={200}
+            width={deviceWidth - 100}
+          />
+          {this.state.hiddenMenu.type === 'tv' &&
+          <TouchableOpacity style={styles.moreMenuTouchable}>
+            <Text style={styles.moreMenuText}>{this.props.translate('go_to_episode')}</Text>
+          </TouchableOpacity>}
+          <TouchableOpacity style={styles.moreMenuTouchable}>
+            <Text style={styles.moreMenuText}>{this.props.translate('go_to_detail')}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={this.cancelAnimationFromHiddenMenu}
+            style={styles.moreMenuTouchable}
+          >
+            <Text style={styles.moreMenuText}>{this.props.translate('cancel_notification')}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={this.dismissHiddenMenu} style={styles.moreMenuTouchable}>
+            <Text style={styles.moreMenuText}>{this.props.translate('cancel')}</Text>
+          </TouchableOpacity>
+        </Animated.View>
       </View>
     );
   }

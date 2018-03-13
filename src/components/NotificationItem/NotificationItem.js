@@ -14,7 +14,9 @@ class NotificationItem extends PureComponent {
     translate: PropTypes.func.isRequired,
     unsetNotification: PropTypes.func.isRequired,
     onDismiss: PropTypes.func.isRequired,
+    hiddenMenuClick: PropTypes.func.isRequired,
     pushNotification: PropTypes.object.isRequired,
+    type: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     repeatInterval: PropTypes.string,
@@ -60,6 +62,14 @@ class NotificationItem extends PureComponent {
     });
   }
 
+
+  handleHiddenMenuClick = () => this.props.hiddenMenuClick({
+    id: this.props.id,
+    title: this.props.title,
+    image: this.props.image,
+    type: this.props.type,
+  });
+
   renderDate = (timeStart, timeEnd, repeated = false, repeatInterval = '') => {
     if (repeated && repeatInterval) {
       return `${this.translate('every')} ${this.translate(repeatInterval)}:${moment.unix(timeStart).format(this.momentFormat)}`;
@@ -96,7 +106,11 @@ class NotificationItem extends PureComponent {
               </View>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.8} style={styles.iconContainer}>
+          <TouchableOpacity
+            onPress={this.handleHiddenMenuClick}
+            activeOpacity={0.8}
+            style={styles.iconContainer}
+          >
             <Icon style={styles.moreIcon} name="md-more" size={30} />
           </TouchableOpacity>
         </Animated.View>

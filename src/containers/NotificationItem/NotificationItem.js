@@ -1,14 +1,8 @@
-import React, { Component } from 'react';
-import { View } from 'react-native';
+import React from 'react';
 import NotificationItem from '../../components/NotificationItem';
-import styles from './styles';
 
-class NotificationItemContainer extends Component {
-  render() {
-    return (
-      <NotificationItem {...this.props} />
-    );
-  }
-}
+const NotificationItemContainer = () => (
+  <NotificationItem {...this.props} />
+);
 
 export default NotificationItemContainer;

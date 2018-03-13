@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import colorPalette from '../../config/colorPalette';
-const { width } = Dimensions.get('window');
+const { width, height: deviceHeight } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     marginVertical: 1.5,
     fontSize: 12,
     color: colorPalette.grayText1,
-  }
+  },
 });
 
 export default styles;

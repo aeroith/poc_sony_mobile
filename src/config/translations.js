@@ -33,6 +33,9 @@ const translations = {
     settings: 'Settings',
     notifications: 'Notifications',
     other_channels: 'Other Channels',
+    go_to_detail: 'Go to program detail',
+    go_to_episode: 'Go to episode detail',
+    cancel_notification: 'Cancel Notification',
     days: {
       mon: 'Monday',
       tue: 'Tuesday',
@@ -92,6 +95,9 @@ const translations = {
     settings: 'Ayarlar',
     notifications: 'Bildirimler',
     other_channels: 'Diğer kanallar',
+    go_to_detail: 'Program detayına git',
+    go_to_episode: 'Bölüm detayına git',
+    cancel_notification: 'Bildirimleri iptal et',
     days: {
       mon: 'Pazartesi',
       tue: 'Salı',
