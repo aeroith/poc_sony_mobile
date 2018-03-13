@@ -1,8 +1,8 @@
 import React from 'react';
 import NotificationItem from '../../components/NotificationItem';
 
-const NotificationItemContainer = () => (
-  <NotificationItem {...this.props} />
+const NotificationItemContainer = props => (
+  <NotificationItem {...props} />
 );
 
 export default NotificationItemContainer;
