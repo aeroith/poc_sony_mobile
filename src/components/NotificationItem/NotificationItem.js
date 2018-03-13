@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { View, Text, TouchableOpacity, Animated, PanResponder, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
-import PushNotification from '../../utils/push-notification';
 import styles from './styles';
 import ImageWrapper from '../Image';
 
@@ -15,15 +14,16 @@ class NotificationItem extends PureComponent {
     translate: PropTypes.func.isRequired,
     unsetNotification: PropTypes.func.isRequired,
     onDismiss: PropTypes.func.isRequired,
+    pushNotification: PropTypes.object.isRequired,
     image: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    repeatInterval: PropTypes.string,
     season: PropTypes.number,
     episodeNumber: PropTypes.number,
     timeStart: PropTypes.number.isRequired,
     timeEnd: PropTypes.number.isRequired,
     id: PropTypes.number.isRequired,
     repeated: PropTypes.bool,
-    repeatInterval: PropTypes.string,
   };
   static defaultProps = {
     repeated: false,
@@ -37,7 +37,6 @@ class NotificationItem extends PureComponent {
     this.translateX = new Animated.Value(0);
     this.translate = this.props.translate;
     this.momentFormat = 'kk:mm';
-    this.pushNotification = new PushNotification(this.onNotification).init();
     this.panResponder = PanResponder.create({
       onMoveShouldSetResponderCapture: () => true,
       onMoveShouldSetPanResponderCapture: () => true,
@@ -48,8 +47,7 @@ class NotificationItem extends PureComponent {
             toValue: dx > 0 ? screenWidth : -screenWidth,
             duration: 200
           }).start(() => {
-            this.props.unsetNotification(this.props.id);
-            this.pushNotification.cancelLocalNotifications({ id: this.props.id });
+            this.props.unsetNotification(this.props.id, this.props.pushNotification);
             this.props.onDismiss();
           });
         } else {
