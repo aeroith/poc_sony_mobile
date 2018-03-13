@@ -145,12 +145,14 @@ export default class Notifications extends Component {
             }
           ]}
           />
-          <ImageWrapper
-            style={styles.moreMenuImg}
-            uri={this.state.hiddenMenu.image}
-            height={200}
-            width={deviceWidth - 100}
-          />
+          {this.state.hiddenMenu.image && (
+            <ImageWrapper
+              style={styles.moreMenuImg}
+              uri={this.state.hiddenMenu.image}
+              height={200}
+              width={deviceWidth - 100}
+            />
+          )}
           {this.state.hiddenMenu.type === 'tv' &&
           <TouchableOpacity style={styles.moreMenuTouchable}>
             <Text style={styles.moreMenuText}>{this.props.translate('go_to_episode')}</Text>
