@@ -6,12 +6,9 @@ export default class ProgramTypeTabSelector extends Component {
   constructor(props) {
     super(props);
     this.availableTypes = ['tv', 'movie'];
-    this.state = {
-      selectedType: 'tv',
-    };
   }
 
-  onPress = type => () => this.setState({ selectedType: type });
+  onPress = type => () => this.props.setProgramType(type);
 
   render() {
     return (
@@ -21,7 +18,7 @@ export default class ProgramTypeTabSelector extends Component {
             this.availableTypes.map((type, index) =>
               <TabItem
                 onPress={this.onPress(type)}
-                active={this.state.selectedType === type}
+                active={this.props.selectedType === type}
                 key={index}
                 style={styles.tabItemText}
                 title={this.props.translate(type)}

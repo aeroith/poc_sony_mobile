@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import styles from './styles';
 import withTranslation from '../../hocs/Translation/index';
 import ProgramTypeTabSelector from '../../containers/ProgramTypeTabSelector';
+import { actions as programActions } from '../../reducers/programs';
 
 @withTranslation
+@connect(
+  state => ({
+    selectedType: state.programs.selectedType,
+  }),
+  programActions,
+)
 export default class Programs extends Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired,
@@ -19,6 +27,8 @@ export default class Programs extends Component {
           style={styles.emptyContainer}
         />
         <ProgramTypeTabSelector
+          selectedType={this.props.selectedType}
+          setProgramType={this.props.setProgramType}
           translate={this.props.translate}
         />
       </View>
