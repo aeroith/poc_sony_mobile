@@ -11,6 +11,7 @@ import { actions as programActions } from '../../reducers/programs';
 @connect(
   state => ({
     selectedType: state.programs.selectedType,
+    programs: state.programs.programs,
   }),
   programActions,
 )
@@ -19,6 +20,10 @@ export default class Programs extends Component {
     navigation: PropTypes.object.isRequired,
     translate: PropTypes.func.isRequired
   };
+
+  componentDidMount() {
+    this.props.getPrograms(1);
+  }
 
   render() {
     return (
