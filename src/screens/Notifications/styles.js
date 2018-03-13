@@ -1,4 +1,5 @@
 import { Dimensions, StyleSheet } from 'react-native';
+
 const { width, height: deviceHeight } = Dimensions.get('window');
 import colorPalette from '../../config/colorPalette';
 
@@ -12,8 +13,6 @@ const styles = StyleSheet.create({
     flexGrow: 0,
     flexBasis: 80,
     flexShrink: 0,
-    borderBottomColor: colorPalette.red,
-    borderBottomWidth: 2,
   },
   notificationItem: {
     height: 80,

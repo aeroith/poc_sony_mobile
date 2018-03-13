@@ -7,8 +7,13 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
-    height: 80,
     zIndex: 11,
+  },
+  navBarNoFloat: {
+    position: 'relative',
+    borderBottomWidth: 1,
+    borderBottomColor: colorPalette.grayBorder1,
+    borderStyle: 'solid',
   },
   linearGradientWrapper: {
     paddingTop: 30,
@@ -19,8 +24,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  linearGradientWrapperNoFloat: {
+    height: 65,
+  },
   linearGradientWrapper__searchBarOpen: {
     paddingTop: 0,
+    height: 35,
   },
   navBarHeaderText: {
     color: colorPalette.white,
