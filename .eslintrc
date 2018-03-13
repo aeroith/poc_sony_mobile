@@ -17,7 +17,9 @@
     "react/forbid-prop-types": 0,
     "import/no-extraneous-dependencies": 0,
     "camelcase": 0,
-    "no-return-assign": 0
+    "no-return-assign": 0,
+    "react/no-array-index-key": 0,
+    "react/no-multi-comp": 0
   },
   "plugins": ["react"]
 }
