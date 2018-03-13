@@ -82,13 +82,9 @@ export default class Notifications extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View
-          style={[styles.emptyContainer, this.state.hiddenMenu.id && { borderBottomWidth: 0 }]}
-        />
         <ScrollView
           onScroll={this.onScroll}
           scrollEventThrottle={10}
-          contentContainerStyle={styles.scrollViewContainer}
         >
           {
             this.props.notifications.map((item) => {

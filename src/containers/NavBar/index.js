@@ -88,7 +88,7 @@ export default class NavBar extends Component {
 
     getGradientLocations = (isSearchBarVisible, noFloat) => {
       if (noFloat) return [1, 1];
-      return [isSearchBarVisible ? 0.4 : 0.15, 1];
+      return [isSearchBarVisible ? 0.6 : 0.15, 1];
     };
 
     render() {

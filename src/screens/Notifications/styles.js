@@ -1,12 +1,13 @@
 import { Dimensions, StyleSheet } from 'react-native';
+import colorPalette from '../../config/colorPalette';
 
 const { width, height: deviceHeight } = Dimensions.get('window');
-import colorPalette from '../../config/colorPalette';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colorPalette.grayBg4,
+    position: 'relative',
   },
   emptyContainer: {
     width: '100%',
@@ -27,6 +28,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: deviceHeight,
     position: 'absolute',
+    top: 0,
     left: 0,
     backgroundColor: colorPalette.transparent,
     zIndex: 1000,
