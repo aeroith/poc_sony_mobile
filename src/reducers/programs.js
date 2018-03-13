@@ -10,6 +10,7 @@ const actionTypes = {
 const initialState = {
   selectedType: 'tv',
   programs: [],
+  isLoading: false,
 };
 
 const actionsMap = {
