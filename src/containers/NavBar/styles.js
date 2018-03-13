@@ -15,6 +15,9 @@ const styles = StyleSheet.create({
     borderBottomColor: colorPalette.grayBorder1,
     borderStyle: 'solid',
   },
+  linearGradientComponent: {
+    position: 'relative',
+  },
   linearGradientWrapper: {
     paddingTop: 30,
     paddingLeft: 15,

@@ -99,6 +99,7 @@ export default class NavBar extends Component {
           <LinearGradient
             colors={[colorPalette.grayBg4, colorPalette.transparent]}
             locations={this.getGradientLocations(isSearchBarVisible, noFloat)}
+            style={styles.linearGradientComponent}
           >
             <Search shouldRender={isSearchBarVisible} />
             <View style={[styles.linearGradientWrapper, noFloat && styles.linearGradientWrapperNoFloat, isSearchBarVisible && styles.linearGradientWrapper__searchBarOpen]}>

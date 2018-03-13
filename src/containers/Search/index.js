@@ -47,6 +47,12 @@ export default class Search extends Component {
       this.getAutocompleteResults = _debounce(this.getAutocompleteResults, 350);
     }
 
+    componentWillReceiveProps(nextProps) {
+      if (this.props.shouldRender !== nextProps.shouldRender && !nextProps.shouldRender) {
+        this.clearSearchBar();
+      }
+    }
+
     getAutocompleteResults = (query) => {
       if (query.length >= 3) {
         this.setState({ loading: true });
@@ -107,6 +113,7 @@ export default class Search extends Component {
           placeholder={this.props.translate('search')}
           placeholderTextColor={colorPalette.grayText1}
           value={this.state.query}
+          autoFocus
           onBlur={this.handleOnBlur}
         />
         {this.state.loading && (
@@ -136,15 +143,12 @@ export default class Search extends Component {
     render() {
       const { shouldRender, systemName } = this.props;
       if (!shouldRender) return null;
-      // TODO: Autocomplete should be rendered differently on android devices. Check documentation
       const autocompleteRendered = this.renderAutocomplete();
       if (systemName === 'iOS') return autocompleteRendered;
       if (systemName === 'Android') {
         return (
-          <View>
-            <View style={styles.autocompleteContainer}>
-              { autocompleteRendered }
-            </View>
+          <View style={styles.autocompleteContainer}>
+            { autocompleteRendered }
           </View>
         );
       }
