@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import styles from './styles';
 import withTranslation from '../../hocs/Translation/index';
+import ProgramTypeTabSelector from '../../containers/ProgramTypeTabSelector';
 
 @withTranslation
 export default class Programs extends Component {
@@ -13,7 +14,14 @@ export default class Programs extends Component {
 
   render() {
     return (
-      <View style={styles.container} />
+      <View style={styles.container}>
+        <View
+          style={styles.emptyContainer}
+        />
+        <ProgramTypeTabSelector
+          translate={this.props.translate}
+        />
+      </View>
     );
   }
 }
