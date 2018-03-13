@@ -35,13 +35,45 @@ export default class NavBar extends Component {
       channelName: PropTypes.string.isRequired,
     };
 
-    getNavHeader = () => {
-      const route = Utils.getCurrentRoute(this.props.nav);
+    constructor(props) {
+      super(props);
+      this.routeStack = {
+        prev: null,
+        current: null,
+      };
+      this.state = {
+        noFloat: false,
+      };
+    }
+
+    componentWillReceiveProps(nextProps) {
+      if (nextProps.nav) {
+        const route = this.getCurrentRouteDetails(nextProps.nav);
+        this.setRouteStack(route);
+        this.setState({ noFloat: !!route.noFloat });
+      }
+    }
+
+    setRouteStack(route) {
+      if (!route || (route.enum === (this.routeStack.current && this.routeStack.current.enum))) return;
+      this.routeStack.prev = this.routeStack.current;
+      this.routeStack.current = route;
+    }
+
+    getCurrentRouteDetails = (navProps) => {
+      if (!navProps) return;
+      return Utils.getCurrentRoute(navProps);
+    };
+
+    getNavHeader = (route, callback) => {
+      const currentRoute = route || this.getCurrentRouteDetails(this.props.nav);
       const channelEnum = Utils.getChannelEnum(this.props.channelName);
-      if (route.uniqueMenuItem) return this.props.translate(route.enum);
-      return this.props.translate(this.props.channelName
-        ? `menu.${channelEnum}.${route.enum}`
+      if (currentRoute.uniqueMenuItem) return this.props.translate(currentRoute.enum);
+      const navHeader = this.props.translate(this.props.channelName
+        ? `menu.${channelEnum}.${currentRoute.enum}`
         : '');
+      if (callback) callback(navHeader);
+      return navHeader;
     };
 
     handleMenuButtonClick = () => {
@@ -54,18 +86,27 @@ export default class NavBar extends Component {
       this.props.setSearchBarState(!isSearchBarVisible);
     };
 
+    getGradientLocations = (isSearchBarVisible, noFloat) => {
+      if (noFloat) return [1, 1];
+      return [isSearchBarVisible ? 0.6 : 0.15, 1];
+    };
+
     render() {
       const { isSearchBarVisible } = this.props;
+      const { noFloat } = this.state;
       return (
-        <Animatable.View style={styles.navBarWrapper} animation="fadeInDown">
+        <Animatable.View style={[styles.navBarWrapper, noFloat && styles.navBarNoFloat]} animation="fadeInDown">
           <LinearGradient
             colors={[colorPalette.grayBg4, colorPalette.transparent]}
-            locations={[isSearchBarVisible ? 0.4 : 0.15, 1]}
+            locations={this.getGradientLocations(isSearchBarVisible, noFloat)}
+            style={styles.linearGradientComponent}
           >
             <Search shouldRender={isSearchBarVisible} />
-            <View style={[styles.linearGradientWrapper, isSearchBarVisible && styles.linearGradientWrapper__searchBarOpen]}>
+            <View style={[styles.linearGradientWrapper, noFloat && styles.linearGradientWrapperNoFloat, isSearchBarVisible && styles.linearGradientWrapper__searchBarOpen]}>
               <TouchableOpacity
-                hitSlop={{ top: 10, right: 20, bottom: 20, left: 15 }}
+                hitSlop={{
+ top: 10, right: 20, bottom: 20, left: 15
+}}
                 onPress={this.handleMenuButtonClick}
                 style={styles.navBarButton}
                 activeOpacity={0.8}
@@ -74,7 +115,9 @@ export default class NavBar extends Component {
               </TouchableOpacity>
               <Text style={styles.navBarHeaderText}>{this.getNavHeader()}</Text>
               <TouchableOpacity
-                hitSlop={{ top: 10, right: 15, bottom: 20, left: 20 }}
+                hitSlop={{
+ top: 10, right: 15, bottom: 20, left: 20
+}}
                 onPress={this.handleSearchButtonClick}
                 style={styles.navBarButton}
                 activeOpacity={0.8}

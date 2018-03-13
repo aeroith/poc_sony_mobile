@@ -17,6 +17,7 @@ const Guide = ({
         <ScrollView
           onScroll={onScroll}
           scrollEventThrottle={10}
+          style={styles.scrollView}
         >
           {
             guide.map(item => (

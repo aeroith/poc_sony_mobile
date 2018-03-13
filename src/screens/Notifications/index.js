@@ -56,7 +56,7 @@ export default class Notifications extends Component {
     this.setState({
       hiddenMenu: item,
     }, () => Animated.timing(this.translateY, {
-      toValue: 80,
+      toValue: 0,
       duration: 500,
       easing: Easing.ease,
       useNativeDriver: true
@@ -82,13 +82,9 @@ export default class Notifications extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View
-          style={[styles.emptyContainer, this.state.hiddenMenu.id && { borderBottomWidth: 0 }]}
-        />
         <ScrollView
           onScroll={this.onScroll}
           scrollEventThrottle={10}
-          contentContainerStyle={styles.scrollViewContainer}
         >
           {
             this.props.notifications.map((item) => {
@@ -133,7 +129,7 @@ export default class Notifications extends Component {
           {
             transform: [{ translateY: this.translateY }],
             opacity: this.translateY.interpolate({
-              inputRange: [80, deviceHeight - 200],
+              inputRange: [0, deviceHeight - 200],
               outputRange: [1, 0]
             })
           }
@@ -143,18 +139,20 @@ export default class Notifications extends Component {
             styles.moreMenuBg,
             {
               opacity: this.translateY.interpolate({
-                inputRange: [80, deviceHeight - 200],
+                inputRange: [0, deviceHeight - 200],
                 outputRange: [0.8, 0]
               })
             }
           ]}
           />
-          <ImageWrapper
-            style={styles.moreMenuImg}
-            uri={this.state.hiddenMenu.image}
-            height={200}
-            width={deviceWidth - 100}
-          />
+          {this.state.hiddenMenu.image && (
+            <ImageWrapper
+              style={styles.moreMenuImg}
+              uri={this.state.hiddenMenu.image}
+              height={200}
+              width={deviceWidth - 100}
+            />
+          )}
           {this.state.hiddenMenu.type === 'tv' &&
           <TouchableOpacity style={styles.moreMenuTouchable}>
             <Text style={styles.moreMenuText}>{this.props.translate('go_to_episode')}</Text>
