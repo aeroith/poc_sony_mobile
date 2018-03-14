@@ -5,6 +5,7 @@
     "name": "SonyChannelMobile",
     "slug": "SonyChannelMobile",
     "sdkVersion": "24.0.0",
-    "appKey": "SonyChannelMobile"
+    "appKey": "SonyChannelMobile",
+    "orientation": "portrait"
   }
 }

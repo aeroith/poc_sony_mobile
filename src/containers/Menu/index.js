@@ -35,6 +35,7 @@ export default class Menu extends Component {
     };
 
     componentWillReceiveProps(nextProps) {
+      console.log('drawer visible ', nextProps.isDrawerVisible);
       if (this.props.isDrawerVisible !== nextProps.isDrawerVisible) {
         const drawerRefMethod = nextProps.isDrawerVisible ? 'openDrawer' : 'closeDrawer';
         if (this.el) this.el[drawerRefMethod]();

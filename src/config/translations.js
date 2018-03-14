@@ -54,6 +54,7 @@ const translations = {
         news: 'News',
         games_and_more: 'Games & More',
         gamesandmore: 'Games & More',
+        livefeed: 'Live Feed',
       },
       sony_channel_turkiye: {
         programs: 'Shows',
@@ -114,6 +115,7 @@ const translations = {
         tv_guide: 'Yayın Akışı',
         galleries: 'Galeriler',
         news: 'Haberler',
+        livefeed: 'Canlı Yayın',
         gamesandmore: 'Oyunlar ve Daha Fazlası',
       },
       sony_channel_turkiye: {

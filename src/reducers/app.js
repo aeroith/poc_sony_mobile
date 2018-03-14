@@ -3,7 +3,8 @@ import ApiClient from '../utils/api-client';
 const actionTypes = {
   CONFIG_REQUEST: 'CONFIG_REQUEST',
   CONFIG_RESPONSE: 'CONFIG_RESPONSE',
-  CONFIG_ERROR: 'CONFIG_ERROR'
+  CONFIG_ERROR: 'CONFIG_ERROR',
+  TOGGLE_TOP_BAR: 'TOGGLE_TOP_BAR',
 };
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
   locale: '',
   systemName: 'ios',
   systemVersion: '',
+  topBarHidden: false,
 };
 
 // Reducer - SearchBar
@@ -43,6 +45,10 @@ const actionsMap = {
     ...state,
     configError: action.error,
   }),
+  [actionTypes.TOGGLE_TOP_BAR]: state => ({
+    ...state,
+    topBarHidden: !state.topBarHidden,
+  }),
 };
 
 // Actions - SearchBar
@@ -57,6 +63,7 @@ const actions = {
       })
       .catch(error => dispatch({ type: actionTypes.CONFIG_ERROR, error }));
   },
+  toggleTopBar: () => ({ type: actionTypes.TOGGLE_TOP_BAR })
 };
 
 
