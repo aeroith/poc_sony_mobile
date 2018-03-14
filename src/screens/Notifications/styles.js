@@ -28,8 +28,6 @@ const styles = StyleSheet.create({
     flex: 1,
     height: deviceHeight,
     position: 'absolute',
-    top: 0,
-    left: 0,
     backgroundColor: colorPalette.transparent,
     zIndex: 1000,
     alignItems: 'center',
