@@ -15,6 +15,8 @@ const persistConfig = {
 
 let composeEnhancers = compose;
 if (__DEV__) {
+  GLOBAL.XMLHttpRequest = GLOBAL.originalXMLHttpRequest || GLOBAL.XMLHttpRequest;
+  GLOBAL.FormData = GLOBAL.originalFormData || GLOBAL.FormData;
   // Use it if Remote debugging with RNDebugger, otherwise use remote-redux-devtools
   /* eslint-disable no-underscore-dangle */
   composeEnhancers = (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ||
