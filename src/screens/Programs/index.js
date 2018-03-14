@@ -79,7 +79,10 @@ class ProgramList extends PureComponent {
     getPrograms: PropTypes.func.isRequired,
   };
 
-  onScroll = Animated.event([{ nativeEvent: { contentOffset: { x: this.animVal } } }]);
+  onScroll = () => Animated.event(
+    [{ nativeEvent: { contentOffset: { x: this.animVal } } }],
+    { useNativeDriver: true }
+  );
   onPress = () => {};
 
   keyExtractor = item => item.id;

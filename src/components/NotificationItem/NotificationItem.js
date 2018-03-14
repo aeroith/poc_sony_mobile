@@ -47,7 +47,8 @@ class NotificationItem extends PureComponent {
         if (Math.abs(vx) >= 0.5 || Math.abs(dx) >= 0.5 * screenWidth) {
           Animated.timing(this.translateX, {
             toValue: dx > 0 ? screenWidth : -screenWidth,
-            duration: 200
+            duration: 200,
+            useNativeDriver: true
           }).start(() => {
             this.props.unsetNotification(this.props.id, this.props.pushNotification);
             this.props.onDismiss();
@@ -55,7 +56,8 @@ class NotificationItem extends PureComponent {
         } else {
           Animated.spring(this.translateX, {
             toValue: 0,
-            bounciness: 10
+            bounciness: 10,
+            useNativeDriver: true,
           }).start();
         }
       }

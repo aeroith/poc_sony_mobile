@@ -48,7 +48,10 @@ class Carousel extends PureComponent {
   }
 
 
-  onScroll = () => Animated.event([{ nativeEvent: { contentOffset: { x: this.animVal } } }]);
+  onScroll = () => Animated.event(
+    [{ nativeEvent: { contentOffset: { x: this.animVal } } }],
+    { useNativeDriver: true }
+  );
 
   onLayout = (event) => {
     const { width, height } = event.nativeEvent.layout;
@@ -59,18 +62,6 @@ class Carousel extends PureComponent {
       }
     });
   };
-
-  setScrollViewRef = (ref) => {
-    this.scrollViewRef = ref;
-    return null;
-  };
-
-  // fixes the weird half screen issue when the device is rotated
-  handleLayoutScrolling = () => this.scrollViewRef.scrollTo({
-    x: this.state.layout.width * this.props.page,
-    y: 0,
-    animated: true
-  });
 
   handlePageChange = (e) => {
     const offset = e.nativeEvent.contentOffset;
@@ -90,13 +81,11 @@ class Carousel extends PureComponent {
     const { translate } = this.props;
     return (
       <View style={styles.mainContainer} onLayout={this.onLayout}>
-        <ScrollView
-          ref={this.setScrollViewRef}
+        <Animated.ScrollView
           style={styles.scrollContainer}
           horizontal
           pagingEnabled
           scrollEventThrottle={10}
-          onContentSizeChange={this.handleLayoutScrolling}
           showsHorizontalScrollIndicator={false}
           onMomentumScrollEnd={this.handlePageChange}
           onScroll={this.onScroll}
@@ -117,7 +106,7 @@ class Carousel extends PureComponent {
                 </TouchableWithoutFeedback>
             ))
           }
-        </ScrollView>
+        </Animated.ScrollView>
         <View style={styles.contentContainer}>
           <View style={styles.mainHeaderContainer}>
             <Text style={styles.mainHeader}>{currentSelection.name}</Text>

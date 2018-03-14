@@ -41,7 +41,10 @@ export default class Notifications extends Component {
 
   onDismiss = () => LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
 
-  onScroll = Animated.event([{ nativeEvent: { contentOffset: { x: this.animVal } } }]);
+  onScroll = () => Animated.event(
+    [{ nativeEvent: { contentOffset: { x: this.animVal } } }],
+    { useNativeDriver: true }
+  );
 
   onNotification = (notification) => {
     if (Platform.OS === 'ios') {

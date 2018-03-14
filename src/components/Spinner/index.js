@@ -33,7 +33,8 @@ export default class Spinner extends Component {
         {
           toValue: 1,
           duration: 4000,
-          easing: Easing.linear
+          easing: Easing.linear,
+          useNativeDriver: true,
         }
       ).start(() => this.spin());
     }

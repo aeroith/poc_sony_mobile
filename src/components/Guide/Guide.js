@@ -10,13 +10,16 @@ const Guide = ({
   guide, translate, notifications, ...props
 }) => {
   this.animVal = new Animated.Value(0);
-  const onScroll = Animated.event([{ nativeEvent: { contentOffset: { x: this.animVal } } }]);
+  const onScroll = () => Animated.event(
+    [{ nativeEvent: { contentOffset: { x: this.animVal } } }],
+    { useNativeDriver: true }
+  );
   return (
     <View {...props}>
       <View style={styles.mainContainer}>
-        <ScrollView
+        <Animated.ScrollView
           onScroll={onScroll}
-          scrollEventThrottle={10}
+          scrollEventThrottle={16}
           style={styles.scrollView}
         >
           {
@@ -37,7 +40,7 @@ const Guide = ({
               />
             ))
           }
-        </ScrollView>
+        </Animated.ScrollView>
       </View>
     </View>
   );
