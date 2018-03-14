@@ -78,6 +78,10 @@ class ProgramList extends PureComponent {
     programs: PropTypes.array.isRequired,
     getPrograms: PropTypes.func.isRequired,
   };
+  constructor(props) {
+    super(props);
+    this.animVal = new Animated.Value(0);
+  }
 
   onScroll = () => Animated.event(
     [{ nativeEvent: { contentOffset: { x: this.animVal } } }],
@@ -86,7 +90,6 @@ class ProgramList extends PureComponent {
   onPress = () => {};
 
   keyExtractor = item => item.id;
-  animVal = new Animated.Value(0);
 
   renderItem = ({ item }) => (
     <ImageItem
