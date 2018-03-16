@@ -979,18 +979,6 @@ export default class VideoPlayer extends Component {
   }
 
   /**
-   * Render the play/pause button and show the respective icon
-   */
-  renderPlayPause() {
-    const source = this.state.paused === true ? require('../../assets/img/play.png') : require('../../assets/img/pause.png');
-    return this.renderControl(
-      <Image source={source} />,
-      this.methods.togglePlayPause,
-      styles.controls.playPause
-    );
-  }
-
-  /**
    * Render our title...if supplied.
    */
   renderTitle() {
@@ -1048,7 +1036,7 @@ export default class VideoPlayer extends Component {
         <View style={styles.error.container}>
           <Image source={require('../../assets/img/error-icon.png')} style={styles.error.icon} />
           <Text style={styles.error.text}>
-            Video unavailable
+            {this.props.translate('video_unavailable')}
           </Text>
         </View>
       );

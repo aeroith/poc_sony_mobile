@@ -36,6 +36,7 @@ export default class LiveFeed extends Component {
           title="Bugs Bunny"
           navigator={this.props.navigation}
           paused
+          translate={this.props.translate}
           source={{ uri: this.props.liveUrl }}
         />
       </View>
