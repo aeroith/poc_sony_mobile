@@ -13,6 +13,10 @@ export default class TVGuide extends Component {
   componentDidMount() {
     Orientation.lockToPortrait();
   }
+
+  componentWillUnmount() {
+    Orientation.unlockAllOrientations();
+  }
   render() {
     return (
       <View style={styles.container}>

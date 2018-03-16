@@ -14,7 +14,13 @@ import {
   View,
   Text
 } from 'react-native';
+import { BlurView } from 'react-native-blur';
+import Icon from 'react-native-vector-icons/Ionicons';
+import OctIcon from 'react-native-vector-icons/Octicons';
+import Spinner from '../Spinner';
+import Orientation from 'react-native-orientation';
 import _ from 'lodash';
+import Utils from '../../utils/utils';
 import styles from './styles';
 
 export default class VideoPlayer extends Component {
@@ -316,7 +322,7 @@ export default class VideoPlayer extends Component {
       ),
       Animated.timing(
         this.animations.bottomControl.opacity,
-        { toValue: 0 }
+        { toValue: 20 }
       ),
       Animated.timing(
         this.animations.bottomControl.marginBottom,
@@ -416,9 +422,16 @@ export default class VideoPlayer extends Component {
   _toggleFullscreen() {
     const state = this.state;
     state.isFullscreen = !state.isFullscreen;
+    const toFullScreen = state.isFullscreen;
     state.resizeMode = state.isFullscreen === true ? 'cover' : 'contain';
     this.props.toggleTopBar();
-    this.setState(state);
+    this.setState(state, () => {
+      if (toFullScreen) {
+        Orientation.lockToLandscape();
+      } else {
+        Orientation.unlockAllOrientations();
+      }
+    });
   }
 
   /**
@@ -786,7 +799,7 @@ export default class VideoPlayer extends Component {
    * consistent <TouchableHighlight>
    * wrapper and styling.
    */
-  renderControl(children, callback, style = {}) {
+  renderControl(children, callback = () => {}, style = {}) {
     return (
       <TouchableHighlight
         underlayColor="transparent"
@@ -795,10 +808,7 @@ export default class VideoPlayer extends Component {
           this.resetControlTimeout();
           callback();
         }}
-        style={[
-          styles.controls.control,
-          style
-        ]}
+        style={style}
       >
         { children }
       </TouchableHighlight>
@@ -853,13 +863,13 @@ export default class VideoPlayer extends Component {
    * Back button control
    */
   renderBack() {
+    const backIcon = Utils.renderIconForPlatform(
+      <Icon name="ios-arrow-back" size={36} style={styles.blurView.icon} />,
+      <Icon name="md-arrow-back" size={36} style={styles.blurView.icon} />
+    );
     return this.renderControl(
-      <Image
-        source={require('../../assets/img/back.png')}
-        style={styles.controls.back}
-      />,
+      backIcon,
       this.methods.onBack,
-      styles.controls.back
     );
   }
 
@@ -938,6 +948,58 @@ export default class VideoPlayer extends Component {
 
           </View>
         </ImageBackground>
+      </Animated.View>
+    );
+  }
+
+  renderBlurControls() {
+    const rewindIcon = Utils.renderIconForPlatform(
+      <Icon name="ios-rewind" size={36} style={styles.blurView.icon} />,
+      <Icon name="md-rewind" size={36} style={styles.blurView.icon} />
+    );
+    const playPauseIcon = this.state.paused ?
+      Utils.renderIconForPlatform(
+        <Icon name="ios-play" size={36} style={styles.blurView.icon} />,
+        <Icon name="md-play" size={36} style={styles.blurView.icon} />
+      ) :
+      Utils.renderIconForPlatform(
+        <Icon name="ios-pause" size={36} style={styles.blurView.icon} />,
+        <Icon name="md-pause" size={36} style={styles.blurView.icon} />
+      );
+    const fastforwardIcon = Utils.renderIconForPlatform(
+      <Icon name="ios-fastforward" size={36} style={styles.blurView.icon} />,
+      <Icon name="md-fastforward" size={36} style={styles.blurView.icon} />
+    );
+    return (
+      <Animated.View style={[
+        styles.blurView.container,
+        {
+          opacity: this.animations.bottomControl.opacity,
+          marginBottom: this.animations.bottomControl.marginBottom,
+        }
+      ]}
+      >
+        <BlurView style={styles.blurView.blur} blur={10}>
+          { this.renderSeekbar() }
+          <View style={styles.blurView.mediaControls}>
+            {
+              this.renderControl(
+                rewindIcon,
+              )
+            }
+            {
+              this.renderControl(
+                playPauseIcon,
+                this.methods.togglePlayPause
+              )
+            }
+            {
+              this.renderControl(
+                fastforwardIcon,
+              )
+            }
+          </View>
+        </BlurView>
       </Animated.View>
     );
   }
@@ -1035,24 +1097,7 @@ export default class VideoPlayer extends Component {
   renderLoader() {
     if (this.state.loading) {
       return (
-        <View style={styles.loader.container}>
-          <Animated.Image
-            source={require('../../assets/img/loader-icon.png')}
-            style={[
-            styles.loader.icon,
-            {
- transform: [
-                {
- rotate: this.animations.loader.rotate.interpolate({
-                    inputRange: [0, 360],
-                    outputRange: ['0deg', '360deg']
-                  })
-}
-              ]
-}
-          ]}
-          />
-        </View>
+        <Spinner wrapperStyle={styles.loader.container} />
       );
     }
     return null;
@@ -1105,7 +1150,7 @@ export default class VideoPlayer extends Component {
           { this.renderError() }
           { this.renderTopControls() }
           { this.renderLoader() }
-          { this.renderBottomControls() }
+          { this.renderBlurControls() }
         </View>
       </TouchableWithoutFeedback>
     );

@@ -1,5 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native';
 const { width, height } = Dimensions.get('window');
+import colorPalette from '../../config/colorPalette';
+
 const styles = {
   player: StyleSheet.create({
     container: {
@@ -38,6 +40,7 @@ const styles = {
   }),
   loader: StyleSheet.create({
     container: {
+      backgroundColor: 'transparent',
       position: 'absolute',
       top: 0,
       right: 0,
@@ -113,8 +116,6 @@ const styles = {
       flexDirection: 'row',
     },
     playPause: {
-      position: 'relative',
-      width: 80,
       zIndex: 0
     },
     title: {
@@ -165,7 +166,7 @@ const styles = {
   seekbar: StyleSheet.create({
     container: {
       alignSelf: 'stretch',
-      height: 28,
+      flex: 2,
       marginLeft: 20,
       marginRight: 20
     },
@@ -177,7 +178,7 @@ const styles = {
       width: '100%'
     },
     fill: {
-      backgroundColor: '#FFF',
+      backgroundColor: colorPalette.dirtyWhite,
       height: 1,
       width: '100%'
     },
@@ -195,6 +196,26 @@ const styles = {
       height: 12,
       width: 12,
     },
+  }),
+  blurView: StyleSheet.create({
+    container: {
+      justifyContent: 'center',
+      height: 70,
+      width: '100%',
+    },
+    blur: {
+      flex: 1,
+    },
+    icon: {
+      color: colorPalette.dirtyWhite,
+      marginHorizontal: 30,
+    },
+    mediaControls: {
+      flex: 5,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+    }
   })
 };
 

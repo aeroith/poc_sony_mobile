@@ -95,12 +95,14 @@ def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion "23.0.3"
 
     defaultConfig {
         applicationId "com.sony.channelmobile"
         minSdkVersion 16
         targetSdkVersion 22
+        renderscriptTargetApi 23
+        renderscriptSupportModeEnabled true
         versionCode 1
         versionName "1.0"
         ndk {
@@ -139,6 +141,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-blur')
     compile project(':react-native-orientation')
     compile project(':react-native-video')
     compile project(':react-native-device-info')
