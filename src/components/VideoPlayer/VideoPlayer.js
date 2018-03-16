@@ -3,12 +3,8 @@ import Video from 'react-native-video';
 import {
   TouchableWithoutFeedback,
   TouchableHighlight,
-  ImageBackground,
   PanResponder,
-  StyleSheet,
-  Touchable,
   Animated,
-  Platform,
   Easing,
   Image,
   View,
@@ -16,10 +12,9 @@ import {
 } from 'react-native';
 import { BlurView } from 'react-native-blur';
 import Icon from 'react-native-vector-icons/Ionicons';
-import OctIcon from 'react-native-vector-icons/Octicons';
-import Spinner from '../Spinner';
-import Orientation from 'react-native-orientation';
 import _ from 'lodash';
+import Orientation from 'react-native-orientation';
+import Spinner from '../Spinner';
 import Utils from '../../utils/utils';
 import styles from './styles';
 
@@ -901,44 +896,6 @@ export default class VideoPlayer extends Component {
       <Image source={source} />,
       this.methods.toggleFullscreen,
       styles.controls.fullscreen
-    );
-  }
-
-  /**
-   * Render bottom control group and wrap it in a holder
-   */
-  renderBottomControls() {
-    const playPauseControl = !this.props.disablePlayPause ? this.renderPlayPause() : this.renderNullControl();
-    const timerControl = !this.props.disableTimer ? this.renderTimer() : this.renderNullControl();
-    const seekbarControl = !this.props.disableSeekbar ? this.renderSeekbar() : this.renderNullControl();
-
-    return (
-      <Animated.View style={[
-        styles.controls.bottom,
-        {
-          opacity: this.animations.bottomControl.opacity,
-          marginBottom: this.animations.bottomControl.marginBottom,
-        }
-      ]}
-      >
-        <ImageBackground
-          source={require('../../assets/img/bottom-vignette.png')}
-          style={[styles.controls.column]}
-          imageStyle={[styles.controls.vignette]}
-        >
-          { seekbarControl }
-          <View style={[
-            styles.controls.row,
-            styles.controls.bottomControlGroup
-          ]}
-          >
-            { playPauseControl }
-            { this.renderTitle() }
-            { timerControl }
-
-          </View>
-        </ImageBackground>
-      </Animated.View>
     );
   }
 

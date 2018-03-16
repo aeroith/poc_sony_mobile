@@ -25,7 +25,9 @@ const initialState = {
 const actionsMap = {
   [actionTypes.CONFIG_REQUEST]: state => ({ ...state, configLoading: true, configError: null }),
   [actionTypes.CONFIG_RESPONSE]: (state, action) => {
-    const { logo, menu, name } = action.channels
+    const {
+      logo, menu, name, live_url
+    } = action.channels
       .filter(channel => channel.id === action.default_channel)[0];
     const [language, country] = action.locale.split('_');
     return {
@@ -39,6 +41,7 @@ const actionsMap = {
       locale: action.locale,
       configLoading: true,
       configError: null,
+      liveUrl: live_url,
     };
   },
   [actionTypes.CONFIG_ERROR]: (state, action) => ({
