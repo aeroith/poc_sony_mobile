@@ -113,7 +113,7 @@ export default class VideoPlayer extends Component {
       volumePanResponder: PanResponder,
       seekPanResponder: PanResponder,
       controlTimeout: null,
-      volumeWidth: 150,
+      volumeWidth: this.state.isFullscreen ? 160 : 100,
       iconOffset: 7,
       seekWidth: 0,
       ref: Video,
@@ -587,9 +587,9 @@ export default class VideoPlayer extends Component {
     if (state.volumeFillWidth < 0) {
       state.volumeFillWidth = 0;
     }
-
-    if (state.volumeTrackWidth > 150) {
-      state.volumeTrackWidth = 150;
+    const maxVolumeTrackWidth = this.state.isFullscreen ? 160 : 100;
+    if (state.volumeTrackWidth > maxVolumeTrackWidth) {
+      state.volumeTrackWidth = maxVolumeTrackWidth;
     }
 
     this.setState(state);
@@ -759,11 +759,7 @@ export default class VideoPlayer extends Component {
         this.setVolumePosition(position);
         state.volume = this.calculateVolumeFromVolumePosition();
 
-        if (state.volume <= 0) {
-          state.muted = true;
-        } else {
-          state.muted = false;
-        }
+        state.muted = state.volume <= 0;
 
         this.setState(state);
       },
@@ -830,8 +826,6 @@ export default class VideoPlayer extends Component {
    */
   renderTopControls() {
     const backControl = !this.props.disableBack ? this.renderBack() : this.renderNullControl();
-    const volumeControl = !this.props.disableVolume ? this.renderVolume() : this.renderNullControl();
-    const fullscreenControl = !this.props.disableFullscreen ? this.renderFullscreen() : this.renderNullControl();
 
     return (
       <Animated.View style={[
@@ -842,19 +836,13 @@ export default class VideoPlayer extends Component {
         }
       ]}
       >
-        <ImageBackground
-          source={require('../../assets/img/top-vignette.png')}
+        <View
           style={[styles.controls.column]}
-          imageStyle={[styles.controls.vignette]}
         >
           <View style={styles.controls.topControlGroup}>
             { backControl }
-            <View style={styles.controls.pullRight}>
-              { volumeControl }
-              { fullscreenControl }
-            </View>
           </View>
-        </ImageBackground>
+        </View>
       </Animated.View>
     );
   }
@@ -864,8 +852,8 @@ export default class VideoPlayer extends Component {
    */
   renderBack() {
     const backIcon = Utils.renderIconForPlatform(
-      <Icon name="ios-arrow-back" size={36} style={styles.blurView.icon} />,
-      <Icon name="md-arrow-back" size={36} style={styles.blurView.icon} />
+      <Icon name="ios-arrow-back" size={36} style={styles.controls.back} />,
+      <Icon name="md-arrow-back" size={36} style={styles.controls.back} />
     );
     return this.renderControl(
       backIcon,
@@ -878,9 +866,11 @@ export default class VideoPlayer extends Component {
    */
   renderVolume() {
     return (
-      <View style={styles.volume.container}>
+      <View style={[styles.volume.container, this.state.isFullscreen && { width: 160 }]}>
+        <Icon name="ios-volume-up" size={26} style={styles.volume.icon} />
         <View style={[
           styles.volume.fill,
+          this.state.isFullscreen && { width: 160 },
           { width: this.state.volumeFillWidth }
         ]}
         />
@@ -896,7 +886,7 @@ export default class VideoPlayer extends Component {
           ]}
           {...this.player.volumePanResponder.panHandlers}
         >
-          <Image style={styles.volume.icon} source={require('../../assets/img/volume.png')} />
+          <View style={styles.volume.hiddenHandle} />
         </View>
       </View>
     );
@@ -953,23 +943,15 @@ export default class VideoPlayer extends Component {
   }
 
   renderBlurControls() {
-    const rewindIcon = Utils.renderIconForPlatform(
-      <Icon name="ios-rewind" size={36} style={styles.blurView.icon} />,
-      <Icon name="md-rewind" size={36} style={styles.blurView.icon} />
-    );
     const playPauseIcon = this.state.paused ?
       Utils.renderIconForPlatform(
-        <Icon name="ios-play" size={36} style={styles.blurView.icon} />,
-        <Icon name="md-play" size={36} style={styles.blurView.icon} />
+        <Icon name="ios-play" size={32} style={[styles.blurView.icon, styles.blurView.middleIcon]} />,
+        <Icon name="md-play" size={32} style={[styles.blurView.icon, styles.blurView.middleIcon]} />
       ) :
       Utils.renderIconForPlatform(
-        <Icon name="ios-pause" size={36} style={styles.blurView.icon} />,
-        <Icon name="md-pause" size={36} style={styles.blurView.icon} />
+        <Icon name="ios-pause" size={32} style={[styles.blurView.icon, styles.blurView.middleIcon]} />,
+        <Icon name="md-pause" size={32} style={[styles.blurView.icon, styles.blurView.middleIcon]} />
       );
-    const fastforwardIcon = Utils.renderIconForPlatform(
-      <Icon name="ios-fastforward" size={36} style={styles.blurView.icon} />,
-      <Icon name="md-fastforward" size={36} style={styles.blurView.icon} />
-    );
     return (
       <Animated.View style={[
         styles.blurView.container,
@@ -981,23 +963,23 @@ export default class VideoPlayer extends Component {
       >
         <BlurView style={styles.blurView.blur} blur={10}>
           { this.renderSeekbar() }
-          <View style={styles.blurView.mediaControls}>
+          <View style={styles.blurView.controls}>
             {
               this.renderControl(
-                rewindIcon,
+                this.renderFullscreen(),
+                this.methods.toggleFullscreen,
+                { marginBottom: 15 }
               )
             }
-            {
-              this.renderControl(
-                playPauseIcon,
-                this.methods.togglePlayPause
-              )
-            }
-            {
-              this.renderControl(
-                fastforwardIcon,
-              )
-            }
+            <View style={styles.blurView.mediaControls}>
+              {
+                this.renderControl(
+                  playPauseIcon,
+                  this.methods.togglePlayPause
+                )
+              }
+            </View>
+            { this.renderVolume() }
           </View>
         </BlurView>
       </Animated.View>
@@ -1124,7 +1106,7 @@ export default class VideoPlayer extends Component {
     return (
       <TouchableWithoutFeedback
         onPress={this.events.onScreenTouch}
-        style={[styles.player.container, this.styles.containerStyle, { zIndex: this.state.zIndex}]}
+        style={[styles.player.container, this.styles.containerStyle, { zIndex: this.state.zIndex }]}
       >
         <View style={[styles.player.container, this.styles.containerStyle]}>
           <Video

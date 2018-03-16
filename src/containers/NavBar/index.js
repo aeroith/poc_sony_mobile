@@ -103,7 +103,7 @@ export default class NavBar extends Component {
       }
       const { noFloat } = this.state;
       return (
-        <Animatable.View style={[styles.navBarWrapper, noFloat && styles.navBarNoFloat]} animation="fadeInDown">
+        <View style={[styles.navBarWrapper, noFloat && styles.navBarNoFloat]} >
           <LinearGradient
             colors={[colorPalette.grayBg4, colorPalette.transparent]}
             locations={this.getGradientLocations(isSearchBarVisible, noFloat)}
@@ -134,7 +134,7 @@ export default class NavBar extends Component {
               </TouchableOpacity>
             </View>
           </LinearGradient>
-        </Animatable.View>
+        </View>
 
       );
     }

@@ -68,6 +68,10 @@ const styles = {
     vignette: {
       resizeMode: 'stretch'
     },
+    back: {
+      color: colorPalette.dirtyWhite,
+      marginLeft: 10,
+    },
     control: {
       padding: 16,
     },
@@ -113,7 +117,8 @@ const styles = {
       flexDirection: 'row',
     },
     fullscreen: {
-      flexDirection: 'row',
+      position: 'absolute',
+      left: 20,
     },
     playPause: {
       zIndex: 0
@@ -139,13 +144,19 @@ const styles = {
   }),
   volume: StyleSheet.create({
     container: {
+      position: 'absolute',
+      right: 18,
       alignItems: 'center',
       justifyContent: 'flex-start',
       flexDirection: 'row',
-      height: 1,
-      marginLeft: 20,
-      marginRight: 20,
-      width: 150,
+      height: 5,
+      width: 100,
+      borderRadius: 2.5,
+    },
+    icon: {
+      position: 'absolute',
+      left: -24,
+      color: colorPalette.dirtyWhite
     },
     track: {
       backgroundColor: '#333',
@@ -153,14 +164,28 @@ const styles = {
       marginLeft: 7,
     },
     fill: {
-      backgroundColor: '#FFF',
-      height: 1,
+      backgroundColor: colorPalette.red,
+      width: 100,
+      height: 5,
+      borderRadius: 2.5,
     },
     handle: {
       position: 'absolute',
       marginTop: -24,
+      marginLeft: -14,
+      width: 10,
+      height: 10,
+      borderRadius: 5,
+      backgroundColor: colorPalette.dirtyWhite
+    },
+    hiddenHandle: {
+      position: 'absolute',
+      marginTop: -24,
       marginLeft: -24,
       padding: 16,
+    },
+    volumeIcon: {
+      color: colorPalette.dirtyWhite
     }
   }),
   seekbar: StyleSheet.create({
@@ -208,10 +233,18 @@ const styles = {
     },
     icon: {
       color: colorPalette.dirtyWhite,
+    },
+    middleIcon: {
       marginHorizontal: 30,
     },
-    mediaControls: {
+    controls: {
       flex: 5,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
+    mediaControls: {
+      flex: 1,
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
