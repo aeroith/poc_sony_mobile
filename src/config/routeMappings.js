@@ -34,7 +34,12 @@ const routeMappings = [
     enum: 'notifications',
     uniqueMenuItem: true,
     noFloat: true,
-  }
+  },
+  {
+    routeName: 'Program',
+    enum: 'program',
+    noFloat: true,
+  },
 ];
 
 export default routeMappings;

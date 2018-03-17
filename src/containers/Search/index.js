@@ -4,7 +4,6 @@ import { View, TextInput, TouchableOpacity, Text } from 'react-native';
 import Image from '../../components/Image';
 import _debounce from 'lodash/debounce';
 import Autocomplete from 'react-native-autocomplete-input';
-import moment from 'moment';
 import { connect } from 'react-redux';
 import config from '../../config/config';
 import withTranslation from '../../hocs/Translation/index';
@@ -18,6 +17,7 @@ import { actions as searchBarActions } from '../../reducers/search';
 @connect(
   state => ({
     systemName: state.app.systemName,
+    channelId: state.app.channelId,
   }),
   dispatch => ({
     setSearchBarState: searchBarState => dispatch(searchBarActions.setSearchBarState(searchBarState))
@@ -55,8 +55,9 @@ export default class Search extends Component {
 
     getAutocompleteResults = (query) => {
       if (query.length >= 3) {
+        const { channelId } = this.props;
         this.setState({ loading: true });
-        SearchService.getAutocompleteResults(query)
+        SearchService.getAutocompleteResults(query, channelId)
           .then(results => this.setState({ data: results, loading: false }));
       }
     };
