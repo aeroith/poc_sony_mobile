@@ -8,7 +8,11 @@ import withLoadingBar from '../../hocs/WithLoadingBar/WithLoadingBar';
 export default class ProgramContent extends Component {
     static propTypes = {
       translate: PropTypes.func.isRequired,
-      isLoading: PropTypes.bool.isRequired
+      isLoading: PropTypes.bool
+    };
+
+    static defaultProps = {
+      isLoading: true,
     };
 
     render() {

@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     color: colorPalette.white,
     fontWeight: 'bold',
     fontSize: 16,
-    maxWidth: 120,
+    maxWidth: 200,
     backgroundColor: 'transparent'
   },
   navBarText: {

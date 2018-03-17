@@ -38,7 +38,6 @@ const routeMappings = [
   {
     routeName: 'Program',
     enum: 'program',
-    noFloat: true,
   },
 ];
 

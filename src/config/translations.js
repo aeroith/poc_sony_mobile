@@ -49,17 +49,18 @@ const translations = {
     menu: {
       sony_crime_channel: {
         programs: 'Shows',
+        program: 'Show',
         tv_guide: 'TV Guide',
         galleries: 'Galleries',
         news: 'News',
         games_and_more: 'Games & More',
-        gamesandmore: 'Games & More',
       },
       sony_channel_turkiye: {
         programs: 'Shows',
-        tvguide: 'TV Guide',
+        program: 'Show',
+        tv_guide: 'TV Guide',
         galleries: 'Galleries',
-        livefeed: 'Live Feed',
+        live_feed: 'Live Feed',
         videos: 'Videos',
       }
     }
@@ -111,13 +112,15 @@ const translations = {
     menu: {
       sony_crime_channel: {
         programs: 'Şovlar',
+        program: 'Şov',
         tv_guide: 'Yayın Akışı',
         galleries: 'Galeriler',
         news: 'Haberler',
-        gamesandmore: 'Oyunlar ve Daha Fazlası',
+        games_and_more: 'Oyunlar ve Daha Fazlası',
       },
       sony_channel_turkiye: {
         programs: 'Şovlar',
+        program: 'Şov',
         tv_guide: 'Yayın Akışı',
         galleries: 'Galeriler',
         livefeed: 'Canlı Yayın',
