@@ -38,6 +38,7 @@ export default class LiveFeed extends Component {
           paused
           translate={this.props.translate}
           source={{ uri: this.props.liveUrl }}
+          {...this.props}
         />
       </View>
     );
