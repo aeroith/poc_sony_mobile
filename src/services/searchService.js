@@ -20,7 +20,7 @@ export default class SearchService {
     return Promise.all(promiseAllData)
       .then(items => items.map((item, index) => {
         const imagePath = item.poster_path || item.backdrop_path;
-        const tmdbImagePath = imagePath ? `${TMDBClient.configuration.images.secure_base_url}${imageSize}${imagePath}` : null;
+        const tmdbImagePath = imagePath ? `${TMDBClient.configuration.images.secure_base_url}${imageSize || 'w92'}${imagePath}` : null;
         return {
           ...data[index],
           tmdbImagePath,

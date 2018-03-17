@@ -1,4 +1,5 @@
 import ApiClient from '../utils/api-client';
+import TMDBClient from '../utils/tmdb-client';
 
 const actionTypes = {
   PROGRAM_EPISODES_REQUEST: 'PROGRAM_EPISODES_REQUEST',
@@ -7,7 +8,8 @@ const actionTypes = {
 };
 
 const initialState = {
-  id: null,
+  programDetails: {},
+  tmdbDetails: {},
   loading: false,
   error: null,
 };
@@ -15,12 +17,14 @@ const initialState = {
 // Reducer - SearchBar
 const actionsMap = {
   [actionTypes.PROGRAM_EPISODES_REQUEST]: state => ({ ...state, loading: true, error: null }),
-  [actionTypes.PROGRAM_EPISODES_RESPONSE]: (state, action) => {
-    return state;
-  },
-  [actionTypes.PROGRAM_EPISODES_ERROR]: (state, action) => {
-    return state;
-  },
+  [actionTypes.PROGRAM_EPISODES_RESPONSE]: (state, { programDetails, tmdbDetails }) => ({
+    ...state,
+    programDetails,
+    tmdbDetails,
+    loading: false,
+    error: null
+  }),
+  [actionTypes.PROGRAM_EPISODES_ERROR]: (state, action) => ({ ...state, error: action.error, loading: false, programDetails: {}, tmdbDetails: {} }),
 };
 
 // Actions - Program
@@ -29,13 +33,26 @@ const actions = {
     const state = getState();
     const { channelId } = state.app;
     dispatch({ type: actionTypes.PROGRAM_EPISODES_REQUEST });
-    ApiClient.get(`channels/${channelId}/programs/${programId}/episodes`)
+    const getProgramWithEpisodes = new Promise((resolve, reject) => ApiClient.get(`channels/${channelId}/programs/${programId}/episodes`)
       .then((response) => {
-        const data = response.data.data[0];
-        console.log('data: ', data);
-        // dispatch({ type: actionTypes.PROGRAM_EPISODES_RESPONSE, ...data });
+        const { tmdb_id: tmdbId, type } = response.data.data.program;
+        return TMDBClient.get('Details', type, tmdbId)
+          .then((tmdbDetails) => {
+            const fetchedData = response.data.data;
+            resolve({ tmdbDetails, programDetails: { seasons: fetchedData.seasons, ...fetchedData.program } });
+          })
+          .catch(() => {
+            resolve({ programDetails: response.data.data });
+          });
       })
-      .catch(error => dispatch({ type: actionTypes.PROGRAM_EPISODES_ERROR, error }));
+      .catch(error => reject(error)));
+    getProgramWithEpisodes
+      .then(({ programDetails, tmdbDetails }) => {
+        dispatch({ type: actionTypes.PROGRAM_EPISODES_RESPONSE, programDetails, tmdbDetails });
+      })
+      .catch((error) => {
+        dispatch({ type: actionTypes.PROGRAM_EPISODES_ERROR, error });
+      });
   },
 };
 
