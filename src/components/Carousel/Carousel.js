@@ -73,6 +73,10 @@ class Carousel extends PureComponent {
     }
   };
 
+  handleCarouselPress = (id) => {
+    console.log('carousel pressed with id =>', id);
+  };
+
   render() {
     if (!this.props.images || _.isEmpty(this.props.images)) {
       return null;
@@ -93,7 +97,7 @@ class Carousel extends PureComponent {
           {
             this.props.images
               .map(({ global_image_url, id }) => (
-                <TouchableWithoutFeedback onPress={() => console.log('carousel pressed')} key={id}>
+                <TouchableWithoutFeedback onPress={() => this.handleCarouselPress(id)} key={id}>
                   <View key={id + 1}>
                     <Image
                       style={[styles.image, { width: this.state.layout.width }]}

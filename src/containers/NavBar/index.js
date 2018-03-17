@@ -92,7 +92,7 @@ export default class NavBar extends Component {
     };
 
     render() {
-      const { isSearchBarVisible } = this.props;
+      const { isSearchBarVisible, navigation } = this.props;
       const { noFloat } = this.state;
       return (
         <Animatable.View style={[styles.navBarWrapper, noFloat && styles.navBarNoFloat]} animation="fadeInDown">
@@ -101,7 +101,7 @@ export default class NavBar extends Component {
             locations={this.getGradientLocations(isSearchBarVisible, noFloat)}
             style={styles.linearGradientComponent}
           >
-            <Search shouldRender={isSearchBarVisible} />
+            <Search shouldRender={isSearchBarVisible} navigation={navigation} />
             <View style={[styles.linearGradientWrapper, noFloat && styles.linearGradientWrapperNoFloat, isSearchBarVisible && styles.linearGradientWrapper__searchBarOpen]}>
               <TouchableOpacity
                 hitSlop={{

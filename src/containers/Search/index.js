@@ -69,6 +69,8 @@ export default class Search extends Component {
 
     handleAutocompleteItemSelect = selectedItem => () => {
       this.setState({ query: selectedItem.name, data: [] });
+      console.log('selectedItem (from autocomplete): ', selectedItem);
+      console.log('this.props.navigation', this.props.navigation);
     };
 
     getType = (typeEnum) => {

@@ -106,7 +106,7 @@ export default class App extends Component {
       <View style={styles.wrapper}>
         <Menu navigation={navigation}>
           <StatusBar barStyle="light-content" style={styles.statusBar} />
-          <NavBar nav={nav} />
+          <NavBar nav={nav} navigation={navigation} />
           <View style={styles.app}>
             <AppNavigator navigation={navigation} />
           </View>
