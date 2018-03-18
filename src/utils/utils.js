@@ -59,7 +59,8 @@ export default class Utils {
 
   static getChannelEnum = channelName => channelName.toLowerCase().replace(/\s/g, '_');
 
-  static renderIconForPlatform = (iosIcon, mdIcon) =>
-    (Platform.OS === 'ios' ? iosIcon : mdIcon);
+  static renderIconForPlatform = (iosIcon, mdIcon) => {
+    if (!mdIcon) return iosIcon;
+    return (Platform.OS === 'ios' ? iosIcon : mdIcon);
+  }
 }
-
