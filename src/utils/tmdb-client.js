@@ -1,6 +1,7 @@
 import axios from 'axios';
 import config from '../config/config';
 import defaultTmdbConfig from './defaultTmdbConfig';
+import _isEmpty from 'lodash/isEmpty';
 
 class TDMBClient {
   constructor() {
@@ -24,6 +25,19 @@ class TDMBClient {
           resolve(defaultTmdbConfig);
         });
     });
+  }
+
+  getDateRange(tmdbDetail) {
+    if (!tmdbDetail || _isEmpty(tmdbDetail)) return '';
+    function getYear(dateString) {
+      if (!dateString) return 'N/A';
+      return dateString.split('-')[0];
+    }
+    const { first_air_date, last_air_date } = tmdbDetail;
+    const firstAirDate = getYear(first_air_date);
+    const lastAirDate = getYear(last_air_date);
+    if (firstAirDate === lastAirDate) return `(${firstAirDate})`;
+    return `(${firstAirDate} - ${lastAirDate})`;
   }
 
   generatePosterPath(tmdbDetailsObj, imageSize) {

@@ -23,7 +23,7 @@ export default class SearchService {
         return {
           ...data[index],
           tmdbImagePath,
-          dateRange: utils.getTMDBDateRange(item),
+          dateRange: TMDBClient.getDateRange(item),
         };
       }))
       .catch(err => console.log(err));

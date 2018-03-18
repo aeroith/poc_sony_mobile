@@ -9,8 +9,8 @@ const actionTypes = {
 };
 
 const initialState = {
-  details: {},
-  tmdbDetails: {},
+  details: null,
+  tmdbDetails: null,
   loading: false,
   error: null,
 };
@@ -26,10 +26,10 @@ const actionsMap = {
     error: null
   }),
   [actionTypes.PROGRAM_EPISODES_ERROR]: (state, action) => ({
-    ...state, error: action.error, loading: false, details: {}, tmdbDetails: {}
+    ...state, error: action.error, loading: false, details: null, tmdbDetails: null
   }),
   [actionTypes.RESET_PROGRAM]: state => ({
-    ...state, details: {}, tmdbDetails: {}, loading: false, error: null
+    ...state, details: null, tmdbDetails: null, loading: false, error: null
   })
 };
 
@@ -59,7 +59,8 @@ const actions = {
           details,
           tmdbDetails: {
             ...tmdbDetails,
-            full_poster_path: TMDBClient.generatePosterPath(tmdbDetails, 'w154')
+            full_poster_path: TMDBClient.generatePosterPath(tmdbDetails, 'w154'),
+            date_range: TMDBClient.getDateRange(tmdbDetails),
           }
         });
       })

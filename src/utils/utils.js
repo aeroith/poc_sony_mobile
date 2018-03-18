@@ -38,17 +38,5 @@ export default class Utils {
     const { routeName } = navState.routes[navStackLength - 1];
     return _find(routeMappings, { routeName });
   }
-  static getTMDBDateRange(tmdbDetail) {
-    if (!tmdbDetail || _isEmpty(tmdbDetail)) return '';
-    function getYear(dateString) {
-      if (!dateString) return 'N/A';
-      return dateString.split('-')[0];
-    }
-    const { first_air_date, last_air_date } = tmdbDetail;
-    const firstAirDate = getYear(first_air_date);
-    const lastAirDate = getYear(last_air_date);
-    if (firstAirDate === lastAirDate) return `(${firstAirDate})`;
-    return `(${firstAirDate} - ${lastAirDate})`;
-  }
   static getChannelEnum = channelName => channelName.toLowerCase().replace(/\s/g, '_')
 }

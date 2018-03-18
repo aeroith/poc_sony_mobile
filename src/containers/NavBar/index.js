@@ -12,6 +12,7 @@ import styles from './styles';
 import Search from '../Search/index';
 import { actions as searchBarActions } from '../../reducers/search';
 import { actions as drawerActions } from '../../reducers/drawer';
+import { actions as programActions } from '../../reducers/program';
 import Utils from '../../utils/utils';
 
 @withTranslation
@@ -20,10 +21,12 @@ import Utils from '../../utils/utils';
     isSearchBarVisible: state.search.isSearchBarVisible,
     isDrawerVisible: state.drawer.isDrawerVisible,
     channelName: state.app.channelName,
+    programDetails: state.program.details,
   }),
   {
     setSearchBarState: searchBarActions.setSearchBarState,
-    setDrawerState: drawerActions.setDrawerState
+    setDrawerState: drawerActions.setDrawerState,
+    resetProgram: programActions.resetProgram,
   }
 )
 export default class NavBar extends Component {
@@ -31,6 +34,7 @@ export default class NavBar extends Component {
       translate: PropTypes.func.isRequired,
       setDrawerState: PropTypes.func.isRequired,
       setSearchBarState: PropTypes.func.isRequired,
+      resetProgram: PropTypes.func.isRequired,
       isDrawerVisible: PropTypes.bool.isRequired,
       channelName: PropTypes.string.isRequired,
     };
@@ -58,6 +62,9 @@ export default class NavBar extends Component {
       if (!route || (route.enum === (this.routeStack.current && this.routeStack.current.enum))) return;
       this.routeStack.prev = this.routeStack.current;
       this.routeStack.current = route;
+      if (this.routeStack.prev && this.routeStack.prev.enum === 'program') {
+        this.props.resetProgram();
+      }
     }
 
     getCurrentRouteDetails = (navProps) => {
@@ -69,6 +76,9 @@ export default class NavBar extends Component {
       const currentRoute = route || this.getCurrentRouteDetails(this.props.nav);
       const channelEnum = Utils.getChannelEnum(this.props.channelName);
       if (currentRoute.uniqueMenuItem) return this.props.translate(currentRoute.enum);
+      if (currentRoute.enum === 'program' && this.props.programDetails) {
+        return this.props.programDetails.name;
+      }
       const navHeader = this.props.translate(this.props.channelName
         ? `menu.${channelEnum}.${currentRoute.enum}`
         : '');

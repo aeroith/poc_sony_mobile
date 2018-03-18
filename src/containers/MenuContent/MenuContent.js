@@ -21,6 +21,8 @@ import colorPalette from '../../config/colorPalette';
   language: state.app.language,
   country: state.app.country,
   menu: state.app.menu,
+  programDetails: state.program.details,
+  programTmdbDetails: state.program.tmdbDetails,
 }))
 export default class MenuContent extends Component {
   static propTypes = {
@@ -130,8 +132,9 @@ export default class MenuContent extends Component {
 
   render() {
     const {
-      channelLogo, channelName, menu, translate
+      channelLogo, channelName, menu, translate, programDetails, programTmdbDetails
     } = this.props;
+    console.log({ programDetails, programTmdbDetails });
     const route = Utils.getCurrentRoute(this.props.navigation.state);
     const channelEnum = Utils.getChannelEnum(channelName);
     return (
@@ -145,6 +148,18 @@ export default class MenuContent extends Component {
           }}
           text={{ content: channelName, style: styles.channelInfoText }}
         />
+        {programDetails && programTmdbDetails && (
+          <MenuItem
+            isSelected
+            bordered
+            image={{
+              uri: programTmdbDetails.full_poster_path,
+              height: 40,
+              width: 30
+            }}
+            text={{ content: programDetails.name, style: styles.channelInfoText }}
+          />
+        )}
         <ScrollView>
           {/* Main menu*/}
           {menu.length > 0 && menu.map((item, index) => (
