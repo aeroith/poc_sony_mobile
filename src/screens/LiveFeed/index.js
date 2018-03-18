@@ -33,7 +33,6 @@ export default class LiveFeed extends Component {
       <View style={styles.container}>
         <VideoPlayer
           poster="https://i.hizliresim.com/1J3zJ1.jpg"
-          title="Bugs Bunny"
           navigator={this.props.navigation}
           paused
           translate={this.props.translate}
