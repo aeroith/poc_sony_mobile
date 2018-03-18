@@ -10,7 +10,8 @@ import { actions as appActions } from '../../reducers/app';
 @withTranslation
 @connect(
   state => ({
-    liveUrl: state.app.liveUrl
+    liveUrl: state.app.liveUrl,
+    posterImage: state.app.posterImage,
   }),
   appActions
 )
@@ -19,10 +20,11 @@ export default class LiveFeed extends Component {
     navigation: PropTypes.object.isRequired,
     translate: PropTypes.func.isRequired,
     liveUrl: PropTypes.string,
+    posterImage: PropTypes.string,
   };
 
   static defaultProps = {
-    liveUrl: undefined
+    liveUrl: undefined,
   };
 
   render() {
@@ -32,7 +34,7 @@ export default class LiveFeed extends Component {
     return (
       <View style={styles.container}>
         <VideoPlayer
-          poster="https://i.hizliresim.com/1J3zJ1.jpg"
+          poster={this.props.posterImage}
           navigator={this.props.navigation}
           paused
           translate={this.props.translate}
