@@ -95,7 +95,7 @@ class ProgramList extends PureComponent {
     <ImageItem
       id={item.id}
       onPress={this.onPress}
-      image={item.poster_image}
+      image={item.tmdbImagePath}
     />
   );
 
