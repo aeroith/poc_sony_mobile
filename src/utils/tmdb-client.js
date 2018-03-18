@@ -19,11 +19,29 @@ class TDMBClient {
           resolve(response.data);
         })
         .catch((err) => {
-          if (this.logErrors) console.log('Tmdb configuration fetch error:', err);
+          if (this.logErrors) console.log('TMDB configuration fetch error:', err);
           this.configuration = defaultTmdbConfig;
           resolve(defaultTmdbConfig);
         });
     });
+  }
+
+  generatePosterPath(tmdbDetailsObj, imageSize) {
+    if (!this.configuration) {
+      console.log('Fetch TMDB configuration first to get the secure_base_url');
+      return '';
+    }
+    const getImageSize = (sizeString) => {
+      if (sizeString && this.configuration.images.poster_sizes.indexOf(sizeString)) {
+        return sizeString;
+      }
+      return this.configuration.images.poster_sizes[0];
+    };
+    const imagePath = tmdbDetailsObj.poster_path || tmdbDetailsObj.backdrop_path;
+    const generatedImageSize = getImageSize(imageSize);
+    return imagePath
+      ? `${this.configuration.images.secure_base_url}${generatedImageSize}${imagePath}`
+      : '';
   }
 
   get(methodName, tmdbType, tmdbId) {
@@ -39,7 +57,7 @@ class TDMBClient {
       return axios.get(url)
         .then(response => resolve(response.data))
         .catch((err) => {
-          if (this.logErrors) console.log('Tmbd data fetch error: ', err);
+          if (this.logErrors) console.log('TMDB data fetch error: ', err);
           resolve({});
         });
     });

@@ -4,11 +4,12 @@ import TMDBClient from '../utils/tmdb-client';
 const actionTypes = {
   PROGRAM_EPISODES_REQUEST: 'PROGRAM_EPISODES_REQUEST',
   PROGRAM_EPISODES_RESPONSE: 'PROGRAM_EPISODES_RESPONSE',
-  PROGRAM_EPISODES_ERROR: 'PROGRAM_EPISODES_ERROR'
+  PROGRAM_EPISODES_ERROR: 'PROGRAM_EPISODES_ERROR',
+  RESET_PROGRAM: 'RESET_PROGRAM',
 };
 
 const initialState = {
-  programDetails: {},
+  details: {},
   tmdbDetails: {},
   loading: false,
   error: null,
@@ -17,14 +18,19 @@ const initialState = {
 // Reducer - SearchBar
 const actionsMap = {
   [actionTypes.PROGRAM_EPISODES_REQUEST]: state => ({ ...state, loading: true, error: null }),
-  [actionTypes.PROGRAM_EPISODES_RESPONSE]: (state, { programDetails, tmdbDetails }) => ({
+  [actionTypes.PROGRAM_EPISODES_RESPONSE]: (state, { details, tmdbDetails }) => ({
     ...state,
-    programDetails,
+    details,
     tmdbDetails,
     loading: false,
     error: null
   }),
-  [actionTypes.PROGRAM_EPISODES_ERROR]: (state, action) => ({ ...state, error: action.error, loading: false, programDetails: {}, tmdbDetails: {} }),
+  [actionTypes.PROGRAM_EPISODES_ERROR]: (state, action) => ({
+    ...state, error: action.error, loading: false, details: {}, tmdbDetails: {}
+  }),
+  [actionTypes.RESET_PROGRAM]: state => ({
+    ...state, details: {}, tmdbDetails: {}, loading: false, error: null
+  })
 };
 
 // Actions - Program
@@ -39,21 +45,31 @@ const actions = {
         return TMDBClient.get('Details', type, tmdbId)
           .then((tmdbDetails) => {
             const fetchedData = response.data.data;
-            resolve({ tmdbDetails, programDetails: { seasons: fetchedData.seasons, ...fetchedData.program } });
+            resolve({ tmdbDetails, details: { seasons: fetchedData.seasons, ...fetchedData.program } });
           })
           .catch(() => {
-            resolve({ programDetails: response.data.data });
+            resolve({ details: response.data.data });
           });
       })
       .catch(error => reject(error)));
     getProgramWithEpisodes
-      .then(({ programDetails, tmdbDetails }) => {
-        dispatch({ type: actionTypes.PROGRAM_EPISODES_RESPONSE, programDetails, tmdbDetails });
+      .then(({ details, tmdbDetails }) => {
+        dispatch({
+          type: actionTypes.PROGRAM_EPISODES_RESPONSE,
+          details,
+          tmdbDetails: {
+            ...tmdbDetails,
+            full_poster_path: TMDBClient.generatePosterPath(tmdbDetails, 'w154')
+          }
+        });
       })
       .catch((error) => {
         dispatch({ type: actionTypes.PROGRAM_EPISODES_ERROR, error });
       });
   },
+  resetProgram: () => ({
+    type: actionTypes.RESET_PROGRAM,
+  }),
 };
 
 

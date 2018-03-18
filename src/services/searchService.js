@@ -7,11 +7,11 @@ export default class SearchService {
     const lowerCaseQuery = query.toLowerCase();
     return ApiClient.get(`/channels/${channelId}/programs?q=${lowerCaseQuery}`)
       // TODO: w92 should be taken from tmdb configuration
-      .then(response => SearchService.getTMDBImages(response.data.data, 'w92'))
+      .then(response => SearchService.getTMDBImages(response.data.data))
       .catch(err => console.log(err));
   }
 
-  static getTMDBImages(data, imageSize) {
+  static getTMDBImages(data) {
     const promiseAllData = data.map(item => TMDBClient.get(
       'Details',
       item.type || '',
@@ -19,8 +19,7 @@ export default class SearchService {
     ));
     return Promise.all(promiseAllData)
       .then(items => items.map((item, index) => {
-        const imagePath = item.poster_path || item.backdrop_path;
-        const tmdbImagePath = imagePath ? `${TMDBClient.configuration.images.secure_base_url}${imageSize || 'w92'}${imagePath}` : null;
+        const tmdbImagePath = TMDBClient.generatePosterPath(item, 'w92');
         return {
           ...data[index],
           tmdbImagePath,
