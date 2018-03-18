@@ -32,6 +32,7 @@ const styles = {
     },
     icon: {
       marginBottom: 16,
+      color: colorPalette.red,
     },
     text: {
       backgroundColor: 'transparent',
@@ -119,6 +120,10 @@ const styles = {
     fullscreen: {
       position: 'absolute',
       left: 20,
+      top: -7,
+    },
+    fullScrenIcon: {
+      color: colorPalette.dirtyWhite,
     },
     playPause: {
       zIndex: 0
