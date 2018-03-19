@@ -34,6 +34,12 @@ const routeMappings = [
     enum: 'notifications',
     uniqueMenuItem: true,
     noFloat: true,
+  },
+  {
+    routeName: 'LiveFeed',
+    enum: 'livefeed',
+    uniqueMenuItem: true,
+    noFloat: true,
   }
 ];
 
