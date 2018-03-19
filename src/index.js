@@ -26,7 +26,7 @@ const deviceInfo = Utils.getDeviceInfo(env);
 const initialState = createAppInitialState(siteConfig, deviceInfo);
 const { store, persistor } = configureStore(initialState, reduxNavMiddleware);
 
-export { addListener };
+export { addListener, store };
 export default () => (
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
