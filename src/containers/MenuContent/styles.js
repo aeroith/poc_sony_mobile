@@ -63,8 +63,6 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     backgroundColor: colorPalette.red,
-    // borderRightColor: colorPalette.red,
-    // borderRightWidth: 3,
   },
   menuSection: {
     margin: 0,
@@ -82,8 +80,5 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: colorPalette.white,
   },
-  menuSectionHeaderIcon: {
-
-  }
 });
 export default styles;

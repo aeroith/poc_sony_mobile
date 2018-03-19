@@ -9,10 +9,9 @@ import { actions as programActions } from '../../reducers/program';
 
 @withTranslation
 @connect(
-  // state => ({
-  //     program: state.program
-  // }),
-  null,
+  state => ({
+    program: state.program
+  }),
   programActions,
 )
 export default class Program extends Component {
@@ -28,15 +27,19 @@ export default class Program extends Component {
   componentDidMount() {
     if (this.props.navigation && this.props.navigation.state.params) {
       const programId = this.props.navigation.state.params.id;
-      console.log('programId:', programId);
       this.props.getProgramWithEpisodes(programId);
     }
   }
 
   render() {
+    const shouldRender = !!(this.props.program && this.props.program.details);
     return (
       <View style={styles.container}>
-        <ProgramContent isLoading={false} translate={this.props.translate} />
+        <ProgramContent
+          isLoading={!shouldRender}
+          program={this.props.program}
+          translate={this.props.translate}
+        />
       </View>
     );
   }

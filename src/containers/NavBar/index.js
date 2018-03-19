@@ -48,6 +48,9 @@ export default class NavBar extends Component {
       this.state = {
         noFloat: false,
       };
+      this.settings = {
+        enableShowHeader: false,
+      };
     }
 
     componentWillReceiveProps(nextProps) {
@@ -76,8 +79,10 @@ export default class NavBar extends Component {
       const currentRoute = route || this.getCurrentRouteDetails(this.props.nav);
       const channelEnum = Utils.getChannelEnum(this.props.channelName);
       if (currentRoute.uniqueMenuItem) return this.props.translate(currentRoute.enum);
-      if (currentRoute.enum === 'program' && this.props.programDetails) {
-        return this.props.programDetails.name;
+      if (currentRoute.enum === 'program' && this.props.programDetail) {
+        if (this.settings.enableShowHeader) {
+          return this.props.programDetails.name;
+        }
       }
       const navHeader = this.props.translate(this.props.channelName
         ? `menu.${channelEnum}.${currentRoute.enum}`

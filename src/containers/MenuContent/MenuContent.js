@@ -134,7 +134,6 @@ export default class MenuContent extends Component {
     const {
       channelLogo, channelName, menu, translate, programDetails, programTmdbDetails
     } = this.props;
-    console.log({ programDetails, programTmdbDetails });
     const route = Utils.getCurrentRoute(this.props.navigation.state);
     const channelEnum = Utils.getChannelEnum(channelName);
     return (
@@ -148,6 +147,7 @@ export default class MenuContent extends Component {
           }}
           text={{ content: channelName, style: styles.channelInfoText }}
         />
+        {/* Program detail */}
         {programDetails && programTmdbDetails && (
           <MenuItem
             isSelected
@@ -158,6 +158,7 @@ export default class MenuContent extends Component {
               width: 30
             }}
             text={{ content: programDetails.name, style: styles.channelInfoText }}
+            style={styles.programDetail}
           />
         )}
         <ScrollView>
