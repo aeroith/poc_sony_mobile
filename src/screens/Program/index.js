@@ -31,11 +31,16 @@ export default class Program extends Component {
     }
   }
 
+  handleOnChangeProgramPageHeader = (transparent) => {
+    this.props.setProgramHeaderVisibility(transparent);
+  };
+
   render() {
     const shouldRender = !!(this.props.program && this.props.program.details);
     return (
       <View style={styles.container}>
         <ProgramContent
+          onChangeProgramPageHeader={this.handleOnChangeProgramPageHeader}
           isLoading={!shouldRender}
           program={this.props.program}
           translate={this.props.translate}

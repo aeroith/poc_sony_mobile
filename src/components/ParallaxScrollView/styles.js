@@ -24,7 +24,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     overflow: 'hidden',
     top: 0,
-    left: 0
+    left: 0,
+  },
+  stickySectionText: {
+    color: 'white',
+    fontSize: 20,
+    margin: 10
   },
   scrollView: {
     backgroundColor: 'transparent'

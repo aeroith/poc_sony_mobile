@@ -7,13 +7,13 @@ const initialState = {
 };
 
 // Action reset to leave only two navigation stack
-const resetAction = (routeName, prevRouteName) => NavigationActions.reset({
+const push = (routeName, prevRouteName, params) => NavigationActions.reset({
   index: 1,
   actions: [
-    NavigationActions.navigate({ routeName: prevRouteName }),
-    NavigationActions.navigate({ routeName })
+    NavigationActions.navigate({ routeName: prevRouteName || 'TVGuide' }),
+    NavigationActions.navigate({ routeName, params })
   ],
 });
-export { initialState, resetAction };
+export { initialState, push };
 export default (state = initialState, action) => AppNavigator.router.getStateForAction(action, state);
 

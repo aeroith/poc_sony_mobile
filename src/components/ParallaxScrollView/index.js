@@ -7,8 +7,9 @@ const styles = require('./styles');
 const window = Dimensions.get('window');
 
 const SCROLLVIEW_REF = 'ScrollView';
+const ACTUAL_HEADER_HEIGHT = 65 * 1.5;
 
-const pivotPoint = (a, b) => a - b;
+const pivotPoint = (a, b) => a - b - ACTUAL_HEADER_HEIGHT;
 
 const renderEmpty = () => <View />;
 
@@ -56,6 +57,7 @@ class ParallaxScrollView extends Component {
     this.scrollY = new Animated.Value(0);
     this._footerComponent = { setNativeProps() {} }; // Initial stub
     this._footerHeight = 0;
+    this.opaqueHeader = false;
   }
 
   render() {
@@ -167,15 +169,22 @@ class ParallaxScrollView extends Component {
       onChangeHeaderVisibility,
       onScroll: prevOnScroll = (e) => {}
     } = this.props;
-    this.props.scrollEvent && this.props.scrollEvent(e);
+    if (this.props.scrollEvent){
+      this.props.scrollEvent(e);
+    }
     const p = pivotPoint(parallaxHeaderHeight, stickyHeaderHeight);
-
+    // console.log('p =>', p);
+    // console.log('e.nativeEvent.contentOffset.y =>', e.nativeEvent.contentOffset.y);
     // This optimization wont run, since we update the animation value directly in onScroll event
     // this._maybeUpdateScrollPosition(e)
 
     if (e.nativeEvent.contentOffset.y >= p) {
-      onChangeHeaderVisibility(false);
-    } else {
+      if (this.opaqueHeader === false) {
+        this.opaqueHeader = true;
+        onChangeHeaderVisibility(false);
+      }
+    } else if (this.opaqueHeader === true) {
+      this.opaqueHeader = false;
       onChangeHeaderVisibility(true);
     }
 

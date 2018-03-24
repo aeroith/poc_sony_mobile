@@ -6,6 +6,7 @@ const actionTypes = {
   PROGRAM_EPISODES_RESPONSE: 'PROGRAM_EPISODES_RESPONSE',
   PROGRAM_EPISODES_ERROR: 'PROGRAM_EPISODES_ERROR',
   RESET_PROGRAM: 'RESET_PROGRAM',
+  SET_PROGRAM_HEADER_VISIBILITY: 'SET_PROGRAM_HEADER_VISIBILITY',
 };
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
   tmdbDetails: null,
   loading: false,
   error: null,
+  isHeaderTransparent: true,
 };
 
 // Reducer - SearchBar
@@ -30,7 +32,10 @@ const actionsMap = {
   }),
   [actionTypes.RESET_PROGRAM]: state => ({
     ...state, details: null, tmdbDetails: null, loading: false, error: null
-  })
+  }),
+  [actionTypes.SET_PROGRAM_HEADER_VISIBILITY]: (state, action) => ({
+    ...state, isHeaderTransparent: action.isTransparent
+  }),
 };
 
 // Actions - Program
@@ -71,6 +76,11 @@ const actions = {
   resetProgram: () => ({
     type: actionTypes.RESET_PROGRAM,
   }),
+  setProgramHeaderVisibility: isTransparent => ({
+    type: actionTypes.SET_PROGRAM_HEADER_VISIBILITY,
+    isTransparent
+  })
+
 };
 
 

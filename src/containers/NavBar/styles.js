@@ -51,6 +51,12 @@ const styles = StyleSheet.create({
     height: 20,
     backgroundColor: 'transparent',
     justifyContent: 'center',
+  },
+  programWrapper: {
+    paddingTop: 30,
+    paddingHorizontal: 15,
+    height: 65,
+    display: 'flex',
   }
 });
 export default styles;

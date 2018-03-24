@@ -10,7 +10,7 @@ import MenuItem from './MenuItem';
 import withTranslation from '../../hocs/Translation';
 import Utils from '../../utils/utils';
 import routeMappings from '../../config/routeMappings';
-import { resetAction } from '../../reducers/nav';
+import { push } from '../../reducers/nav';
 import colorPalette from '../../config/colorPalette';
 
 @withTranslation
@@ -91,7 +91,7 @@ export default class MenuContent extends Component {
   handleMenuItemClick = (item, currentRouteName) => {
     const { routeName } = _find(routeMappings, { enum: _isObject(item) ? item.text : item });
     if (currentRouteName !== routeName) {
-      this.props.navigation.dispatch(resetAction(routeName, currentRouteName));
+      this.props.navigation.dispatch(push(routeName, currentRouteName));
     }
   };
 
