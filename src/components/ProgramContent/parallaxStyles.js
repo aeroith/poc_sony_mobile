@@ -12,8 +12,9 @@ const foregroundStyles = {
   container: {
     height: parallaxBackgroundHeight,
     flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'flex-start',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
   },
   headerText: {
     fontSize: 25,
@@ -24,8 +25,7 @@ const foregroundStyles = {
     color: colorPalette.white,
   },
   wrapper: {
-    width: '100%',
-    paddingHorizontal: 15,
+    paddingHorizontal: 18,
     paddingVertical: 15,
   },
   dateRange: {
@@ -37,13 +37,4 @@ const foregroundStyles = {
   }
 };
 
-const contentStyles = {
-  wrapper: {
-    shadowColor: colorPalette.black,
-    shadowOpacity: 1,
-    shadowOffset: { width: 2, height: 2 },
-    shadowRadius: 15,
-  }
-};
-
-export { foregroundStyles, contentStyles };
+export { foregroundStyles };

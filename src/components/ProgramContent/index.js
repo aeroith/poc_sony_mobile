@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, Dimensions, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons';
 import styles, { stickyHeaderStyle } from './styles';
 import { foregroundStyles, contentStyles } from './parallaxStyles';
 import ParallaxScrollView from '../ParallaxScrollView';
@@ -46,13 +48,15 @@ export default class ProgramContent extends Component {
             <Text style={foregroundStyles.headerText}>{ name }</Text>
             <Text style={foregroundStyles.dateRange}>{ this.props.program.tmdbDetails.date_range }</Text>
           </View>
+          <TouchableOpacity style={styles.socialIconButton} activeOpacity={0.8}>
+            <SimpleLineIcon style={styles.socialIcon} name="share" size={17} color={colorPalette.white} />
+          </TouchableOpacity>
         </View>
       );
     };
 
     handleRenderStickyHeader = () => {
       const { name } = this.props.program.details;
-      const seasonName = `${this.props.translate('season')} ${this.state.season}`;
       return (
         <View style={styles.stickySection}>
           <View style={styles.stickySectionWrapper}>
@@ -71,6 +75,8 @@ export default class ProgramContent extends Component {
     };
 
     render() {
+      const seasonInfo = `${this.props.translate('season')} ${this.state.season}`;
+      const { description } = this.props.program.details;
       return (
         <ParallaxScrollView
           onChangeHeaderVisibility={this.handleOnHeaderChangeVisibility}
@@ -83,8 +89,21 @@ export default class ProgramContent extends Component {
           stickyHeaderHeight={stickyHeaderHeight}
           outputScaleValue={7}
         >
-          <View style={[contentStyles.wrapper, { height: contentHeight }]}>
-            <Text>Scroll me</Text>
+          <View style={[styles.content, { height: contentHeight }]}>
+            <View style={styles.contentWrapper}>
+              <View style={styles.contentSection}>
+                <Text style={styles.contentHeaderText}>Description</Text>
+                <Text style={styles.contentText}>{ description }</Text>
+              </View>
+              <TouchableOpacity
+                onPress={this.handleSeasonSelect}
+                style={styles.seasonButton}
+                activeOpacity={0.8}
+              >
+                <Text style={styles.seasonButtonText}>{ seasonInfo }</Text>
+                <Icon style={styles.seasonButtonIcon} name="ios-arrow-down" size={19} color={colorPalette.red} />
+              </TouchableOpacity>
+            </View>
           </View>
         </ParallaxScrollView>
       );

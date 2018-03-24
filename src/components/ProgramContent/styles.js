@@ -25,9 +25,58 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
   },
-  stickySeasonButton: {
-    height: '100%',
-    width: 100,
+  content: {
+    shadowColor: colorPalette.black,
+    shadowOpacity: 1,
+    shadowOffset: { width: 2, height: 2 },
+    shadowRadius: 14,
+  },
+  contentWrapper: {
+    paddingHorizontal: 20,
+    paddingVertical: 24,
+  },
+  contentSection: {
+    paddingBottom: 20,
+    borderBottomWidth: 1,
+    borderColor: colorPalette.grayText2,
+  },
+  contentHeaderText: {
+    fontSize: 16,
+    paddingBottom: 10,
+    color: colorPalette.white,
+  },
+  contentText: {
+    fontSize: 14,
+    color: colorPalette.grayText1,
+    lineHeight: 22,
+  },
+  seasonButton: {
+    height: 60,
+    maxWidth: 150,
+    backgroundColor: 'transparent',
+    paddingVertical: 10,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  seasonButtonText: {
+    fontSize: 16,
+    color: colorPalette.white,
+  },
+  seasonButtonIcon: {
+    paddingLeft: 10,
+  },
+  socialIconButton: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 50,
+    width: 50,
+    borderColor: colorPalette.grayText1,
+    borderWidth: 1,
+    borderRadius: 30,
+    marginRight: 18,
+    marginBottom: 19,
   },
 });
 
