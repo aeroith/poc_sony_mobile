@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Animated, Dimensions, ScrollView, View, ViewPropTypes } from 'react-native';
+import { stickyHeaderStyle } from '../ProgramContent/styles';
 import PropTypes from 'prop-types';
 
 const styles = require('./styles');
@@ -7,9 +8,10 @@ const styles = require('./styles');
 const window = Dimensions.get('window');
 
 const SCROLLVIEW_REF = 'ScrollView';
-const ACTUAL_HEADER_HEIGHT = 65 * 1.5;
+const { height: stickyHeaderHeight } = stickyHeaderStyle;
+const HEADER_HEIGHT = stickyHeaderHeight * 1.5;
 
-const pivotPoint = (a, b) => a - b - ACTUAL_HEADER_HEIGHT;
+const pivotPoint = (a, b) => a - b - HEADER_HEIGHT;
 
 const renderEmpty = () => <View />;
 

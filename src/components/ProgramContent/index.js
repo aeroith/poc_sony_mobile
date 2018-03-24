@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, Dimensions } from 'react-native';
-import styles from './styles';
+import { View, Text, Dimensions, TouchableOpacity } from 'react-native';
+import styles, { stickyHeaderStyle } from './styles';
 import { foregroundStyles, contentStyles } from './parallaxStyles';
 import ParallaxScrollView from '../ParallaxScrollView';
 import colorPalette from '../../config/colorPalette';
@@ -9,7 +9,7 @@ import Image from '../Image';
 import withLoadingBar from '../../hocs/WithLoadingBar/WithLoadingBar';
 
 const { width, height } = Dimensions.get('window');
-const STICKY_HEADER_HEIGHT = 65;
+const { height: stickyHeaderHeight } = stickyHeaderStyle;
 const parallaxBackgroundHeight = 250;
 const contentHeight = height - 250;
 
@@ -18,6 +18,13 @@ export default class ProgramContent extends Component {
     static propTypes = {
       translate: PropTypes.func.isRequired,
     };
+
+    constructor(props) {
+      super(props);
+      this.state = {
+        season: 1,
+      };
+    }
 
     handleRenderBackground = () => {
       const { program } = this.props;
@@ -31,26 +38,36 @@ export default class ProgramContent extends Component {
       );
     };
 
-    handleRenderForeground = () => (
-      <View style={foregroundStyles.container}>
-        <View style={foregroundStyles.wrapper}>
-          <Text style={foregroundStyles.headerText}>The Flash</Text>
-          <Text style={foregroundStyles.dateRange}>{ this.props.program.tmdbDetails.date_range }</Text>
+    handleRenderForeground = () => {
+      const { name } = this.props.program.details;
+      return (
+        <View style={foregroundStyles.container}>
+          <View style={foregroundStyles.wrapper}>
+            <Text style={foregroundStyles.headerText}>{ name }</Text>
+            <Text style={foregroundStyles.dateRange}>{ this.props.program.tmdbDetails.date_range }</Text>
+          </View>
         </View>
-      </View>
-    );
+      );
+    };
 
     handleRenderStickyHeader = () => {
       const { name } = this.props.program.details;
+      const seasonName = `${this.props.translate('season')} ${this.state.season}`;
       return (
         <View style={styles.stickySection}>
-          <Text style={styles.stickySectionText}>{ name }</Text>
+          <View style={styles.stickySectionWrapper}>
+            <Text style={styles.stickySectionText}>{ name }</Text>
+          </View>
         </View>
       );
     };
 
     handleOnHeaderChangeVisibility = (transparent) => {
       this.props.onChangeProgramPageHeader(transparent);
+    };
+
+    handleSeasonSelect = () => {
+      console.log('seasonSelect clicked');
     };
 
     render() {
@@ -63,7 +80,7 @@ export default class ProgramContent extends Component {
           renderBackground={this.handleRenderBackground}
           renderForeground={this.handleRenderForeground}
           renderStickyHeader={this.handleRenderStickyHeader}
-          stickyHeaderHeight={STICKY_HEADER_HEIGHT}
+          stickyHeaderHeight={stickyHeaderHeight}
           outputScaleValue={7}
         >
           <View style={[contentStyles.wrapper, { height: contentHeight }]}>

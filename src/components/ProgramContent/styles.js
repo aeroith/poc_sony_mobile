@@ -10,8 +10,6 @@ const styles = StyleSheet.create({
   },
   stickySection: {
     height: STICKY_HEADER_HEIGHT,
-    paddingTop: 28,
-    paddingLeft: 50,
     borderBottomWidth: 1,
     borderColor: colorPalette.grayBorder1,
   },
@@ -19,6 +17,23 @@ const styles = StyleSheet.create({
     color: colorPalette.white,
     fontWeight: 'bold',
     fontSize: 16,
-  }
+  },
+  stickySectionWrapper: {
+    flex: 1,
+    paddingTop: 28,
+    paddingHorizontal: 15,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  stickySeasonButton: {
+    height: '100%',
+    width: 100,
+  },
 });
+
+const stickyHeaderStyle = {
+  height: STICKY_HEADER_HEIGHT
+};
+
+export { stickyHeaderStyle };
 export default styles;
