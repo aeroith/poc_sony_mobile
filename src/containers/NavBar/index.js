@@ -157,10 +157,16 @@ export default class NavBar extends Component {
     };
 
     render() {
-      const { isSearchBarVisible } = this.props;
+      const { isSearchBarVisible, isProgramHeaderTransparent } = this.props;
       const { noFloat } = this.state;
       return (
-        <Animatable.View style={[styles.navBarWrapper, noFloat && styles.navBarNoFloat]} animation="fadeInDown">
+        <Animatable.View
+          style={[
+                styles.navBarWrapper,
+                noFloat && styles.navBarNoFloat,
+                !isProgramHeaderTransparent && this.routeStack.current.enum === 'program' && styles.navBarWrapperStaticWidth,
+            ]}
+        >
           <LinearGradient
             colors={[colorPalette.grayBg4, colorPalette.transparent]}
             locations={this.getGradientLocations(isSearchBarVisible, noFloat)}

@@ -15,6 +15,9 @@ const styles = StyleSheet.create({
     borderBottomColor: colorPalette.grayBorder1,
     borderStyle: 'solid',
   },
+  navBarWrapperStaticWidth: {
+    marginRight: 50,
+  },
   linearGradientComponent: {
     position: 'relative',
   },

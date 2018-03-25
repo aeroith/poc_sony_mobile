@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import colorPalette from '../../config/colorPalette';
 
 const STICKY_HEADER_HEIGHT = 65;
+const episodeItemHeight = 55;
 
 const styles = StyleSheet.create({
   container: {
@@ -13,23 +14,38 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: colorPalette.grayBorder1,
   },
-  stickySectionText: {
+  stickSectionLeftContent: {
+    width: 50,
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  stickySectionMidContent: {
     color: colorPalette.white,
     fontWeight: 'bold',
     fontSize: 16,
   },
+  stickySectionRightContent: {
+    width: 50,
+  },
   stickySectionWrapper: {
     flex: 1,
-    paddingTop: 28,
-    paddingHorizontal: 15,
+    paddingTop: 15,
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  stickySocialButton: {
+    height: 50,
+    width: 50,
     justifyContent: 'center',
+    alignItems: 'center',
   },
   content: {
-    // shadowColor: colorPalette.black,
-    // shadowOpacity: 1,
-    // shadowOffset: { width: 2, height: 2 },
-    // shadowRadius: 14,
+    shadowColor: colorPalette.black,
+    shadowOpacity: 1,
+    shadowOffset: { width: 2, height: -20 },
+    shadowRadius: 40,
   },
   contentWrapper: {
     paddingHorizontal: 20,
@@ -85,23 +101,38 @@ const styles = StyleSheet.create({
   },
   episode: {
     flexDirection: 'row',
-    height: 45,
-    marginBottom: 7,
+    height: episodeItemHeight,
+    marginBottom: 5,
   },
-  episodeImage: {
-    height: 45,
-    width: 75,
-    backgroundColor: colorPalette.grayBg4,
-  },
-  episodeDescription: {
-    padding: 10,
-    height: 45,
+  episodeNumber: {
+    height: episodeItemHeight,
+    width: 30,
+    backgroundColor: colorPalette.grayBg2,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  episodeNumberText: {
+    color: colorPalette.white,
+    fontWeight: 'bold',
+  },
+  episodeImage: {
+    height: episodeItemHeight,
+    width: 75,
+    backgroundColor: colorPalette.grayBg2,
+  },
+  episodeDescription: {
+    flex: 1,
+    padding: 15,
+    height: episodeItemHeight,
+    justifyContent: 'center',
+    backgroundColor: colorPalette.grayBg2,
+    borderRightWidth: 2,
+    borderRightColor: colorPalette.grayText1
   },
   episodeName: {
     fontSize: 14,
     color: colorPalette.white,
+    lineHeight: 22,
   },
 });
 
