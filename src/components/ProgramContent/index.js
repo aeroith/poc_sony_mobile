@@ -49,7 +49,7 @@ export default class ProgramContent extends Component {
             <Text style={foregroundStyles.dateRange}>{ this.props.program.tmdbDetails.date_range }</Text>
           </View>
           <TouchableOpacity style={styles.socialIconButton} activeOpacity={0.8}>
-            <SimpleLineIcon style={styles.socialIcon} name="share" size={17} color={colorPalette.white} />
+            <SimpleLineIcon style={styles.socialIcon} name="share" size={15} color={colorPalette.white} />
           </TouchableOpacity>
         </View>
       );
@@ -89,12 +89,14 @@ export default class ProgramContent extends Component {
           stickyHeaderHeight={stickyHeaderHeight}
           outputScaleValue={7}
         >
-          <View style={[styles.content, { height: contentHeight }]}>
+          <View style={[styles.content, { height: 1000 }]}>
             <View style={styles.contentWrapper}>
+              {/* Description */}
               <View style={styles.contentSection}>
-                <Text style={styles.contentHeaderText}>Description</Text>
+                <Text style={styles.contentHeaderText}>{this.props.translate('description')}</Text>
                 <Text style={styles.contentText}>{ description }</Text>
               </View>
+              {/* Season selection */}
               <TouchableOpacity
                 onPress={this.handleSeasonSelect}
                 style={styles.seasonButton}
@@ -103,6 +105,25 @@ export default class ProgramContent extends Component {
                 <Text style={styles.seasonButtonText}>{ seasonInfo }</Text>
                 <Icon style={styles.seasonButtonIcon} name="ios-arrow-down" size={19} color={colorPalette.red} />
               </TouchableOpacity>
+              {/* Episodes */}
+              <View style={styles.episodes}>
+                {this.props.program.details && Object.keys(this.props.program.details.seasons).length > 0 && (
+                    this.props.program.details.seasons[this.state.season].map((episode, index) => (
+                      <View style={styles.episode} key={`${episode.id}_${index}`}>
+                        <View style={styles.episodeImage}>
+                          <Image
+                            uri={episode.episode_image_url || episode.local_image_url}
+                            height={45}
+                            width={75}
+                          />
+                        </View>
+                        <View style={styles.episodeDescription}>
+                          <Text style={styles.episodeName}>{`${episode.episode_number}. ${episode.episode_name}`}</Text>
+                        </View>
+                      </View>
+                    ))
+                )}
+              </View>
             </View>
           </View>
         </ParallaxScrollView>

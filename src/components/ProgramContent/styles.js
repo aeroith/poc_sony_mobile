@@ -26,10 +26,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   content: {
-    shadowColor: colorPalette.black,
-    shadowOpacity: 1,
-    shadowOffset: { width: 2, height: 2 },
-    shadowRadius: 14,
+    // shadowColor: colorPalette.black,
+    // shadowOpacity: 1,
+    // shadowOffset: { width: 2, height: 2 },
+    // shadowRadius: 14,
   },
   contentWrapper: {
     paddingHorizontal: 20,
@@ -70,13 +70,38 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    height: 50,
-    width: 50,
+    height: 40,
+    width: 40,
     borderColor: colorPalette.grayText1,
     borderWidth: 1,
-    borderRadius: 30,
+    borderRadius: 20,
     marginRight: 18,
     marginBottom: 19,
+  },
+  episodes: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+  },
+  episode: {
+    flexDirection: 'row',
+    height: 45,
+    marginBottom: 7,
+  },
+  episodeImage: {
+    height: 45,
+    width: 75,
+    backgroundColor: colorPalette.grayBg4,
+  },
+  episodeDescription: {
+    padding: 10,
+    height: 45,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  episodeName: {
+    fontSize: 14,
+    color: colorPalette.white,
   },
 });
 
