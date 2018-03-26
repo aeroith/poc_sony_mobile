@@ -86,7 +86,7 @@ export default class ProgramContent extends Component {
     };
 
     handleSeasonSelect = () => {
-      console.log('seasonSelect clicked');
+      console.log('Season select clicked');
     };
 
     handleOnSocialIconClick = () => {

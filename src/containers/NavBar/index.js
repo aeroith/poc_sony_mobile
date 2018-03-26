@@ -22,7 +22,6 @@ import Utils from '../../utils/utils';
     isDrawerVisible: state.drawer.isDrawerVisible,
     channelName: state.app.channelName,
     programDetails: state.program.details,
-    isProgramHeaderTransparent: state.program.isHeaderTransparent,
   }),
   {
     setSearchBarState: searchBarActions.setSearchBarState,
@@ -38,7 +37,6 @@ export default class NavBar extends Component {
       resetProgram: PropTypes.func.isRequired,
       isDrawerVisible: PropTypes.bool.isRequired,
       channelName: PropTypes.string.isRequired,
-      isProgramHeaderTransparent: PropTypes.bool.isRequired
     };
 
     constructor(props) {
@@ -98,17 +96,17 @@ export default class NavBar extends Component {
 
     handleBackClick = () => {
       const { routes } = this.props.navigation.state;
-      this.props.navigation.dispatch(push(routes[0].routeName, 'Program'));
+      this.props.navigation.dispatch(push(routes[0].routeName, this.routeStack.current.routeName));
     };
 
     getGradientLocations = (isSearchBarVisible, noFloat) => {
       if (noFloat) return [1, 1];
-      if (this.routeStack.current && this.routeStack.current.enum === 'program') return [0, 0];
+      if (this.routeStack.current && this.routeStack.current.onlyBack) return [0, 0];
       return [isSearchBarVisible ? 0.6 : 0.15, 1];
     };
 
     renderNavBar = () => {
-      if (this.routeStack.current && this.routeStack.current.enum === 'program') {
+      if (this.routeStack.current && this.routeStack.current.onlyBack) {
         return (
           <View style={styles.programWrapper}>
             <TouchableOpacity
@@ -157,14 +155,14 @@ export default class NavBar extends Component {
     };
 
     render() {
-      const { isSearchBarVisible, isProgramHeaderTransparent } = this.props;
+      const { isSearchBarVisible } = this.props;
       const { noFloat } = this.state;
       return (
         <Animatable.View
           style={[
                 styles.navBarWrapper,
                 noFloat && styles.navBarNoFloat,
-                !isProgramHeaderTransparent && this.routeStack.current.enum === 'program' && styles.navBarWrapperStaticWidth,
+                this.routeStack.current && this.routeStack.current.onlyBack && styles.navBarWrapperStaticWidth,
             ]}
         >
           <LinearGradient

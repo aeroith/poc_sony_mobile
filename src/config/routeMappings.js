@@ -38,6 +38,7 @@ const routeMappings = [
   {
     routeName: 'Program',
     enum: 'program',
+    onlyBack: true,
   },
 ];
 
