@@ -17,6 +17,7 @@ import Menu from './Menu';
     nav: state.nav,
     locale: state.app.locale,
     configLoading: state.app.configLoading,
+    topBarHidden: state.app.topBarHidden,
   }),
   dispatch => ({
     dispatch,
@@ -31,6 +32,7 @@ export default class App extends Component {
     locale: PropTypes.string.isRequired,
     getConfig: PropTypes.func.isRequired,
     clearNotification: PropTypes.func.isRequired,
+    topBarHidden: PropTypes.bool.isRequired,
   };
 
   constructor(props) {
@@ -99,14 +101,14 @@ export default class App extends Component {
   };
 
   render() {
-    const { dispatch, nav } = this.props;
+    const { dispatch, nav, topBarHidden } = this.props;
     const navigation = addNavigationHelpers({ dispatch, state: nav, addListener });
 
     return (
       <View style={styles.wrapper}>
         <Menu navigation={navigation}>
-          <StatusBar barStyle="light-content" style={styles.statusBar} />
-          <NavBar nav={nav} navigation={navigation} />
+          <StatusBar hidden={topBarHidden} barStyle="light-content" style={styles.statusBar} />
+          <NavBar hidden={topBarHidden} nav={nav} navigation={navigation} />
           <View style={styles.app}>
             <AppNavigator navigation={navigation} />
           </View>

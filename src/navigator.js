@@ -8,6 +8,7 @@ import News from './screens/News';
 import GamesAndMore from './screens/GamesAndMore';
 import Settings from './screens/Settings';
 import Notifications from './screens/Notifications';
+import LiveFeed from './screens/LiveFeed';
 import Counter from './containers/Counter';
 
 const AppNavigator = new StackNavigator(
@@ -20,6 +21,7 @@ const AppNavigator = new StackNavigator(
     GamesAndMore: { screen: GamesAndMore },
     Settings: { screen: Settings },
     Notifications: { screen: Notifications },
+    LiveFeed: { screen: LiveFeed },
     Counter: { screen: Counter },
   },
   {

@@ -36,6 +36,12 @@ const routeMappings = [
     noFloat: true,
   },
   {
+    routeName: 'LiveFeed',
+    enum: 'livefeed',
+    uniqueMenuItem: true,
+    noFloat: true,
+  },
+  {
     routeName: 'Program',
     enum: 'program',
     onlyBack: true,

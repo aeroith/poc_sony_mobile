@@ -46,15 +46,6 @@ export default class Notifications extends Component {
     { useNativeDriver: true }
   );
 
-  onNotification = (notification) => {
-    if (Platform.OS === 'ios') {
-      this.props.unsetNotification(notification.data.id);
-      notification.finish(PushNotificationIOS.FetchResult.NoData);
-    } else {
-      this.props.unsetNotification(+notification.id);
-    }
-  };
-
   handleHiddenMenuClick = (item) => {
     this.setState({
       hiddenMenu: item,
@@ -78,7 +69,7 @@ export default class Notifications extends Component {
   };
 
   cancelAnimationFromHiddenMenu = () => {
-    this.props.unsetNotification(this.state.hiddenMenu.id, this.pushNotification);
+    this.props.unsetNotification(this.state.hiddenMenu.id);
     this.dismissHiddenMenu();
   };
 

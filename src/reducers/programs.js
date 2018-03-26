@@ -1,4 +1,5 @@
 import ApiClient from '../utils/api-client';
+import SearchService from '../services/searchService';
 
 const actionTypes = {
   SET_PROGRAM_TYPE: 'SET_PROGRAM_TYPE',
@@ -19,7 +20,7 @@ const actionsMap = {
   [actionTypes.REQUEST_PROGRAMS]: state =>
     ({ ...state, isLoading: true }),
   [actionTypes.RECEIVE_PROGRAMS]: (state, action) =>
-    ({ ...state, isLoading: false, programs: action.programs}),
+    ({ ...state, isLoading: false, programs: action.programs }),
   [actionTypes.ERROR_PROGRAMS]: (state, action) =>
     ({ ...state, error: action.error, isLoading: false })
 };
@@ -29,7 +30,8 @@ const setProgramType = selectedType => ({ type: actionTypes.SET_PROGRAM_TYPE, se
 const getPrograms = channelId => (dispatch) => {
   dispatch({ type: actionTypes.REQUEST_PROGRAMS });
   return ApiClient.get(`/channels/${channelId}/programs`)
-    .then(response => dispatch({ type: actionTypes.RECEIVE_PROGRAMS, programs: response.data.data }))
+    .then(response => SearchService.getTMDBImages(response.data.data, 'w92'))
+    .then(programs => dispatch({ type: actionTypes.RECEIVE_PROGRAMS, programs }))
     .catch(error => dispatch({ type: actionTypes.ERROR_PROGRAMS, error: error.request._response }));
 };
 

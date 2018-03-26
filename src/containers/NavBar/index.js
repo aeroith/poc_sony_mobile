@@ -37,6 +37,11 @@ export default class NavBar extends Component {
       resetProgram: PropTypes.func.isRequired,
       isDrawerVisible: PropTypes.bool.isRequired,
       channelName: PropTypes.string.isRequired,
+      hidden: PropTypes.bool,
+    };
+
+    static defaultProps = {
+      hidden: false,
     };
 
     constructor(props) {
@@ -155,7 +160,8 @@ export default class NavBar extends Component {
     };
 
     render() {
-      const { isSearchBarVisible } = this.props;
+      const { isSearchBarVisible, hidden } = this.props;
+      if (hidden) return null;
       const { noFloat } = this.state;
       return (
         <Animatable.View

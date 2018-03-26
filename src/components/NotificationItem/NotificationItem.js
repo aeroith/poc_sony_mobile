@@ -50,7 +50,7 @@ class NotificationItem extends PureComponent {
             duration: 200,
             useNativeDriver: true
           }).start(() => {
-            this.props.unsetNotification(this.props.id, this.props.pushNotification);
+            this.props.unsetNotification(this.props.id);
             this.props.onDismiss();
           });
         } else {

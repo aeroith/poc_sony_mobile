@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, Text, TouchableOpacity, Alert, PushNotificationIOS, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, Alert, Platform } from 'react-native';
 import { View as AnimatableView } from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
@@ -21,7 +21,7 @@ export default class GuideItem extends PureComponent {
     timeStart: PropTypes.number.isRequired,
     timeEnd: PropTypes.number.isRequired,
     translate: PropTypes.func.isRequired,
-    setNotification: PropTypes.func.isRequired,
+    setNotificationScheduled: PropTypes.func.isRequired,
     unsetNotification: PropTypes.func.isRequired,
     notificationActive: PropTypes.bool.isRequired,
   };
@@ -43,18 +43,8 @@ export default class GuideItem extends PureComponent {
   onNotificationIconPress = () => {
     if (this.props.notificationActive) {
       this.props.unsetNotification(this.props.id);
-      this.pushNotification.cancelLocalNotifications({ id: this.props.id });
     } else {
       this.notificationAlert();
-    }
-  };
-
-  onNotification = (notification) => {
-    if (Platform.OS === 'ios') {
-      this.props.unsetNotification(notification.data.id);
-      notification.finish(PushNotificationIOS.FetchResult.NoData);
-    } else {
-      this.props.unsetNotification(+notification.id);
     }
   };
 
@@ -75,7 +65,7 @@ export default class GuideItem extends PureComponent {
         {
           text: translate('ok'),
           onPress: () => {
-            this.props.setNotification({
+            this.props.setNotificationScheduled({
               id: this.props.id,
               title: this.props.title,
               season: this.props.season,
@@ -85,23 +75,13 @@ export default class GuideItem extends PureComponent {
               timeStart: this.props.timeStart,
               timeEnd: this.props.timeEnd,
               repeated: false,
+              notificationProperties: {
+                date: new Date((this.props.timeStart - 600) * 1000),
+                id: this.props.id,
+                message: `${this.props.title} ${this.translate('notification_msg')}`,
+              }
             });
             this.activeIconRef.shake(300);
-            if (Platform.OS === 'ios') {
-              this.pushNotification.localNotificationSchedule({
-                message: `${this.props.title} ${this.translate('notification_msg')}`,
-                date: new Date((this.props.timeStart - 600) * 1000),
-                userInfo: {
-                  id: this.props.id
-                },
-              });
-            } else {
-              this.pushNotification.localNotificationSchedule({
-                id: this.props.id.toString(),
-                message: `${this.props.title} ${this.translate('notification_msg')}`,
-                date: new Date((this.props.timeStart - 600) * 1000),
-              });
-            }
           },
         },
       ],

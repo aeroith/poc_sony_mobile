@@ -37,6 +37,7 @@ const translations = {
     go_to_detail: 'Go to program detail',
     go_to_episode: 'Go to episode detail',
     cancel_notification: 'Cancel Notification',
+    video_unavailable: 'Video Unavailable',
     days: {
       mon: 'Monday',
       tue: 'Tuesday',
@@ -55,6 +56,7 @@ const translations = {
         galleries: 'Galleries',
         news: 'News',
         games_and_more: 'Games & More',
+        livefeed: 'Live Feed',
       },
       sony_channel_turkiye: {
         programs: 'Shows',
@@ -101,6 +103,7 @@ const translations = {
     go_to_detail: 'Program detayına git',
     go_to_episode: 'Bölüm detayına git',
     cancel_notification: 'Bildirimleri iptal et',
+    video_unavailable: 'Seçtiğiniz video kullanılamıyor',
     days: {
       mon: 'Pazartesi',
       tue: 'Salı',
@@ -119,6 +122,7 @@ const translations = {
         galleries: 'Galeriler',
         news: 'Haberler',
         games_and_more: 'Oyunlar ve Daha Fazlası',
+        livefeed: 'Canlı Yayın',
       },
       sony_channel_turkiye: {
         programs: 'Şovlar',
