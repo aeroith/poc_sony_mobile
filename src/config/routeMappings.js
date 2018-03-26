@@ -37,8 +37,7 @@ const routeMappings = [
   },
   {
     routeName: 'LiveFeed',
-    enum: 'livefeed',
-    uniqueMenuItem: true,
+    enum: 'live_feed',
     noFloat: true,
   },
   {

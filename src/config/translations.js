@@ -56,7 +56,7 @@ const translations = {
         galleries: 'Galleries',
         news: 'News',
         games_and_more: 'Games & More',
-        livefeed: 'Live Feed',
+        live_feed: 'Live Feed',
       },
       sony_channel_turkiye: {
         programs: 'Shows',
@@ -122,14 +122,14 @@ const translations = {
         galleries: 'Galeriler',
         news: 'Haberler',
         games_and_more: 'Oyunlar ve Daha Fazlası',
-        livefeed: 'Canlı Yayın',
+        live_feed: 'Canlı Yayın',
       },
       sony_channel_turkiye: {
         programs: 'Şovlar',
         program: 'Şov',
         tv_guide: 'Yayın Akışı',
         galleries: 'Galeriler',
-        livefeed: 'Canlı Yayın',
+        live_feed: 'Canlı Yayın',
         videos: 'Videolar',
       }
     }
