@@ -2,7 +2,19 @@ import { StyleSheet } from 'react-native';
 import colorPalette from '../../config/colorPalette';
 
 const STICKY_HEADER_HEIGHT = 65;
-const episodeItemHeight = 55;
+
+const episodeItemDimensions = {
+  height: 55,
+  imageWidth: 75,
+};
+
+const stickyHeaderStyle = {
+  height: STICKY_HEADER_HEIGHT,
+  button: {
+    height: 50,
+    width: 50,
+  }
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -14,8 +26,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: colorPalette.grayBorder1,
   },
-  stickSectionLeftContent: {
-    width: 50,
+  stickySectionLeftContent: {
+    width: stickyHeaderStyle.button.width,
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
@@ -26,7 +38,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   stickySectionRightContent: {
-    width: 50,
+    width: stickyHeaderStyle.button.width,
   },
   stickySectionWrapper: {
     flex: 1,
@@ -36,8 +48,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   stickySocialButton: {
-    height: 50,
-    width: 50,
+    height: stickyHeaderStyle.button.height,
+    width: stickyHeaderStyle.button.width,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -101,11 +113,11 @@ const styles = StyleSheet.create({
   },
   episode: {
     flexDirection: 'row',
-    height: episodeItemHeight,
+    height: episodeItemDimensions.height,
     marginBottom: 5,
   },
   episodeNumber: {
-    height: episodeItemHeight,
+    height: episodeItemDimensions.height,
     width: 30,
     backgroundColor: colorPalette.grayBg2,
     alignItems: 'center',
@@ -116,14 +128,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   episodeImage: {
-    height: episodeItemHeight,
-    width: 75,
+    height: episodeItemDimensions.height,
+    width: episodeItemDimensions.imageWidth,
     backgroundColor: colorPalette.grayBg2,
   },
   episodeDescription: {
     flex: 1,
     padding: 15,
-    height: episodeItemHeight,
+    height: episodeItemDimensions.height,
     justifyContent: 'center',
     backgroundColor: colorPalette.grayBg2,
     borderRightWidth: 2,
@@ -136,9 +148,5 @@ const styles = StyleSheet.create({
   },
 });
 
-const stickyHeaderStyle = {
-  height: STICKY_HEADER_HEIGHT
-};
-
-export { stickyHeaderStyle };
+export { stickyHeaderStyle, episodeItemDimensions };
 export default styles;
