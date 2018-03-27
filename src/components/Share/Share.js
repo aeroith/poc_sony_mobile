@@ -24,7 +24,7 @@ export default class ShareButton extends React.PureComponent {
   static defaultProps = {
     size: 30,
     iconSize: 16,
-    callback: _identity,
+    callback: () => {},
     iconStyle: undefined,
     style: undefined,
     dialogTitle: undefined,
