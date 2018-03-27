@@ -10,7 +10,7 @@ import MenuItem from './MenuItem';
 import withTranslation from '../../hocs/Translation';
 import Utils from '../../utils/utils';
 import routeMappings from '../../config/routeMappings';
-import { resetAction } from '../../reducers/nav';
+import { push } from '../../reducers/nav';
 import colorPalette from '../../config/colorPalette';
 
 @withTranslation
@@ -21,6 +21,8 @@ import colorPalette from '../../config/colorPalette';
   language: state.app.language,
   country: state.app.country,
   menu: state.app.menu,
+  programDetails: state.program.details,
+  programTmdbDetails: state.program.tmdbDetails,
 }))
 export default class MenuContent extends Component {
   static propTypes = {
@@ -34,12 +36,16 @@ export default class MenuContent extends Component {
     country: PropTypes.string.isRequired,
     menu: PropTypes.arrayOf(PropTypes.string),
     translate: PropTypes.func.isRequired,
+    programDetails: PropTypes.any,
+    programTmdbDetails: PropTypes.any,
   };
 
   static defaultProps = {
     isLoading: false,
     connectedChannels: [],
     menu: [],
+    programDetails: null,
+    programTmdbDetails: null,
   };
 
   static navigations = [
@@ -89,7 +95,7 @@ export default class MenuContent extends Component {
   handleMenuItemClick = (item, currentRouteName) => {
     const { routeName } = _find(routeMappings, { enum: _isObject(item) ? item.text : item });
     if (currentRouteName !== routeName) {
-      this.props.navigation.dispatch(resetAction(routeName, currentRouteName));
+      this.props.navigation.dispatch(push(routeName, currentRouteName));
     }
   };
 
@@ -130,7 +136,7 @@ export default class MenuContent extends Component {
 
   render() {
     const {
-      channelLogo, channelName, menu, translate
+      channelLogo, channelName, menu, translate, programDetails, programTmdbDetails
     } = this.props;
     const route = Utils.getCurrentRoute(this.props.navigation.state);
     const channelEnum = Utils.getChannelEnum(channelName);
@@ -145,6 +151,19 @@ export default class MenuContent extends Component {
           }}
           text={{ content: channelName, style: styles.channelInfoText }}
         />
+        {/* Program detail */}
+        {programDetails && programTmdbDetails && (
+          <MenuItem
+            isSelected
+            bordered
+            image={{
+              uri: programTmdbDetails.full_poster_path,
+              height: 40,
+              width: 30
+            }}
+            text={{ content: programDetails.name, style: styles.channelInfoText }}
+          />
+        )}
         <ScrollView>
           {/* Main menu*/}
           {menu.length > 0 && menu.map((item, index) => (

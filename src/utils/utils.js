@@ -1,7 +1,6 @@
 import { getDeviceCountry, getDeviceLocale, getSystemName, getSystemVersion } from 'react-native-device-info';
 import { Platform } from 'react-native';
 import _find from 'lodash/find';
-import _isEmpty from 'lodash/isEmpty';
 import siteConfig from '../config/siteConfig';
 import routeMappings from '../config/routeMappings';
 
@@ -42,22 +41,7 @@ export default class Utils {
     return _find(routeMappings, { routeName });
   }
 
-  static getTMDBDateRange(tmdbDetail) {
-    if (!tmdbDetail || _isEmpty(tmdbDetail)) return '';
-
-    function getYear(dateString) {
-      if (!dateString) return 'N/A';
-      return dateString.split('-')[0];
-    }
-
-    const { first_air_date, last_air_date } = tmdbDetail;
-    const firstAirDate = getYear(first_air_date);
-    const lastAirDate = getYear(last_air_date);
-    if (firstAirDate === lastAirDate) return `(${firstAirDate})`;
-    return `(${firstAirDate} - ${lastAirDate})`;
-  }
-
-  static getChannelEnum = channelName => channelName.toLowerCase().replace(/\s/g, '_');
+  static getChannelEnum = channelName => channelName.toLowerCase().replace(/\s/g, '_')
 
   static renderIconForPlatform = (iosIcon, mdIcon) => {
     if (!mdIcon) return iosIcon;

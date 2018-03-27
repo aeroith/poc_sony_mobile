@@ -37,10 +37,14 @@ const routeMappings = [
   },
   {
     routeName: 'LiveFeed',
-    enum: 'livefeed',
-    uniqueMenuItem: true,
+    enum: 'live_feed',
     noFloat: true,
-  }
+  },
+  {
+    routeName: 'Program',
+    enum: 'program',
+    onlyBack: true,
+  },
 ];
 
 export default routeMappings;

@@ -15,6 +15,9 @@ const styles = StyleSheet.create({
     borderBottomColor: colorPalette.grayBorder1,
     borderStyle: 'solid',
   },
+  navBarWrapperStaticWidth: {
+    marginRight: 50,
+  },
   linearGradientComponent: {
     position: 'relative',
   },
@@ -38,7 +41,7 @@ const styles = StyleSheet.create({
     color: colorPalette.white,
     fontWeight: 'bold',
     fontSize: 16,
-    maxWidth: 120,
+    maxWidth: 200,
     backgroundColor: 'transparent'
   },
   navBarText: {
@@ -51,6 +54,12 @@ const styles = StyleSheet.create({
     height: 20,
     backgroundColor: 'transparent',
     justifyContent: 'center',
+  },
+  programWrapper: {
+    paddingTop: 30,
+    paddingHorizontal: 15,
+    height: 65,
+    display: 'flex',
   }
 });
 export default styles;

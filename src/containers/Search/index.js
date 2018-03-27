@@ -4,7 +4,6 @@ import { View, TextInput, TouchableOpacity, Text } from 'react-native';
 import Image from '../../components/Image';
 import _debounce from 'lodash/debounce';
 import Autocomplete from 'react-native-autocomplete-input';
-import moment from 'moment';
 import { connect } from 'react-redux';
 import config from '../../config/config';
 import withTranslation from '../../hocs/Translation/index';
@@ -13,11 +12,13 @@ import colorPalette from '../../config/colorPalette';
 import SearchService from '../../services/searchService';
 import Spinner from '../../components/Spinner';
 import { actions as searchBarActions } from '../../reducers/search';
+import { push } from '../../reducers/nav';
 
 @withTranslation
 @connect(
   state => ({
     systemName: state.app.systemName,
+    channelId: state.app.channelId,
   }),
   dispatch => ({
     setSearchBarState: searchBarState => dispatch(searchBarActions.setSearchBarState(searchBarState))
@@ -55,8 +56,9 @@ export default class Search extends Component {
 
     getAutocompleteResults = (query) => {
       if (query.length >= 3) {
+        const { channelId } = this.props;
         this.setState({ loading: true });
-        SearchService.getAutocompleteResults(query)
+        SearchService.getAutocompleteResults(query, channelId)
           .then(results => this.setState({ data: results, loading: false }));
       }
     };
@@ -68,6 +70,12 @@ export default class Search extends Component {
 
     handleAutocompleteItemSelect = selectedItem => () => {
       this.setState({ query: selectedItem.name, data: [] });
+      this.props.setSearchBarState(false);
+      if (selectedItem.id) {
+        const { routes } = this.props.navigation.state;
+        const currentRouteName = routes[routes.length - 1].routeName;
+        this.props.navigation.dispatch(push('Program', currentRouteName, { id: selectedItem.id }));
+      }
     };
 
     getType = (typeEnum) => {

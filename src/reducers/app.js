@@ -28,12 +28,13 @@ const actionsMap = {
   [actionTypes.CONFIG_REQUEST]: state => ({ ...state, configLoading: true, configError: null }),
   [actionTypes.CONFIG_RESPONSE]: (state, action) => {
     const {
-      logo, menu, name, live_url, poster_image
+      logo, menu, name, live_url, poster_image, id
     } = action.channels
       .filter(channel => channel.id === action.default_channel)[0];
     const [language, country] = action.locale.split('_');
     return {
       ...state,
+      channelId: id,
       channelName: name,
       connectedChannels: action.channels,
       channelLogo: logo,

@@ -19,6 +19,7 @@ const translations = {
     tomorrow: 'Tomorrow',
     new: 'New',
     popular: 'Popular',
+    description: 'Description',
     set_notification: 'Set Notification',
     set_notification_extended: 'Remind me 10 minutes before the show starts',
     notification_msg: 'is starting in 10 minutes! Hurry!',
@@ -50,18 +51,19 @@ const translations = {
     menu: {
       sony_crime_channel: {
         programs: 'Shows',
+        program: 'Show',
         tv_guide: 'TV Guide',
         galleries: 'Galleries',
         news: 'News',
         games_and_more: 'Games & More',
-        gamesandmore: 'Games & More',
-        livefeed: 'Live Feed',
+        live_feed: 'Live Feed',
       },
       sony_channel_turkiye: {
         programs: 'Shows',
-        tvguide: 'TV Guide',
+        program: 'Show',
+        tv_guide: 'TV Guide',
         galleries: 'Galleries',
-        livefeed: 'Live Feed',
+        live_feed: 'Live Feed',
         videos: 'Videos',
       }
     }
@@ -83,6 +85,7 @@ const translations = {
     tomorrow: 'Yarın',
     new: 'Yeni',
     popular: 'Popüler',
+    description: 'Hakkında',
     set_notification: 'Hatırlatıcı ayarla',
     set_notification_extended: 'Program başlamadan 10 dakika önce beni uyar',
     notification_msg: '10 dakika içerisinde başlıyor. Acele et!',
@@ -114,17 +117,19 @@ const translations = {
     menu: {
       sony_crime_channel: {
         programs: 'Şovlar',
+        program: 'Şov',
         tv_guide: 'Yayın Akışı',
         galleries: 'Galeriler',
         news: 'Haberler',
-        livefeed: 'Canlı Yayın',
-        gamesandmore: 'Oyunlar ve Daha Fazlası',
+        games_and_more: 'Oyunlar ve Daha Fazlası',
+        live_feed: 'Canlı Yayın',
       },
       sony_channel_turkiye: {
         programs: 'Şovlar',
+        program: 'Şov',
         tv_guide: 'Yayın Akışı',
         galleries: 'Galeriler',
-        livefeed: 'Canlı Yayın',
+        live_feed: 'Canlı Yayın',
         videos: 'Videolar',
       }
     }

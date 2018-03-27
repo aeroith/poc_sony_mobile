@@ -13,12 +13,14 @@ class ImageWrapper extends Component {
     width: PropTypes.number.isRequired,
     style: PropTypes.any,
     wrapperStyle: PropTypes.any,
+    hasOverlay: PropTypes.bool,
   };
 
   static defaultProps = {
     wrapperStyle: {},
     style: {},
     uri: config.dummyImageUrl,
+    hasOverlay: false,
   };
 
   constructor(props) {
@@ -57,6 +59,7 @@ class ImageWrapper extends Component {
           style={[styles.image, isLoading && styles.imageLoading, imageStyles]}
           onLoad={this.handleOnLoad}
         />
+        {this.props.hasOverlay && <View style={styles.overlay} />}
       </View>
 
     );
