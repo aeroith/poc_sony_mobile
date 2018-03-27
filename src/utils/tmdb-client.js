@@ -1,7 +1,7 @@
 import axios from 'axios';
+import _isEmpty from 'lodash/isEmpty';
 import config from '../config/config';
 import defaultTmdbConfig from './defaultTmdbConfig';
-import _isEmpty from 'lodash/isEmpty';
 
 class TDMBClient {
   constructor() {
@@ -61,7 +61,8 @@ class TDMBClient {
   get(methodName, tmdbType, tmdbId) {
     return new Promise((resolve) => {
       if (!(tmdbType && tmdbId)) resolve({});
-      this.getConfiguration().then(() => this[`get${methodName}`](tmdbType, tmdbId).then(resp => resolve(resp)));
+      this.getConfiguration()
+        .then(() => this[`get${methodName}`](tmdbType, tmdbId).then(resp => resolve(resp)));
     });
   }
 

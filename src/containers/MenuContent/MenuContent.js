@@ -36,12 +36,16 @@ export default class MenuContent extends Component {
     country: PropTypes.string.isRequired,
     menu: PropTypes.arrayOf(PropTypes.string),
     translate: PropTypes.func.isRequired,
+    programDetails: PropTypes.any,
+    programTmdbDetails: PropTypes.any,
   };
 
   static defaultProps = {
     isLoading: false,
     connectedChannels: [],
     menu: [],
+    programDetails: null,
+    programTmdbDetails: null,
   };
 
   static navigations = [
@@ -158,7 +162,6 @@ export default class MenuContent extends Component {
               width: 30
             }}
             text={{ content: programDetails.name, style: styles.channelInfoText }}
-            style={styles.programDetail}
           />
         )}
         <ScrollView>
