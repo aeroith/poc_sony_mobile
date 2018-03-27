@@ -17,11 +17,15 @@ import { actions as programActions } from '../../reducers/program';
 export default class Program extends Component {
   static propTypes = {
     navigation: PropTypes.object,
-    translate: PropTypes.func.isRequired
+    translate: PropTypes.func.isRequired,
+    setProgramHeaderVisibility: PropTypes.func.isRequired,
+    getProgramWithEpisodes: PropTypes.func.isRequired,
+    program: PropTypes.objectOf(PropTypes.any),
   };
 
   static defaultProps = {
-    navigation: {}
+    navigation: {},
+    program: { details: null },
   };
 
   componentDidMount() {

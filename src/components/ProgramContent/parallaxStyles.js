@@ -34,7 +34,8 @@ const foregroundStyles = {
     fontWeight: '400',
     paddingTop: 6,
     ...textShadow,
-  }
+  },
+  parallaxBackgroundHeight,
 };
 
-export { foregroundStyles };
+export default foregroundStyles;

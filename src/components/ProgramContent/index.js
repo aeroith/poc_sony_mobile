@@ -4,7 +4,7 @@ import { View, Text, Dimensions, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { View as AnimatableView } from 'react-native-animatable';
 import styles, { stickyHeaderStyle, episodeItemDimensions } from './styles';
-import { foregroundStyles, contentStyles } from './parallaxStyles';
+import foregroundStyles from './parallaxStyles';
 import SocialIconButton from '../SocialIconButton';
 import ParallaxScrollView from '../ParallaxScrollView';
 import colorPalette from '../../config/colorPalette';
@@ -13,18 +13,20 @@ import withLoadingBar from '../../hocs/WithLoadingBar/WithLoadingBar';
 
 const { width } = Dimensions.get('window');
 const { height: stickyHeaderHeight } = stickyHeaderStyle;
-const parallaxBackgroundHeight = 250;
 
 @withLoadingBar
 export default class ProgramContent extends Component {
     static propTypes = {
       translate: PropTypes.func.isRequired,
+      program: PropTypes.objectOf(PropTypes.any).isRequired,
+      onChangeProgramPageHeader: PropTypes.func.isRequired,
     };
 
     constructor(props) {
       super(props);
+      this.seasonKeysArr = Object.keys(this.props.program.details.seasons).sort();
       this.state = {
-        season: 1,
+        season: this.seasonKeysArr[0],
       };
     }
 
@@ -33,7 +35,7 @@ export default class ProgramContent extends Component {
       return (
         <Image
           uri={program.details && program.details.global_image_url}
-          height={parallaxBackgroundHeight}
+          height={foregroundStyles.parallaxBackgroundHeight}
           width={width}
           hasOverlay
         />
@@ -96,7 +98,7 @@ export default class ProgramContent extends Component {
           onChangeHeaderVisibility={this.handleOnHeaderChangeVisibility}
           backgroundColor={colorPalette.grayBg4}
           contentBackgroundColor={colorPalette.grayBg4}
-          parallaxHeaderHeight={parallaxBackgroundHeight}
+          parallaxHeaderHeight={foregroundStyles.parallaxBackgroundHeight}
           renderBackground={this.handleRenderBackground}
           renderForeground={this.handleRenderForeground}
           renderStickyHeader={this.handleRenderStickyHeader}
