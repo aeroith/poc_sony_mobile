@@ -18,7 +18,16 @@ const { width: deviceWidth, height: deviceHeight } = Dimensions.get('window');
     notifications: state.notification.notifications,
     routes: state.nav.routes,
   }),
-  { ...notificationActions, push },
+  dispatch => ({
+    setNotificationScheduled: notification =>
+      dispatch(notificationActions.setNotificationScheduled(notification)),
+    setNotification: notification =>
+      dispatch(notificationActions.setNotification(notification)),
+    unsetNotification: notification =>
+      dispatch(notificationActions.unsetNotification(notification)),
+    push: (...params) =>
+      dispatch(push(...params)),
+  })
 )
 @withTranslation
 export default class Notifications extends Component {
