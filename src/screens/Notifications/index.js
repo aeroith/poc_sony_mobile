@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { View, ScrollView, Animated, UIManager, LayoutAnimation, Platform, PushNotificationIOS, Text, Dimensions, Easing, TouchableOpacity } from 'react-native';
+import _last from 'lodash/last';
+import { View, ScrollView, Animated, UIManager, LayoutAnimation, Text, Dimensions, Easing, TouchableOpacity } from 'react-native';
 import NotificationItem from '../../containers/NotificationItem';
 import styles from './styles';
 import { actions as notificationActions } from '../../reducers/notification';
 import withTranslation from '../../hocs/Translation/index';
 import PushNotification from '../../utils/push-notification';
 import ImageWrapper from '../../components/Image';
+import { push } from '../../reducers/nav';
 
 const { width: deviceWidth, height: deviceHeight } = Dimensions.get('window');
 
 @connect(
   state => ({
-    notifications: state.notification.notifications
+    notifications: state.notification.notifications,
+    routes: state.nav.routes,
   }),
-  notificationActions,
+  { ...notificationActions, push },
 )
 @withTranslation
 export default class Notifications extends Component {
@@ -24,6 +27,7 @@ export default class Notifications extends Component {
     translate: PropTypes.func.isRequired,
     unsetNotification: PropTypes.func.isRequired,
     notifications: PropTypes.array.isRequired,
+    routes: PropTypes.array.isRequired,
   };
 
   constructor(props) {
@@ -68,6 +72,11 @@ export default class Notifications extends Component {
     }));
   };
 
+  navigateToProgramDetail = () => {
+    const { routeName: currentRoute } = _last(this.props.routes);
+    this.props.push('Program', currentRoute, { id: this.state.hiddenMenu.programId });
+  };
+
   cancelAnimationFromHiddenMenu = () => {
     this.props.unsetNotification(this.state.hiddenMenu.id);
     this.dismissHiddenMenu();
@@ -91,6 +100,7 @@ export default class Notifications extends Component {
                 type,
                 season,
                 id,
+                programId,
                 repeated,
                 repeatInterval
               } = item;
@@ -98,6 +108,7 @@ export default class Notifications extends Component {
                 <NotificationItem
                   key={id}
                   id={id}
+                  programId={programId}
                   style={styles.notificationItem}
                   title={title}
                   image={image}
@@ -151,7 +162,7 @@ export default class Notifications extends Component {
           <TouchableOpacity style={styles.moreMenuTouchable}>
             <Text style={styles.moreMenuText}>{this.props.translate('go_to_episode')}</Text>
           </TouchableOpacity>}
-          <TouchableOpacity style={styles.moreMenuTouchable}>
+          <TouchableOpacity onPress={this.navigateToProgramDetail} style={styles.moreMenuTouchable}>
             <Text style={styles.moreMenuText}>{this.props.translate('go_to_detail')}</Text>
           </TouchableOpacity>
           <TouchableOpacity

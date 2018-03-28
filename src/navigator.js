@@ -29,6 +29,9 @@ const AppNavigator = new StackNavigator(
     navigationOptions: {
       header: null,
     },
+    cardStyle: {
+      backgroundColor: 'transparent'
+    }
   },
 );
 

@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     flexDirection: 'column',
     alignItems: 'center',
-    backgroundColor: colorPalette.white,
+    backgroundColor: colorPalette.som,
   },
   welcome: {
     fontSize: 20,

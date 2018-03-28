@@ -27,6 +27,7 @@ const Guide = ({
               <GuideItem
                 key={item.id}
                 id={item.id}
+                programId={item.program_id}
                 title={item.name}
                 type={item.type}
                 season={item.season}

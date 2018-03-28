@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, TextInput, TouchableOpacity, Text } from 'react-native';
-import Image from '../../components/Image';
 import _debounce from 'lodash/debounce';
 import Autocomplete from 'react-native-autocomplete-input';
 import { connect } from 'react-redux';
+import Image from '../../components/Image';
 import config from '../../config/config';
 import withTranslation from '../../hocs/Translation/index';
 import styles from './styles';

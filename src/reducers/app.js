@@ -8,7 +8,7 @@ const actionTypes = {
 };
 
 const initialState = {
-  configLoading: false,
+  configLoading: true,
   configError: '',
   channelName: '',
   connectedChannels: [],
@@ -42,7 +42,7 @@ const actionsMap = {
       language,
       country,
       locale: action.locale,
-      configLoading: true,
+      configLoading: false,
       configError: null,
       liveUrl: live_url,
       posterImage: poster_image,

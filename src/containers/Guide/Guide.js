@@ -16,6 +16,7 @@ import withTranslation from '../../hocs/Translation';
     timeEnd: state.tabbedDatePicker.timeEnd,
     isLoading: state.guide.isLoading,
     notifications: state.notification.notifications,
+    channelId: state.app.channelId,
   }),
   { ...notificationActions, ...guideActions },
 )
@@ -26,6 +27,7 @@ export default class GuideContainer extends Component {
     timeEnd: PropTypes.number.isRequired,
     isLoading: PropTypes.bool,
     translate: PropTypes.func.isRequired,
+    channelId: PropTypes.number.isRequired,
   };
 
   static defaultProps = {
@@ -34,7 +36,7 @@ export default class GuideContainer extends Component {
 
   componentDidMount() {
     const { timeStart, timeEnd } = this.props;
-    this.props.setTvGuideResults(1, timeStart, timeEnd);
+    this.props.setTvGuideResults(this.props.channelId, timeStart, timeEnd);
   }
 
   render() {

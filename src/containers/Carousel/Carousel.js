@@ -12,7 +12,8 @@ import withTranslation from '../../hocs/Translation';
   state => ({
     images: state.carousel.images.filter(x => x.global_image_url),
     page: state.carousel.page,
-    isLoading: state.carousel.isLoading
+    isLoading: state.carousel.isLoading,
+    channelId: state.app.channelId
   }),
   carouselActions
 )
@@ -21,10 +22,11 @@ export default class CarouselContainer extends Component {
     translate: PropTypes.func.isRequired,
     getFeaturedPhotos: PropTypes.func.isRequired,
     isLoading: PropTypes.bool,
+    channelId: PropTypes.number.isRequired,
   };
 
   componentDidMount() {
-    this.props.getFeaturedPhotos(1);
+    this.props.getFeaturedPhotos(this.props.channelId);
   }
 
   render() {

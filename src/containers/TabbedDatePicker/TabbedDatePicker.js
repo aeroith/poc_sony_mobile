@@ -16,6 +16,7 @@ const moment = require('moment');
   state => ({
     timeStart: state.tabbedDatePicker.timeStart,
     timeEnd: state.tabbedDatePicker.timeEnd,
+    channelId: state.app.channelId,
   }),
   {
     ...tabbedDatePickerActions,

@@ -25,6 +25,7 @@ class NotificationItem extends PureComponent {
     timeStart: PropTypes.number.isRequired,
     timeEnd: PropTypes.number.isRequired,
     id: PropTypes.number.isRequired,
+    programId: PropTypes.number.isRequired,
     repeated: PropTypes.bool,
   };
   static defaultProps = {
@@ -67,6 +68,7 @@ class NotificationItem extends PureComponent {
 
   handleHiddenMenuClick = () => this.props.hiddenMenuClick({
     id: this.props.id,
+    programId: this.props.programId,
     title: this.props.title,
     image: this.props.image,
     type: this.props.type,

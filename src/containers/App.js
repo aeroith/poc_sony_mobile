@@ -11,6 +11,7 @@ import { actions as notificationActions } from '../reducers/notification';
 import styles from './styles';
 import NavBar from './NavBar';
 import Menu from './Menu';
+import withLoadingBar from "../hocs/WithLoadingBar/WithLoadingBar";
 
 @connect(
   state => ({
@@ -37,20 +38,17 @@ export default class App extends Component {
 
   constructor(props) {
     super(props);
+    OneSignal.addEventListener('received', this.onReceived);
+    OneSignal.addEventListener('opened', this.onOpened);
+    OneSignal.addEventListener('registered', this.onRegistered);
+    OneSignal.addEventListener('ids', this.onIds);
     this.state = {
       appState: AppState.currentState
     };
   }
 
-  componentWillMount() {
-    this.props.getConfig();
-    OneSignal.addEventListener('received', this.onReceived);
-    OneSignal.addEventListener('opened', this.onOpened);
-    OneSignal.addEventListener('registered', this.onRegistered);
-    OneSignal.addEventListener('ids', this.onIds);
-  }
-
   componentDidMount() {
+    this.props.getConfig();
     this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
       this.props.dispatch(NavigationActions.back());
       return true;

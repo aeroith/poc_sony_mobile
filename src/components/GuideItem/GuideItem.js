@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, Text, TouchableOpacity, Alert, Platform } from 'react-native';
 import { View as AnimatableView } from 'react-native-animatable';
+import _last from 'lodash/last';
 import Icon from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
 import Image from '../Image';
@@ -12,6 +13,7 @@ const moment = require('moment');
 export default class GuideItem extends PureComponent {
   static propTypes = {
     id: PropTypes.number.isRequired,
+    programId: PropTypes.number.isRequired,
     image: PropTypes.string,
     title: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
@@ -21,6 +23,7 @@ export default class GuideItem extends PureComponent {
     timeStart: PropTypes.number.isRequired,
     timeEnd: PropTypes.number.isRequired,
     translate: PropTypes.func.isRequired,
+    push: PropTypes.func.isRequired,
     setNotificationScheduled: PropTypes.func.isRequired,
     unsetNotification: PropTypes.func.isRequired,
     notificationActive: PropTypes.bool.isRequired,
@@ -38,7 +41,10 @@ export default class GuideItem extends PureComponent {
     this.pushNotification = new PushNotification(this.onNotification).init();
   }
 
-  onContentPress = () => console.log('Guide Item Content Pressed');
+  onContentPress = () => {
+    const { routeName: currentRoute } = _last(this.props.routes);
+    this.props.push('Program', currentRoute, { id: this.props.programId });
+  };
 
   onNotificationIconPress = () => {
     if (this.props.notificationActive) {
@@ -74,6 +80,7 @@ export default class GuideItem extends PureComponent {
               image: this.props.image,
               timeStart: this.props.timeStart,
               timeEnd: this.props.timeEnd,
+              programId: this.props.programId,
               repeated: false,
               notificationProperties: {
                 date: new Date((this.props.timeStart - 600) * 1000),
