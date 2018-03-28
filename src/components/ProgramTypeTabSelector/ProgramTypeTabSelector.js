@@ -35,6 +35,6 @@ const TabItem = ({ onPress, active, title }) => (
     onPress={onPress}
     style={[styles.tabItemContainer, active && styles.tabItemContainerActive]}
   >
-    <Text style={styles.tabItemText}>{title}</Text>
+    <Text style={[styles.tabItemText, active && styles.tabItemTextActive]}>{title}</Text>
   </TouchableOpacity>
 );

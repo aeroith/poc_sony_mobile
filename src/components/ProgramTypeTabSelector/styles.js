@@ -8,13 +8,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
+    marginBottom: 10,
   },
   tabItemContainer: {
     alignItems: 'center',
     justifyContent: 'center',
     height: 40,
     flexBasis: 120,
-    marginBottom: 10,
   },
   tabItemContainerActive: {
     borderBottomWidth: 2,
@@ -24,6 +24,9 @@ const styles = StyleSheet.create({
     color: colorPalette.white,
     fontWeight: '500',
     fontSize: 15,
+  },
+  tabItemTextActive: {
+    top: 1,
   }
 });
 
