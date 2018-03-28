@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { View as AnimatableView } from 'react-native-animatable';
 import styles, { stickyHeaderStyle, episodeItemDimensions } from './styles';
 import foregroundStyles from './parallaxStyles';
-import SocialIconButton from '../SocialIconButton';
+import Share from '../Share';
 import ParallaxScrollView from '../ParallaxScrollView';
 import colorPalette from '../../config/colorPalette';
 import Image from '../Image';
@@ -52,8 +52,9 @@ export default class ProgramContent extends Component {
               {this.props.program.tmdbDetails.date_range}
             </Text>
           </View>
-          <SocialIconButton
-            onSocialIconClick={this.handleOnSocialIconClick}
+          <Share
+            message={`${name} is awesome!`}
+            callback={this.handleOnSocialIconClick}
             style={styles.socialIconButton}
           />
         </AnimatableView>
@@ -68,8 +69,9 @@ export default class ProgramContent extends Component {
             <View style={styles.stickySectionLeftContent} />
             <Text style={styles.stickySectionMidContent}>{ name }</Text>
             <View style={styles.stickySectionRightContent}>
-              <SocialIconButton
-                onSocialIconClick={this.handleOnSocialIconClick}
+              <Share
+                message={`${name} is awesome!`}
+                callback={this.handleOnSocialIconClick}
                 style={styles.stickySocialButton}
               />
             </View>
@@ -86,8 +88,8 @@ export default class ProgramContent extends Component {
       console.log('Season select clicked');
     };
 
-    handleOnSocialIconClick = () => {
-      console.log('Social icon clicked');
+    handleOnSocialIconClick = (e) => {
+      console.log(`'Social icon clicked with action: ${e.action}`);
     };
 
     render() {

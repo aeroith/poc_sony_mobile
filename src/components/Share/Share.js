@@ -11,6 +11,7 @@ const removeFalsy = _pickBy(_identity);
 export default class ShareButton extends React.PureComponent {
   static propTypes = {
     size: PropTypes.number,
+    activeOpacity: PropTypes.number,
     iconSize: PropTypes.number,
     message: PropTypes.string,
     url: PropTypes.string,
@@ -18,13 +19,16 @@ export default class ShareButton extends React.PureComponent {
     dialogTitle: PropTypes.string,
     excludedActivityTypes: PropTypes.array,
     callback: PropTypes.func,
+    onError: PropTypes.func,
     style: View.propTypes.style,
     iconStyle: Text.propTypes.style,
   };
   static defaultProps = {
     size: 30,
-    iconSize: 16,
+    activeOpacity: 0.8,
+    iconSize: 15,
     callback: () => {},
+    onError: console.log,
     iconStyle: undefined,
     style: undefined,
     dialogTitle: undefined,
@@ -35,7 +39,7 @@ export default class ShareButton extends React.PureComponent {
   };
   onShareIconPress = () => {
     const {
-      message, url, title, dialogTitle, callback, excludedActivityTypes
+      message, url, title, dialogTitle, callback, excludedActivityTypes, onError
     } = this.props;
     const shareProperties = removeFalsy({
       message,
@@ -48,11 +52,12 @@ export default class ShareButton extends React.PureComponent {
     });
     return Share
       .share(shareProperties, extraProperties)
-      .then(callback);
+      .then(callback)
+      .catch(onError);
   };
 
   render() {
-    const { size } = this.props;
+    const { size, activeOpacity } = this.props;
     return (
       <View
         style={
@@ -67,6 +72,7 @@ export default class ShareButton extends React.PureComponent {
           ]}
       >
         <TouchableOpacity
+          activeOpacity={activeOpacity}
           hitSlop={{
           top: 10,
           bottom: 10,
