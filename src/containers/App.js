@@ -11,7 +11,7 @@ import { actions as notificationActions } from '../reducers/notification';
 import styles from './styles';
 import NavBar from './NavBar';
 import Menu from './Menu';
-import withLoadingBar from "../hocs/WithLoadingBar/WithLoadingBar";
+import FacebookLoginOverlay from './FacebookLoginOverlay';
 
 @connect(
   state => ({
@@ -111,6 +111,7 @@ export default class App extends Component {
             <AppNavigator navigation={navigation} />
           </View>
         </Menu>
+        <FacebookLoginOverlay />
       </View>
     );
   }

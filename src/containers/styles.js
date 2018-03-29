@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   app: {
     flex: 1,
     zIndex: 1,
-    backgroundColor: 'black'
+    backgroundColor: 'black',
   },
   statusBar: {
     zIndex: 11,
