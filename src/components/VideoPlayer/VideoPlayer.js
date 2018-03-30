@@ -7,7 +7,7 @@ import {
   PanResponder,
   Animated,
   Easing,
-  Image,
+  Platform,
   View,
   Text
 } from 'react-native';
@@ -964,27 +964,51 @@ export default class VideoPlayer extends Component {
         }
       ]}
       >
-        <BlurView style={styles.blurView.blur} blur={10}>
-          { this.renderSeekbar() }
-          <View style={styles.blurView.controls}>
-            {
-              this.renderControl(
-                this.renderFullscreen(),
-                this.methods.toggleFullscreen,
-                { marginBottom: 15 }
-              )
-            }
-            <View style={styles.blurView.mediaControls}>
-              {
-                this.renderControl(
-                  playPauseIcon,
-                  this.methods.togglePlayPause
-                )
-              }
+        {
+          Platform.OS === 'ios' ?
+            <BlurView style={styles.blurView.blur} blur={10}>
+              { this.renderSeekbar() }
+              <View style={styles.blurView.controls}>
+                {
+                  this.renderControl(
+                    this.renderFullscreen(),
+                    this.methods.toggleFullscreen,
+                    { marginBottom: 15 }
+                  )
+                }
+                <View style={styles.blurView.mediaControls}>
+                  {
+                    this.renderControl(
+                      playPauseIcon,
+                      this.methods.togglePlayPause
+                    )
+                  }
+                </View>
+                { this.renderVolume() }
+              </View>
+            </BlurView> :
+            <View style={styles.blurView.blur}>
+              { this.renderSeekbar() }
+              <View style={styles.blurView.controls}>
+                {
+                  this.renderControl(
+                    this.renderFullscreen(),
+                    this.methods.toggleFullscreen,
+                    { marginBottom: 15 }
+                  )
+                }
+                <View style={styles.blurView.mediaControls}>
+                  {
+                    this.renderControl(
+                      playPauseIcon,
+                      this.methods.togglePlayPause
+                    )
+                  }
+                </View>
+                { this.renderVolume() }
+              </View>
             </View>
-            { this.renderVolume() }
-          </View>
-        </BlurView>
+        }
       </Animated.View>
     );
   }

@@ -25,6 +25,7 @@ export default class LiveFeed extends Component {
 
   static defaultProps = {
     liveUrl: undefined,
+    posterImage: undefined,
   };
 
   render() {
