@@ -11,7 +11,7 @@ import { actions as notificationActions } from '../reducers/notification';
 import styles from './styles';
 import NavBar from './NavBar';
 import Menu from './Menu';
-import FacebookLoginOverlay from './FacebookLoginOverlay';
+import LoginOverlay from './LoginOverlay';
 
 @connect(
   state => ({
@@ -19,6 +19,7 @@ import FacebookLoginOverlay from './FacebookLoginOverlay';
     locale: state.app.locale,
     configLoading: state.app.configLoading,
     topBarHidden: state.app.topBarHidden,
+    isLoginScreenVisible: state.app.isLoginScreenVisible,
   }),
   dispatch => ({
     dispatch,
@@ -34,6 +35,7 @@ export default class App extends Component {
     getConfig: PropTypes.func.isRequired,
     clearNotification: PropTypes.func.isRequired,
     topBarHidden: PropTypes.bool.isRequired,
+    isLoginScreenVisible: PropTypes.bool.isRequired
   };
 
   constructor(props) {
@@ -99,19 +101,25 @@ export default class App extends Component {
   };
 
   render() {
-    const { dispatch, nav, topBarHidden } = this.props;
+    const {
+      dispatch, nav, topBarHidden, isLoginScreenVisible
+    } = this.props;
     const navigation = addNavigationHelpers({ dispatch, state: nav, addListener });
 
     return (
       <View style={styles.wrapper}>
         <Menu navigation={navigation}>
           <StatusBar hidden={topBarHidden} barStyle="light-content" style={styles.statusBar} />
-          <NavBar hidden={topBarHidden} nav={nav} navigation={navigation} />
-          <View style={styles.app}>
+          <NavBar
+            hidden={topBarHidden || isLoginScreenVisible}
+            nav={nav}
+            navigation={navigation}
+          />
+          <View style={[styles.app, isLoginScreenVisible && styles.hideAppContent]}>
             <AppNavigator navigation={navigation} />
           </View>
         </Menu>
-        <FacebookLoginOverlay />
+        {isLoginScreenVisible && <LoginOverlay />}
       </View>
     );
   }

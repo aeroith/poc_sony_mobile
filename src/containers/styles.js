@@ -12,9 +12,13 @@ const styles = StyleSheet.create({
     flex: 1,
     zIndex: 1,
     backgroundColor: 'black',
+    opacity: 1,
   },
   statusBar: {
     zIndex: 11,
+  },
+  hideAppContent: {
+    opacity: 0,
   },
 });
 export default styles;

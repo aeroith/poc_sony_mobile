@@ -12,18 +12,26 @@ import Utils from '../../utils/utils';
 import routeMappings from '../../config/routeMappings';
 import { push } from '../../reducers/nav';
 import colorPalette from '../../config/colorPalette';
+import {actions as notificationActions} from "../../reducers/notification";
+import {actions as appActions} from "../../reducers/app";
 
 @withTranslation
-@connect(state => ({
-  channelName: state.app.channelName,
-  connectedChannels: state.app.connectedChannels,
-  channelLogo: state.app.channelLogo,
-  language: state.app.language,
-  country: state.app.country,
-  menu: state.app.menu,
-  programDetails: state.program.details,
-  programTmdbDetails: state.program.tmdbDetails,
-}))
+@connect(
+    state => ({
+    channelName: state.app.channelName,
+    connectedChannels: state.app.connectedChannels,
+    channelLogo: state.app.channelLogo,
+    language: state.app.language,
+    country: state.app.country,
+    menu: state.app.menu,
+    programDetails: state.program.details,
+    programTmdbDetails: state.program.tmdbDetails,
+    isLoggedIn: state.user.isLoggedIn,
+  }),
+  dispatch => ({
+    setLoginScreenVisibility: isVisible => dispatch(appActions.setLoginScreenVisibility(isVisible)),
+  }),
+)
 export default class MenuContent extends Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired,
@@ -38,6 +46,8 @@ export default class MenuContent extends Component {
     translate: PropTypes.func.isRequired,
     programDetails: PropTypes.any,
     programTmdbDetails: PropTypes.any,
+    isLoggedIn: PropTypes.bool.isRequired,
+    setLoginScreenVisibility: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -136,12 +146,13 @@ export default class MenuContent extends Component {
 
   render() {
     const {
-      channelLogo, channelName, menu, translate, programDetails, programTmdbDetails
+      channelLogo, channelName, menu, translate, programDetails, programTmdbDetails, isLoggedIn, setLoginScreenVisibility
     } = this.props;
     const route = Utils.getCurrentRoute(this.props.navigation.state);
     const channelEnum = Utils.getChannelEnum(channelName);
     return (
       <View style={styles.menuContentWrapper}>
+        {/* Channel name */}
         <MenuItem
           bordered
           image={{
@@ -151,6 +162,13 @@ export default class MenuContent extends Component {
           }}
           text={{ content: channelName, style: styles.channelInfoText }}
         />
+        {/* Login button */}
+        {!isLoggedIn && <MenuItem
+          bordered
+          text={{ content: translate('Login') }}
+          contentRight={<Icon name="ios-arrow-dropright" size={25} color={colorPalette.white} />}
+          onPress={() => setLoginScreenVisibility(true)}
+        />}
         {/* Program detail */}
         {programDetails && programTmdbDetails && (
           <MenuItem

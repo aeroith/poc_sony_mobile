@@ -1,29 +1,52 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Zocial';
+import { connect } from 'react-redux';
+import { View as AnimatableView } from 'react-native-animatable';
 import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import colorPalette from '../../config/colorPalette';
 import withTranslation from '../../hocs/Translation';
+import { actions as appActions } from '../../reducers/app';
 
 @withTranslation
-export default class FacebookLoginOverlay extends Component {
+@connect(
+  state => ({
+    isLoginScreenVisible: state.app.isLoginScreenVisible,
+  }),
+  dispatch => ({
+    setLoginScreenVisibility: isVisible => dispatch(appActions.setLoginScreenVisibility(isVisible)),
+  }),
+)
+export default class LoginOverlay extends Component {
   static propTypes = {
-    translate: PropTypes.func.isRequired
+    translate: PropTypes.func.isRequired,
+    setLoginScreenVisibility: PropTypes.func.isRequired,
   };
 
   handleLoginWithFacebook = () => {
     console.log('Login with Facebook');
   };
-  
+
   handleCancelLogin = () => {
-    console.log('Login canceled');
+    this.animatableView.fadeOutDown().then(() => {
+      this.props.setLoginScreenVisibility(false);
+    });
+  };
+
+  handleViewRef = (animatableView) => {
+    this.animatableView = animatableView;
   };
 
   render() {
     const { translate } = this.props;
     return (
-      <View style={styles.container}>
+      <AnimatableView
+        animation="fadeInUp"
+        style={styles.container}
+        ref={this.handleViewRef}
+        useNativeDriver
+      >
         <Text style={styles.header}>Sony Channel Mobile</Text>
         <TouchableOpacity
           onPress={this.handleLoginWithFacebook}
@@ -34,7 +57,7 @@ export default class FacebookLoginOverlay extends Component {
             <Icon
               name="facebook"
               color={colorPalette.white}
-              size={14}
+              size={16}
             />
           </View>
           <Text
@@ -54,7 +77,7 @@ export default class FacebookLoginOverlay extends Component {
             {translate('cancel_login').toUpperCase()}
           </Text>
         </TouchableOpacity>
-      </View>
+      </AnimatableView>
     );
   }
 }
