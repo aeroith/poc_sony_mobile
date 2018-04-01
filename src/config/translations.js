@@ -38,6 +38,9 @@ const translations = {
     go_to_episode: 'Go to episode detail',
     cancel_notification: 'Cancel Notification',
     video_unavailable: 'Video Unavailable',
+    login: 'Login',
+    login_with_facebook: 'Login with Facebook',
+    cancel_login: 'Continue without signing in',
     days: {
       mon: 'Monday',
       tue: 'Tuesday',
@@ -104,6 +107,9 @@ const translations = {
     go_to_episode: 'Bölüm detayına git',
     cancel_notification: 'Bildirimleri iptal et',
     video_unavailable: 'Seçtiğiniz video kullanılamıyor',
+    login: 'Giriş Yapın',
+    login_with_facebook: 'Facebook ile giriş',
+    cancel_login: 'Giriş yapmadan devam et',
     days: {
       mon: 'Pazartesi',
       tue: 'Salı',

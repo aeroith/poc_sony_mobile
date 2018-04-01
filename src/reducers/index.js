@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import app from './app';
+import user from './user';
 import counter from './counter';
 import nav from './nav';
 import search from './search';
@@ -13,6 +14,7 @@ import program from './program';
 
 export default combineReducers({
   app,
+  user,
   counter,
   nav,
   search,

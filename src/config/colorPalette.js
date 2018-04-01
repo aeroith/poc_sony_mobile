@@ -29,6 +29,8 @@ const colorPalette = {
       pinkBg: '#da287a',
       greenBg1: '#005d70',
       dummyImageColor: '#e0e0e0',
+      facebookBlue: '#3b5998',
+      facebookBlueDark: '#384D89',
       transparent: 'transparent',
     },
   },

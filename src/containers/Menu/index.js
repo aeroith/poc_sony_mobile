@@ -13,6 +13,7 @@ import { actions as searchBarActions } from '../../reducers/search';
     nav: state.nav,
     isDrawerVisible: state.drawer.isDrawerVisible,
     isSearchBarVisible: state.search.isSearchBarVisible,
+    isLoginScreenVisible: state.app.isLoginScreenVisible,
   }),
   dispatch => ({
     setDrawerState: drawerState => dispatch(drawerActions.setDrawerState(drawerState)),
@@ -28,6 +29,7 @@ export default class Menu extends Component {
       setDrawerState: PropTypes.func.isRequired,
       setSearchBarState: PropTypes.func.isRequired,
       isAppTypeLoading: PropTypes.bool,
+      isLoginScreenVisible: PropTypes.bool.isRequired,
     };
 
     static defaultProps = {
@@ -41,7 +43,7 @@ export default class Menu extends Component {
       }
       const { routeName: prevRouteName } = this.props.nav.routes[this.props.nav.routes.length - 1];
       const { routeName: nextRouteName } = nextProps.nav.routes[nextProps.nav.routes.length - 1];
-      if (prevRouteName !== nextRouteName) {
+      if (prevRouteName !== nextRouteName || this.props.isLoginScreenVisible !== nextProps.isLoginScreenVisible) {
         this.props.setDrawerState(false);
       }
     }

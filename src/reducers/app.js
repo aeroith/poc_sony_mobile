@@ -5,6 +5,7 @@ const actionTypes = {
   CONFIG_RESPONSE: 'CONFIG_RESPONSE',
   CONFIG_ERROR: 'CONFIG_ERROR',
   TOGGLE_TOP_BAR: 'TOGGLE_TOP_BAR',
+  SET_LOGIN_SCREEN_VISIBILITY: 'SET_LOGIN_SCREEN_VISIBILITY',
 };
 
 const initialState = {
@@ -19,6 +20,7 @@ const initialState = {
   systemName: 'ios',
   systemVersion: '',
   topBarHidden: false,
+  isLoginScreenVisible: true,
   liveUrl: '',
   posterImage: '',
 };
@@ -52,6 +54,10 @@ const actionsMap = {
     ...state,
     configError: action.error,
   }),
+  [actionTypes.SET_LOGIN_SCREEN_VISIBILITY]: (state, action) => ({
+    ...state,
+    isLoginScreenVisible: action.isLoginScreenVisible,
+  }),
   [actionTypes.TOGGLE_TOP_BAR]: state => ({
     ...state,
     topBarHidden: !state.topBarHidden,
@@ -70,7 +76,8 @@ const actions = {
       })
       .catch(error => dispatch({ type: actionTypes.CONFIG_ERROR, error }));
   },
-  toggleTopBar: () => ({ type: actionTypes.TOGGLE_TOP_BAR })
+  toggleTopBar: () => ({ type: actionTypes.TOGGLE_TOP_BAR }),
+  setLoginScreenVisibility: isLoginScreenVisible => ({ type: actionTypes.SET_LOGIN_SCREEN_VISIBILITY, isLoginScreenVisible })
 };
 
 
