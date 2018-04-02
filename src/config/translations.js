@@ -39,6 +39,7 @@ const translations = {
     cancel_notification: 'Cancel Notification',
     video_unavailable: 'Video Unavailable',
     login: 'Login',
+    logout: 'Logout',
     login_with_facebook: 'Login with Facebook',
     cancel_login: 'Continue without signing in',
     days: {
@@ -108,6 +109,7 @@ const translations = {
     cancel_notification: 'Bildirimleri iptal et',
     video_unavailable: 'Seçtiğiniz video kullanılamıyor',
     login: 'Giriş Yapın',
+    logout: 'Çıkış Yapın',
     login_with_facebook: 'Facebook ile giriş',
     cancel_login: 'Giriş yapmadan devam et',
     days: {

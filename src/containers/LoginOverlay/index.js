@@ -8,6 +8,7 @@ import styles from './styles';
 import colorPalette from '../../config/colorPalette';
 import withTranslation from '../../hocs/Translation';
 import { actions as appActions } from '../../reducers/app';
+import { actions as userActions } from '../../reducers/user';
 
 @withTranslation
 @connect(
@@ -16,6 +17,8 @@ import { actions as appActions } from '../../reducers/app';
   }),
   dispatch => ({
     setLoginScreenVisibility: isVisible => dispatch(appActions.setLoginScreenVisibility(isVisible)),
+    login: permissions => dispatch(userActions.login(permissions)),
+    getPublicInfo: () => dispatch(userActions.getPublicInfo()),
   }),
 )
 export default class LoginOverlay extends Component {
@@ -24,8 +27,15 @@ export default class LoginOverlay extends Component {
     setLoginScreenVisibility: PropTypes.func.isRequired,
   };
 
+  permissions = ['public_profile'];
+
   handleLoginWithFacebook = () => {
-    console.log('Login with Facebook');
+    this.props.login(this.permissions)
+      .then(() => {
+        this.props.getPublicInfo();
+        this.handleCancelLogin();
+      })
+      .catch(console.log)
   };
 
   handleCancelLogin = () => {

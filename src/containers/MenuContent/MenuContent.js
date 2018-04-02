@@ -12,8 +12,8 @@ import Utils from '../../utils/utils';
 import routeMappings from '../../config/routeMappings';
 import { push } from '../../reducers/nav';
 import colorPalette from '../../config/colorPalette';
-import {actions as notificationActions} from "../../reducers/notification";
 import {actions as appActions} from "../../reducers/app";
+import {actions as userActions} from "../../reducers/user";
 
 @withTranslation
 @connect(
@@ -30,6 +30,7 @@ import {actions as appActions} from "../../reducers/app";
   }),
   dispatch => ({
     setLoginScreenVisibility: isVisible => dispatch(appActions.setLoginScreenVisibility(isVisible)),
+    logout: () => dispatch(userActions.logout()),
   }),
 )
 export default class MenuContent extends Component {
@@ -48,6 +49,7 @@ export default class MenuContent extends Component {
     programTmdbDetails: PropTypes.any,
     isLoggedIn: PropTypes.bool.isRequired,
     setLoginScreenVisibility: PropTypes.func.isRequired,
+    logout: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -163,12 +165,21 @@ export default class MenuContent extends Component {
           text={{ content: channelName, style: styles.channelInfoText }}
         />
         {/* Login button */}
-        {!isLoggedIn && <MenuItem
-          bordered
-          text={{ content: translate('Login') }}
-          contentRight={<Icon name="ios-arrow-dropright" size={25} color={colorPalette.white} />}
-          onPress={() => setLoginScreenVisibility(true)}
-        />}
+        {
+          isLoggedIn ?
+            <MenuItem
+              bordered
+              text={{ content: translate('logout')}}
+              contentRight={<Icon name={'ios-log-out'} size={25} color={colorPalette.white} />}
+              onPress={() => this.props.logout()}
+            /> :
+            <MenuItem
+              bordered
+              text={{ content: translate('login') }}
+              contentRight={<Icon name="ios-log-in" size={25} color={colorPalette.white} />}
+              onPress={() => setLoginScreenVisibility(true)}
+            />
+        }
         {/* Program detail */}
         {programDetails && programTmdbDetails && (
           <MenuItem
