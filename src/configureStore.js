@@ -4,12 +4,18 @@ import { Platform, AsyncStorage } from 'react-native';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { persistStore, persistReducer } from 'redux-persist';
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+import { createFilter } from 'redux-persist-transform-filter';
 import reducer from './reducers';
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['carousel', 'notification']
+  transforms: [
+    createFilter('app', ['isLoginScreenVisible'], ['isLoginScreenVisible']),
+  ],
+  whitelist: ['carousel', 'notification', 'user', 'app'],
+  stateReconciler: autoMergeLevel2
 };
 
 
