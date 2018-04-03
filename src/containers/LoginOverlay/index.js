@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/Zocial';
 import { connect } from 'react-redux';
+import SonyLogo from '../../assets/img/sony_logo.png';
 import { View as AnimatableView } from 'react-native-animatable';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import styles from './styles';
 import colorPalette from '../../config/colorPalette';
 import withTranslation from '../../hocs/Translation';
@@ -59,6 +60,10 @@ export default class LoginOverlay extends Component {
         ref={this.handleViewRef}
         useNativeDriver
       >
+        <Image
+          style={styles.logo}
+          source={SonyLogo}
+        />
         <Text style={styles.header}>Sony Channel Mobile</Text>
         <TouchableOpacity
           onPress={this.handleLoginWithFacebook}

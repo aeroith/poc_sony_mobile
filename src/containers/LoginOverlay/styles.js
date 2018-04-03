@@ -18,12 +18,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
   },
   header: {
-    fontSize: 22,
+    fontSize: 18,
     fontWeight: 'bold',
     color: colorPalette.white,
     marginBottom: 40,
+    marginTop: 10,
     paddingVertical: 15,
     paddingHorizontal: 10,
+  },
+  logo: {
+    width: 70,
+    height: 54,
   },
   facebookLoginButton: {
     flexDirection: 'row',

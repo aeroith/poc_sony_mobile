@@ -50,7 +50,7 @@ const actions = {
         return TMDBClient.get('Details', type, tmdbId)
           .then((tmdbDetails) => {
             const fetchedData = response.data.data;
-            resolve({ tmdbDetails, details: { seasons: fetchedData.seasons, ...fetchedData.program } });
+            resolve({ tmdbDetails, details: { titles: fetchedData.titles, ...fetchedData.program } });
           })
           .catch(() => {
             resolve({ details: response.data.data });

@@ -24,7 +24,7 @@ export default class ProgramContent extends Component {
 
     constructor(props) {
       super(props);
-      this.seasonKeysArr = Object.keys(this.props.program.details.seasons).sort();
+      this.seasonKeysArr = Object.keys(this.props.program.details.titles).sort();
       this.state = {
         season: this.seasonKeysArr[0],
       };
@@ -117,23 +117,24 @@ export default class ProgramContent extends Component {
                 <Text style={styles.contentText}>{ description }</Text>
               </View>
 
-              {/* Season selection */}
               <View style={styles.contentSection}>
-                <TouchableOpacity
-                  onPress={this.handleSeasonSelect}
-                  style={styles.seasonButton}
-                  activeOpacity={0.8}
-                >
-                  <Text style={styles.seasonButtonText}>{ seasonInfo }</Text>
-                  <Icon style={styles.seasonButtonIcon} name="ios-arrow-down" size={19} color={colorPalette.red} />
-                </TouchableOpacity>
-
+                {/* Season selection */}
+                {this.props.program.details.type !== 'movie' && (
+                  <TouchableOpacity
+                    onPress={this.handleSeasonSelect}
+                    style={styles.seasonButton}
+                    activeOpacity={0.8}
+                  >
+                    <Text style={styles.seasonButtonText}>{ seasonInfo }</Text>
+                    <Icon style={styles.seasonButtonIcon} name="ios-arrow-down" size={19} color={colorPalette.red} />
+                  </TouchableOpacity>
+                )}
                 {/* Episodes */}
                 <View style={styles.episodes}>
                   {this.props.program.details
-                    && Object.keys(this.props.program.details.seasons).length > 0
+                    && Object.keys(this.props.program.details.titles).length > 0
                     && (
-                    this.props.program.details.seasons[this.state.season].map((episode, index) => (
+                    this.props.program.details.titles[this.state.season].map((episode, index) => (
                       <AnimatableView animation="fadeInUp" style={styles.episode} key={`${episode.id}_${index}`}>
                         <View style={styles.episodeNumber}>
                           <Text style={styles.episodeNumberText}>{episode.episode_number}</Text>
