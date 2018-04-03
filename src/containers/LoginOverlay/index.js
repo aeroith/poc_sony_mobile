@@ -25,6 +25,8 @@ export default class LoginOverlay extends Component {
   static propTypes = {
     translate: PropTypes.func.isRequired,
     setLoginScreenVisibility: PropTypes.func.isRequired,
+    login: PropTypes.func.isRequired,
+    getPublicInfo: PropTypes.func.isRequired,
   };
 
   permissions = ['public_profile'];
@@ -35,7 +37,7 @@ export default class LoginOverlay extends Component {
         this.props.getPublicInfo();
         this.handleCancelLogin();
       })
-      .catch(console.log)
+      .catch(console.log);
   };
 
   handleCancelLogin = () => {

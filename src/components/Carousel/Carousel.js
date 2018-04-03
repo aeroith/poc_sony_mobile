@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { View, ScrollView, Image, Animated, Text, Dimensions, TouchableWithoutFeedback } from 'react-native';
+import { View, Image, Animated, Text, Dimensions, TouchableWithoutFeedback } from 'react-native';
+import _last from 'lodash/last';
 import Tag from '../Tag';
 import withLoadingBar from '../../hocs/WithLoadingBar';
 import styles from './styles';
@@ -12,10 +13,12 @@ const { width: initialWidth, height: initialHeight } = Dimensions.get('window');
 class Carousel extends PureComponent {
   static propTypes = {
     images: PropTypes.array,
+    routes: PropTypes.array.isRequired,
     page: PropTypes.number,
     setCarouselPage: PropTypes.func.isRequired,
     resetCarousel: PropTypes.func.isRequired,
     translate: PropTypes.func.isRequired,
+    push: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -73,8 +76,9 @@ class Carousel extends PureComponent {
     }
   };
 
-  handleCarouselPress = (id) => {
-    console.log('carousel pressed with id =>', id);
+  handleCarouselPress = (programId) => {
+    const { routeName: currentRoute } = _last(this.props.routes);
+    this.props.push('Program', currentRoute, { id: programId });
   };
 
   render() {
@@ -96,8 +100,11 @@ class Carousel extends PureComponent {
         >
           {
             this.props.images
-              .map(({ global_image_url, id }) => (
-                <TouchableWithoutFeedback onPress={() => this.handleCarouselPress(id)} key={id}>
+              .map(({ global_image_url, id, program_id }) => (
+                <TouchableWithoutFeedback
+                  onPress={() => this.handleCarouselPress(program_id)}
+                  key={id}
+                >
                   <View key={id + 1}>
                     <Image
                       style={[styles.image, { width: this.state.layout.width }]}

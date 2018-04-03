@@ -27,6 +27,7 @@ export default class GuideItem extends PureComponent {
     setNotificationScheduled: PropTypes.func.isRequired,
     unsetNotification: PropTypes.func.isRequired,
     notificationActive: PropTypes.bool.isRequired,
+    routes: PropTypes.array.isRequired,
   };
 
   static defaultProps = {

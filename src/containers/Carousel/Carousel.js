@@ -5,6 +5,7 @@ import { View } from 'react-native';
 import Carousel from '../../components/Carousel';
 import styles from './styles';
 import { actions as carouselActions } from '../../reducers/carousel';
+import { push } from '../../reducers/nav';
 import withTranslation from '../../hocs/Translation';
 
 @withTranslation
@@ -13,9 +14,15 @@ import withTranslation from '../../hocs/Translation';
     images: state.carousel.images.filter(x => x.global_image_url),
     page: state.carousel.page,
     isLoading: state.carousel.isLoading,
-    channelId: state.app.channelId
+    channelId: state.app.channelId,
+    routes: state.nav.routes,
   }),
-  carouselActions
+  dispatch => ({
+    getFeaturedPhotos: channelId => dispatch(carouselActions.getFeaturedPhotos(channelId)),
+    setCarouselPage: page => dispatch(carouselActions.setCarouselPage(page)),
+    resetCarousel: () => dispatch(carouselActions.resetCarousel()),
+    push: (...params) => dispatch(push(...params)),
+  })
 )
 export default class CarouselContainer extends Component {
   static propTypes = {
