@@ -39,6 +39,8 @@ const getPublicInfo = () => (dispatch) => FBClient.getPublicInfo(FIELDS, (error,
   }
 });
 
+const resetState = () => ({ type: actionsTypes.RESET_STATE });
+
 const login = permissions => dispatch => FBClient.login(permissions)
   .then(result => {
     if (result.isCancelled) {
@@ -54,8 +56,6 @@ const logout = () => (dispatch) => {
   dispatch(setLoginState(false));
   dispatch(resetState());
 };
-
-const resetState = () => ({ type: actionsTypes.RESET_STATE });
 
 const actions = {
   setLoginState,

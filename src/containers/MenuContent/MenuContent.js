@@ -12,12 +12,13 @@ import Utils from '../../utils/utils';
 import routeMappings from '../../config/routeMappings';
 import { push } from '../../reducers/nav';
 import colorPalette from '../../config/colorPalette';
-import {actions as appActions} from "../../reducers/app";
-import {actions as userActions} from "../../reducers/user";
+import { actions as appActions } from '../../reducers/app';
+import { actions as userActions } from '../../reducers/user';
+import UserInfo from '../UserInfo';
 
 @withTranslation
 @connect(
-    state => ({
+  state => ({
     channelName: state.app.channelName,
     connectedChannels: state.app.connectedChannels,
     channelLogo: state.app.channelLogo,
@@ -27,6 +28,8 @@ import {actions as userActions} from "../../reducers/user";
     programDetails: state.program.details,
     programTmdbDetails: state.program.tmdbDetails,
     isLoggedIn: state.user.isLoggedIn,
+    userName: state.user.name,
+    userPicture: state.user.picture
   }),
   dispatch => ({
     setLoginScreenVisibility: isVisible => dispatch(appActions.setLoginScreenVisibility(isVisible)),
@@ -148,12 +151,16 @@ export default class MenuContent extends Component {
 
   render() {
     const {
-      channelLogo, channelName, menu, translate, programDetails, programTmdbDetails, isLoggedIn, setLoginScreenVisibility
+      channelLogo, channelName, menu, translate, programDetails, programTmdbDetails, isLoggedIn, setLoginScreenVisibility, userName, userPicture,
     } = this.props;
     const route = Utils.getCurrentRoute(this.props.navigation.state);
     const channelEnum = Utils.getChannelEnum(channelName);
     return (
       <View style={styles.menuContentWrapper}>
+        {/* User info section */}
+        {isLoggedIn && userName.length > 0 && userPicture.data && (
+          <UserInfo userName={userName} userPicture={userPicture} translate={translate} />
+        ) }
         {/* Channel name */}
         <MenuItem
           bordered
@@ -164,22 +171,14 @@ export default class MenuContent extends Component {
           }}
           text={{ content: channelName, style: styles.channelInfoText }}
         />
-        {/* Login button */}
-        {
-          isLoggedIn ?
-            <MenuItem
-              bordered
-              text={{ content: translate('logout')}}
-              contentRight={<Icon name={'ios-log-out'} size={25} color={colorPalette.white} />}
-              onPress={() => this.props.logout()}
-            /> :
-            <MenuItem
-              bordered
-              text={{ content: translate('login') }}
-              contentRight={<Icon name="ios-log-in" size={25} color={colorPalette.white} />}
-              onPress={() => setLoginScreenVisibility(true)}
-            />
-        }
+        {!isLoggedIn && (
+          <MenuItem
+            bordered
+            text={{ content: translate('login') }}
+            contentRight={<Icon name="ios-log-in" size={25} color={colorPalette.white} />}
+            onPress={() => setLoginScreenVisibility(true)}
+          />
+        )}
         {/* Program detail */}
         {programDetails && programTmdbDetails && (
           <MenuItem

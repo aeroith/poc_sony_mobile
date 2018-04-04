@@ -9,7 +9,7 @@ class FBApiClient {
     return LoginManager.logOut();
   }
   login(permissions) {
-    return LoginManager.logInWithReadPermissions(permissions)
+    return LoginManager.logInWithReadPermissions(permissions);
   }
 
 }
