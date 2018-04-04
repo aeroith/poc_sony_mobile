@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Image, Text } from 'react-native';
 import initials from 'initials';
-import contrast from 'contrast';
 
 // from https://flatuicolors.com/
 const defaultColors = [
@@ -73,7 +72,7 @@ export default class UserAvatar extends Component {
     if (src) {
       const props = {
         style: imageStyle,
-        source: { uri: src }
+        source: { uri: src },
       };
 
       inner = React.createElement(this.props.component || Image, props);

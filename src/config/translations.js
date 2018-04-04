@@ -38,9 +38,11 @@ const translations = {
     go_to_episode: 'Go to episode detail',
     cancel_notification: 'Cancel Notification',
     video_unavailable: 'Video Unavailable',
-    login: 'Login',
-    logout: 'Logout',
-    login_with_facebook: 'Login with Facebook',
+    login: 'Sign In',
+    logout: 'Sign Out',
+    login_with_facebook: 'Sign in with Facebook',
+    logout_alert_message_title: 'Signing Out?',
+    logout_alert_message_text: 'Please click onto \'Cancel\' button if you don\'t wish to Sign Out',
     cancel_login: 'Continue without signing in',
     days: {
       mon: 'Monday',
@@ -111,6 +113,8 @@ const translations = {
     login: 'Giriş Yapın',
     logout: 'Çıkış Yapın',
     login_with_facebook: 'Facebook ile giriş',
+    logout_alert_message_title: 'Çıkış yapmak mı istiyorsunuz?',
+    logout_alert_message_text: 'Çıkış yapmak istemiyorsanız \'İptal\' butonuna basın',
     cancel_login: 'Giriş yapmadan devam et',
     days: {
       mon: 'Pazartesi',

@@ -151,7 +151,16 @@ export default class MenuContent extends Component {
 
   render() {
     const {
-      channelLogo, channelName, menu, translate, programDetails, programTmdbDetails, isLoggedIn, setLoginScreenVisibility, userName, userPicture,
+      channelLogo,
+      channelName,
+      menu, translate,
+      programDetails,
+      programTmdbDetails,
+      isLoggedIn,
+      setLoginScreenVisibility,
+      userName,
+      userPicture,
+      logout,
     } = this.props;
     const route = Utils.getCurrentRoute(this.props.navigation.state);
     const channelEnum = Utils.getChannelEnum(channelName);
@@ -159,7 +168,13 @@ export default class MenuContent extends Component {
       <View style={styles.menuContentWrapper}>
         {/* User info section */}
         {isLoggedIn && userName.length > 0 && userPicture.data && (
-          <UserInfo userName={userName} userPicture={userPicture} translate={translate} />
+          <UserInfo
+            userName={userName}
+            userPicture={userPicture}
+            translate={translate}
+            setLoginVisibility={setLoginScreenVisibility}
+            logout={logout}
+          />
         ) }
         {/* Channel name */}
         <MenuItem
