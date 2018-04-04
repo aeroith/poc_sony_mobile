@@ -125,7 +125,7 @@ export default class VideoPlayer extends Component {
      */
     this.events = {
       onError: this.props.onError,
-      onEnd: this.props.onEnd,
+      onEnd: () => {},
       onScreenTouch: this._onScreenTouch.bind(this),
       onLoadStart: this._onLoadStart.bind(this),
       onProgress: this._onProgress.bind(this),
