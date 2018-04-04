@@ -4,7 +4,7 @@ import { View, TouchableOpacity, Text, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import colorPalette from '../../config/colorPalette';
 import styles from './styles';
-import UserAvatar from '../../components/UserAvatar';
+import UserAvatar from '../UserAvatar/index';
 
 export default class UserInfo extends Component {
   static propTypes = {

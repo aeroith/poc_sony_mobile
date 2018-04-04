@@ -14,7 +14,7 @@ import { push } from '../../reducers/nav';
 import colorPalette from '../../config/colorPalette';
 import { actions as appActions } from '../../reducers/app';
 import { actions as userActions } from '../../reducers/user';
-import UserInfo from '../UserInfo';
+import UserInfo from '../../components/UserInfo';
 
 @withTranslation
 @connect(
@@ -53,6 +53,8 @@ export default class MenuContent extends Component {
     isLoggedIn: PropTypes.bool.isRequired,
     setLoginScreenVisibility: PropTypes.func.isRequired,
     logout: PropTypes.func.isRequired,
+    userName: PropTypes.string.isRequired,
+    userPicture: PropTypes.objectOf(PropTypes.any).isRequired,
   };
 
   static defaultProps = {
