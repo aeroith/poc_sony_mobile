@@ -36,7 +36,7 @@ const translations = {
     other_channels: 'Other Channels',
     go_to_detail: 'Go to program detail',
     go_to_episode: 'Go to episode detail',
-    cancel_notification: 'Cancel Notification',
+    cancel_notification: 'Remove Notification',
     video_unavailable: 'Video Unavailable',
     login: 'Sign In',
     logout: 'Sign Out',

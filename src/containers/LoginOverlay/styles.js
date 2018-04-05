@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   logo: {
-    width: 70,
-    height: 54,
+    width: 122,
+    height: 119,
   },
   facebookLoginButton: {
     flexDirection: 'row',
